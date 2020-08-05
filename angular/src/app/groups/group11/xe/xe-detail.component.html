@@ -1,0 +1,315 @@
+
+<form #formRef="ngForm" [formGroup]="xeForm">
+    <ul style="background-color: #58a3dc;font-size: 15px;padding-left:10px;margin:0;color:white">
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="save()"><i
+                class="fa fa-floppy-o"></i></li>
+        <li *ngIf="isGranted('Pages.Group11.Xe.Delete')"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="delete()"><i
+                class="fa fa-trash"></i></li>
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;"
+            onclick="window.history.back()"><i class="fa fa-arrow-left"></i></li>
+            <li *ngIf="show" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="this.export()" ><i
+                class="fa fa-file-excel-o"></i></li>
+    </ul>
+    <div *ngIf="!show" class="blockUI blockOverlay"
+        style="z-index: 1000; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(170, 170, 170); opacity: 0.3; cursor: wait; position: fixed;">
+    </div>
+    <div *ngIf="show">
+        <div
+            style="background-color: #58a3dc; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+            <h1 style="margin-bottom: 0px"><i class="fa fa-info-circle"
+                    style="font-size: 20px; margin-right: 15px"></i>Thông tin xe</h1>
+        </div>
+        <div style="padding: 20px;">
+            <div style="padding: 20px; background-color: white;">
+                <div class="row">
+
+                    <div class="col-md-6" style="font-size: 15px;">
+                        <div>
+                            <div>Mã xe <span style="color: red">(*)</span></div>
+
+                            <input formControlName="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }"
+                                [(ngModel)]="inputModel.xE_CODE" name="xE_CODE" class="form-control" maxlength="25"
+                                style="background-color: #f4f5f8" [disabled]="this.editPageState === 'view'">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.code.errors?.required" name="empty_field">Vui lòng nhập mã xe </div>
+                                <div *ngIf="f.code.errors?.pattern">{{l('Group11CarCodePatternValidate')}}</div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>Tên xe <span style="color: red">(*)</span></div>
+
+                            <input formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                                [(ngModel)]="inputModel.xE_NAME" name="xE_NAME" class="form-control" maxlength="25"
+                                style="background-color: #f4f5f8"> 
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.name.errors?.required" name="empty_field">Vui lòng nhập tên xe </div>
+                                <div *ngIf="f.name.errors?.pattern" name="min_max_length">Tên xe từ 3 đến 50 kí tự</div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>Model xe <span style="color: red">(*)</span></div>
+
+                            <input formControlName="model" [ngClass]="{ 'is-invalid': submitted && f.model.errors }"
+                                [(ngModel)]="inputModel.xE_MODEL" name="xE_MODEL" class="form-control" maxlength="25"
+                                style="background-color: #f4f5f8">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.model.errors?.required" name="empty_field">Vui lòng nhập model xe </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="font-size: 15px;">
+                        <div>
+                            <div>Biển số <span style="color: red">(*)</span></div>
+
+                            <input type="text" formControlName="license_plate"
+                                [ngClass]="{ 'is-invalid': submitted && f.license_plate.errors }" maxlength="25"
+                                [(ngModel)]="inputModel.xE_LICENSE_PLATE" name="xE_LICENSE_PLATE" class="form-control"
+                                style="background-color: #f4f5f8
+                            ">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.license_plate.errors?.required" name="empty_field">Vui lòng nhập biển số xe
+                                </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>Màu sắc <span style="color: red">(*)</span></div>
+
+                            <input formControlName="color" [ngClass]="{ 'is-invalid': submitted && f.color.errors }" maxlength="25"
+                                [(ngModel)]="inputModel.xE_COLOR" name="xE_COLOR" class="form-control" style="background-color: #f4f5f8
+                                ">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.color.errors?.required" name="empty_field">Vui lòng nhập màu xe </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>Số chỗ ngồi <span style="color: red">(*)</span></div>
+
+                            <input (keypress)="numberOnly($event)" type="text" formControlName="seats" maxlength="4"
+                                [ngClass]="{ 'is-invalid': submitted && f.seats.errors }"
+                                [(ngModel)]="inputModel.xE_SEATS" name="xE_SEATS" class="form-control" style="background-color: #f4f5f8
+                                ">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.seats.errors?.required" name="empty_field">Vui lòng nhập số chỗ ngồi </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div
+            style="background-color: #58a3dc; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+            <h1 style="margin-bottom: 0px"><i class="fa fa-info-circle"
+                    style="font-size: 20px; margin-right: 15px"></i>Thông số chi tiết</h1>
+        </div>
+        <div style="padding: 20px;">
+            <div style="padding: 20px; background-color: white;">
+                <div class="row">
+                    <div class="col-md-6" style="font-size: 15px;">
+                        <div>
+                            <div>Hãng sản xuất <span style="color: red">(*)</span></div>
+
+                            <input formControlName="manufacturer"
+                                [ngClass]="{ 'is-invalid': submitted && f.manufacturer.errors }" maxlength="25"
+                                [(ngModel)]="inputModel.xE_MANUFACTURER" name="xE_MANUFACTURER" class="form-control"
+                                style="background-color: #f4f5f8
+                                ">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.manufacturer.errors?.required" name="empty_field">Vui lòng nhập hãng sản
+                                    xuất </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>Tốc độ tối đa <span style="color: red">(*)</span></div>
+
+                            <input (keypress)="numberOnly($event)" type="text" formControlName="max_speed" maxlength="4"
+                                [ngClass]="{ 'is-invalid': submitted && f.max_speed.errors }"
+                                [(ngModel)]="inputModel.xE_MAX_SPEED" name="xE_MAX_SPEED" class="form-control" style="background-color: #f4f5f8
+                                ">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.max_speed.errors?.required" name="empty_field">Vui lòng nhập tốc độ tối đa
+                                </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>Mức tiêu hao nhiên liệu <span style="color: red">(*)</span></div>
+
+                            <input (keypress)="numberOnly($event)" type="text" formControlName="consumption" maxlength="9"
+                                [ngClass]="{ 'is-invalid': submitted && f.consumption.errors }"
+                                [(ngModel)]="inputModel.xE_CONSUMPTION" name="xE_CONSUMPTION" class="form-control" 
+                                style="background-color: #f4f5f8
+                                ">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.consumption.errors?.required" name="empty_field">Vui lòng nhập mức tiêu
+                                    hao nhiên liệu </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>Số km lần trước bảo dưỡng <span style="color: red">(*)</span></div>
+
+                            <input (keypress)="numberOnly($event)" type="text" formControlName="last_distance" maxlength="18"
+                                [ngClass]="{ 'is-invalid': submitted && f.last_distance.errors }"
+                                [(ngModel)]="inputModel.xE_LAST_TOTAL_KM" name="xE_LAST_TOTAL_KM" class="form-control"
+                                style="background-color: #f4f5f8
+                                ">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.last_distance.errors?.required" name="empty_field">Vui lòng nhập mức tiêu
+                                    hao nhiên liệu </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="font-size: 15px">
+                        <div>
+                            <div>Năm sản xuất <span style="color: red">(*)</span></div>
+
+                            <input (keypress)="numberOnly($event)" type="text" formControlName="manufacture_year" maxlength="6"
+                                [ngClass]="{ 'is-invalid': submitted && f.manufacture_year.errors }"
+                                [(ngModel)]="inputModel.xE_MANUFACTURE_YEAR" name="xE_MANUFACTURE_YEAR"
+                                class="form-control" style="background-color: #f4f5f8
+                                ">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.manufacture_year.errors?.required" name="empty_field">Vui lòng nhập năm
+                                    sản xuất </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>Giá trị <span style="color: red">(*)</span></div>
+
+                            <input (keypress)="numberOnly($event)" type="text" formControlName="price" maxlength="9"
+                                [ngClass]="{ 'is-invalid': submitted && f.price.errors }"
+                                [(ngModel)]="inputModel.xE_PRICE" name="xE_PRICE" class="form-control" style="background-color: #f4f5f8
+                                ">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.price.errors?.required" name="empty_field">Vui lòng nhập giá trị </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>Trạng thái hiện tại <span style="color: red">(*)</span></div>
+                            <select class="form-control" style="background-color: #f4f5f8"
+                                [ngClass]="{ 'is-invalid': submitted && f.status.errors }"
+                                [(ngModel)]="inputModel.xE_STATUS" formControlName="status" name="xE_STATUS">
+                                <option [selected]="editPageState === 'add' ? true : false">Tốt</option>
+                                <option>Đang sửa chữa</option>
+                                <option>Hư hỏng</option>
+                                <option>Đã thanh lí</option>
+                            </select>
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.status.errors?.required" name="empty_field">Vui lòng chọn trạng thái hiện
+                                    tại </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>Tổng số km đi được <span style="color: red">(*)</span></div>
+
+                            <input (keypress)="numberOnly($event)" type="text" formControlName="total_distance" maxlength="18"
+                                [(ngModel)]="inputModel.xE_TOTAL_KM" name="xE_TOTAL_KM" class="form-control" style="background-color: #f4f5f8
+                                ">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>Ghi chú</div>
+                    <textarea rows="5" [(ngModel)]="inputModel.xE_NOTES" name="xE_NOTES" class="form-control"
+                        formControlName="notes" style="background-color: #f4f5f8"></textarea>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="editPageState==='view'">
+        <div *ngIf="isGranted('Pages.Group11.Xe')"
+            style="background-color: #58a3dc; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+            <h1 style="margin-bottom: 0px"><i class="fa fa-info-circle"
+                    style="font-size: 20px; margin-right: 15px"></i>{{l('Group10_NTX_LIST_TITLE')}}</h1>
+        </div>
+        <div style="padding: 20px;">
+            <div style="padding: 20px; background-color: white;">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>{{l('Group10_NTX_NAME')}}</label>
+                        <input   formControlName="ntx_name" disabled [(ngModel)]="this.currentNTX.ntX_NAME"   class="form-control" style="background-color: #f4f5f8">
+                    </div>
+                    <div class="col-lg-6">
+                        <label>{{l('Group10_NTX_CODE')}}</label>
+                        <input   formControlName="ntx_code" disabled [(ngModel)]="this.currentNTX.ntX_CODE"  class="form-control" style="background-color: #f4f5f8">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div *ngIf="isGranted('Pages.Group11.Xe')" style="padding: 20px; background-color: white;">
+            <div class="row align-items-center">
+                <!--<Primeng-TurboTable-Start>-->
+                <div class="primeng-datatable-container">
+                    <div class="primeng-paging-container">
+                        <!-- [busyIf]="primengTableHelper.isLoading"> -->
+
+                        <p-table #dataTable [columns]="cols" [value]="primengTableHelper.records"
+                            rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                            [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                            selectionMode="single"  [paginator]="true"
+                            [scrollable]="true" ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+                            [resizableColumns]="primengTableHelper.resizableColumns">
+
+                            <ng-template pTemplate="header" let-columns>
+                                <tr>
+                                    <th *ngFor="let col of columns
+                                    let i = index"  [pSortableColumn]="col.field">
+                                        {{col.header}}
+                                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-record="$implicit" let-columns="columns"
+                                let-i="rowIndex">
+                                <tr [pSelectableRow]="record"
+                                    >
+
+                                    <td  *ngFor="let col of columns ">
+                                        <div style="align-items: center;" *ngIf="col.field==='ntX_ID'; else break2">
+                                            {{i+1}}
+                                        </div>
+                                        <ng-template #break2>
+                                            <div *ngIf="col.field==='ntX_BIRTHDAY'; else break1 ">
+                                                {{record[col.field]|date:'shortDate'}} </div>
+
+                                            <ng-template  #break1>
+                                               <div  >
+                                                {{record[col.field]}}
+                                               </div>
+                                            </ng-template>
+                                        </ng-template>
+
+
+
+                                    </td>
+                                </tr>
+
+                            </ng-template>
+                        </p-table>
+                        <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                            {{l('NoData')}}
+                        </div>
+                        <span class="total-records-count">
+                            {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                        </span>
+                    </div>
+                </div>
+                <!--<Primeng-TurboTable-End>-->
+            </div>
+        </div>
+    </div>
+    </div>
+</form>

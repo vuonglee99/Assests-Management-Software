@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<zxing:ZXingScannerPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White"
+             xmlns:viewModels="clr-namespace:QRScan.ViewModels"  
+             x:Class="QRScan.Views.ScannerView">
+    <zxing:ZXingScannerPage.BindingContext>
+        <viewModels:ScannerViewModel/>
+    </zxing:ZXingScannerPage.BindingContext>
+    <StackLayout>
+        <Grid HeightRequest="50" Margin="20,0,20,0" HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="backLabel"  Source="backarrow" Margin="0,0,0,-5" HeightRequest="30" WidthRequest="30">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GobackCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Label Grid.Column="1" FontSize="25" TextColor="Black" Margin="0,3,0,0" AbsoluteLayout.LayoutBounds="0,0,1,1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" AbsoluteLayout.LayoutFlags="All" Text="Quét mã QR thiết bị"/>
+            <Image x:Name="backLabel0" Grid.Column="2" Source="backarrow0" HeightRequest="30" WidthRequest="30">
+                
+            </Image>
+        </Grid>
+        <ScrollView Orientation="Vertical">
+            <StackLayout>
+                <Frame BorderColor="Black" Margin="10,20,10,0" Padding="10">
+                    <Grid HorizontalOptions="FillAndExpand" Padding="0" ColumnSpacing="5" RowSpacing="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Label Grid.Row="0" Grid.Column="0" Text="Mã đơn vị:" FontSize="18" TextColor="Black" Margin="3"/>
+                        <Label Grid.Row="1" Grid.Column="0" Text="Mã bản kiểm kê:" FontSize="18" TextColor="Black" Margin="3"/>
+                        <Label Grid.Row="2" Grid.Column="0" Text="Ngày tạo:" FontSize="18" TextColor="Black" Margin="3"/>
+
+                        <Frame Grid.Row="0" Grid.Column="1" BorderColor="Black" HorizontalOptions="FillAndExpand" Padding="0" Margin="0,0,0,0">
+                            <Label x:Name="MaDV"  FontSize="18" TextColor="Black" Margin="3"/>
+                        </Frame>
+                        <Frame Grid.Row="1" Grid.Column="1" BorderColor="Black" HorizontalOptions="FillAndExpand" Padding="0" Margin="0,0,0,0">
+                            <Label x:Name="MaKK" FontSize="18" TextColor="Black" Margin="3"/>
+                        </Frame>
+                        <Frame Grid.Row="2" Grid.Column="1" BorderColor="Black" HorizontalOptions="FillAndExpand" Padding="0" Margin="0,0,0,0">
+                            <Label x:Name="NgayTao"  FontSize="18" TextColor="Black" Margin="3"/>
+                        </Frame>
+                    </Grid>
+                </Frame>
+                <Grid HorizontalOptions="FillAndExpand"  >
+                    <Frame Margin="10,10,10,20" BorderColor="Black"  CornerRadius="10" Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                        <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <pancake:PancakeView HorizontalOptions="FillAndExpand" CornerRadius="10,10,0,0" BorderThickness="2" BorderColor="Black" BackgroundColor="#0095FF" Margin="0" Padding="0">
+                                <Label Margin="0,3" TextColor="White" Text="Quét mã tại đây" HorizontalTextAlignment="Center" FontSize="25" HorizontalOptions="FillAndExpand"/>
+                            </pancake:PancakeView>
+
+                            <Frame Grid.Row="1" Margin="0,25,0,10" BorderColor="Transparent" HasShadow="False" Padding="0" WidthRequest="250" HeightRequest="250" HorizontalOptions="Center" VerticalOptions="Center">
+                                <Grid Padding="0" ColumnSpacing="0" RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition />
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <!--4 thanh ngang-->
+                                    <BoxView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                                             HeightRequest="5" WidthRequest="60"
+                                             BackgroundColor="Black"/>
+                                    <BoxView Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" 
+                                                 HeightRequest="5" WidthRequest="60"
+                                                 BackgroundColor="Black"/>
+                                    <BoxView Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" 
+                                             HeightRequest="5" WidthRequest="60"
+                                             BackgroundColor="Black"/>
+                                    <BoxView Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" 
+                                             HeightRequest="5" WidthRequest="60"
+                                             BackgroundColor="Black"/>
+                                    <!--4 thanh dọc-->
+                                    <BoxView Grid.Row="1" Grid.Column="0" 
+                                             HeightRequest="55" WidthRequest="5"
+                                             BackgroundColor="Black"/>
+                                    <BoxView  Grid.Row="1" Grid.Column="4" HorizontalOptions="End"
+                                             HeightRequest="55" WidthRequest="5"
+                                             BackgroundColor="Black"/>
+                                    <BoxView Grid.Row="3" Grid.Column="0" 
+                                             HeightRequest="55" WidthRequest="5"
+                                             BackgroundColor="Black"/>
+                                    <BoxView  Grid.Row="3" Grid.Column="4" HorizontalOptions="End"
+                                             HeightRequest="55" WidthRequest="5"
+                                             BackgroundColor="Black"/>
+                                    <Frame Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="3"  Padding="0">
+                                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  Margin="0">
+                                            <zxing:ZXingScannerView x:Name="Scanner" OnScanResult="Scanner_OnScanResult" IsScanning="true" Margin="0" 
+                                                            IsAnalyzing="True"
+                                                                Scale="1.2" IsVisible="True"
+                                            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+
+                                        </Grid>
+                                    </Frame>
+
+                                </Grid>
+                            </Frame>
+                            <Label x:Name="errLabel" IsVisible="False" Grid.Row="2" Text="Mã QR không đúng định dạng hoặc đã bị lỗi" TextColor="Red"  Margin="15,0,15,30" FontSize="18" HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </Frame>
+                </Grid>
+                <pancake:PancakeView BorderColor="Black" BorderThickness="1" Margin="10,10,10,20" CornerRadius="5" Padding="0">
+                    <StackLayout>
+                        <Grid RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <pancake:PancakeView BackgroundColor="#0095FF">
+                                <Label HorizontalOptions="Center" Margin="5,3" HorizontalTextAlignment="Center" Text="Nhập thông tin thiết bị nếu có vấn đề với mã QR" FontSize="20" TextColor="White"/>
+                            </pancake:PancakeView>
+                            <Grid  Grid.Row="1" Margin="10,20,10,10" Padding="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label VerticalOptions="Center"  Text="Nhập mã thiết bị:"  FontSize="17" TextColor="{Binding Choose1,Converter={StaticResource ChoosedLabelColorConverter}}" Padding="0" HorizontalOptions="Start"/>
+                                <Label VerticalOptions="Center"  Grid.Row="1" Text="Nhập tên nếu không có mã:" FontSize="17" Padding="0" TextColor="{Binding Choose2,Converter={StaticResource ChoosedLabelColorConverter}}" HorizontalOptions="Start"/>
+                                <pancake:PancakeView  Padding="0" Grid.Row="0" Grid.Column="1" BorderColor="Black" BorderThickness="1" HorizontalOptions="FillAndExpand">
+                                    <Entry IsEnabled="{Binding Choose1}" Grid.Row="0" Text="{Binding MaTB}" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+                                </pancake:PancakeView>
+                                <pancake:PancakeView Grid.Row="1" Grid.Column="1"   BorderColor="Black" BorderThickness="1" HorizontalOptions="FillAndExpand">
+                                    <Entry IsEnabled="{Binding Choose2}" Text="{Binding TenTB}"  HorizontalOptions="FillAndExpand" />
+                                </pancake:PancakeView>
+                                <Image Grid.Row="0" Grid.Column="2" Source="{Binding Choose1,Converter={StaticResource RadioButtonConverter}}" WidthRequest="23" HeightRequest="23" Margin="5,0,0,0">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Choose1Command}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Image Grid.Row="1" Grid.Column="2" Source="{Binding Choose2,Converter={StaticResource RadioButtonConverter}}" WidthRequest="23" HeightRequest="23" Margin="5,0,0,0">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Choose2Command}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Grid>
+
+                        </Grid>
+                        <Button  Command="{Binding KiemKeCommand}" Margin="30,10,30,20" HeightRequest="55"  HorizontalOptions="FillAndExpand" Text="Kiểm kê thiết bị" FontSize="20" Padding="0" BackgroundColor="#0095FF" BorderColor="Black" TextColor="White" BorderWidth="1" CornerRadius="2"/>
+
+                    </StackLayout>
+                    
+                </pancake:PancakeView>
+                
+
+            </StackLayout>
+        </ScrollView>
+        
+        
+    </StackLayout>
+    
+</zxing:ZXingScannerPage>

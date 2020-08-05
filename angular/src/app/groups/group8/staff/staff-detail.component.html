@@ -1,0 +1,188 @@
+<form #formRef class="bakery bakery-form" (ngSubmit)="save($event)">
+    <ul
+        style="background-color: #248dc1;font-family: auto;font-size: 20px;padding-left:10px;margin:0;color:white; line-height: 55px;">
+        <li style="display: inline-block;padding-left: 20px">
+            {{titleHeader}}</li>
+    </ul>
+    <div style="height: 50px;"></div>
+    <!--Mã nhân viên , tên nhân viên, chức vụ, sđt, cmnd, địa chỉ, phòng ban, ngày cấp cmnd, nơi cấp cmnd, mã số thuế, trạng thái hoạt động, email, mô tả-->
+    <div class="form-control">
+        <div class="row col-md-12">
+            <div class="col-md-6">
+                <div class="form-group row bakery-form-group form-group">
+                    <label for="manv" class="control-label col-md-6">Mã Nhân Viên </label>
+                    <div class="form-control col-md-6">
+                        <input id="manv" class="bakery-input form-control bakery-input-small"
+                            [(ngModel)]="inputModel.nV_MA_NV" name="nV_MA_NV" type="text" required #manv="ngModel"
+                            [disabled]="editPageState !== 'add'">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <div class="col-md-6">
+                <div class="form-group row bakery-form-group form-group">
+                    <label for="tennv" class="control-label col-md-6">Tên Nhân Viên *</label>
+                    <div class="form-control col-md-6">
+                        <input id="tennv" class="bakery-input form-control bakery-input-small" required
+                            [(ngModel)]="inputModel.nV_TEN" name="nV_TEN" type="text" #tennv="ngModel"
+                            [disabled]="editPageState === 'view'">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row bakery-form-group form-group">
+                    <label for="chucvu" class="control-label col-md-6">Chức vụ</label>
+                    <div class="form-control col-md-6">
+                        <input id="chucvu" class="bakery-input form-control bakery-input-small" required
+                            [(ngModel)]="inputModel.nV_CHUC_VU" name="nV_CHUC_VU" type="text" #chucvu="ngModel"
+                            [disabled]="editPageState === 'view'">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row  col-md-12">
+            <div class="col-md-6">
+                <div class="form-group row bakery-form-group form-group">
+                    <label for="diachi" class="control-label col-md-6">Địa Chỉ</label>
+                    <div class="form-control col-md-6">
+                        <input id="diachi" class="bakery-input form-control bakery-input-small"
+                            [(ngModel)]="inputModel.nV_DIA_CHI" name="nV_DIA_CHI" required type="text" #diachi="ngModel"
+                            [disabled]="editPageState === 'view'">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row bakery-form-group">
+                    <label for="phongban" class="control-label col-md-6">Phòng Ban</label>
+                    <div class="form-control col-md-6">
+                        <group8-select [(ngModel)]="inputModel.nV_PHONG_BAN" name="nV_PHONG_BAN" #phongban="ngModel"
+                            required id="phongban" class="input" [disabled]="editPageState === 'view'"
+                            [dataSources]="phongBan_List" dataDisplay="TEN" dataValue="MA_PB">
+                        </group8-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row  col-md-12">
+            <div class="col-md-6">
+                <div class="form-group row bakery-form-group form-group">
+                    <label for="sdt" class="control-label col-md-6">SĐT</label>
+                    <div class="form-control col-md-6">
+                        <input id="sdt" class="bakery-input form-control bakery-input-small" required
+                            (keypress)="validate($event)" [(ngModel)]="inputModel.nV_SDT" name="nV_SDT" type="text"
+                            #sdt="ngModel" [disabled]="editPageState === 'view'">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row bakery-form-group">
+                    <label for="phongban" class="control-label col-md-6">Trạng Thái Hoạt Động</label>
+                    <div class="form-control col-md-6">
+                        <group8-select [(ngModel)]="inputModel.nV_TRANG_THAI" name="nV_TRANG_THAI" #trangthai="ngModel"
+                            id="trangthai" class="input" required [disabled]="editPageState === 'view'"
+                            (onchange)="onChange($event)" [dataSources]="thangthaiList" dataDisplay="TEN"
+                            dataValue="MA_TT">
+                        </group8-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row  col-md-12">
+            <div class="col-md-6">
+                <div class="form-group row bakery-form-group form-group">
+                    <label for="cmnd" class="control-label col-md-6">CMND *</label>
+                    <div class="form-control col-md-6">
+                        <input id="cmnd" class="bakery-input form-control bakery-input-small" required minlength="9"
+                            maxlength="12" (keypress)="validate($event)" [(ngModel)]="inputModel.nV_CMND" name="nV_CMND"
+                            type="text" #cmnd="ngModel" [disabled]="editPageState === 'view'">
+                        <div class="alert alert-danger"
+                            *ngIf="cmnd.invalid && (cmnd.dirty || cmnd.touched) && !cmnd.errors.required">
+                            <div *ngIf="cmnd.errors.minlength || cmnd.errors.maxlength">
+                                Số CMND phải từ 9 - 12 số
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row bakery-form-group form-group">
+                    <label for="masothue" class="control-label col-md-6">Mã Số Thuế</label>
+                    <div class="form-control col-md-6">
+                        <input id="masothue" class="bakery-input form-control bakery-input-small"
+                            [(ngModel)]="inputModel.nV_MA_SO_THUE" name="nV_MA_SO_THUE" required type="text"
+                            #masothue="ngModel" [disabled]="editPageState === 'view'">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row  col-md-12">
+            <div class="col-md-6">
+                <div class="form-group row bakery-form-group">
+                    <label for="ngaycap" class="control-label col-md-6">Ngày Cấp CMND</label>
+                    <div class="form-control col-md-6">
+                        <p-calendar id="ngaycap" ngClass="w-100" name="nV_NGAY_CAP_CMND" #ngaycap="ngModel" required
+                            [(ngModel)]="ngaycapDate" dateFormat="dd.mm.yy" [disabled]="editPageState === 'view'">
+                        </p-calendar>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row  col-md-12">
+            <div class="col-md-6">
+                <div class="form-group row bakery-form-group form-group">
+                    <label for="noicap" class="control-label col-md-6">Nơi Cấp CMND</label>
+                    <div class="form-control col-md-6">
+                        <input id="noicap" class="bakery-input form-control bakery-input-small"
+                            [(ngModel)]="inputModel.nV_NOI_CAP_CMND" name="nV_NOI_CAP_CMND" type="text"
+                            #noicap="ngModel" required [disabled]="editPageState === 'view'">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row  col-md-12">
+            <div class="col-md-12">
+                <div class="form-group row bakery-form-group form-group">
+                    <label for="mota" class="control-label col-md-6">Mô Tả</label>
+                    <div class="form-control col-md-12">
+                        <textarea id="mota" class="bakery-input form-control bakery-input-small"
+                            [(ngModel)]="inputModel.nV_MO_TA" name="nV_MO_TA" #mota="ngModel"
+                            [disabled]="editPageState === 'view'" rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row margin-bottom-10">
+            <div class="col-sm-12 text-right">
+                <button *ngIf="editPageState !== 'edit'" class="btn btn-primary float-left" (click)="backToList()"><i
+                        class="fa fa-arrow-left"></i>
+                    {{l("Quay lại")}}</button>
+                <button *ngIf="editPageState === 'view'" class="btn btn-danger" (click)="deleteCTNV()"><i
+                        class="fa fa-times"></i>
+                    {{l("Xóa")}}</button>
+                <button *ngIf="editPageState === 'edit'" class="btn btn-primary" (click)="cancel()"><i
+                        class="fa fa-times"></i>
+                    {{l("Hủy")}}</button>
+                <button *ngIf="editPageState === 'edit'" class="btn btn-primary" type="submit"
+                    [disabled]="tennv.invalid || cmnd.invalid || ngaycap.invalid || noicap.invalid || diachi.invalid || sdt.invalid || chucvu.invalid || masothue.invalid">
+                    <i class="fa fa-save"></i>
+                    {{l("Lưu")}}</button>
+                <button *ngIf="editPageState === 'view'" class="btn btn-primary" (click)="update()"><i
+                        class="fa fa-edit"></i>
+                    {{l("Cập nhật")}}</button>
+                <button *ngIf="editPageState === 'add'" class="btn btn-primary" type="submit"
+                    [disabled]="tennv.invalid || cmnd.invalid || ngaycap.invalid || noicap.invalid || diachi.invalid || sdt.invalid || chucvu.invalid || masothue.invalid">
+                    <i class="fa fa-plus"></i>
+                    {{l("Thêm")}}</button>
+            </div>
+        </div>
+
+    </div>
+</form>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

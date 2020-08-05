@@ -1,0 +1,595 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<localizationDictionary culture="en">
+  <texts>
+    <text name="UitDemoUI">UIT Demo UI</text>
+
+    <!-- BEGIN-GROUP-6 -->
+    <text name="GR6_STT">Ordinal number</text>
+    <text name="GR6_DESC">Description</text>
+    <text name="GR6_WARNING">Warning</text>
+    <text name="GR6_TOTAL_RECORD">Total records</text>
+    <text name="GR6_NO_DATA">No Data</text>
+    <text name="GR6_YES">OK</text>
+    <text name="GR6_SAVE">Save</text>
+    <text name="GR6_CANCEL">Cancel</text>
+    <text name="GR6_GOBACK">Back</text>
+    <text name="GR6_EDIT">Edit</text>
+    <text name="GR6_UPDATE">Edit</text>
+    <text name="GR6_DELETE">Delete</text>
+    <text name="GR6_APPROVE">Approve</text>
+    <text name="GR6_DENY">Deny</text>
+    <text name="GR6_STATUS">Status</text>
+    <text name="GR6_SEARCHBY">Search by</text>
+    <text name="GR6_CONFIRM">Confirm</text>
+    <text name="GR6_DOWNLOAD">Download</text>
+    <text name="GR6_CREATE">Create</text>
+    <text name="GR6_DTH">Processing</text>
+    <text name="GR6_DC">Peding</text>
+    <text name="GR6_DHT">Completed</text>
+    <text name="GR6_CREATE_EXCEL_SUCESSFULL">Export file created!</text>
+
+    <text name="GR6_REQUEST_TYPE">Request Type</text>
+    <text name="GR6_APPROVED">Approved</text>
+    <text name="GR6_APPROVE_TYPE">Approve Type</text>
+    <text name="GR6_PENDING">Pending</text>
+    <text name="GR6_DENIED">Denied</text>
+    <text name="GR6_ALL">All</text>
+    <text name="GR6_ACTIVE">Active</text>
+    <text name="GR6_INACTIVE">Inactive</text>
+
+     <!-- Message -->
+     <text name="GR6_DELETED_MESSAGE">Item deleted</text>
+     <text name="GR6_MESSAGE">Message</text>
+     <text name="GR6_DELETED_SENT">Request sent</text>
+     <text name="GR6_REQUEST_SENT">Request sent</text>
+     <text name="GR6_REQUEST_APPROVED">Request approved</text>
+     <text name="GR6_REQUEST_DENIED">Request denied</text>
+    
+
+     <!-- DVT -->
+    <text name="GR6_DVT_LIST_TITLE">Units</text>
+    <text name="GR6_DVT_DETAIL_TITLE">Detailed unit</text>
+    <text name="GR6_DVT_CODE">Unit code</text>
+    <text name="GR6_DVT_NAME">Unit name</text>
+    <text name="GR6_DVT_DELETE_WARNING">Are you sure to delete this unit?</text>
+
+    <!-- DUT -->
+    <text name="GR6_DUT_LIST_TITLE">Priorities</text>
+    <text name="GR6_DUT_TITLE">Priority</text>
+    <text name="GR6_DUT_DETAIL_TITLE">Detailed priority</text>
+    <text name="GR6_DUT_CREATE_TITLE">Create priority</text>
+    <text name="GR6_DUT_CODE">Priority code</text>
+    <text name="GR6_DUT_NAME">Priority name</text>
+    <text name="GR6_DUT_LEVEL">Priority level</text>
+    <text name="GR6_DUT_DELETE_WARNING">Are you sure to delete this priority?</text>
+
+     <!-- TTYCSC -->
+     <text name="GR6_TTYCSC_LIST_TITLE">Repairing order status</text>
+     <text name="GR6_TTYCSC_TITLE">Repairing order status</text>
+     <text name="GR6_TTYCSC_DETAIL_TITLE">Detailed status</text>
+     <text name="GR6_TTYCSC_CREATE_TITLE">Create status</text>
+     <text name="GR6_TTYCSC_CODE">Status code</text>
+     <text name="GR6_TTYCSC_NAME">Status name</text>
+     <text name="GR6_TTYCSC_DELETE_WARNING">Are you sure to delete this status?</text>
+     <text name="GR6_TTYCSC_DENY_CONFIRM">Are you sure to deny this request?</text>
+     <text name="GR6_TTYCSC_APPROVE_CONFIRM">Are you sure to approve this request?</text>
+
+    <!-- Thong-Ke -->
+    <text name="GR6_STATISTIC">Statistic</text>
+    <text name="GR6_STATISTIC_DESC">Repairing request statistic</text>
+    <text name="GR6_STATISTIC_COUNT">Total repairing request</text>
+    <text name="GR6_STATISTIC_RATIO">Ratio</text>
+    <text name="GR6_STATISTIC_REQUEST">Request statistic</text>
+    <text name="GR6_STATISTIC_COMPLETED_REQUEST">Total completed reparing requests</text>
+    <text name="GR6_STATISTIC_PROCESSING_REQUEST">Total processing reparing requests</text>
+    <text name="GR6_STATISTIC_PENDING_REQUEST">Total pending reparing requests</text>
+
+    <!-- END-GROUP-6 -->
+
+     <!--Buldings-->
+    <text name="BuildingsManagement">Buildings Management</text>
+    <text name="BuildingsListTitle">Buildings List</text>
+    <text name="BuildingsListSubitle">Manage your buildings list</text>
+    <text name="BuildingCode">Building's code</text>
+    <text name="BuildingName">Building's name</text>
+    <text name="BuildingAddress">Building's address</text>
+    <text name="BuildingFloorNo">No.Floors</text>
+    <text name="BuildingDescription">Building's description</text>
+    <text name="BuildingDeleteWarningMessage">Building {0} wil be delete</text>
+    <text name="BuildingDetailTitle_Create">Create new building</text>
+    <text name="BuildingDetailTitle_Detail">Detail of building</text>
+    <text name="BuildingDetailTitle_Modify">Modify existed building</text>
+    <text name="BuildingDetailSubtitle">Building's detail infomation</text>
+
+    <text name="FloorsListTitle">Floors List</text>
+    <text name="FloorCode">Floor's code</text>
+    <text name="FloorName">Floor's name</text>
+    <text name="FloorType">Floor's type</text>
+    <text name="FloorTypeCreate">Create new floor type</text>
+    <text name="FloorTypeName">Floor's type name</text>
+    <text name="FloorDescription">Floor's description</text>
+    <text name="FloorDeleteWarningMessage">Floor {0} wil be delete</text>
+    <text name="FloorDetailTitle_Create">Create new floor</text>
+    <text name="FloorDetailTitle_Detail">Detail of floor</text>
+    <text name="FloorDetailTitle_Modify">Modify existed floor</text>
+    <text name="FloorDetailSubtitle">Floor's detail infomation</text>
+
+    <text name="ApartmentsListTitle">Apartments List</text>
+    <text name="ApartmentCode">Apartment's code</text>
+    <text name="ApartmentName">Apartment's name</text>
+    <text name="ApartmentType">Apartment's type</text>
+    <text name="ApartmentTypeCreate">Create new apartment type</text>
+    <text name="ApartmentTypeName">Apartment's type name</text>
+    <text name="ApartmentDescription">Apartment's description</text>
+    <text name="ApartmentPrice">Apartment's price</text>
+    <text name="ApartmentRooms">Apartment's rooms</text>
+    <text name="ApartmentArea">Apartment's area</text>
+    <text name="ApartmentDeleteWarningMessage">Apartment {0} wil be delete</text>
+    <text name="ApartmentDetailTitle_Create">Create new apartment</text>
+    <text name="ApartmentDetailTitle_Detail">Detail of apartment</text>
+    <text name="ApartmentDetailTitle_Modify">Modify existed apartment</text>
+    <text name="ApartmentDetailSubtitle">Apartment's detail infomation</text>
+
+    <text name="ResidentsManagement">Residents Management</text>
+    <text name="ResidentsListTitle">Residents List</text>
+    <text name="ResidentsListSubitle">Manage your residents list</text>
+    <text name="ResidentCode">Resident's code</text>
+    <text name="ResidentName">Resident's name</text>
+    <text name="ResidentPhone">Resident's phone</text>
+    <text name="ResidentBirth">Resident's birth</text>
+    <text name="ResidentIDCard">Resident's card id</text>
+    <text name="ResidentCurApart">Living apartment</text>
+    <text name="ResidentDeleteWarningMessage">Resident {0} wil be delete</text>
+    <text name="ResidentDetailTitle_Create">Create new resident</text>
+    <text name="ResidentDetailTitle_Detail">Detail of resident</text>
+    <text name="ResidentDetailTitle_Modify">Modify existed resident</text>
+    <text name="ResidentDetailSubtitle">Resident's detail infomation</text>
+
+    <text name="Group3AuthStatus">Approve</text>
+    <text name="Group3Rooms">Room(s)</text>
+    <text name="Group3CurrencyUnit">USD</text>
+    <text name="Group3Status">Status</text>
+    <text name="Group3Create">Create</text>
+    <text name="Group3Detail">Detail</text>
+    <text name="Group3Delete">Delete</text>
+    <text name="Group3Modify">Modify</text>
+    <text name="Group3Update">Update</text>
+    <text name="Group3Approve">Approve</text>
+    <text name="Group3Export">Export Excel</text>
+    <text name="Group3Back">Back</text>
+    <text name="Group3Cancel">Cancel</text>
+    <text name="Group3Approved">Approved</text>
+    <text name="Group3Denied">Denied</text>
+    <text name="Group3Waiting">Waiting</text>
+    <text name="Group3UpdateSuccess">Update successful</text>
+    <text name="Group3MakerID">Maker ID</text>
+    <text name="Group3CreateDate">Create datetime</text>
+    <text name="Group3CheckerID">Checker ID</text>
+    <text name="Group3ApproveDate">Approved datetime</text>
+    <text name="Group3PageDetailNotFound">
+      This page is not existed in system.
+      But, may be it still exists in database.
+      Please contact to your database's administrator for more detail.
+    </text>
+    <text name="Group3ClickToChoose">Click to choose item</text>
+	
+	
+	<!--Group 7-->
+	<text name="G7ListOfVehicleTypes">Vehicle types</text>
+	<text name="G7VehicleTypeCode">Type code</text>
+	<text name="G7EnterVehicleTypeCode">Enter type code</text>
+	<text name="G7VehicleTypeName">Type name</text>
+	<text name="G7EnterVehicleTypeName">Enter type name</text>
+	<text name="G7No">No</text>
+	<text name="G7Description">Description</text>
+	<text name="G7DateCreated">Date Created</text>
+	<text name="G7NoData">No Data</text>
+	<text name="G7TotalRecordsCount">Total records count</text>
+	
+	<text name="G7SupplierDetailScreen">Supplier Detail</text>
+	<text name="G7NotFoundSuppliers">Can not found suppliers. Back</text>
+	<text name="G7AddSupplier">Add supplier</text>
+	<text name="G7ViewDetail">View detail</text>
+	<text name="G7SupplierCode">Supplier code</text>
+	<text name="G7SupplierName">Supplier name</text>
+	<text name="G7CantBeEmpty">can't be empty</text>
+	<text name="G7Address">Address</text>
+	<text name="G7Phone">Phone</text>
+	<text name="G7MustBe10Characters">must be 10 characters</text>
+	<text name="G7TaxNumber">Tax number</text>
+	<text name="G7ContactPersonName">Contact person's name</text>
+	<text name="G7ContactPersonEmail">Contact person's email</text>
+	<text name="G7ContactPersonPhone">Contact person's phone</text>
+	<text name="G7CorrectEmail">Please enter valid email: abc@xyz.com</text>
+
+
+<!-- GROUP11 START-->
+ <!--Maintenance START-->
+    <text name="Group11Maintenance">Car Maintenance</text>
+    <text name="MaintenanceManagement">Car Maintenance</text>
+    <text name="MaintenanceInfo">Maintenance Information</text>
+    <text name="MaintenanceCar">Car Id</text>
+    <text name="MaintenanceCode">Maintenance Code</text>
+    <text name="MaintenanceTitle">Maintenance Detail</text>
+    <text name="MaintenanceGarage">Garage</text>
+    <text name="MaintenanceAddress">Address</text>
+    <text name="MaintenanceFrom">From</text>
+    <text name="MaintenanceTo">To</text>
+    <text name="MaintenancePrice">Total fee</text>
+    <text name="MaintenanceNo">No.</text>
+
+    <text name="Group11SearchByCarId">Search by car id...</text>
+
+    <text name="Group11MaintenanceCodeValidate">Please input maintenance code</text>
+    <text name="Group11MaintenanceCarValidate">Please input car id</text>
+    <text name="Group11MaintenanceGarageValidate">Please input garage</text>
+    <text name="Group11MaintenanceAddressValidate">Please input address</text>
+    <text name="Group11MaintenanceFromValidate">Please choose begin maintenance date</text>
+    <text name="Group11MaintenanceToValidate">Please choose finish maintenance date</text>
+    <text name="Group11MaintenanceWhiteSpaceValidate">Please input valid data</text>
+    <text name="Group11MaintenanceBeforeDateValidate">Please choose another valid date</text>
+
+    <text name="TypeApproveStatus">Pending to approve</text>
+    <text name="Group11Delete">Delete</text>
+    <text name="Group11Update">Update</text>
+    <text name="Group11Insert">Insert</text>
+    <text name="Group11FormInvalid">Please input all require data!</text>
+    <text name="Group11DisApproveButton">DISAPPROVE</text>
+    <text name="Group11ApproveButton">APPROVE</text>
+    <text name="SuccessfullyDeleteApproved">The removal request has been successfully approved</text>
+    <text name="SuccessfullyUpdateApproved">The update request has been successfully approved</text>
+    <text name="SuccessfullyApproved">Add request has been successfully approved</text>
+    <text name="SuccessfullyDeleteDisApproved">Removal request has been denied</text>
+    <text name="SuccessfullyUpdateDisApproved">Update request has been denied</text>
+    <text name="SuccessfullyDisApproved">Add request has been denied</text>
+    <text name="MaintenanceAuthStatus">Approval Status</text>
+    <text name="ExistedMaintenanceCodeError">A maintenance code already exists or is pending approval</text>
+    <text name="InQueueDeleteMessage">Removal request has been added to the approval list</text>
+    <text name="InQueueUpdateMessage">Update request has been added to the approval list</text>
+    <text name="WaitingForApproveMessage">Maintenance service is pending to approve</text>
+    <text name="InvalidFinishDateError">The end date must not be before the begin maintenance date</text>
+    <text name="AddNewSuccessMessage">Add request has been added to the approval list</text>
+    <text name="ChooseMaintenanceToViewDetailMessage">Please select the maintenance service to view information</text>
+    <text name="ExportExcelSuccess">Export excel successfully</text>
+    <text name="ExportExcelError">Fail to export excel, please check again</text>
+    <text name="ChooseMaintenanceToDeleteMessage">Please select a maintenance service to delete</text>
+    <text name="ChooseMaintenanceToApproveMessage">Please select a maintenance service to approve</text>
+    <text name="ChooseAlreadyApprovedMessage">Maintenance service has been approved already</text>
+    <text name="MaintenanceDeleteWarningMessage">Are you sure to delete maintenance service {0}?</text>
+    <text name="MaintenanceApproveDeleteWarningMessage">Approve delete request {0}?</text>
+    <text name="MaintenanceApproveUpdateWarningMessage">Approve update request {0}?</text>
+    <text name="MaintenanceApproveInsertWarningMessage">Approve insert request {0}?</text>
+    <text name="MaintenanceDenyDeleteWarningMessage">Deny delete request {0}?</text>
+    <text name="MaintenanceDenyUpdateWarningMessage">Deny update request {0}? </text>
+    <text name="MaintenanceDenyInsertWarningMessage">Deny insert request {0}?</text>
+    <text name="MaintenanceDetail">Maintenance Details</text>
+    <text name="Group11MaintenanceCodePatternValidate">Maintenance code must not contains space and special characters except _</text>
+    <!--Maintenance END-->
+    <!--Car Rental START -->
+    <text name="Group11CarRental">Car Rental</text>
+    <text name="CarRentalManagement">Car Rental Management</text>
+    <text name="CarRentalDetail">Car Rental Details</text>
+    <text name="CarRentalCode">Car Rental Code</text>
+    <text name="CarRentalRenter">Car Renter</text>
+    <text name="CarRentalCar">Car</text>
+    <text name="CarRentalPrice">Rent Cost</text>
+    <text name="CarRentalFrom">Rent Date</text>
+    <text name="CarRentalReturn">Return Date</text>
+    <text name="CarRentalExpect">Expect To Return</text>
+    <text name="CarRentalNotes">Notes</text>
+    <text name="CarRentalNo">No.</text>
+    
+    <text name="Group11CarRentalCodeValidate">Please input car rental code</text>
+    <text name="Group11CarRentalRenterValidate">Please choose a renter</text>
+    <text name="Group11CarRentalCarValidate">Please choose a car</text>
+    <text name="Group11CarRentalPriceValidate">Please input rental cost</text>
+    <text name="Group11CarRentalFromValidate">Please choose a rent date</text>
+    <text name="Group11CarRentalExpectValidate">Please choose a date expect to return</text>
+    <text name="Group11CarRentalReturnValidate">Please choose a return date</text>
+    <text name="Group11CarRentalWhiteSpaceValidate">Please input valid data</text>
+    <text name="Group11CarRentalBeforeDateValidate">Rent date must be before return date and expect to return date</text>
+    <text name="InvalidRentDateError">Rent date is invalid</text>
+    
+    <text name="CarRentalDeleteWarningMessage">Are you sure to delete car rental {0}?</text>
+    <text name="Group11CarRentalCodePatternValidate">Car rental code must not contains space and special characters except _</text>
+    <!--Car Rental END-->
+     <!-- Car START-->
+    <text name="Group11Car">Car</text>
+    <text name="CarManagement">Car Management</text>
+    <text name="CarCode">Car Code</text>
+    <text name="SearchByCarCode">Search by car code...</text>
+    <text name="CarName">Car name</text>
+    <text name="SearchByCarName">Search by car name...</text>
+    <text name="CarLicensePlate">Car license plate</text>
+    <text name="SearchByCarLicensePlate">Search by license plate...</text>
+    <text name="CarNo">No.</text>
+    <text name="CarColor">Color</text>
+    <text name="CarManufacturer">Manufacturer</text>
+    <text name="CarStatus">Status</text>
+    
+    <text name="CarDeleteWarningMessage">Are you sure to delete car {0}?</text>
+    <text name="Group11CarCodePatternValidate">Car code must not contains space and special characters except _</text>
+    <!-- Car END-->
+  <!--GROUP11 END-->
+    <!--Loai xe-->
+    <text name="G2LoaiXe">Vehicle Type</text>
+      <text name="G2QuanLyCacLoaiXe">Manage Vehicle Type</text>
+      <text name="G2ThemLoaiXe">Add Vehicle Type</text>
+      <text name="G2TimKiem">Search</text>
+      <text name="G2MaLoaiXe">ID</text>
+      <text name="G2TenLoaiXe">Name</text>
+      <text name="G2NhapTuKhoaDeTim">Key to Search</text>
+      <text name="G2MoTa">Description</text>
+      <text name="G2TongCong">All</text>
+      <text name="G2KhongCoDuLieu">Data Empty</text>
+      <text name="G2XoaMucDaChon">Delete Selected</text>
+      <text name="G2KhongTimThayLoaiXe">Not found this vehicle type</text>
+      <text name="G2Chon">Select</text>
+      <text name="G2Daxoa">Deleted</text>
+      <text name="G2Muc">filed</text>
+      <text name="G2TroLai">Back</text>
+      <text name="G2NhapGiaTri">Type value</text>
+      <text name="G2Them">Add</text>
+      <text name="G2ThongTinLoaiXe">Information of vehicle type</text>
+      <text name="G2HangXe">Manufacturer</text>
+      <text name="G2NamSanXuat">Year of manufacture</text>
+      <text name="G2LoaiNguyenLieu">Fuel type</text>
+      <text name="G2DinhMucNL">Amount of fuel (l/100km)</text>
+
+      <text name="G2KhongDuocTrong">must not empty</text>
+      <text name="G2KhongVuotQua">must not exceed</text>
+      <text name="G2KyTu">characters</text>
+      <text name="G2KhongChuaKyTuDacBiet">must not have special character</text>
+      <text name="G2KhongTimThayLoaiXeNay">Could not find this vehicle type</text>
+      <text name="G2LoaiXeBiXoaHoacKhongTonTai">This vehicle type might be deleted or not exist. Please check again!</text>
+      <text name="G2SuaThanhCong">Edited successfully</text>
+      <text name="G2KhongHopLe">is absurd</text>
+      <text name="G2XoaThanhCong">Removed successfully</text>
+      <text name="G2XacNhan">Confirm</text>
+      <text name="G2BanChacChanMuonXoaLoaiXe">Are you sure to delete this vehicle type</text>
+      <text name="G2DuyetThanhCong">Approved</text>
+      <text name="G2KhongDuyetThanhCong">Disapproved</text>
+    <text name="G2DuFilter">Enough</text>
+    <text name="G2ThieuFilter">Lost</text>
+    <text name="G2ThuaFilter">Redundant</text>
+    <!-- Group4-Text -->
+    <text name="g4SuccessfullyAdded">Added Successfully</text>
+    <text name="g4SuccessfullyUpdated">Updated Successfully</text>
+    <text name="g4SuccessfullyDeleted">Deleted Successfully</text>
+    <text name="g4WarningSelectedTenant">Please select one tenant</text>
+    <text name="g4ConfirmDelete">Confirm delete</text>
+    <text name="g4DeleteWarningMessage" value="Delete {0}, are you sure?" />
+    <text name="g4SaveErrorMessage">Please enter the information again</text>
+    <text name="g4MaxTenantMessage">Maximum number of people!</text>
+    <text name="g4BtnAddText">Add</text>
+    <text name="g4BtnEditText">Edit</text>
+    <text name="g4BtnDeleteText">Delete</text>
+    <text name="g4BtnSearchText">Search</text>
+    <text name="g4BtnViewText">Detail</text>
+    <text name="g4BtnSaveText">Save</text>
+    <text name="g4BtnBackText">Back</text>
+    <text name="g4BtnCancelText">Cancel</text>
+    <text name="g4BtnApproveText">Approve</text>
+    <text name="g4BtnDenyText">Deny</text>
+    <text name="g4ApprovedStatus">Approved</text>
+    <text name="g4DenyStatus">Denied</text>
+    <text name="g4WaitingStatus">Waiting</text>
+    <text name="g4AddPageName">Add</text>
+    <text name="g4EditPageName">Edit</text>
+    <text name="g4ViewPageName">View</text>
+    <text name="g4SearchByCode">Search by code</text>
+    <text name="g4SearchByName">Search by name</text>
+    <text name="g4SeleteAll">--- All ---</text>
+    <text name="g4SummaryRecords">Summary</text>
+    <text name="g4EmptyValueValidate">This field cannot be empty</text>
+    <text name="g4SerialColTitle">Serial</text>
+    <text name="g4NoResultFound">No Result Found</text>
+    <text name="g4List">List</text>
+    <text name="g4Manage">Manage</text>
+    <text name="g4EmptyData">Empty Data</text>
+    <text name="g4BranchPageName">Branch</text>
+    <text name="g4BranchCodeLable">Branch Code</text>
+    <text name="g4BranchNameLable">Branch Name</text>
+    <text name="g4BranchTypeLable">Branch Type</text>
+    <text name="g4BranchFatherLable">Father Branch</text>
+    <text name="g4BranchPhoneLable">Phone Number</text>
+    <text name="g4BranchFaxLable">Fax Number</text>
+    <text name="g4BranchEmailLable">Email</text>
+    <text name="g4BranchAddressLable">Address</text>
+    <text name="g4BranchDescriptionLable">Description</text>
+    <text name="g4BranchStatusLable">Active Status</text>
+    <text name="g4BranchActiveStatus">Active</text>
+    <text name="g4InvalidPhoneNumber">Phone number should be 10 digits</text>
+    <text name="g4InvalidFaxNumber">Fax number should be 10 digits</text>
+    <text name="g4InvalidEmailAddress">Invalid email address (ex: "abc@xyz.com")</text>
+    <text name="g4ApartmentPageName">Apartment</text>
+    <text name="g4ApartmentCodeLable">Apartment Code</text>
+    <text name="g4ApartmentNameLable">Apartment Name</text>
+    <text name="g4BuildingLable">Building</text>
+    <text name="g4FloorLable">Floor</text>
+    <text name="g4ApartmentTypeLable">Apartment Type</text>
+    <text name="g4StatusLable">Status</text>
+    <text name="g4PriceLable">Price</text>
+    <text name="g4NumberOfRoomLable">Number of rooms</text>
+    <text name="g4SuperficiesLable">Superficies</text>
+    <text name="g4MaximumPeopleLable">Maximum people</text>
+    <text name="g4ApartmentDescription">Description</text>
+    <text name="g4ChooseApType">--- Choose Apartment type ---</text>
+    <text name="g4ResidentsList">Residents List</text>
+    <text name="g4BtnAddResidentLable">Add Resident</text>
+    <text name="g4ApartmentAuthStatus">Auth Status</text>
+    <text name="g4NumbersOfPeople">Numbers of peoples</text>
+    <text name="g4ApartmentList">Apartment list</text>
+    <text name="g4ManageApartment">Manage appartment</text>
+    <text name="g4Enable">Enable</text>
+    <text name="g4Disable">Disable</text>
+    <text name="g4UnseletedApartmentWarning">Please choose one Apartment</text>
+    <text name="g4ApTypePageName">Apartment Type</text>
+    <text name="g4AddApTypePageLable">Add Apartment Type</text>
+    <text name="g4EditApTypePageLable">Edit Apartment Type</text>
+    <text name="g4ApTypeCodeLable">Apartment Type Code</text>
+    <text name="g4ApTypeNameLable">Apartment Type Name</text>
+    <text name="g4ApTypeDescriptionLable">Description</text>
+    <text name="g4ListApTypeTitle">Apartment Type List</text>
+    <text name="g4UnseletedApTypeWarning">Please choose one Apartment Type</text>
+    <text name="g4Apartment">Please choose one Apartment Type</text>
+    <text name="g4ApartmentManagement">Apartments</text>
+    <text name="g4ApartmentTypeManagement">Apartment Types</text>
+    <text name="g4ExportSuccess">Exported Successfully</text>
+    <text name="g4ExportFalled">Export Falled</text>
+    <text name="g4AddToApartment">Add to apartment</text>
+    <text name="g4ChooseBuilding">--- Choose Building ---</text>
+    <text name="g4ChooseFloor">--- Choose Floor ---</text>
+    <text name="g4MakerID">Maker ID</text>
+    <text name="g4CreateDT">Create Datetime</text>
+    <text name="g4CheckerID">Checker ID</text>
+    <text name="g4ApproveDT">Approve Datetime</text>
+    <text name="g4ResidentCode">Code </text>
+    <text name="g4ResidentName">Name </text>
+    <text name="g4ResidentPhone">Phone </text>
+    <text name="g4ResidentBirth">Birth </text>
+    <text name="g4ResidentIDCard">ID Card </text>
+    <text name="g4WaitingAdd">Waiting Add</text>
+    <text name="g4WaitingUpdate">Waiting Update</text>
+    <text name="g4WaitingDelete">Waiting Delete </text>
+    <text name="g4BtnChangeText">View Change </text>
+    <text name="g4Compare">Compare</text>
+    <text name="g4ApartmentOld">Old Info</text>
+    <text name="g4ApartmentNew">New Info</text> 
+    <text name="g4SuccessfullyApproved">Approved Successfully</text>
+    <text name="g4SuccessfullyDenied">Denied Successfully</text>
+    <text name="g4WaitingApprove">Waiting Approve</text>
+    <text name="g4Approved">Approved</text>
+    <!-- Group 4 -->
+
+
+    <text name="Group12_ModelTitle" >List of Models</text>
+    <text name="Group12_ModelDetailTitle">Model Infomation</text>
+    <text name="Group12_ModelCode" >Model code</text>
+    <text name="Group12_ModelName" >Model name</text>
+    <text name="Group12_ModelType" >Type</text>
+    <text name="Group12_ModelHSX" >Manufacturer</text>
+    <text name="Group12_ModelDMNL" >Fuel norms</text>
+    <text name="Group12_ModelNote" >Notes</text>
+    <text name="Group12_AddNewModel">Add New Model</text>
+    <text name="Group12_SearchModels">Search Models</text>
+    <text name="Group12_DeleteModels">Delete Models </text>
+    <text name="Group12_ViewDetailModel">Model details</text>
+    <text name="Group12_ExportModelTable">Export excel file</text>
+
+
+    <text name="Group12_autH_STATUS" >Status</text>
+    <text name="Group12_NoData" >No data</text>
+    <text name="Group12_All" >All</text>
+     <text name="Group12_DeleteModelWaringMessage" >Are you sure?</text>
+    <text name="Group12_DeleteSuccess" >Delete successfully!</text>
+    <text name="Group12_Notification" >Notification</text>
+    <text name="Group12_ChooseAModel" >Please select a model!</text>
+    <text name="Group12_ChooseMaxModel" >Only one model is allowed!</text>
+    <text name="Group12_ApproveAction" >Approve</text>
+    <text name="Group12_DenyApproveAction" >Deny</text>
+    <text name="Group12_Approved" >Approved</text>
+    <text name="Group12_WatingForCheckingDeletion"> Waiting for deletion </text>
+    <text name="Group12_WatingForCheckingUpdate" >Waiting for update</text>
+    <text name="Group12_WatingForCheckingAdd" >Waiting for add new</text>
+    <text name="Group12_CheckSuccess" >Approved successfully!</text>
+    <text name="Group12_DenyApproveSuccessfully" >Deny approve successfully!</text>
+    <text name="Group12_DenyApprove" >Deny</text>
+
+    <!--GROUP10-->
+     <text name="Group10_REASON">Reason</text>
+    <text name="Group10_REQUEST_REASON">Please enter disapprove reason</text>
+	<text name="Group10_EXCEL_FAIL">Excel exporting execution failed</text>
+	<text name="Group10_EXCEL_COMPLETE">Excel exporting execution successful</text>
+	<text name="Group10_EXCEL_REQUEST">Do you want to dowload this file?</text>
+    <text name="Group10_AUTH_STATUS">Status</text>
+    <text name="Group10_APPROVE_DT">Approve date</text>
+  <text name="GROUP10_NUMBER_ORDER">No.</text>
+    <text name="Group10_SEARCH">Search with: </text>
+    <text name="Group10_MALE">Male</text>
+    <text name="Group10_FEMALE">Female</text>
+    <text name="Group10_DELETE_WARNING">Are you sure to delete this?</text>
+    <text name="Group10_DELETE_CHOSE">Please select a row to delete!</text>
+    <text name="Group10_DELETE_COMPLETE">Delete successful</text>
+    <text name="Group10_UPDATE_COMPLETE">Update successful</text>
+    <text name="Group10_ADD_COMPLETE">Add successful</text>
+    <text name="Group10_UPDATE_CHOSE">Please select a row to update!</text>
+    <text name="Group10_DETAIL_CHOSE">Please select a row to view detail!</text>
+    <text name="Group10_ID_NOT_FOUND">No data</text>
+    <text name="Group10_ERROR_INPUT">An error occurred, please check the input fields</text>
+  <text name="Group10_DELETE_APPROVE">A removal request has been added to the approve list</text>
+    <text name="Group10_ADD_APPROVE">A additional request has been added to the approve list</text>
+    <text name="Group10_UPDATE_APPROVE">A editting request has been added to the approve list</text>
+
+<!--Approve status-->
+<text name="DEN_UPDATE">Disapproved update</text>
+<text name="DEN_DELETE">Disapproved delete</text>
+<text name="DEN_INSERT">Disapproved insert</text>
+<text name="APP_INSERT">Approved insert</text>
+<text name="APP_DELETE">Approved delete</text>
+<text name="APP_UPDATE">Approved update</text>
+<text name="PEN_INSERT">Pending insert</text>
+<text name="PEN_DELETE">Pending delete</text>
+<text name="PEN_UPDATE">Pending update</text>
+  <!--Validate-->
+    <text name="Group10_ONLY_NUMBER">Please enter numbers only.</text>
+    <text name="Group10_MAX">Please enter at most {0} characters.</text>
+    <text name="Group10_MIN">Please enter at least {0} characters.</text>
+    <text name="Group10_REQUIRED">Please enter something.</text>
+    <text name="Group10_SELECT_DATE">Please select date in the past. </text>
+
+   <!-- NTX -->
+    <text name="Group10_NTX_LIST_TITLE">Car renter management</text>
+    <text name="Group10_NTX_DETAIL_TITLE">Car renter detail</text>
+    <text name="Group10_NTX_CODE">Renter code</text>
+    <text name="Group10_NTX_NAME">Renter name</text>
+    <text name="Group10_NTX_ADDRESS">Address</text>
+    <text name="Group10_NTX_GENDER">Gender</text>
+    <text name="Group10_NTX_BIRTHDAY">Birthday</text>
+    <text name="Group10_NTX_ID_CARD">Id card</text>
+    <text name="Group10_NTX_LICENSE">License</text>
+   <!--NSX-->
+     
+    
+    <text name="Group10_NSX_LIST_TITLE">Manufacturer management</text>
+    <text name="Group10_NSX_DETAIL_TITLE">Manufacturer detail</text>
+    <text name="Group10_NSX_CODE">Manufacturer code</text>
+    <text name="Group10_NSX_NAME">Manufacturer name</text>
+    <text name="Group10_NSX_FROM">Manufacturer from</text>
+    <!--CTBD-->
+    
+    <text name="Group10_CTBD_DETAIL_TITLE">Detail of maintenance detail </text>
+    <text name="Group10_CTBD_CODE">Detail code</text>
+    <text name="Group10_CTBD_NAME">Detail name</text>
+    <text name="Group10_CTBD_QUANTITY">Quantity</text>
+    <text name="Group10_CTBD_UNIT_PRICE">Unit price</text>
+    <text name="Group10_CTBD_TOTAL_PRICE">Total price</text>
+  <!--GTOUP10-->
+    <text name="Group12_Back" >Back</text>
+    <text name="Group12_Edit" >Edit</text>
+    <text name="Group12_Save" >Save</text>
+    <text name="Group12_Cancel" >Cancel</text>
+    <text name="Group12_EditSuccessfully" >Edit successfully!</text>
+
+
+
+     <text name="Group12_KiemKeTitle" >List of inventories</text>
+    <text name="Group12_KiemKeDetailTitle">Inventory infomation</text>
+    <text name="Group12_AddNewInventoryTitle">Add new inventory</text>
+    <text name="Group12_kK_CODE">Inventory code</text>
+    <text name="Group12_kK_NGUOITAO">Creator</text>
+    <text name="Group12_kK_MADONVI">Unit code</text>
+    <text name="Group12_kK_TENDONVI">Unit name</text>
+    <text name="Group12_kK_NGAYTAO">Date created</text>
+    <text name="Group12_kK_NGAYCHOT">Closing date</text>
+    <text name="Group12_kK_TONGTB_DUOCKIEMKE">Inventoried</text>
+    <text name="Group12_kK_TONGTB_DUSOVOISAOKE">Enough for st</text>
+    <text name="Group12_kK_TONGTB_THIEUSOVOISAOKE">Missing compared to st</text>
+    <text name="Group12_kK_TONGTB_THUASOVOISAOKE">Redundant compared to st</text>
+    <text name="Group12_AddNewInventory">Add New Inventory</text>
+    <text name="Group12_SearchInventories">Search Inventories</text>
+    <text name="Group12_DeleteInventories">Delete Inventories </text>
+    <text name="Group12_ViewDetailInventory">Inventory details</text>
+    <text name="Group12_ExportInventoryTable">Export excel file</text>
+  </texts>
+</localizationDictionary>

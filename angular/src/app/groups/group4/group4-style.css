@@ -1,0 +1,100 @@
+button:hover {
+    cursor: pointer;
+}
+
+.group4 {}
+
+.group4 .approveTrue {
+    font-size: 17px;
+    color: green;
+}
+
+.group4 .approveFalse {
+    font-size: 17px;
+    color: red
+}
+
+.group4 .form-control:focus {
+    border-color: #0095ff;
+}
+
+.group4 p-inputmask>input {
+    padding: .85rem 1.15rem !important;
+    border-color: #ebedf2 !important;
+}
+
+.group4 p-inputmask>input:disabled {
+    opacity: 1.0 !important;
+}
+
+.group4 input.form-control:disabled {
+    background-color: #e9ecef !important;
+}
+
+.group4 .ui-paginator-left-content {
+    padding-top: 6px !important;
+}
+
+.group4 .ui-paginator-bottom {
+    padding-top: 6px !important;
+}
+
+.group4 .ddReadOnly {
+    padding-top: 4.2px !important;
+    padding-bottom: 4.2px !important;
+    width: 100% !important;
+    background-color: #E9ECEF !important;
+    border-color: #ebedf2 !important;
+}
+
+.group4 .ddReadOnly .ui-dropdown-label {
+    background-color: #E9ECEF !important;
+}
+
+.group4 .ddReadOnly .ui-dropdown-trigger {
+    background-color: #E9ECEF !important;
+}
+
+.group4 .ddReadOnly:hover {
+    background-color: #E9ECEF !important;
+}
+
+.group4 .dropdown {
+    padding-top: 4.2px !important;
+    padding-bottom: 4.2px !important;
+    width: 100% !important;
+    background-color: #E9ECEF !important;
+    border-color: #ebedf2 !important;
+}
+
+.group4 .dropdown .ui-dropdown-label {
+    background-color: #E9ECEF !important;
+}
+
+.group4 .dropdown .ui-dropdown-trigger {
+    background-color: #E9ECEF !important;
+}
+
+.group4 .dropdown:hover {
+    background-color: #E9ECEF !important;
+}
+
+.group4 .dropdown .ui-dropdown.ui-state-focus {
+    border-color: #0095ff;
+}
+
+.group4 .cb-invalid {
+    display: block;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #f4516c;
+}
+
+.apOld {
+    border-color: red;
+}
+
+.apNew {
+    border-color: green;
+}

@@ -1,0 +1,163 @@
+<div class="group4">
+    <!-- tạm thời Pages.Group4.Apartment.Add -->
+    <toolbar-info-page-list [namePage]="l('g4ApartmentPageName')" isGrantedAdd="Pages.Group4.Apartment.Add" isGrantedDelete="Pages.Group4.Apartment.Delete" (add)="add()" (delete)="delete()" (viewDetail)="viewDetail()" (search)="search()" (exportExcel)="exportExcel()"></toolbar-info-page-list>
+
+    <div class="m-content">
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+
+                <form name="formRef1" (ngSubmit)="search()">
+                    <div class="row">
+                        <!-- Mã căn hộ -->
+                        <div class="col-md-3 form-group">
+                            <label class="font-weight-bold">{{l('g4ApartmentCodeLable')}}: </label>
+                            <input name="filterCodeText" type="text" autoFocus class="form-control" [(ngModel)]="filterCodeText" [placeholder]="l('g4SearchByCode')">
+                        </div>
+
+                        <!-- Tên căn hộ -->
+                        <div class="col-md-3 form-group">
+                            <label class="font-weight-bold">{{l('g4ApartmentNameLable')}}: </label>
+                            <input name="filterNameText" type="text" class="form-control" [(ngModel)]="filterNameText" [placeholder]="l('g4SearchByName')">
+                        </div>
+
+
+                        <!-- Số người tối đa -->
+                        <div class="col-md-3 form-group">
+                            <label class="font-weight-bold">{{l('g4MaximumPeopleLable')}}: </label>
+                            <input name="filterMaxTenant" type="number" class="form-control" [(ngModel)]="filterMaxTenant">
+                        </div>
+
+
+                        <!-- Loại căn hộ -->
+                        <div class="col-md-3 form-group">
+                            <label class="font-weight-bold" style="display: block;">{{l('g4ApartmentTypeLable')}}:
+                            </label>
+                            <p-dropdown name="ddApType" [options]="apTypes" [(ngModel)]="selectedApType" [placeholder]="l('g4SeleteAll')" optionLabel="apartmenT_TYPE_NAME" filter="true" resetFilterOnHide="true" styleClass="dropdown">
+                            </p-dropdown>
+                        </div>
+
+
+                        <!-- Tòa nhà -->
+                        <div class="col-md-3 form-group">
+                            <label class="font-weight-bold" style="display: block;">{{l('g4BuildingLable')}}:</label>
+                            <p-dropdown name="ddApBuilding" [options]="apBuildings" [(ngModel)]="selectedBuilding" [placeholder]="l('g4SeleteAll')" optionLabel="buildinG_NAME" filter="true" (onChange)="onChangeBuildings()" styleClass="dropdown">
+                            </p-dropdown>
+                        </div>
+
+                        <!-- Tầng -->
+                        <div class="col-md-3 form-group">
+                            <label class="font-weight-bold" style="display: block;">{{l('g4FloorLable')}} : </label>
+                            <p-dropdown name="ddApFloor" [options]="apFloors" [(ngModel)]="selectedFloor" [placeholder]="l('g4SeleteAll')" optionLabel="floor_NAME" filter="true" resetFilterOnHide="true" styleClass="dropdown">
+                            </p-dropdown>
+                        </div>
+
+
+                        <!-- Tình trạng -->
+                        <div class="col-md-3 form-group">
+                            <label class="font-weight-bold" style="display: block;">{{l('g4StatusLable')}} : </label>
+                            <p-dropdown name="ddApStatus" [options]="apStatus" [(ngModel)]="selectedStatus" [placeholder]="l('g4SeleteAll')" optionLabel="text" resetFilterOnHide="true" styleClass="dropdown">
+                            </p-dropdown>
+                        </div>
+
+
+                        <!-- Trạng thái duyệt-->
+                        <div *ngIf="permissionViewChanges==='1'" class="col-md-3 form-group">
+                            <label class="font-weight-bold" style="display: block;">{{l('g4ApartmentAuthStatus')}} :
+                            </label>
+                            <p-dropdown name="ddApAuthStatus" [options]="apAuthStatus" [(ngModel)]="selectedAuthStatus" [placeholder]="l('g4SeleteAll')" optionLabel="text" resetFilterOnHide="true" styleClass="dropdown">
+                            </p-dropdown>
+                        </div>
+
+                        <button hidden></button>
+                    </div>
+                </form>
+
+
+                <!-- start table -->
+                <div class="row align-items-center pt-3">
+                    <div class="primeng-datatable-container">
+                        <div class="primeng-paging-container">
+
+                            <p-table #dt [value]="records" [rows]="10" [rowsPerPageOptions]="[5,10,25,50]" [paginator]="true" [filterDelay]="0" [loading]="loading" selectionMode="single" [(selection)]="selectedApartment" [scrollable]="true" ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+                                [resizableColumns]="primengTableHelper.resizableColumns">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th style="width: 70px"> {{l('g4SerialColTitle')}} </th>
+                                        <th style="width: 150px" pSortableColumn="apartmenT_CODE">
+                                            {{l('g4ApartmentCodeLable')}}
+                                            <p-sortIcon field="apartmenT_CODE"></p-sortIcon>
+                                        </th>
+                                        <th style="width: 150px" pSortableColumn="apartmenT_NAME">
+                                            {{l('g4ApartmentNameLable')}}
+                                            <p-sortIcon field="apartmenT_NAME"></p-sortIcon>
+                                        </th>
+                                        <th style="width: 190px" pSortableColumn="apartmenT_TYPE_NAME">
+                                            {{l('g4ApartmentTypeLable')}}
+                                            <p-sortIcon field="apartmenT_TYPE_NAME"></p-sortIcon>
+                                        </th>
+                                        <th style="width: 150px" pSortableColumn="buildinG_NAME">
+                                            {{l('g4BuildingLable')}}
+                                            <p-sortIcon field="buildinG_NAME"></p-sortIcon>
+                                        </th>
+                                        <th style="width: 120px" pSortableColumn="floor_NAME"> {{l('g4FloorLable')}}
+                                            <p-sortIcon field="floor_NAME"></p-sortIcon>
+                                        </th>
+                                        <th style="width: 150px" pSortableColumn="residenT_QUANTITY">
+                                            {{l('g4NumbersOfPeople')}}
+                                            <p-sortIcon field="residenT_QUANTITY"></p-sortIcon>
+                                        </th>
+                                        <th style="width: 150px" pSortableColumn="apartmenT_PRICE">
+                                            {{l('g4PriceLable')}}
+                                            <p-sortIcon field="apartmenT_PRICE"></p-sortIcon>
+                                        </th>
+                                        <th style="width: 200px" pSortableColumn="apartmenT_STATUS">
+                                            {{l('g4StatusLable')}}
+                                            <p-sortIcon field="apartmenT_STATUS"></p-sortIcon>
+                                        </th>
+                                        <th *ngIf="permissionViewChanges==='1'" style="width: 150px" pSortableColumn="autH_STATUS">
+                                            {{l('g4ApartmentAuthStatus')}}
+                                            <p-sortIcon field="autH_STATUS"></p-sortIcon>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+
+                                <ng-template pTemplate="body" let-record="$implicit" let-i="rowIndex">
+                                    <tr (dblclick)="dblclick(record)" (click)="selectedApartment = record" [pSelectableRow]="record">
+                                        <td style="width: 70px"> {{i+1}} </td>
+                                        <td style="width: 150px"> {{record.apartmenT_CODE}} </td>
+                                        <td style="width: 150px"> {{record.apartmenT_NAME}} </td>
+                                        <td style="width: 190px"> {{record.apartmenT_TYPE_NAME}} </td>
+                                        <td style="width: 150px"> {{record.buildinG_NAME}} </td>
+                                        <td style="width: 120px"> {{record.floor_NAME}} </td>
+                                        <td style="width: 150px">
+                                            {{record.residenT_QUANTITY}}/{{record.apartmenT_MAX_TENANT}} </td>
+                                        <td style="width: 150px"> {{record.apartmenT_PRICE | currency: "VND" }} </td>
+                                        <td style="width: 200px">
+                                            {{record.apartmenT_STATUS=='0'?l('g4Disable'):l('g4Enable')}}
+                                        </td>
+                                        <td *ngIf="permissionViewChanges==='1'" style="width: 150px">
+                                            {{record.autH_STATUS_NAME}} </td>
+                                    </tr>
+                                </ng-template>
+
+                                <!-- empty message -->
+                                <ng-template pTemplate="emptymessage">
+                                    <tr>
+                                        <td colspan="7" style="text-align:center">{{l('g4EmptyData')}}</td>
+                                    </tr>
+                                </ng-template>
+
+                                <!-- paginator -->
+                                <ng-template pTemplate="paginatorleft" class="ui-paginator-current">
+                                    <span>{{l('g4SummaryRecords')}}: {{dt.totalRecords}}</span>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end table -->
+            </div>
+        </div>
+    </div>
+</div>

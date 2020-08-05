@@ -1,0 +1,279 @@
+<div class="group4">
+    <!-- Toolbar + headings-->
+    <toolbar-info-page-detail [autH_STATUS_VALUE]="autH_STATUS_VALUE" [namePage]="l('g4ApartmentPageName')" [editPageState]="editPageState" isGrantedUpdate="Pages.Group4.Apartment.Update" isGrantedDelete="Pages.Group4.Apartment.Delete" (save)="save(formRef1)"
+        (update)="update()" (delete)="delete()" (back)="back()" (view)="view()">
+    </toolbar-info-page-detail>
+
+
+    <!-- body -->
+    <div class="m-content">
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+
+                <!-- approve -->
+
+                <approve-detail [editPageState]="editPageState" [autH_STATUS_VALUE]="autH_STATUS_VALUE" isGrantedApprove="Pages.Group4.Apartment.Approve" (approve)="approve()" (deny)="deny()" (viewChange)="viewChange()"></approve-detail>
+
+                <form #formRef1="ngForm" (ngSubmit)="save(formRef1)">
+                    <fieldset [disabled]="editPageState == 'view'">
+                        <div class="row">
+
+                            <!-- Mã căn hộ -->
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold">{{l('g4ApartmentCodeLable')}} </label>
+                                <span class="text-danger"> (*) </span>
+                                <p-inputMask #code="ngModel" id="ap_code" name="ap_code" [(ngModel)]="inputModel.apartmenT_CODE" mask="AP99999999" placeholder="AP________" styleClass="form-control" autoClear required>
+                                </p-inputMask>
+                                <div *ngIf="code.invalid && code.touched" class="cb-invalid">
+                                    *{{l('g4EmptyValueValidate')}}
+                                </div>
+
+                            </div>
+
+                            <!-- Tên căn hộ -->
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold">{{l('g4ApartmentNameLable')}}</label>
+                                <span class="text-danger"> (*) </span>
+                                <input id="ap_name" class="form-control " [(ngModel)]="inputModel.apartmenT_NAME" name="apartmenT_NAME" #apartmenT_NAME="ngModel" maxlength="40" required [ngClass]="{'is-invalid':apartmenT_NAME.touched && apartmenT_NAME.invalid}">
+
+                                <div class="invalid-feedback">
+                                    <span> *{{l('g4EmptyValueValidate')}}</span>
+                                </div>
+
+                            </div>
+
+                            <!-- Tòa nhà -->
+                            <div class="col-md-6 form-group">
+                                <!-- <input id="ap_buildingID" class="form-control" [value]="buildingName" name="buildinG_ID" disabled="true"> -->
+                                <label class="font-weight-bold">{{l('g4BuildingLable')}}:</label>
+                                <span class="text-danger"> (*) </span>
+                                <p-dropdown #building="ngModel" name="ddApBuilding" [options]="apBuildings" [(ngModel)]="selectedBuilding" optionLabel="buildinG_NAME" filter="true" [styleClass]="editPageState != 'add'?'ddReadOnly':'dropdown'" resetFilterOnHide="true" (onChange)="onChangeBuildings()"
+                                    [placeholder]="l('g4ChooseBuilding')" [readonly]="editPageState != 'add'" required>
+                                </p-dropdown>
+
+                                <div *ngIf="building.invalid && building.touched" class="cb-invalid">
+                                    *{{l('g4EmptyValueValidate')}}
+                                </div>
+                            </div>
+
+                            <!-- Tầng -->
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold">{{l('g4FloorLable')}}</label>
+                                <span class="text-danger"> (*) </span>
+                                <!-- <input id="ap_floorID" class="form-control" [value]="floorName" name="floor_ID"                                    disabled="true"> -->
+                                <p-dropdown #floor="ngModel" name="ddApFloor" [options]="apFloors" [(ngModel)]="selectedFloor" optionLabel="floor_NAME" filter="true" [styleClass]="editPageState != 'add'?'ddReadOnly':'dropdown'" resetFilterOnHide="true" [placeholder]="l('g4ChooseFloor')"
+                                    [readonly]="editPageState != 'add'" required>
+                                </p-dropdown>
+                                <div *ngIf="floor.invalid && floor.touched" class="cb-invalid">
+                                    *{{l('g4EmptyValueValidate')}}
+                                </div>
+                            </div>
+
+
+                            <!-- Loại căn hộ -->
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold">{{l('g4ApartmentTypeLable')}}</label>
+                                <span class="text-danger"> (*) </span>
+                                <p-dropdown #type="ngModel" id="ap_type" name="ddApType" [options]="apTypes" [(ngModel)]="selectedApType" [placeholder]="l('g4ChooseApType')" optionLabel="apartmenT_TYPE_NAME" filter="true" emptyFilterMessage="l('g4NoResultFound')" resetFilterOnHide="true"
+                                    [readonly]="editPageState == 'view'" [styleClass]="editPageState == 'view'?'ddReadOnly':'dropdown'" required>
+                                </p-dropdown>
+                                <div *ngIf="type.invalid && type.touched" class="cb-invalid">
+                                    *{{l('g4EmptyValueValidate')}}
+                                </div>
+                            </div>
+
+
+
+                            <!-- Tình trạng hoạt động-->
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold pt-3" style="display: block;">{{l('g4StatusLable')}}</label>
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="ap_status" class="mr-2" type="checkbox" name="status" [disabled]="editPageState == 'view'
+                                        || editPageState == 'add'
+                                        || (editPageState == 'edit' && inputModel.autH_STATUS != 'A')"
+                                            [ngModel]="inputModel.apartmenT_STATUS == '1' ? true : false"
+                                            (ngModelChange)="inputModel.apartmenT_STATUS=$event?'1':'0'">
+                                        {{l('g4Enable')}}
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Giá -->
+                            <div class="col-md-6 form-group">
+                                <label id="ap_price" class="font-weight-bold">{{l('g4PriceLable')}} </label>
+                                <div class="input-group">
+                                    <input id="ap_price" class="form-control" [(ngModel)]="inputModel.apartmenT_PRICE" name="apartmenT_PRICE" #apartmenT_PRICE="ngModel" maxlength="20" [ngClass]="{'is-invalid':apartmenT_PRICE.touched && apartmenT_PRICE.invalid}">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">vnđ</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Số phòng -->
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold">{{l('g4NumberOfRoomLable')}}</label>
+                                <input id="ap_rooms" type="number" class="form-control" [(ngModel)]="inputModel.apartmenT_ROOMS" name="apartmenT_ROOMS" #apartmenT_ROOMS="ngModel" maxlength="10" min="0" [ngClass]="{'is-invalid':apartmenT_ROOMS.touched && apartmenT_ROOMS.invalid}">
+                            </div>
+
+                            <!-- Diện tích -->
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold">{{l('g4SuperficiesLable')}}</label>
+                                <div class="input-group">
+                                    <input id="ap_area" type="number" class="form-control" [(ngModel)]="inputModel.apartmenT_AREA" name="apartmenT_AREA" #apartmenT_AREA="ngModel" maxlength="40" min="0" [ngClass]="{'is-invalid':apartmenT_AREA.touched && apartmenT_AREA.invalid}">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">m<sup>2</sup></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Số người tối đa -->
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold">{{l('g4MaximumPeopleLable')}}</label>
+                                <span class="text-danger"> (*) </span>
+                                <input id="ap_maxTenant" type="number" class="form-control" #apartmenT_MAX_TENANT="ngModel" name="apartmenT_MAX_TENANT" [(ngModel)]="inputModel.apartmenT_MAX_TENANT" [ngClass]="{'is-invalid':apartmenT_MAX_TENANT.touched && apartmenT_MAX_TENANT.invalid}"
+                                    maxlength="50" required>
+                                <div class="invalid-feedback"> <span> *{{l('g4EmptyValueValidate')}}</span> </div>
+                            </div>
+
+                            <!-- Mô tả -->
+                            <div class="col-md-12 form-group">
+                                <label class="font-weight-bold">{{l('g4ApartmentDescription')}}</label>
+                                <textarea id="ap_description" class="form-control" rows='3' [(ngModel)]="inputModel.apartmenT_DESCRIPTION" name="apartmenT_DESCRIPTION" maxlength="1000"></textarea>
+                            </div>
+
+
+                            <!-- makerID -->
+                            <div *ngIf="editPageState!='add'" class="col-md-3 form-group">
+                                <label class="font-weight-bold ">{{l('g4MakerID')}}</label>
+                                <input class="form-control" [ngModel]="inputModel.makeR_ID" name="makeR_ID" disabled="true">
+                            </div>
+
+                            <!-- creatE_DT -->
+                            <div *ngIf="editPageState!='add'" class="col-md-3 form-group">
+                                <label class="font-weight-bold ">{{l('g4CreateDT')}}</label>
+                                <input class="form-control" [ngModel]="inputModel.creatE_DT | date :'hh:mm,  dd-MM-yyyy'" name="creatE_DT" disabled="true">
+                            </div>
+
+                            <!-- makerID -->
+                            <div *ngIf="editPageState!='add'" class="col-md-3 form-group">
+                                <label class="font-weight-bold ">{{l('g4CheckerID')}}</label>
+                                <input class="form-control" [ngModel]="inputModel.checkeR_ID" name="checkeR_ID" disabled="true">
+                            </div>
+
+                            <!-- makerID -->
+                            <div *ngIf="editPageState!='add'" class="col-md-3 form-group">
+                                <label class="font-weight-bold ">{{l('g4ApproveDT')}}</label>
+                                <input class="form-control" [ngModel]="inputModel.approvE_DT | date :'hh:mm,  dd-MM-yyyy'" name="approvE_DT" disabled="true">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+                <!-- end nội dung -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Danh sách Người thuê  -->
+    <div *ngIf="editPageState!='add'">
+        <!-- Heading -->
+        <div class="m-subheader pt-0">
+            <div class="d-flex align-items-center">
+                <div class="mr-auto col-xs-6">
+                    <h3 class="m-subheader__title m-subheader__title--separator">
+                        <span>{{l('g4ResidentsList')}}</span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-content">
+            <div class="m-portlet m-portlet--mobile">
+                <!-- button Người thuê -->
+                <div *ngIf="autH_STATUS_VALUE=='0'" class="m-subheader ">
+                    <div class="col-xs-6 text-right">
+                        <button id="btn_save_tenant" class="btn btn-primary mr-2" (click)="ShowAddTenant()" *ngIf="isGranted('Pages.Group4.ApartmentResident.Add')" [disabled]="this.listTenant.length >= this.inputModel.apartmenT_MAX_TENANT">
+                            <i class="fa fa-plus"></i>
+                            <span class="group4">{{l('g4BtnAddResidentLable')}}
+                            </span>
+                        </button>
+                        <button id="btn_delete_tenant" class="btn btn-primary" (click)="deleteTenant()" *ngIf="isGranted('Pages.Group4.ApartmentResident.Delete')">
+                            <i class="fa fa-times"></i>
+                            <span class="group4">{{l('g4BtnDeleteText')}}
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- table-->
+                <div class="m-portlet__body mx-0 pt-3">
+                    <div class="row align-items-center">
+                        <div class="primeng-datatable-container">
+                            <div class="primeng-paging-container">
+
+                                <p-table id="table_tenant" name="tableTenant" class="tableG4" #tb [value]="listTenant" [rows]="10" [rowsPerPageOptions]="[5,10,25,50]" [paginator]="true" [filterDelay]="0" selectionMode="single" [(selection)]="selectedTenant">
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th style="width: 50px">
+                                                {{l('g4SerialColTitle')}}
+                                            </th>
+                                            <th style="width: 100px" pSortableColumn="residenT_CODE">
+                                                {{l('g4ResidentCode')}}
+                                                <p-sortIcon field="residenT_CODE"></p-sortIcon>
+                                            </th>
+                                            <th style="width: 150px" pSortableColumn="residenT_NAME">
+                                                {{l('g4ResidentName')}}
+                                                <p-sortIcon field="residenT_NAME"></p-sortIcon>
+                                            </th>
+                                            <th style="width: 100px" pSortableColumn="residenT_IDCARD">
+                                                {{l('g4ResidentIDCard')}}
+                                                <p-sortIcon field="residenT_IDCARD"></p-sortIcon>
+                                            </th>
+                                            <th style="width: 100px" pSortableColumn="residenT_BIRTH">
+                                                {{l('g4ResidentBirth')}}
+                                                <p-sortIcon field="residenT_BIRTH"></p-sortIcon>
+                                            </th>
+                                            <th style="width: 100px">
+                                                {{l('g4ResidentPhone')}}
+                                            </th>
+                                        </tr>
+                                    </ng-template>
+
+                                    <ng-template pTemplate="body" class="body-table" let-record="$implicit" let-i="rowIndex">
+                                        <tr id="tr_row_tenant" [pSelectableRow]="record">
+                                            <td style="width: 50px"> {{i+1}} </td>
+                                            <td style="width: 100px"> {{record.residenT_CODE}} </td>
+                                            <td style="width: 150"> {{record.residenT_NAME}} </td>
+                                            <td style="width: 100px"> {{record.residenT_IDCARD}} </td>
+                                            <td style="width: 100px"> {{record.residenT_BIRTH|date:"dd/MM/yyyy"}} </td>
+                                            <td style="width: 100px"> 0378963405 </td>
+                                            <!-- <td (click)="deleteTenant(record)">
+                                        <i class="fa fa-times fa-5x mr-2" aria-hidden="true"></i>
+                                    </td> -->
+                                        </tr>
+                                    </ng-template>
+
+                                    <ng-template pTemplate="emptymessage">
+                                        <tr>
+                                            <td colspan="6" style="text-align:center">{{l('g4EmptyData')}}</td>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="paginatorleft" class="ui-paginator-current">
+                                        <span>{{l('g4SummaryRecords')}}: {{tb.totalRecords}}</span>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- table add Người thuê -->
+        <g4Tenant #g4Tenant [listFreeTenant]="listFreeTenant" (g4TenantAdd)="addTenant($event)" (g4TenantSearch)="searchTenant($event)"></g4Tenant>
+        <compare-ap #compare [apNew]="inputModel" [apOld]="apOld"></compare-ap>
+    </div>
+</div>

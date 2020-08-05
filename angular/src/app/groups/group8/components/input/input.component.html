@@ -1,0 +1,19 @@
+<div class="form-group row bakery-form-group form-group">
+  <label (for)="id" class="control-label col-md-6">{{label}}</label>
+  <div class="form-control col-md-6">
+    <input 
+      [(ngModel)]="ngModelValue" 
+      [placeholder]="placeholder" 
+      (change)="onChange('')" 
+      [name]="name" 
+      [type]="type" 
+      [pattern]="pattern" 
+      (keypress)="keypress"
+      class="bakery-input form-control bakery-input-small" 
+      [ngClass]="class" 
+      [disabled]="disabled" 
+      [required]="required"
+      [formControlName]="formControlName"
+      >
+  </div>
+</div>

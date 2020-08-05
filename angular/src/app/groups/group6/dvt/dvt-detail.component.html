@@ -1,0 +1,276 @@
+<div [@routerTransition] class="row">
+    <div class="col-12 m-primary">
+        <button
+            (click)="onGoBack()"
+            class="btn"
+            style="background-color: transparent;"
+        >
+            <i
+                class="fa fa-arrow-left fa-2x text-white"
+                style="font-size: 1.5rem;"
+            ></i>
+            <span class="text-white my-text h6">{{l('GR6_GOBACK')}}</span>
+        </button>
+        <button
+            (click)="handleEdit()"
+            class="btn"
+            data-toggle="modal"
+            style="background-color: transparent;"
+        >
+            <i
+                class="fa fa-edit fa-2x text-white"
+                style="font-size: 1.5rem;"
+            ></i>
+            <span class="text-white my-text h6">{{l('GR6_EDIT')}}</span>
+        </button>
+        <button
+            [hidden]="!isGranted('Pages.Group6.TrangThaiYeuCauSuaChua.Delete')"
+            class="btn"
+            data-target="#exampleModal"
+            data-toggle="modal"
+            style="background-color: transparent;"
+        >
+            <i
+                class="fa fa-trash fa-2x text-white"
+                style="font-size: 1.5rem;"
+            ></i>
+            <span class="text-white my-text h6">{{l('GR6_DELETE')}}</span>
+        </button>
+    </div>
+    <div class="col-12 card p-3 m-primary pl-3 my-3">
+        <span class="h3 mx-3 my-font text-white"> {{l('GR6_DVT_DETAIL_TITLE')}} </span>
+    </div>
+
+    <div class="col-12" style="padding-left: 2rem; padding-right: 2rem">
+        <form #form="ngForm" class="card" id="DETAIL_DUT_FORM">
+            <div class="row mt-4 ml-2 mb-2" style="margin-top: 15px!important;">
+                <div class="form-group col-md-6 col-xs-12">
+                    <label class="col-form-label my-font" for="madv-input">{{l('GR6_DVT_CODE')}}</label>
+                    <div>
+                        <input
+                            [value]="detailModel.dvT_CODE"
+                            class="form-control"
+                            id="madv-input"
+                            name=""
+                            pInputText
+                            readonly
+                            size="30"
+                            type="text"
+                        />
+                    </div>
+                </div>
+                <div class="form-group col-md-6 col-xs-12">
+                    <label
+                        class="col-form-label my-font"
+                        for="code-input"
+                    >
+                        {{l('GR6_DVT_NAME')}}
+                        <span class="text-danger">*</span>
+                    </label>
+                    <div>
+                        <input
+                            [(ngModel)]="detailModel.dvT_NAME"
+                            [pattern]="viRegStr"
+                            [readOnly]="editPageState!=='EDIT' || (editPageState==='EDIT'&&!initFlag)"
+                            class="form-control"
+                            id="code-input"
+                            maxlength="10000"
+                            name="dvT_CODE"
+                            pInputText
+                            required="true"
+                            size="30"
+                            style="margin-right: 1em;"
+                            type="text"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6 col-xs-12">
+                    <label class="col-form-label my-font" for="madv-input">{{l('GR6_DESC')}}</label>
+                    <div>
+                <textarea
+                    [(ngModel)]="detailModel.dvT_DESC"
+                    [pattern]="viRegStr"
+                    [readOnly]="editPageState!=='EDIT' || (editPageState==='EDIT'&&!initFlag)"
+                    aria-label="With textarea"
+                    class="form-control"
+                    id="dut_DESC"
+                    maxlength="10000"
+                    name="duT_DESC"
+                    pInputTextarea
+                >
+                </textarea>
+                    </div>
+                </div>
+                <div *ngIf="editPageState==='EDIT'" class="row">
+                    <div class="col col-8 offset-2">
+                        <div class="row justify-content-end pr-4">
+                            <button (click)="handleCancel()" class="btn">
+                                <span class="my-text">{{l('GR6_CANCEL')}} </span>
+                            </button>
+                            <button
+                                [disabled]="form.invalid"
+                                class="btn m-primary"
+                                type="submit"
+                            >
+                                <span class="my-text text-white"> {{l('GR6_SAVE')}}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal -->
+    <div
+        aria-hidden="true"
+        aria-labelledby="exampleModalLabel"
+        class="modal fade"
+        id="exampleModal"
+        role="dialog"
+        tabindex="-1"
+    >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title my-font" id="exampleModalLabel">
+                        {{l('GR6_WARNING')}}
+                    </h5>
+                    <button
+                        aria-label="Close"
+                        class="close"
+                        data-dismiss="modal"
+                        type="button"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="my-font">
+                        {{l('GR6_DVT_DELETE_WARNING')}}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                        type="button"
+                    >
+                        <span class="my-font">{{l('GR6_CANCEL')}}</span>
+                    </button>
+                    <button
+                        (click)="onDelete()"
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                        type="button"
+                    >
+                        <span class="my-font">{{l('GR6_YES')}}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Approve modal-->
+    <div
+        aria-hidden="true"
+        aria-labelledby="approveModal"
+        class="modal fade"
+        id="approveModal"
+        role="dialog"
+        tabindex="-1"
+    >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title my-text">
+                        {{l('GR6_CONFIRM')}}
+                    </h5>
+                    <button
+                        aria-label="Close"
+                        class="close"
+                        data-dismiss="modal"
+                        type="button"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="my-text">
+                        {{l('GR6_DVT_APPROVE_CONFIRM')}}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                        type="button"
+                    >
+                        <span class="my-text">
+                            {{l('GR6_CANCEL')}}
+                        </span>
+                    </button>
+                    <button
+                        class="btn btn-primary"
+                        data-dismiss="modal"
+                        type="button"
+                    >
+                        <span class="my-text">{{l('GR6_YES')}}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Approve modal-->
+    <div
+        aria-hidden="true"
+        aria-labelledby="denyModal"
+        class="modal fade"
+        id="denyModal"
+        role="dialog"
+        tabindex="-1"
+    >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title my-text">
+                        {{l('GR6_CONFIRM')}}
+                    </h5>
+                    <button
+                        aria-label="Close"
+                        class="close"
+                        data-dismiss="modal"
+                        type="button"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="my-text">
+                        {{l('GR6_DVT_DENY_CONFIRM')}}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                        type="button"
+                    >
+                        <span class="my-text">
+                            {{l('GR6_CANCEL')}}
+                        </span>
+                    </button>
+                    <button
+                        class="btn btn-primary"
+                        data-dismiss="modal"
+                        type="button"
+                    >
+                        <span class="my-text">{{l('GR6_YES')}}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

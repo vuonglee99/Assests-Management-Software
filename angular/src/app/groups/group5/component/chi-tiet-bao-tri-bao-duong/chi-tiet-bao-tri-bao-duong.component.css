@@ -1,0 +1,65 @@
+
+/* sử dụng font chung cho trang phongbn */
+
+.group5-chi-tiet-bao-tri .pb-bgblue{
+    background-color: #0095ff;
+    color:white;
+}
+.group5-chi-tiet-bao-tri button.pb-bgblue {
+    border: none;
+}
+.group5-chi-tiet-bao-tri .font-common-detail{
+    font-size: 17px;
+    font-family: serif;
+}
+.group5-chi-tiet-bao-tri button:hover{
+    cursor: pointer;
+}
+.group5-chi-tiet-bao-tri .ic-title-search{
+    font-size: 25px;
+    margin-right: 10px;
+}
+.group5-chi-tiet-bao-tri .bgwhite{
+    background-color: white;
+}
+.group5-chi-tiet-bao-tri .line-height-search{
+    line-height: 35px;
+}
+.group5-chi-tiet-bao-tri .font-weigth-search{
+    font-weight: 400;
+}
+.group5-chi-tiet-bao-tri .title-search:hover{
+    cursor: pointer;
+}
+.group5-chi-tiet-bao-tri th,td{
+    font-size: 15px;
+    border: 1px solid #d1d7e3;
+    font-family: serif;
+}
+.group5-chi-tiet-bao-tri .ui-paginator .ui-paginator-pages {
+    height: 2.5em;
+}
+.group5-chi-tiet-bao-tri .ui-paginator{
+    text-align: right;
+}
+.group5-chi-tiet-bao-tri .ui-paginator-page.ui-paginator-element {
+    height: 2.5em;
+}
+.group5-chi-tiet-bao-tri .ui-paginator .ui-paginator-first, .group5-chi-tiet-bao-tri .ui-paginator .ui-paginator-prev,.group5-chi-tiet-bao-tri .ui-paginator .ui-paginator-next, .group5-chi-tiet-bao-tri .ui-paginator .ui-paginator-last{
+    vertical-align: middle;
+}
+.group5-chi-tiet-bao-tri .ui-table .ui-table-tbody>tr>td {
+    padding: 10px;
+    text-align: center;
+}
+.group5-chi-tiet-bao-tri .ui-table .ui-table-thead>tr>th{
+    padding: 20px 0 20px 0;
+    text-align: center;
+}
+.group5-chi-tiet-bao-tri .ui-state-highlight{
+    background-color: #0095ff !important;
+}
+.group5-chi-tiet-bao-tri .padding10{
+    padding-bottom: 10px;
+    margin-right: 10px;
+}

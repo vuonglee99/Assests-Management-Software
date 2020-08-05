@@ -1,0 +1,127 @@
+<div style="background: #EDF1F7; padding: 5px; height: 100%;">
+    <!-- Toolbar Done -->
+    <div style="position: relative;
+    width: 100%;
+    height: 40px;
+    background: #0095FF;
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+    box-sizing: border-box;">
+        <div class="bar_btn" style="width: 30px; height:30px; display: flex; cursor: pointer; border-radius: 4px;"
+            *ngIf="isGranted('Pages.Group15.DONVITINH.Add')" (click)="navigate_addNewDVT()">
+            <img src="https://imgur.com/PpeVc9T.png" style="width: 20px; height:20px; margin:auto;" />
+        </div>
+        <div class="bar_btn"
+            style="width: 30px; height:30px; display: flex; margin-left: 8px; cursor: pointer; border-radius: 4px;"
+            (click)="navigate_updateDVT()">
+            <img src="https://imgur.com/hiufvPw.png" style="width: 20px; height:20px; margin:auto;" />
+        </div>
+        <div class="bar_btn"
+            style="width: 30px; height:30px; display: flex; margin-left: 8px; cursor: pointer; border-radius: 4px;"
+            (click)="delete_DVT()">
+            <img src="https://imgur.com/uJSPcP8.png" style="width: 20px; height:20px; margin:auto;" />
+        </div>
+    </div>
+
+    <!-- Tableheadbar Done -->
+    <div style="position: relative;
+    width: 100%;
+    height: 40px;
+    background: #0095FF;
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-top: 5px;">
+        <div class="bar_btn" style="width: 30px; height:30px; display: flex; cursor: pointer; border-radius: 4px;"
+            (click)="turnBack()">
+            <img src="https://imgur.com/KWShC20.png" style="width: 20px; height:20px; margin:auto;" />
+        </div>
+        <div class="bar_label" style="line-height: 24px; padding-left: 5px; padding-right:  5px; margin: auto; width: 30%; height:24px; display: flex;margin-left: 5px; cursor: pointer; border-radius: 4px; 
+    color: white ; font-family: Roboto;; font-size: 16px; font-weight: 700;">
+            CHI TIẾT ĐƠN VỊ TÍNH
+        </div>
+    </div>
+
+    <!-- Text input Mã DVT và Tên DVT: -->
+    <div style="position: relative; display: flex; justify-content: space-between; width: 100%;">
+        <div style="position: relative;
+    display: flex;
+    width: 100%;
+    height: 40px;
+    justify-content:space-between;
+    box-sizing: border-box;
+    padding: 5px;
+    ">
+            <div class="simple_label"
+                style=" width: 50%; height:30px; line-height: 30px;display:flex; border-radius: 4px; color: #222b45 ; font-family: Roboto; font-size: 18px; box-sizing: border-box">
+                Mã DVT:
+            </div>
+            <input class="simple_readonly_input" type="text" style=" padding-left: 5px; padding-right:  5px; margin: auto; width: 50%; height:24px; display: flex;margin-left: 5px; border-radius: 4px; box-sizing: border-box; 
+            min-width: 200px; color:  #222b45; font-family: Roboto; font-size: 14px; "
+                [(ngModel)]="this.detailModel.dvT_CODE" readonly>
+
+        </div>
+        <div style="position: relative;
+    display: flex;
+    width: 100%;
+    height: 40px;
+    justify-content:space-between;
+    box-sizing: border-box;
+    padding: 5px;
+    ">
+            <div style="width: 50%; display: flex;">
+                <div class="simple_label"
+                    style=" height:30px; line-height: 30px;display:flex; border-radius: 4px; color: #222b45 ; font-family: Roboto; font-size: 18px; box-sizing: border-box">
+                    Tên DVT:
+                </div>
+                <div class="simple_label"
+                    style="height:30px; line-height: 30px;display:flex; border-radius: 4px; color: #fe3a3a ; font-family: Roboto; font-size: 18px; box-sizing: border-box">
+                    *
+                </div>
+            </div>
+            <input class="simple_input" type="text" style=" padding-left: 5px; padding-right:  5px; margin: auto; width: 50%; height:24px; display: flex;margin-left: 5px; border-radius: 4px; box-sizing: border-box; 
+            min-width: 200px; color:  #222b45; font-family: Roboto; font-size: 14px; background: white;"
+                [(ngModel)]="this.detailModel.dvT_NAME" readonly>
+        </div>
+    </div>
+    <!-- Text area mô tả -->
+
+    <div style="position: relative;
+    box-sizing: border-box;
+    height: fit-content;
+    padding: 5px;
+    width: 100%;
+    ">
+        <div style="display: flex;">
+            <div class="simple_label"
+                style="height:30px; line-height: 30px; border-radius: 4px; color: #222b45 ; font-family: Roboto;; font-size: 18px;">
+                Mô tả:
+            </div>
+            <div class="simple_label"
+                style="height:30px; line-height: 30px;display:flex; border-radius: 4px; color: #fe3a3a ; font-family: Roboto; font-size: 18px; box-sizing: border-box">
+                *
+            </div>
+        </div>
+        <textarea class="simple_textArea"
+            style=" box-sizing: border-box;width: 100%; line-height: 30px; padding-left: 5px; padding-right:  5px; margin: auto;padding-bottom: 20px ; border-radius: 4px;  color:  #222b45; font-family: Roboto; font-size: 14px; background: white;"
+            [(ngModel)]="this.detailModel.dvT_DESC" readonly></textarea>
+
+    </div>
+</div>
+
+<group15-modal id="modal-delete-dvt-detail-done">
+    <div class="group15-modal">
+        <div class="modal-port">
+            <div class="modal-head">Thông báo</div>
+            <div class="modal-body">
+                <div class="modal-content">
+                    Xoá chi tiết Đơn vị tính thành công!
+                </div>
+                <button (click)="closeModalAndTurnBack('modal-delete-dvt-detail-done');">OK</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-background"></div>
+</group15-modal>

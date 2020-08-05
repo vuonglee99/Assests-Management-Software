@@ -1,0 +1,78 @@
+<div class="group4">
+    <!-- Toolbar + headings-->
+    <toolbar-info-page-detail [namePage]="l('g4ApTypePageName')" [editPageState]="editPageState" isGrantedUpdate="Pages.Group4.ApartmentType.Update" isGrantedDelete="Pages.Group4.ApartmentType.Delete" (save)="save(formRef1)" (update)="update()" (delete)="delete()"
+        (back)="back()" (view)="view()" isGrantedUpdate="Pages.Group4.ApartmentType.Approve" (approve)="approve()" autH_STATUS_VALUE="0">
+    </toolbar-info-page-detail>
+
+
+    <div class="m-content">
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+
+                <!-- <approve-detail [editPageState]="editPageState" [autH_STATUS]="inputModel.autH_STATUS" isGrantedApprove="Pages.Group4.ApartmentType.Approve"></approve-detail> -->
+
+                <form #formRef1="ngForm" (ngSubmit)="save(formRef1)">
+                    <fieldset [disabled]="editPageState == 'view'">
+                        <div class="row">
+
+                            <!-- Mã loại căn hộ -->
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold">{{l('g4ApTypeCodeLable')}} </label>
+                                <span class="text-danger"> (*) </span>
+
+                                <p-inputMask id="apT_code" name="apT_code" [(ngModel)]="inputModel.apartmenT_TYPE_CODE" mask="APT9999999" placeholder="APT_______" styleClass="form-control">
+                                </p-inputMask>
+                                <!-- <input id="ap_type_code" class="form-control" [(ngModel)]="inputModel.apartmenT_TYPE_CODE" name="apartmenT_TYPE_CODE" #apartmenT_TYPE_CODE="ngModel" maxlength="10" required [ngClass]="{'is-invalid':apartmenT_TYPE_CODE.touched && apartmenT_TYPE_CODE.invalid}">
+                                <div class="invalid-feedback">
+                                    <span> *{{l('g4EmptyValueValidate')}}</span>
+                                </div> -->
+                            </div>
+
+                            <!-- Tên loại căn hộ -->
+                            <div class="col-md-6 form-group">
+                                <label class="font-weight-bold ">{{l('g4ApTypeNameLable')}}</label>
+                                <span class="text-danger"> (*) </span>
+                                <input id="ap_type_name" class="form-control" [(ngModel)]="inputModel.apartmenT_TYPE_NAME" name="apartmenT_TYPE_NAME" #apartmenT_TYPE_NAME="ngModel" maxlength="40" required [ngClass]="{'is-invalid':apartmenT_TYPE_NAME.touched && apartmenT_TYPE_NAME.invalid}">
+                                <div class="invalid-feedback">
+                                    <span> *{{l('g4EmptyValueValidate')}}</span>
+                                </div>
+                            </div>
+
+                            <!-- Mô tả-->
+                            <div class="col-md-12 form-group">
+                                <label class="font-weight-bold ">{{l('g4ApTypeDescriptionLable')}}</label>
+                                <textarea id="ap_type_description" class="form-control" rows='3' [(ngModel)]="inputModel.apartmenT_TYPE_DESCRIPTION" name="apartmenT_TYPE_DESCRIPTION" maxlength="1000"></textarea>
+                            </div>
+
+                            <!-- makerID -->
+                            <div *ngIf="editPageState!='add'" class="col-md-3 form-group">
+                                <label class="font-weight-bold ">{{l('g4MakerID')}}</label>
+                                <input class="form-control" [ngModel]="inputModel.makeR_ID" name="makeR_ID" disabled="true">
+                            </div>
+
+                            <!-- creatE_DT -->
+                            <div *ngIf="editPageState!='add'" class="col-md-3 form-group">
+                                <label class="font-weight-bold ">   {{l('g4CreateDT')}}</label>
+                                <input class="form-control" [ngModel]="inputModel.creatE_DT |date :'medium'" name="creatE_DT" disabled="true">
+                            </div>
+
+                            <!-- makerID -->
+                            <div *ngIf="editPageState!='add'" class="col-md-3 form-group">
+                                <label class="font-weight-bold ">{{l('g4CheckerID')}}</label>
+                                <input class="form-control" [ngModel]="inputModel.checkeR_ID" name="checkeR_ID" disabled="true">
+                            </div>
+
+                            <!-- makerID -->
+                            <div *ngIf="editPageState!='add'" class="col-md-3 form-group">
+                                <label class="font-weight-bold ">{{l('g4ApproveDT')}}</label>
+                                <input class="form-control" [ngModel]="inputModel.approvE_DT |date :'medium' " name="approvE_DT" disabled="true">
+                            </div>
+
+
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

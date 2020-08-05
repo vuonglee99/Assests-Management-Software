@@ -1,0 +1,148 @@
+<form #formRef="ngForm" [formGroup]="formData">
+  <ul style="background-color: #248dc1;font-size: 15px;padding-left:10px;margin:0;color:white">
+    <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="save()"><i
+        class="fa fa-floppy-o"></i>
+    </li>
+    <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" onclick="window.history.back()">
+      <i class="fa fa-arrow-left"></i> </li>
+  </ul>
+  <div style="padding: 20px;">
+    <div style="padding: 20px; background-color: white;">
+      <div class="row">
+        <div class="col-md-6" style="font-size: 15px;">
+          <div>
+            <div>Mã code &nbsp;<span class="text-danger">(*)</span></div>
+            <input [(ngModel)]="filterInput.devicE_CODE" name="devicE_CODE" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.devicE_CODE.errors }" formControlName="devicE_CODE"
+               required>
+
+            <div *ngIf="submitted" class="invalid-feedback">
+              <div *ngIf="f.devicE_CODE.errors?.required" name="empty_field">Vui lòng nhập mã thiết bị
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>Tên thiết bị &nbsp;<span class="text-danger">(*)</span></div>
+            <input [(ngModel)]="filterInput.devicE_NAME" name="devicE_NAME" class="form-control" formControlName="devicE_NAME"
+               [ngClass]="{ 'is-invalid': submitted && f.devicE_NAME.errors }">
+
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div *ngIf="f.devicE_NAME.errors?.required" name="empty_field">Vui lòng nhập tên thiết bị
+                </div>
+              </div>
+            
+          </div>
+          <div>
+            <div>Đơn vị quản lý &nbsp;<span class="text-danger">(*)</span></div>
+
+
+            
+            <p-dropdown  class="form-control"  formControlName="brancH_ID" [options]="listBranch" [(ngModel)]="branchId_dropdown" filter="true" optionLabel="BRANCH_NAME"  placeholder="Đơn vị" 
+            formControlName="brancH_ID"
+               [ngClass]="{ 'is-invalid': submitted && f.brancH_ID.errors }">
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div *ngIf="f.brancH_ID.errors?.required" name="empty_field">Vui lòng nhập tên thiết bị
+                </div>
+              </div>
+        
+
+            </p-dropdown>
+
+           
+            <div *ngIf="submitted" class="invalid-feedback">
+              <div *ngIf="f.brancH_ID.errors?.required" name="empty_field">Vui lòng chọn đơn vị quản lý
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>Chu Kì Bảo Dưỡng</div>
+            <select name="maintenancE_CYCLE" class="form-control bg-input" formControlName="maintenancE_CYCLE"
+            [ngClass]="{ 'is-invalid': submitted && f.maintenancE_CYCLE.errors }" [(ngModel)]="filterInput.maintenancE_CYCLE">
+              <option value="">--Chọn Chu Kì--</option>
+              <option value="3">3 Tháng</option>
+              <option value="6">6 Tháng</option>
+              <option value="12">12 Tháng</option>
+            </select>
+            <div *ngIf="submitted" class="invalid-feedback">
+              <div *ngIf="f.maintenancE_CYCLE.errors?.required" name="empty_field">Vui lòng chọn chu kì bảo dưỡng
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>Tình trạng</div>
+            <select name="activE_STATUS" class="form-control bg-input" formControlName="activE_STATUS"
+            [ngClass]="{ 'is-invalid': submitted && f.activE_STATUS.errors }" [(ngModel)]="filterInput.activE_STATUS">
+              <option value="">--Chọn tình trạng--</option>
+              <option value="1">Hoạt động</option>
+              <option value="0">Không hoạt động</option>
+            </select>
+            <div *ngIf="submitted" class="invalid-feedback">
+              <div *ngIf="f.activE_STATUS.errors?.required" name="empty_field">Vui lòng chọn tình trạng
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" style="font-size: 15px;">
+          <div>
+            <div>Serial <span style="color: red">(*)</span></div>
+            <input [(ngModel)]="filterInput.serial" name="serial_1" class="form-control" formControlName="serial"
+               [ngClass]="{ 'is-invalid': submitted && f.serial.errors }">
+            <div *ngIf="submitted" class="invalid-feedback">
+              <div *ngIf="f.serial.errors?.required" name="empty_field">Vui lòng nhập serial
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>Nhà sản xuất </div>
+            <select [(ngModel)]="filterInput.produceR_ID" name="produceR_ID" class="form-control"
+               [ngModelOptions]="{standalone: true}">
+              <option data-value="1" value="Sam Sung">Sam Sung</option>
+              <option data-value="2" value="LG">LG</option>
+              <option data-value="3" value="Nagakawa">Nagakawa</option>
+              <option data-value="4" value="Toshiba">Toshiba</option>
+              <option data-value="5" value="Panasonic">Panasonic</option>
+            </select>
+          </div>
+          <div>
+            <div>Mô tả</div>
+            <textarea rows="6" cols="66" class="form-control bg-input" pInputTextarea autoResize="autoResize"
+              [(ngModel)]="filterInput.descriptions" [ngModelOptions]="{standalone: true}"></textarea>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pt-2">
+          <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <div>Ngày Mua</div>
+           
+              
+              <input  type="date"  [(ngModel)]="datE_BUY" name="datE_BUY" class="form-control" formControlName="datE_BUY"
+              [ngClass]="{ 'is-invalid': submitted && f.datE_BUY.errors }" [value]="datE_BUY" >
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div *ngIf="f.datE_BUY.errors?.required" name="empty_field">Vui lòng chọn ngày mua
+                </div>
+              </div>           
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <div>Ngày Bảo Hành</div>
+              <input type="date"  [(ngModel)]="datE_WARRANTY_BEGIN" name="datE_WARRANTY_BEGIN" class="form-control" formControlName="datE_WARRANTY_BEGIN"
+              [ngClass]="{ 'is-invalid': submitted && f.datE_WARRANTY_BEGIN.errors }"  [value]="datE_WARRANTY_BEGIN" >
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div *ngIf="f.datE_WARRANTY_BEGIN.errors?.required" name="empty_field">Vui lòng chọn ngày bảo hành
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <div>Ngày Hết Bảo Hành</div>
+              <input formControlName="datE_WARRANTY_END" [ngClass]="{ 'is-invalid': submitted && f.datE_WARRANTY_END.errors }"
+              type="date" [(ngModel)]="datE_WARRANTY_END" name="datE_WARRANTY_END" class="form-control">
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div *ngIf="f.datE_WARRANTY_END.errors?.required" name="empty_field">Vui lòng chọn ngày hết bảo hành
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

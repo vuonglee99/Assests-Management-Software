@@ -1,0 +1,86 @@
+group15-modal {
+    display: none;
+
+    .group15-modal {
+        position : fixed;
+        overflow : hidden;
+        top      : 0;
+        right    : 0;
+        bottom   : 0;
+        left     : 0;
+        z-index  : 1000;
+        width    : 40%;
+        max-width: 300px;
+        margin   : auto;
+
+
+        .modal-port {
+            margin-top: 50%;
+            .modal-head {
+                background : #0095FF;
+                padding    : 5px;
+                color      : white;
+                font-family: Roboto;
+                font-size  : 15;
+                font-weight: bold;
+            }
+
+            .modal-body {
+                display       : flex;
+                flex-direction: column;
+
+                background: #fff;
+                border    : 1px solid #c4c4c4;
+                border-top: none;
+                box-shadow: 0px 0px 10px 0px #c4c4c4;
+                padding   : 10px;
+                font-family: Roboto;
+                font-size: 15;
+                margin   : auto;
+                overflow : hidden;
+                height   : fit-content;
+
+                .modal-content {
+                    margin       : auto;
+                    height       : 100%;
+                    margin-bottom: 10px;
+                    border: none;
+                }
+
+                button {
+                    display      : flex;
+                    margin       : auto;
+                    cursor       : pointer;
+                    border-radius: 4px;
+                    background   : #0095FF;
+                    box-shadow   : none;
+                    border       : 1px solid #0095FF;
+                    color        : #fff;
+                    font-weight  : bold;
+                    font-family  : Roboto;
+                    font-size    : medium;
+                }
+
+                button:hover {
+                    background: #006fd6;
+                    border    : white 1px solid;
+                }
+            }
+        }
+    }
+
+    .modal-background {
+        position        : fixed;
+        top             : 0;
+        right           : 0;
+        bottom          : 0;
+        left            : 0;
+        background-color: white;
+        opacity         : 0.5;
+        z-index         : 900;
+    }
+}
+
+body.modal-open {
+    overflow: hidden;
+}

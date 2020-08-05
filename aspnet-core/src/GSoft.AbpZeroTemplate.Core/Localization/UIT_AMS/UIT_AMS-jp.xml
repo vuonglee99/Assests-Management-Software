@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="it">
+  <texts>
+    <text name="UitDemoUI">UIT giao diện demo</text>
+    <text name="Group12_ModelTitle" >Danh sách các mẫu xe</text>
+    <text name="Group12_ModelDetailTitle">Thông tin mẫu xe</text>
+    <text name="Group12_ModelCode" >Mã mẫu</text>
+    <text name="Group12_ModelName" >Tên mẫu</text>
+    <text name="Group12_ModelType" >Loại</text>
+    <text name="Group12_ModelHSX" >Hãng sản xuất</text>
+    <text name="Group12_ModelDMNL" >DMNL</text>
+    <text name="Group12_ModelNote" >Ghi chú</text>
+    <text name="Group12_autH_STATUS" >Trạng thái</text>
+    <text name="Group12_NoData" >Không có dữ liệu</text>
+    <text name="Group12_All" >Tất cả</text>
+    <text name="Group12_DeleteModelWaringMessage" >Bạn có chắc không?</text>
+    <text name="Group12_DeleteSuccess" >Xóa thành công!</text>
+    <text name="Group12_Notification" >Thông báo</text>
+    <text name="Group12_ChooseAModel" >Vui lòng chọn một mẫu xe!</text>
+    <text name="Group12_ChooseMaxModel" >Chỉ được chọn 1 mẫu xe!</text>
+    <text name="Group12_ApproveAction" >Duyệt</text>
+    <text name="Group12_DenyApproveAction" >Từ chối</text>
+    <text name="Group12_Approved" >Đã duyệt</text>
+    <text name="Group12_WatingForCheckingDeletion" >Chờ duyệt xóa</text>
+    <text name="Group12_WatingForCheckingUpdate" >Chờ duyệt chỉnh sửa/cập nhật</text>
+     <text name="Group12_WatingForCheckingAdd" >Chờ duyệt thêm mới</text>
+    <text name="Group12_CheckSuccess" >Duyệt thành công</text>
+    <text name="Group12_DenyApprove" >Từ chối duyệt</text>
+
+    
+  </texts>
+</localizationDictionary>

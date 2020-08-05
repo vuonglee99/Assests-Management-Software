@@ -1,0 +1,4 @@
+.no-pointer-class {
+    cursor: not-allowed;
+    pointer-events:none;
+}

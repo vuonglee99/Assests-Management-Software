@@ -1,0 +1,72 @@
+
+/* sử dụng font chung cho trang phongbn */
+
+.group14-them .pb-bgblue{
+    background-color: #58a3dc;
+    color:white;
+}
+.group14-them button.pb-bgblue {
+    border: none;
+}
+.group14-them .font-common-detail{
+    font-size: 17px;
+    font-family: Roboto;
+}
+.group14-them button:hover{
+    cursor: pointer;
+}
+.group14-them .ic-title-search{
+    font-size: 25px;
+    margin-right: 10px;
+}
+.group14-them .bgwhite{
+    background-color: white;
+}
+.group14-them .line-height-search{
+    line-height: 35px;
+}
+.group14-them .font-weigth-search{
+    font-weight: 600;
+}
+.group14-them .title-search:hover{
+    cursor: pointer;
+}
+.group14-them th,td{
+    font-size: 15px;
+    border: 1px solid #d1d7e3;
+    font-family: Roboto;
+}
+.group14-them .ui-paginator .ui-paginator-pages {
+    height: 2.5em;
+}
+.group14-them .ui-paginator{
+    text-align: right;
+}
+.group14-them .ui-paginator-page.ui-paginator-element {
+    height: 2.5em;
+}
+.group14-them .ui-paginator .ui-paginator-first, .group5-them .ui-paginator .ui-paginator-prev,.group5-them .ui-paginator .ui-paginator-next, .group5-them .ui-paginator .ui-paginator-last{
+    vertical-align: middle;
+}
+.group14-them .ui-table .ui-table-tbody>tr>td {
+    padding: 10px;
+    text-align: center;
+}
+.group14-them .ui-table .ui-table-thead>tr>th{
+    padding: 20px 0 20px 0;
+    text-align: center;
+    font-family: Roboto;
+}
+.group14-them .ui-state-highlight{
+    /* background-color: #58a3dc !important; */
+}
+.group14-them .padding10{
+    padding-bottom: 10px;
+    margin-right: 10px;
+}
+.bg-input{
+    background-color: #e9ecef;
+}
+.group14-them .ui-inputtext,.group5-them .form-control:focus {
+    background: #e9ecef !important;
+}

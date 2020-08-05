@@ -1,0 +1,213 @@
+<div>
+    <ul
+        style="background-color: #248dc1;font-family: Roboto !important;font-size: 15px;padding-left:10px;margin:0;color:white">
+        <li *ngIf="isGranted('Pages.Group12.KiemKe.Create')"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="addNew()"
+            name="btnAdd" pTooltip="{{l('Group12_AddNewInventory')}}" tooltipPosition="bottom"><i class="fa fa-plus"
+                style="font-size: large;vertical-align: middle;"></i></li>
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="search()"
+            name="btnSearch" pTooltip="{{l('Group12_SearchInventories')}}" tooltipPosition="bottom"><i
+                class="fa fa-search" style="font-size: large;vertical-align: middle;"></i></li>
+        <li *ngIf="isGranted('Pages.Group12.KiemKe.Delete')"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="delete()"
+            name="btnDelete" pTooltip="{{l('Group12_DeleteInventories')}}" tooltipPosition="bottom"><i
+                class="fa fa-trash" style="font-size: large;vertical-align: middle;"></i></li>
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="viewDetail()"
+            name="btnView" pTooltip="{{l('Group12_ViewDetailInventory')}}" tooltipPosition="bottom">
+            <i class="fa fa-pencil" style="font-size: large;vertical-align: middle;"></i></li>
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="xemChiTiet()" name="btnXemCT"
+            pTooltip="Chi tiết kiểm kê" tooltipPosition="bottom">
+            <i class="fa fa-eye" style="font-size: large;vertical-align: middle;"></i></li>
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="exportExcel()"
+            name="btnExport" pTooltip="{{l('Group12_ExportInventoryTable')}}" tooltipPosition="bottom">
+            <i class="fa fa-file-text-o" style="font-size: large;vertical-align: middle;"></i></li>
+    </ul>
+</div>
+
+<div
+    style="background-color: #248dc1; font-family: Roboto !important;padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+    <h4>{{l('Group12_KiemKeTitle')}}</h4>
+</div>
+
+
+
+<div class="m-content" style="font-family: Roboto !important;">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body">
+
+            <form class="horizontal-form" autocomplete="off" style="padding: 0 15px; margin-top: 15px;">
+                <div class="m-form m-form--label-align-right">
+                    <div class="row align-items-center m--margin-bottom-10">
+                        <div class="col-xl-12">
+                            <div class="form-group m-form__group align-items-center">
+                                <div class="input-group">
+                                    <b style="display: flex; align-items: center;font-family: Roboto !important;">{{l('Group12_kK_CODE')}}
+                                    </b>
+                                    <input name="filterText" autoFocus class="form-control m-input"
+                                        style="margin-left: 20px" type="text" [(ngModel)]="kiemKeInput.kK_CODE"
+                                        name="kK_CODE">
+                                    <span style="width: 50px"></span>
+                                    <b
+                                        style="display: flex; align-items: center;font-family: Roboto !important;">{{l('Group12_kK_NGUOITAO')}}</b>
+                                    <select name="filterText" autoFocus class="form-control m-input"
+                                        style="margin-left: 20px" [(ngModel)]="kiemKeInput.kK_NGUOITAO"
+                                        name="modeL_TYPE">
+                                        <option value="" class="mt-1 mb-1">---{{l('Group12_All')}}---</option>
+                                        <option *ngFor="let nv of nhanvienList " value="{{nv}}">
+                                            {{nv}}
+                                        </option>
+                                    </select>
+                                    <span style="width: 50px"></span>
+                                    <b
+                                        style="display: flex; align-items: center;font-family: Roboto !important;">{{l('Group12_kK_NGAYTAO')}}</b>
+
+                                    <input name="filterText" autoFocus class="form-control m-input"
+                                        style="margin-left: 20px" [placeholder]="l('Group12_kK_NGAYTAO')"
+                                        type="date" [(ngModel)]="kiemKeInput.kK_NGAYTAO" name="kK_NGAYTAO">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 mt-3">
+                            <div class="form-group m-form__group align-items-center">
+                                <div class="input-group">
+                                    <b style="display: flex; align-items: center;font-family: Roboto !important;">{{l('Group12_kK_MADONVI')}}
+                                    </b>
+                                    <input name="filterText" autoFocus class="form-control m-input"
+                                        style="margin-left: 28px" type="text" [(ngModel)]="kiemKeInput.kK_MADONVI"
+                                        name="kK_MADONVI">
+                                    <span style="width: 50px"></span>
+                                    <b style="display: flex; align-items: center;font-family: Roboto !important;">{{l('Group12_kK_TENDONVI')}}
+                                    </b>
+                                    <input name="filterText" autoFocus class="form-control m-input" type="text"
+                                    style="margin-left: 20px" [(ngModel)]="kiemKeInput.kK_TENDONVI" name="kK_TENDONVI">
+
+                                    <span style="width: 50px"></span>
+                                    <b
+                                        style="display: flex; align-items: center;font-family: Roboto !important;">{{l('Group12_kK_NGAYCHOT')}}</b>
+
+                                    <input name="filterText" autoFocus class="form-control m-input"
+                                        style="margin-left: 20px" [placeholder]="l('Group12_kK_NGAYCHOT')"
+                                        type="date" [(ngModel)]="kiemKeInput.kK_NGAYCHOT" name="kK_NGAYCHOT">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row align-items-center">
+                <!--<Primeng-TurboTable-Start>-->
+                <div class="primeng-datatable-container">
+                    <div class="primeng-paging-container">
+                        <p-table #dataTable rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                            [value]="primengTableHelper.records" [loading]="loading"
+                            [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                            selectionMode="multiple" [(selection)]="listSelectedRow" [paginator]="true"
+                            [scrollable]="true" ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+                            [resizableColumns]="primengTableHelper.resizableColumns" dataKey="kK_CODE" editMode="row">
+                            <ng-template pTemplate="header" let-columns>
+                                <tr style="font-family: Roboto !important;">
+                                    <th style="width: 50px !important;">#</th>
+                                    <th pSortableColumn="kK_CODE" style="width: 150px"> {{l('Group12_kK_CODE')}}
+                                        <p-sortIcon field="kK_CODE">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="kK_NGUOITAO" style="width: 150px">{{l('Group12_kK_NGUOITAO')}}
+                                        <p-sortIcon field="kK_NGUOITAO">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="kK_MADONVI" style="width: 150px">{{l('Group12_kK_MADONVI')}}
+                                        <p-sortIcon field="kK_MADONVI">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="kK_TENDONVI" style="width: 150px">{{l('Group12_kK_TENDONVI')}}
+                                        <p-sortIcon field="kK_TENDONVI">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="kK_NGAYTAO" style="width: 150px">{{l('Group12_kK_NGAYTAO')}}
+                                        <p-sortIcon field="kK_NGAYTAO">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="kK_NGAYCHOT" style="width: 150px">{{l('Group12_kK_NGAYCHOT')}}
+                                        <p-sortIcon field="kK_NGAYCHOT">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="kK_TONGTB_DUOCKIEMKE" style="width: 150px">
+                                        {{l('Group12_kK_TONGTB_DUOCKIEMKE')}}
+                                        <p-sortIcon field="kK_TONGTB_DUOCKIEMKE">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="kK_TONGTB_DUSOVOISAOKE" style="width: 150px">
+                                        {{l('Group12_kK_TONGTB_DUSOVOISAOKE')}}
+                                        <p-sortIcon field="kK_TONGTB_DUSOVOISAOKE">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="kK_TONGTB_THIEUSOVOISAOKE" style="width: 150px">
+                                        {{l('Group12_kK_TONGTB_THIEUSOVOISAOKE')}}
+                                        <p-sortIcon field="kK_TONGTB_THIEUSOVOISAOKE">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="kK_TONGTB_THUASOVOISAOKE" style="width: 150px">
+                                        {{l('Group12_kK_TONGTB_THUASOVOISAOKE')}}
+                                        <p-sortIcon field="kK_TONGTB_THUASOVOISAOKE">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th style="width: 100px">
+                                        {{l('Group12_autH_STATUS')}}
+                                    </th>
+                                    <th style="width: 100px"
+                                        [hidden]="!isGrantedAny('Pages.Group12.KiemKe.Approve','Pages.Group12.KiemKe.Add')">
+                                       
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowData let-kiemKe let-i="rowIndex" let-editing="editing">
+                                <tr [pSelectableRow]="rowData" (dblclick)="onRowDblClick($event, kiemKe)"
+                                    style="font-family: Roboto !important;">
+                                    <td style="width: 50px !important;">{{i+1}}</td>
+                                    <td style="width: 150px">{{kiemKe.kK_CODE}}</td>
+                                    <td style="width: 150px">{{kiemKe.kK_NGUOITAO}} </td>
+                                    <td style="width: 150px">{{kiemKe.kK_MADONVI}}</td>
+                                    <td style="width: 150px">{{kiemKe.kK_TENDONVI }}</td>
+                                    <td style="width: 150px">{{convertDate(kiemKe.kK_NGAYTAO)}}</td>
+                                    <td style="width: 150px">{{convertDate(kiemKe.kK_NGAYCHOT)}}</td>
+                                    <td style="width: 150px">{{kiemKe.kK_TONGTB_DUOCKIEMKE }}</td>
+                                    <td style="width: 150px">{{kiemKe.kK_TONGTB_DUSOVOISAOKE }}</td>
+                                    <td style="width: 150px">{{kiemKe.kK_TONGTB_THIEUSOVOISAOKE }}</td>
+                                    <td style="width: 150px">{{kiemKe.kK_TONGTB_THUASOVOISAOKE }}</td>
+                                    <td style="width: 100px">{{kiemKe.kK_TRANGTHAI }}</td>
+                                    <td style="width: 100px; text-align: center;"
+                                        [hidden]="!isGrantedAny('Pages.Group12.KiemKe.Approve','Pages.Group12.KiemKe.Add')">
+                                        <span class="ui-column-title"> {{l('Group12_autH_STATUS')}}</span>
+                                        <i class="fa fa-check-circle m--font-success"
+                                            *ngIf="kiemKe.autH_STATUS==='1'"></i>
+                                        <!--đã duyệt-->
+                                        <i class="fa fa-times-circle m--font-danger"
+                                            *ngIf="kiemKe.autH_STATUS==='-1'"></i>
+                                        <!--từ chối duyệt-->
+                                        <i class="fa fa-plus-circle m--font-warning"
+                                            *ngIf="kiemKe.autH_STATUS==='0' && !kiemKe.approvE_DT && kiemKe.recorD_STATUS==='1'"></i>
+                                        <!--chờ duyệt thêm-->
+                                        <i class="fa fa-pencil-square-o m--font-warning"
+                                            *ngIf="kiemKe.autH_STATUS==='0' && kiemKe.approvE_DT"></i>
+                                        <!--chờ duyệt chỉnh sửa-->
+                                        <i class="fa fa-trash m--font-warning"
+                                            *ngIf="kiemKe.autH_STATUS==='0' && kiemKe.recorD_STATUS==='0'"></i>
+                                        <!--chờ duyệt chỉnh xóa-->
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                            {{l('Group12_NoData')}}
+                        </div>
+                        <span class="total-records-count">
+                            {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                        </span>
+                    </div>
+                </div>
+                <!--<Primeng-TurboTable-End>-->
+            </div>
+        </div>
+    </div>
+</div>

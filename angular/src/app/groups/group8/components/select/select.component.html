@@ -1,0 +1,5 @@
+<select [(ngModel)]="ngModelValue" (change)="updateChanges()" [name]="name" [attr.data-live-search]="true"
+  jq-plugin="selectpicker" class="bakery-input bakery-input-small" [ngClass]="class" [disabled]="disabled"
+  [required]="required">
+  <option *ngFor="let item of dataSources" [value]="item[dataValue]">{{item[dataDisplay]}}</option>
+</select>

@@ -1,0 +1,200 @@
+<div bsModal #createModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg group4">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title font-weight-bold">
+                    <span>{{l('g4Compare')}}</span>
+                </h4>
+                <button id="btn_close" type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <fieldset disabled="true">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="font-weight-bold" style="font-size: 20px;">{{l('g4ApartmentOld')}}
+                                    </label>
+                                </div>
+                                <!-- Mã căn hộ -->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4ApartmentCodeLable')}} </label>
+                                    <input name="code" class="form-control " [ngModel]="apOld.apartmenT_CODE" [ngClass]="{'apOld':apOld.apartmenT_CODE!=apNew.apartmenT_CODE}">
+                                </div>
+
+                                <!-- Tên căn hộ -->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4ApartmentNameLable')}} </label>
+                                    <input name="name" class="form-control" [ngModel]="apOld.apartmenT_NAME" [ngClass]="{'apOld':apOld.apartmenT_NAME!=apNew.apartmenT_NAME}">
+                                </div>
+
+                                <!-- <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4BuildingLable')}}:</label>
+                                    <input name="building" class="form-control " [ngModel]="apOld.buildinG_ID" [ngClass]="{'apOld':apOld.buildinG_ID!=apNew.buildinG_ID}">
+                                </div>
+
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4FloorLable')}}</label>
+                                    <input name="floor" class="form-control " [ngModel]="apOld.floor_ID" [ngClass]="{'apOld':apOld.floor_ID!=apNew.floor_ID}">
+                                </div> -->
+
+
+                                <!-- Loại căn hộ -->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4ApartmentTypeLable')}}</label>
+                                    <input name="apType" class="form-control " [ngModel]="apOldName" [ngClass]="{'apOld':apOld.apartmenT_TYPE_ID!=apNew.apartmenT_TYPE_ID}">
+                                </div>
+
+
+
+                                <!-- Tình trạng hoạt động-->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4StatusLable')}}</label>
+                                    <input class="mr-2" class="form-control " name="status" [ngModel]="apOld.apartmenT_STATUS == '1' ? l('g4Enable') : l('g4Disable')" [ngClass]="{'apOld':apOld.apartmenT_STATUS!=apNew.apartmenT_STATUS}">
+
+                                </div>
+
+                                <!-- Giá -->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4PriceLable')}} </label>
+                                    <div class="input-group">
+                                        <input class="form-control" [ngModel]="apOld.apartmenT_PRICE" name="price" [ngClass]="{'apOld':apOld.apartmenT_PRICE!=apNew.apartmenT_PRICE}">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">vnđ</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Số phòng -->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4NumberOfRoomLable')}}</label>
+                                    <input class="form-control" [(ngModel)]="apOld.apartmenT_ROOMS" name="rooms" [ngClass]="{'apOld':apOld.apartmenT_ROOMS!=apNew.apartmenT_ROOMS}">
+                                </div>
+
+                                <!-- Diện tích -->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4SuperficiesLable')}}</label>
+                                    <div class="input-group">
+                                        <input class="form-control" [ngModel]="apOld.apartmenT_AREA" name="area" [ngClass]="{'apOld':apOld.apartmenT_AREA!=apNew.apartmenT_AREA}">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">m<sup>2</sup></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Số người tối đa -->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4MaximumPeopleLable')}}</label>
+                                    <input class="form-control" name="max_tenant" [ngModel]="apOld.apartmenT_MAX_TENANT" [ngClass]="{'apOld':apOld.apartmenT_MAX_TENANT!=apNew.apartmenT_MAX_TENANT}">
+                                </div>
+
+                                <!-- Mô tả -->
+                                <div class="col-md-12 form-group">
+                                    <label class="font-weight-bold">{{l('g4ApartmentDescription')}}</label>
+                                    <textarea id="ap_description" class="form-control" rows='3' [(ngModel)]="apOld.apartmenT_DESCRIPTION" name="note" [ngClass]="{'apOld':apOld.apartmenT_DESCRIPTION!=apNew.apartmenT_DESCRIPTION}"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <fieldset disabled="true">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="font-weight-bold" style="font-size: 20px;">{{l('g4ApartmentNew')}}
+                                    </label>
+                                </div>
+                                <!-- Mã căn hộ -->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4ApartmentCodeLable')}} </label>
+                                    <input name="code" class="form-control " [ngModel]="apNew.apartmenT_CODE" [ngClass]="{'apNew':apOld.apartmenT_CODE!=apNew.apartmenT_CODE}">
+                                </div>
+
+                                <!-- Tên căn hộ -->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4ApartmentNameLable')}} </label>
+                                    <input name="name" class="form-control " [ngModel]="apNew.apartmenT_NAME" [ngClass]="{'apNew':apOld.apartmenT_NAME!=apNew.apartmenT_NAME}">
+                                </div>
+
+                                <!--                             
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4BuildingLable')}}:</label>
+                                    <input name="building" class="form-control " [ngModel]="apNew.buildinG_ID" [ngClass]="{'apNew':apOld.buildinG_ID!=apNew.buildinG_ID}">
+                                </div>
+
+                           
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4FloorLable')}}</label>
+                                    <input name="floor" class="form-control " [ngModel]="apNew.floor_ID" [ngClass]="{'apNew':apOld.floor_ID!=apNew.floor_ID}">
+                                </div> -->
+
+
+                                <!-- Loại căn hộ -->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4ApartmentTypeLable')}}</label>
+                                    <input name="apType" class="form-control " [ngModel]="apNewName" [ngClass]="{'apNew':apOld.apartmenT_TYPE_ID!=apNew.apartmenT_TYPE_ID}">
+                                </div>
+
+
+
+                                <!-- Tình trạng hoạt động-->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4StatusLable')}}</label>
+                                    <input class="mr-2" class="form-control " name="status" [ngModel]="apNew.apartmenT_STATUS == '1' ? l('g4Enable') : l('g4Disable')" [ngClass]="{'apNew':apOld.apartmenT_STATUS!=apNew.apartmenT_STATUS}">
+                                </div>
+
+                                <!-- Giá -->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4PriceLable')}} </label>
+                                    <div class="input-group">
+                                        <input class="form-control" [ngModel]="apNew.apartmenT_PRICE" name="price" [ngClass]="{'apNew':apOld.apartmenT_PRICE!=apNew.apartmenT_PRICE}">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">vnđ</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Số phòng -->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4NumberOfRoomLable')}}</label>
+                                    <input class="form-control" [(ngModel)]="apNew.apartmenT_ROOMS" name="rooms" [ngClass]="{'apNew':apOld.apartmenT_ROOMS!=apNew.apartmenT_ROOMS}">
+                                </div>
+
+                                <!-- Diện tích -->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4SuperficiesLable')}}</label>
+                                    <div class="input-group">
+                                        <input class="form-control" [ngModel]="apNew.apartmenT_AREA" name="area" [ngClass]="{'apNew':apOld.apartmenT_AREA!=apNew.apartmenT_AREA}">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">m<sup>2</sup></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Số người tối đa -->
+                                <div class="col-md-6 form-group">
+                                    <label class="font-weight-bold">{{l('g4MaximumPeopleLable')}}</label>
+                                    <input class="form-control" name="max_tenant" [ngModel]="apNew.apartmenT_MAX_TENANT" [ngClass]="{'apNew':apOld.apartmenT_MAX_TENANT!=apNew.apartmenT_MAX_TENANT}">
+                                </div>
+
+                                <!-- Mô tả -->
+                                <div class="col-md-12 form-group">
+                                    <label class="font-weight-bold">{{l('g4ApartmentDescription')}}</label>
+                                    <textarea id="ap_description" class="form-control" rows='3' [(ngModel)]="apNew.apartmenT_DESCRIPTION" name="note" [ngClass]="{'apNew':apOld.apartmenT_DESCRIPTION!=apNew.apartmenT_DESCRIPTION}"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

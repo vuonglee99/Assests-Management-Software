@@ -1,0 +1,98 @@
+image: mcr.microsoft.com/dotnet/core/sdk:3.1-bionic
+
+# Đây là các biến tĩnh nhằm giúp thiết lập nhanh các cài đặt.
+variables:
+  CHROME_DRIVER_VERSION: "84.0.4147.30"
+  CHROME_DRIVER_BASE: "chromedriver.storage.googleapis.com"
+  CPU_ARCH: "64"
+  DOTNET_TEST_DEBUG_PATH: "aspnet-core/test/Selenium.Test/bin/Debug/netcoreapp3.1"
+
+stages:
+  - build
+  - test
+  - deploy
+
+dotnetbuild:
+  stage: build
+  artifacts:
+    paths:
+      - aspnet-core/src/GSoft.AbpZeroTemplate.Web.Host
+#  tags: 
+#    - myrunner
+  script:
+    - "cd aspnet-core/src/GSoft.AbpZeroTemplate.Web.Host"
+    - "dotnet restore"
+    - "dotnet build"
+    
+dotnettest:
+  stage: test
+  needs: ["dotnetbuild"]
+  script:
+#    - "cd ../../test/GSoft.AbpZeroTemplate.Tests"
+    - "cd aspnet-core/test/GSoft.AbpZeroTemplate.Tests"
+    - "dotnet test"
+
+angularbuild:
+  image: trion/ng-cli-karma
+  artifacts:
+    paths:
+      - angular/node_modules/
+      - .npm/
+  stage: build
+  environment: Stage
+  script:
+    - cd angular
+    - npm install
+    - ng build
+    
+e2e-test-chrome:
+  image: mcr.microsoft.com/dotnet/core/sdk:2.1-bionic
+  stage: test
+  needs: []
+#  services:
+#    - selenium/standalone-chrome
+  before_script:
+    #Chuẩn bị các utility cần thiết.
+    - apt-get update && apt-get install sudo -y
+    - sudo apt-get install unzip zip
+  
+    #Tải dotnet core.
+    - wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+    - sudo dpkg -i packages-microsoft-prod.deb
+    - sudo apt-get update; sudo apt-get install -y apt-transport-https && sudo apt-get update && sudo apt-get install -y dotnet-sdk-3.1
+    
+    #Tải chrome về (làm y chang bên Linux luôn).
+    - export CHROME_BIN=/usr/bin/google-chrome
+    - sudo apt-get install -y libappindicator1 fonts-liberation
+    - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - sudo apt-get install ./google-chrome*.deb -y
+    
+    #Tải driver về, sau đó set quyền để driver có thể chạy được.
+    #- chown root:root test/group15_new/bin/Debug/netcoreapp2.1/chromedriver
+    - export CHROME_DRIVER_FILE="chromedriver_linux${CPU_ARCH}.zip"
+    - export CHROME_DRIVER_URL="https://${CHROME_DRIVER_BASE}/${CHROME_DRIVER_VERSION}/${CHROME_DRIVER_FILE}"
+    - wget -nv -O chromedriver_linux${CPU_ARCH}.zip ${CHROME_DRIVER_URL}
+    - unzip chromedriver_linux${CPU_ARCH}.zip
+    - rm chromedriver_linux${CPU_ARCH}.zip
+    # Cách 1 : Copy driver đến folder debug. 
+#    - mkdir --parents ./${DOTNET_TEST_DEBUG_PATH}; mv chromedriver ${DOTNET_TEST_DEBUG_PATH}/chromedriver
+#    - chmod 755 ${DOTNET_TEST_DEBUG_PATH}/chromedriver
+    # Cách 2 : Thêm chrome-driver vào PATH của Linux.
+#    - export PATH=$PATH:$(pwd)
+#    - echo $PATH
+#    - chmod 755 chromedriver
+#    - chmod +x chromedriver
+    # Cách 3 : Chuyển chromedriver đến PATH đã có sẵn.
+    - sudo cp chromedriver /usr/local/bin/chromedriver
+  script:
+#    - cd aspnet-core/src/GSoft.AbpZeroTemplate.Web.Host
+#    - dotnet run
+#    - cd -
+#    - cd angular
+#    - npm start
+    - set +e
+    - SELENIUM="http://selenium__standalone-chrome:4444/wd/hub" BASE_URL="https://$CI_BUILD_REF_SLUG-dot-$GAE_PROJECT.appspot.com" DRIVER="headless_chrome"
+    - set -e
+#    - docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
+    - cd aspnet-core/test/Selenium.Test
+    - dotnet test

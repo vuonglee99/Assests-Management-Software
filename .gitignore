@@ -1,0 +1,11 @@
+#aspnet-core/src/GSoft.AbpZeroTemplate.Web.Host/appsettings.json
+#aspnet-core/src/GSoft.AbpZeroTemplate.Core.Shared/Helpers/ProcedureHelper.cs
+
+# Created by https://www.toptal.com/developers/gitignore/api/xamarinstudio
+# Edit at https://www.toptal.com/developers/gitignore?templates=xamarinstudio
+### XamarinStudio ###
+mobile-kiemke-group2/QRScan/QRScan/bin/
+mobile-kiemke-group2/QRScan/QRScan/obj/
+mobile-kiemke-group2/QRScan/QRScan.Android/bin/
+mobile-kiemke-group2/QRScan/QRScan.Android/obj/
+# End of https://www.toptal.com/developers/gitignore/api/xamarinstudio

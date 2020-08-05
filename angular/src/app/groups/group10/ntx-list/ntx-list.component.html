@@ -1,0 +1,125 @@
+<div class="group10" style="font-family: roboto;">
+    <div>
+        <ul  style="background-color: #58a3dc;font-size: 15px;padding-left:10px;margin:0;color:white">
+            <li *ngIf=" isGranted('Pages.Group10.NTX.Add')" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="add()" ><i
+                class="fa fa-plus" id="btnAdd"></i></li>
+            <li *ngIf=" isGranted('Pages.Group10.NTX.Update')" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="update()" ><i
+                class="fa fa-pencil" id="btnEdit"></i></li>
+            <li *ngIf="isGranted('Pages.Group10.NTX.Delete')"
+                style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="delete()"><i
+                class="fa fa-trash" id="btnDel"></i></li>
+            <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;"
+            (click)="detail()"><i class="fa fa-eye"></i></li>
+            <li *ngIf="isGranted('Pages.Group10.NTX.Search')" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="search()"><i
+                class="fa fa-search"></i></li>
+
+                <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="export()"><i
+                    class="fa fa-file-excel-o"></i></li>
+        </ul>
+    </div>
+    <div
+    style="background-color: #58a3dc; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+    <h1 style="margin-bottom: 0px"><i class="fa fa-info-circle"
+            style="font-size: 30px; margin-right: 15px"></i>{{l('Group10_NTX_LIST_TITLE')}}</h1>
+    </div>
+    <div class="m-content">
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+
+                <form class="horizontal-form" autocomplete="off">
+                    <div class="m-form m-form--label-align-right">
+                        <div class="row align-items-center m--margin-bottom-10">
+                            <div class="col-xl-12">
+                                <div class="form-group m-form__group align-items-center">
+                                    <div class="input-group">
+                                        <b style="display: flex; margin-right: 10px;align-items: center;">{{l('Group10_NTX_ID_CARD')}} </b>
+                                        <input name="filterText" autoFocus class="form-control m-input "
+                                            [placeholder]="l('Group10_SEARCH')+l('Group10_NTX_ID_CARD')" type="text"
+                                            [(ngModel)]="filterInput.ntX_ID_CARD" name="ntX_ID_CARD">
+
+                                        <span style="width: 20px"></span>
+
+                                        <b style="display: flex; margin-right: 10px ;align-items: center;">{{l('Group10_NTX_NAME')}} </b>
+                                        <input name="filterText" autoFocus class="form-control m-input"
+                                            [placeholder]="l('Group10_SEARCH')+l('Group10_NTX_NAME')" type="text"
+                                            [(ngModel)]="filterInput.ntX_NAME" name="ntX_NAME">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+                <div class="row align-items-center">
+                    <!--<Primeng-TurboTable-Start>-->
+                    <div class="primeng-datatable-container">
+                        <div class="primeng-paging-container">
+                            <p-table #dataTable rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                                [value]="primengTableHelper.records"
+                                [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                                selectionMode="single" [(selection)]="selectedNTX" [paginator]="true" [scrollable]="true"
+                                ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+                                [resizableColumns]="primengTableHelper.resizableColumns">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th style="width: 50px !important;">{{l('GROUP10_NUMBER_ORDER')}}</th>
+                                        <th class="text-left" pSortableColumn="ntX_CODE">{{l('Group10_NTX_CODE')}} <p-sortIcon field="ntX_CODE">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th class="text-left" pSortableColumn="ntX_NAME">{{l('Group10_NTX_NAME')}} <p-sortIcon field="ntX_NAME">
+                                            </p-sortIcon>
+                                        </th>
+
+                                        <th class="text-left" pSortableColumn="ntX_ADDRESS">{{l('Group10_NTX_ADDRESS')}} <p-sortIcon
+                                                field="ntX_ADDRESS">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th class="text-left" pSortableColumn="ntX_GENDER">{{l('Group10_NTX_GENDER')}} <p-sortIcon
+                                                field="ntX_GENDER">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th  pSortableColumn="ntX_BIRTHDAY">{{l('Group10_NTX_BIRTHDAY')}} <p-sortIcon field="ntX_BIRTHDAY">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th class="text-left" pSortableColumn="ntX_ID_CARD">{{l('Group10_NTX_ID_CARD')}} <p-sortIcon
+                                                field="ntX_ID_CARD">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th class="text-left" pSortableColumn="ntX_LICENSE">{{l('Group10_NTX_LICENSE')}} <p-sortIcon field="ntX_LICENSE">
+                                            </p-sortIcon>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-ntx let-i="rowIndex">
+                                    <tr [pSelectableRow]="rowData">
+                                        <td style="width: 50px !important;">{{i+1}}</td>
+                                        <td  class="text-left">{{ntx.ntX_CODE}}</td>
+                                        <td class="text-left">{{ntx.ntX_NAME}}</td>
+                                        <td class="text-left">{{ntx.ntX_ADDRESS}}</td>
+                                        <td class="text-left">{{ntx.ntX_GENDER=='1'?l('Group10_MALE'):l('Group10_FEMALE')}}</td>
+                                        <td>{{ntx.ntX_BIRTHDAY | date: 'MM/dd/yyyy'}}</td>
+                                        <td class="text-left">{{ntx.ntX_ID_CARD  }}</td>
+                                        <td class="text-left">{{ntx.ntX_LICENSE }}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                            <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                                {{l('NoData')}}
+                            </div>
+                            <span class="total-records-count">
+                                {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!--<Primeng-TurboTable-End>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

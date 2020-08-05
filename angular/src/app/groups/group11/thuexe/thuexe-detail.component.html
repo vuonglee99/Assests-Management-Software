@@ -1,0 +1,130 @@
+<form #formRef="ngForm" [formGroup]="thueXeForm">
+    <ul style="background-color: #58a3dc;font-size: 15px;padding-left:10px;margin:0;color:white">
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;"
+            onclick="window.history.back()"><i class="fa fa-arrow-left"></i></li>
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="save()"><i
+                class="fa fa-floppy-o"></i></li>
+        <li *ngIf="isGranted('Pages.Group11.Xe.Delete') && editPageState === 'view'"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="delete()"><i class="fa fa-trash"></i></li>
+    </ul>
+    <div *ngIf="!show" class="blockUI blockOverlay"
+        style="z-index: 1000; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(170, 170, 170); opacity: 0.3; cursor: wait; position: fixed;">
+    </div>
+    <div *ngIf="show">
+        <div
+            style="background-color: #58a3dc; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+            <h1 style="margin-bottom: 0px"><i class="fa fa-info-circle"
+                    style="font-size: 20px; margin-right: 15px"></i>{{l('CarRentalDetail')}}</h1>
+        </div>
+        <div style="padding: 20px;">
+            <div style="padding: 20px; background-color: white;">
+                <div style="font-size: 15px;">
+                    <div>{{l('CarRentalCode')}} <span style="color: red">(*)</span></div>
+                    <input formControlName="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }" maxlength="20"
+                        [(ngModel)]="inputModel.ptX_CODE" name="ptX_CODE" class="form-control"
+                        style="background-color: #f4f5f8">
+                    <div *ngIf="submitted" class="invalid-feedback">
+                        <div *ngIf="f.code.errors?.required" name="empty_field">{{l('Group11CarRentalCodeValidate')}} </div>
+                        <div *ngIf="f.code.errors?.pattern">{{l('Group11CarRentalCodePatternValidate')}}</div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6" style="font-size: 15px;">
+                        <div>
+                            <div>{{l('CarRentalRenter')}} <span style="color: red">(*)</span></div>
+
+                            <select formControlName="ntx" [ngClass]="{ 'is-invalid': submitted && f.ntx.errors }" 
+                                [(ngModel)]="inputModel.ntX_ID" name="ntX_ID" class="form-control"
+                                style="background-color: #f4f5f8" [disabled]="this.editPageState === 'view'">
+                                <option [value]="undefined" disabled>--- Chọn người thuê xe ---</option>
+                                <option *ngFor="let ntx of ntxList" [value]="ntx.ntX_ID">{{ntx.ntX_CODE}} - {{ntx.ntX_NAME}}</option>
+                            </select>
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.ntx.errors?.required" name="empty_field">{{l('Group11CarRentalRenterValidate')}} </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>{{l('CarRentalCar')}} <span style="color: red">(*)</span></div>
+
+                            <select formControlName="xe" [ngClass]="{ 'is-invalid': submitted && f.xe.errors }"
+                                [(ngModel)]="inputModel.xE_ID" name="xE_ID" class="form-control"
+                                style="background-color: #f4f5f8">
+                                <option [value]="undefined" disabled>--- Chọn xe cần thuê ---</option>
+                                <option *ngFor="let xe of xeList" [value]="xe.xE_ID">{{xe.xE_CODE}} - {{xe.xE_NAME}}</option>
+                            </select>
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.xe.errors?.required" name="empty_field">{{l('Group11CarRentalCarValidate')}} </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>{{l('CarRentalPrice')}} <span style="color: red">(*)</span></div>
+
+                            <input (keypress)="numberOnly($event)" formControlName="price" [ngClass]="{ 'is-invalid': submitted && f.price.errors }"
+                                [(ngModel)]="inputModel.ptX_PRICE" name="ptX_PRICE" class="form-control" maxlength="18"
+                                style="background-color: #f4f5f8">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.price.errors?.required" name="empty_field">{{l('Group11CarRentalPriceValidate')}}</div>
+                                <div *ngIf="f.price.errors?.pattern" name="only_number">{{l('Group11CarRentalPriceWithWordsValidate')}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="font-size: 15px">
+                        <div>
+                            <div>{{l('CarRentalFrom')}} <span style="color: red">(*)</span></div>
+
+                            <input type="date" formControlName="rentDT" [(ngModel)]="ptX_RENT_DT" (ngModelChange)="checkValidDate()"
+                                [ngClass]="{ 'is-invalid': f.rentDT.errors }" name="ptX_RENT_DT"
+                                class="form-control" style="background-color: #f4f5f8
+                            ">
+                            <div class="invalid-feedback">
+                                <div *ngIf="f.rentDT.errors?.required" name="empty_field">{{l('Group11CarRentalFromValidate')}}
+                                </div>
+                                <div *ngIf="f.rentDT.errors?.beforeRentDT">{{l('Group11CarRentalBeforeDateValidate')}}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>{{l('CarRentalExpect')}} <span style="color: red">(*)</span></div>
+
+                            <input type="date" formControlName="expDT" [(ngModel)]="ptX_EXP_DT" (ngModelChange)="checkValidDate()"
+                                [ngClass]="{ 'is-invalid': f.expDT.errors }" name="ptX_EXP_DT"
+                                class="form-control" style="background-color: #f4f5f8
+                                ">
+                            <div class="invalid-feedback">
+                                <div *ngIf="f.expDT.errors?.required" name="empty_field">{{l('Group11CarRentalExpectValidate')}} </div>
+                                <div *ngIf="f.expDT.errors?.beforeRentDT">{{l('Group11CarRentalBeforeDateValidate')}}
+                                </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>{{l('CarRentalReturn')}} <span style="color: red">(*)</span></div>
+
+                            <input type="date" formControlName="returnDT" [(ngModel)]="ptX_RETURN_DT" (ngModelChange)="checkValidDate()"
+                                [ngClass]="{ 'is-invalid': f.returnDT.errors }" name="ptX_RETURN_DT"
+                                class="form-control" style="background-color: #f4f5f8
+                                ">
+                            <div class="invalid-feedback">
+                                <div *ngIf="f.returnDT.errors?.required" name="empty_field">{{l('Group11CarRentalReturnValidate')}}
+                                </div>
+                                <div *ngIf="f.returnDT.errors?.beforeRentDT">{{l('Group11CarRentalBeforeDateValidate')}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>{{l('CarRentalNotes')}}</div>
+                    <textarea rows="5" name="ptX_NOTE" class="form-control" formControlName="notes"
+                        [(ngModel)]="inputModel.ptX_NOTE" style="background-color: #f4f5f8"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

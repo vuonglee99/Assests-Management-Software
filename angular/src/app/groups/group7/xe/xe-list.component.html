@@ -1,0 +1,40 @@
+<div>
+    <ul style="background-color: #248dc1;font-family: auto;font-size: 15px;padding-left:10px;margin:0;color:white">
+        <li *ngIf="isGranted('Pages.Group7.Xe.Add')" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="addNew()">Thêm</li>
+        <li *ngIf="isGranted('Pages.Group7.Xe.Update')" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="update()">Chỉnh Sửa
+        </li>
+        <li *ngIf="isGranted('Pages.Group7.Xe.Delete')" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="delete()">Xóa</li>
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="search()">Tìm kiếm
+        </li>
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="viewDetail()">Xem
+            chi tiết</li>
+    </ul>
+</div>
+
+<form #formRef="ngForm" class="filter">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label>Mã xe</label>
+            <input class="form-control" [(ngModel)]="filterInput.xE_CODE" name="xE_CODE">
+        </div>
+    </div>
+
+    <button hidden (click)="search()"></button>
+</form>
+
+<p-table [value]="records">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Mã xe</th>
+            <th>Tên xe</th>
+            <th>Màu xe</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-car>
+        <tr>
+            <td>{{car.xE_CODE}}</td>
+            <td>{{car.xE_NAME}}</td>
+            <td>{{car.xE_COLOR}}</td>
+        </tr>
+    </ng-template>
+</p-table>

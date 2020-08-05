@@ -1,0 +1,269 @@
+<form #formRef class="bakery bakery-form" (ngSubmit)="save()">
+    <ul
+        style="background-color: #248dc1;font-family: auto;font-size: 13px;padding-left:10px;margin:0;color:white; line-height: 32px;">
+        <li *ngIf="editPageState === 'view'" (click)="update()" class="li-custom"><i class="fa fa-edit"
+                style="margin-right: 4px !important"></i>Chỉnh
+            sửa
+        </li>
+        <li *ngIf="editPageState === 'view'" (click)="delete()" class="li-custom"><i class="fa fa-times"
+                style="margin-right: 4px !important"></i>Xóa
+        </li>
+        <li *ngIf="editPageState === 'add'" (click)="save()" class="li-custom"><i class="fa fa-plus"
+                style="margin-right: 4px !important"></i>Thêm</li>
+        <li *ngIf="editPageState === 'edit'" (click)="save()" class="li-custom"><i class="fa fa-save"
+                style="margin-right: 4px !important"></i>Lưu</li>
+        <li (click)="backToList()" class="li-custom"><i class="fa fa-arrow-left"
+                style="margin-right: 4px !important"></i>Trờ Lại</li>
+    </ul>
+    <ul
+        style="margin-top: 12px !important;
+        background-color: #248dc1;font-family: auto;font-size: 20px;padding-left:10px;margin:0;color:white; line-height: 56px;">
+        <li style="display: inline-block;padding-left: 20px">
+            {{titleHeader}}</li>
+    </ul>
+    <div class="form-control">
+        <p-panel header="Thông tin cơ bản" [toggleable]="true">
+            <div class="row col-md-12">
+                <div class="col-md-6 mb-8">
+                    <p class="first">Mã Thiết Bị</p>
+                    <input class="bakery-input" [disabled]="editPageState !== 'add'" name="tbvT_MA_TBVT" id="mathietbi"
+                        type="text" pInputText [(ngModel)]="inputModel.tbvT_MA_TBVT" #mathietbi="ngModel">
+                </div>
+                <div class="col-md-6 mb-8">
+                    <p class="first">Tên Thiết Bị</p>
+                    <input class="bakery-input" name="tbvT_TEN" id="tenthietbi" type="text" pInputText
+                        [(ngModel)]="inputModel.tbvT_TEN" #tenthietbi="ngModel" [disabled]="editPageState === 'view'">
+                </div>
+            </div>
+            <div class="row col-md-12 mb-8">
+                <div class="col-md-6">
+                    <p class="first">Serial</p>
+                    <input class="bakery-input" name="tbvT_SERIAL" id="serial" type="text" pInputText
+                        [(ngModel)]="inputModel.tbvT_SERIAL" #serial="ngModel" [disabled]="editPageState === 'view'">
+                </div>
+                <div class="col-md-6 mb-8">
+                    <p class="first">Ngày Nhập</p>
+                    <p-calendar [disabled]="editPageState === 'view'" [(ngModel)]="ngaymuaDate" [showIcon]="true"
+                        dateFormat="dd/mm/yy" name="ngaymuaDate">
+                    </p-calendar>
+                </div>
+            </div>
+            <div class="row col-md-12 mb-8">
+                <div class="col-md-6">
+                    <p class="first">Loại</p>
+                    <group8-select [(ngModel)]="inputModel.tbvT_LOAI" name="tbvT_LOAI" #loai="ngModel" id="loai"
+                        class="input" [disabled]="editPageState === 'view'" [dataSources]="LOAI_LIST" dataDisplay="TEN"
+                        dataValue="MA_L">
+                    </group8-select>
+                </div>
+                <div class="col-md-6">
+                    <p class="first">Đơn Vị Tính</p>
+                    <input class="bakery-input" [disabled]="editPageState === 'view'" name="tbvT_DVT" id="serial"
+                        type="text" pInputText [(ngModel)]="inputModel.tbvT_DVT" #serial="ngModel">
+                </div>
+            </div>
+            <div class="row col-md-12 mb-8">
+                <div class="col-md-6">
+                    <div class="ui-g">
+                        <p-checkbox [disabled]="editPageState === 'view'" name="isNhapTheoLo" binary="true"
+                            label="Nhập Theo Lô" [(ngModel)]="isNhapTheoLo">
+                        </p-checkbox>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isNhapTheoLo === true" class=" row col-md-12 mb-8">
+                <p-panel header="Thông tin nhập theo lô">
+                    <div class="row col-md-12 mb-8">
+                        <div class="col-md-6">
+                            <p class="first">Số Lượng</p>
+                            <input class="bakery-input" [disabled]="editPageState === 'view'"
+                                name="this.inputModel.tbvT_SL_THEO_LO" type="number" pInputText
+                                [(ngModel)]="this.inputModel.tbvT_SL_THEO_LO" #soluongtheolo="ngModel">
+                        </div>
+                        <div class="col-md-6">
+                            <p class="first">Tình Trạng Thiết Bị</p>
+                            <input class="bakery-input" [disabled]="editPageState === 'view'"
+                                name="tbvT_TINH_TRANG_THIET_BI" id="tinhtrangthietbi" type="text" pInputText
+                                [(ngModel)]="inputModel.tbvT_TINH_TRANG_THIET_BI" #tinhtrangthietbi="ngModel">
+                        </div>
+                    </div>
+                    <div class="row col-md-12 mb-8">
+                        <div class="col-md-6">
+                            <p class="first">Tình Trạng TBVTYT</p>
+                            <input class="bakery-input" [disabled]="editPageState === 'view'"
+                                name="tbvT_TINH_TRANG_TBTBVT" id="tinhtrangTBVTYT" type="text" pInputText
+                                [(ngModel)]="inputModel.tbvT_TINH_TRANG_TBTBVT" #tinhtrangTBVTYT="ngModel">
+                        </div>
+                        <div class="col-md-6">
+                            <p class="first">Ghi Chú</p>
+                            <textarea pInputTextarea [(ngModel)]="inputModel.tbvT_GHI_CHU_TINH_TRANG"
+                                [disabled]="editPageState === 'view'" name="ghichu"></textarea>
+                        </div>
+                    </div>
+                </p-panel>
+            </div>
+        </p-panel>
+
+
+        <p-panel header="Thông Tin Bảo Hành" [toggleable]="true">
+            <div class="row col-md-12 mb-8">
+                <div class="col-md-6">
+                    <p class="first">Nhà Sản Xuất</p>
+                    <input class="bakery-input" [disabled]="editPageState === 'view'" name="tbvT_HANG_SX" id="hangsx"
+                        type="text" pInputText [(ngModel)]="inputModel.tbvT_HANG_SX" #hangsx="ngModel">
+                </div>
+                <div class="col-md-6">
+                    <p class="first">Năm Sản Xuất</p>
+                    <input class="bakery-input" [disabled]="editPageState === 'view'" name="tbvt_NAM_SX" id="namsx"
+                        type="text" pInputText [(ngModel)]="inputModel.tbvT_NAM_SX" #namsx="ngModel">
+                </div>
+            </div>
+            <div class="row col-md-12 mb-8">
+                <div class="col-md-6">
+                    <p class="first">Nhà Cung Cấp</p>
+                    <input class="bakery-input" [disabled]="editPageState === 'view'" name="tbvT_NHA_CUNG_CAP"
+                        id="nhacungcap" type="text" pInputText [(ngModel)]="inputModel.tbvT_NHA_CUNG_CAP"
+                        #nhacungcap="ngModel">
+                </div>
+            </div>
+            <div class="row col-md-12 mb-8">
+                <div class="col-md-6">
+                    <p class="first">Từ Ngày</p>
+                    <p-calendar [disabled]="editPageState === 'view'" [(ngModel)]="tungayDate" [showIcon]="true"
+                        dateFormat="dd/mm/yy" name="tungayDate">
+                    </p-calendar>
+                </div>
+                <div class="col-md-6">
+                    <p class="first">Đến Ngày</p>
+                    <p-calendar [disabled]="editPageState === 'view'" [(ngModel)]="denngayDate" [showIcon]="true"
+                        dateFormat="dd/mm/yy" name="denngayDate">
+                    </p-calendar>
+                </div>
+            </div>
+        </p-panel>
+
+        <p-panel header="Thông Tin Bảo Dưỡng" [toggleable]="true">
+            <div class="row col-md-12 mb-8">
+                <div class="col-md-6">
+                    <p class="first">Tỉ Lệ Hao Mòn</p>
+                    <input class="bakery-input" [disabled]="editPageState === 'view'" name="tbvT_TI_LE_HAO_MON"
+                        id="tilehaomon" type="text" pInputText [(ngModel)]="inputModel.tbvT_TI_LE_HAO_MON"
+                        #tilehaomon="ngModel">
+                </div>
+            </div>
+            <div class="row col-md-12 mb-8">
+                <div class="col-md-6">
+                    <div class="ui-g">
+                        <p-checkbox [disabled]="editPageState === 'view'" name="isCanBaoDuong" binary="true"
+                            label="Cần Bảo Dưỡng" [(ngModel)]="isCanBaoDuong"></p-checkbox>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isCanBaoDuong === true" class=" row col-md-12 mb-8">
+                <p-panel header="Thông tin bảo dưỡng">
+                    <div class="row col-md-12 mb-8">
+                        <div class="col-md-6">
+                            <p class="first">Chu Kỳ</p>
+                            <group8-select [(ngModel)]="inputModel.tbvT_CHU_KY_BAO_DUONG" name="tbvT_CHU_KY_BAO_DUONG"
+                                #chuky="ngModel" id="chuky" class="input" [disabled]="editPageState === 'view'"
+                                [dataSources]="THANG_LIST" dataDisplay="TEN" dataValue="MA_T">
+                            </group8-select>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="first">Ghi Chú</p>
+                            <textarea [disabled]="editPageState === 'view'" pInputTextarea
+                                [(ngModel)]="inputModel.tbvT_NOI_DUNG_BAO_DUONG" name="ghichubaoduong"></textarea>
+                        </div>
+                    </div>
+                </p-panel>
+            </div>
+        </p-panel>
+        <p-table [columns]="cols" selectionMode="single" [value]="this.inputModel.tbvT_PhuKien" [paginator]="true"
+            [rows]="10" [scrollable]="true" (onRowSelect)="onRowSelect($event)" [(selection)]="selectedPhuKien">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                        {{col.header}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData">
+                    <td *ngFor="let col of columns">
+                        {{rowData[col.field]}}
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary" let-rowData>
+                <div style="text-align:left">
+                    <button type="button" pButton icon="pi pi-plus" (click)="showDialog()"
+                        label="Thêm mới phụ kiện"></button>
+                </div>
+            </ng-template>
+        </p-table>
+        <p-dialog header="Thêm Mới Phụ Kiện" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true"
+            showEffect="fade" [modal]="true" [style]="{width: '500px'}">
+            <div class="p-grid ui-fluid customDialog" *ngIf="this.phukienModel">
+                <div class="p-col-4">
+                    <label for="this.phukienModel.phU_KIEN_ID">ID</label>
+                </div>
+                <div class="p-col-8">
+                    <input [ngModelOptions]="{standalone: true}" pInputText id="this.phukienModel.phU_KIEN_ID"
+                        [(ngModel)]="this.phukienModel.phU_KIEN_ID" />
+                </div>
+                <div class="p-col-4">
+                    <label for="this.phukienModel.phU_KIEN_TBVT_ID">ID Phụ Kiện Thiết Bị Vật Tư</label>
+                </div>
+                <div class="p-col-8">
+                    <input [ngModelOptions]="{standalone: true}" pInputText id="this.phukienModel.phU_KIEN_TBVT_ID"
+                        [(ngModel)]="this.phukienModel.phU_KIEN_TBVT_ID" />
+                </div>
+                <div class="p-col-4">
+                    <label for="this.phukienModel.phU_KIEN_MA_PK">Mã Phụ Kiện</label>
+                </div>
+                <div class="p-col-8">
+                    <input [ngModelOptions]="{standalone: true}" pInputText id="this.phukienModel.phU_KIEN_MA_PK"
+                        [(ngModel)]="this.phukienModel.phU_KIEN_MA_PK" />
+                </div>
+                <div class="p-col-4">
+                    <label for="this.phukienModel.phU_KIEN_TEN">Tên Phụ Kiện</label>
+                </div>
+                <div class="p-col-8">
+                    <input [ngModelOptions]="{standalone: true}" pInputText id="this.phukienModel.phU_KIEN_TEN"
+                        [(ngModel)]="this.phukienModel.phU_KIEN_TEN" />
+                </div>
+                <div class="p-col-4">
+                    <label for="this.phukienModel.phU_KIEN_DVT">Đơn Vị Tính</label>
+                </div>
+                <div class="p-col-8">
+                    <input [ngModelOptions]="{standalone: true}" pInputText id="this.phukienModel.phU_KIEN_DVT"
+                        [(ngModel)]="this.phukienModel.phU_KIEN_DVT" />
+                </div>
+                <div class="p-col-4">
+                    <label for="this.phukienModel.phU_KIEN_SO_LUONG">Số Lượng</label>
+                </div>
+                <div class="p-col-8">
+                    <input [ngModelOptions]="{standalone: true}" pInputText id="this.phukienModel.phU_KIEN_SO_LUONG"
+                        [(ngModel)]="this.phukienModel.phU_KIEN_SO_LUONG" />
+                </div>
+                <div class="p-col-4">
+                    <label for="this.phukienModel.phU_KIEN_GHI_CHU">Ghi Chú</label>
+                </div>
+                <div class="p-col-8">
+                    <textarea [ngModelOptions]="{standalone: true}" pInputTextarea
+                        id="this.phukienModel.phU_KIEN_GHI_CHU"
+                        [(ngModel)]="this.phukienModel.phU_KIEN_GHI_CHU"></textarea>
+                </div>
+            </div>
+            <p-footer>
+                <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                    <button type="button" pButton icon="pi pi-times" (click)="cancelAddPhuKien()"
+                        label="Quay Lại"></button>
+                    <button type="button" pButton icon="pi pi-times" (click)="deletePhuKien()" label="Xóa"></button>
+                    <button type="button" pButton icon="pi pi-check" (click)="addNewPhuKien()" label="Lưu"></button>
+                </div>
+            </p-footer>
+        </p-dialog>
+    </div>
+</form>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

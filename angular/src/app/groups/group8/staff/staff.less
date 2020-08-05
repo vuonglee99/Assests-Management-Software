@@ -1,0 +1,73 @@
+.bakery {
+  font-size: 13px;
+}
+
+.form-control {
+  background-color: transparent;
+}
+
+.bakery-form-group {
+  .form-control {
+    padding: 0;
+    border : none;
+  }
+
+  .bakery-input,
+  p-calendar input {
+    width           : 100%;
+    background-color: rgb(247, 249, 252);
+    border          : 1px solid rgb(228, 233, 242);
+    color           : rgb(34, 43, 69);
+    border-radius   : 4px;
+  }
+
+  p-calendar {
+
+    input,
+    span {
+      width: 100%;
+    }
+  }
+
+  .danger-text {
+    color: rgb(170, 24, 24);
+  }
+
+  .bakery-input.ng-invalid,
+  p-calendar.ng-invalid input {
+    border: 1px solid rgb(170, 24, 24);
+  }
+
+  .bakery-input:focus,
+  p-calendar input:focus {
+    background-color: rgb(255, 255, 255);
+    border-color    : rgb(51, 102, 255);
+    outline         : none;
+  }
+
+  .bakery-input:hover,
+  p-calendar input:hover {
+    background-color: rgb(237, 241, 247);
+    border-color    : rgb(228, 233, 242);
+  }
+
+  .bakery-input-small,
+  .bakery-input-small::placeholder {
+    font-size  : 13px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+
+  .bakery-input-small {
+    padding: 3px 16px;
+  }
+
+  select.bakery-input-small {
+    padding: 3px 16px 3px 12px;
+  }
+
+  label {
+    line-height: 24px;
+    padding-top: 8px;
+  }
+}

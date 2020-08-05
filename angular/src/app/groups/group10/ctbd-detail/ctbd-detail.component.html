@@ -1,0 +1,163 @@
+<!-- main app container -->
+<div class="group10" style="font-family: roboto;">
+    <div>
+        <ul *ngIf="(this.editPageState=='view' || this.editPageState == 'edit')" style="background-color: #58a3dc;font-size: 15px;padding-left:10px;margin:0;color:white">
+            <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;"
+            onclick="window.history.back()"><i class="fa fa-arrow-left"></i></li>
+            <li *ngIf="this.isUpdate && isGranted('Pages.Group10.CTBD.Update') && inputModel.recorD_STATUS == '1' && inputModel.autH_STATUS !== null" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="onSubmit()" ><i
+                class="fa fa-floppy-o" id="btnUpdate"></i></li>
+            <li *ngIf="!this.isUpdate && isGranted('Pages.Group10.CTBD.Update') && inputModel.recorD_STATUS == '1' && inputModel.autH_STATUS !== null" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="update()" ><i
+                class="fa fa-pencil" id="btnEdit"></i></li>
+            <li *ngIf="isGranted('Pages.Group10.CTBD.Delete') && inputModel.recorD_STATUS == '1' && inputModel.autH_STATUS !== null"
+                style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="delete()"><i
+                class="fa fa-trash" id="btnDel"></i></li>
+            <li *ngIf="isGranted('Pages.Group10.CTBD.Approve') && inputModel.autH_STATUS === null && isShow " 
+                style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="approve()"><i
+                    class="fa fa-check"></i> {{l('Group11ApproveButton')}}</li>
+            <li *ngIf="isGranted('Pages.Group10.CTBD.Approve') && inputModel.autH_STATUS === null && isShow"
+                style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="nav_disapprove()"><i
+                    class="fa fa-times"></i> {{l('Group11DisApproveButton')}}</li>
+        </ul>
+
+        <ul *ngIf="(this.editPageState=='add' )" style="background-color: #58a3dc;font-size: 15px;padding-left:10px;margin:0;color:white">
+            <li *ngIf="isGranted('Pages.Group10.CTBD.Add')" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="onSubmit()" ><i
+                class="fa fa-floppy-o" id="btnUpdate"></i></li>
+
+            <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;"
+            onclick="window.history.back()"><i class="fa fa-arrow-left"></i></li>
+
+        </ul>
+      
+        <ul *ngIf="(this.editPageState=='approve' )" style="background-color: #58a3dc;font-size: 15px;padding-left:10px;margin:0;color:white">
+
+            <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;"
+            onclick="window.history.back()"><i class="fa fa-arrow-left"></i></li>
+
+            <li *ngIf="isGranted('Pages.Group10.CTBD.Approve') && inputModel.autH_STATUS === null && isShow"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="disapprove()"><i
+                class="fa fa-times"></i> {{l('Group11DisApproveButton')}}</li>
+          
+            
+        </ul>
+
+    </div>
+    <div class="m-subheader m-t-1">
+        <div
+            style="background-color: #58a3dc; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+            <h1 style="margin-bottom: 0px"><i class="fa fa-info-circle"
+                    style="font-size: 30px; margin-right: 15px"></i>{{l('Group10_CTBD_DETAIL_TITLE')}}</h1>
+        </div>
+        <div class="bgwhite rounded-bottom">
+            <div class=" p-5 font-common-detail">
+                <div  >
+
+                    <div class="row" *ngIf="isGranted('Pages.Group10.CTBD.Approve') && inputModel.autH_STATUS === null"
+                    style="color: orange">
+                    <div class="col-md-6" style="font-size: 15px; display: inline-block"><i
+                            class="fa fa-question-circle"></i> {{l('TypeApproveStatus')}}:
+                        <span
+                            *ngIf="inputModel.approvE_DT.toISOString().substring(0, 10) !== '0000-12-31'; else UpdateApproval">
+                            ({{l('Group11Delete')}})</span>
+                        <ng-template #UpdateApproval>
+                            <span *ngIf="isUpdating; else InsertApproval"> ({{l('Group11Update')}})</span>
+                            <ng-template #InsertApproval>
+                                <span> ({{l('Group11Insert')}})</span>
+                            </ng-template>
+                        </ng-template>
+
+                    </div>
+                </div>
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                        <div  class="row">
+                            <div *ngIf="this.editPageState=='approve'" class="form-group col-12">
+                                <label  >{{this.l('Group10_REASON')}} 
+                                </label>
+                                <input id="total_price" type="text" formControlName="reason" class="form-control"
+                                     />
+                            </div>
+                           </div>
+                           <div  class="row">
+                            <div *ngIf="inputModel.reason!=null" class="form-group col-12">
+                                <label  >{{this.l('Group10_REASON')}} 
+                                </label>
+                                <input id="total_price" type="text" formControlName="reason" class="form-control" disabled
+                                     />
+                            </div>
+                           </div>
+
+                       <div class="row">
+                        <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <label >{{l('Group10_CTBD_NAME')}}
+                                <label style="color: red">*</label>
+                            </label>
+                            <input id="name" type="text" formControlName="name" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.name.errors }" disabled />
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required" name="empty_field">{{l('Group10_REQUIRED')}}</div>
+                                <div *ngIf="f.name.errors.maxlength" name="maxsize_field">{{l('Group10_MAX','50')}}</div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <label >{{l('Group10_CTBD_CODE')}}
+                                <label style="color: red">*</label>
+                            </label>
+                            <input id="code" type="text" formControlName="code" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.code.errors }" disabled />
+                            <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
+                                <div *ngIf="f.code.errors.required" name="empty_field">{{l('Group10_REQUIRED')}}</div>
+                                <div *ngIf="f.code.errors.maxlength" name="maxsize_field">{{l('Group10_MAX','20')}}</div>
+                            </div>
+
+                        </div>
+                       </div>
+
+                        <div class="row">
+                            <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <label  >{{l('Group10_CTBD_QUANTITY')}}
+                                    <label style="color: red">*</label>
+                                </label>
+                                <input (keyup)="calTotalPrice()" id="quantity" type="text" formControlName="quantity" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.quantity.errors }" disabled />
+                                <div *ngIf="submitted && f.quantity.errors" class="invalid-feedback">
+                                    <div *ngIf="f.quantity.errors.required" name="empty_field">{{l('Group10_REQUIRED')}}</div>
+                                    <div *ngIf="f.quantity.errors.pattern" name="quantity_field">{{l('Group10_ONLY_NUMBER')}}</div>
+
+                                </div>
+
+                            </div>
+                            <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <label >{{l('Group10_CTBD_UNIT_PRICE')+' (VND)'}}
+                                    <label style="color: red">*</label>
+                                </label>
+                                <input (keyup)="calTotalPrice()" id="unit_price" type="text" formControlName="unit_price" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.unit_price.errors }" disabled />
+                                <div *ngIf="submitted && f.unit_price.errors" class="invalid-feedback">
+                                    <div *ngIf="f.unit_price.errors.pattern" name="unit_price_field">{{l('Group10_ONLY_NUMBER')}}</div>
+                                    <div *ngIf="f.unit_price.errors.required" name="empty_field">{{l('Group10_REQUIRED')}}</div>
+                                </div>
+
+                            </div>
+                        </div>
+                       <div class="row">
+                        <div class="form-group col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <label  >{{l('Group10_CTBD_TOTAL_PRICE')+' (VND)'}} 
+                                <label style="color: red">*</label>
+                            </label>
+                            <input id="total_price" type="text" formControlName="total_price" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.total_price.errors }" disabled />
+                        </div>
+                       </div>
+
+
+               
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

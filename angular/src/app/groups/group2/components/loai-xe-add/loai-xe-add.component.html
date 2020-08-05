@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+</head>
+
+<body>
+    <div>
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+            <div class="panel panel-default main-panel ">
+                <div class="panel-body">
+                    <form>
+                        <!-- NEW -->
+                        <ul style="background-color: #248dc1;font-size: 15px;padding-left:10px;margin:0;color:white">
+                            <li class="tool-bar-icon-disable">
+                                <i class="fa fa-plus"></i>
+                                <!--Thêm--></li>
+                            <li class="tool-bar-icon-disable">
+                                <i class="fa fa-pencil"></i>
+                                <!-- Sửa -->
+                            </li>
+                            <li class="{{canAdd?'tool-bar-icon-normal':'tool-bar-icon-disable'}}"
+                                (click)="canAdd?onAdd():null">
+                                <i class="fa fa-floppy-o"></i>
+                                <!-- Lưu -->
+                            </li>
+                            <li class="tool-bar-icon-disable">
+                                <i class="fa fa-trash"></i>
+                                <!-- Xóa -->
+                            </li>
+                            <li class="tool-bar-icon-disable">
+                                <i class="fa fa-search"></i>
+                                <!--Tìm kiếm-->
+                            </li>
+                            <li class="tool-bar-icon-disable">
+                                <i class="fa fa-eye"></i>
+                                <!--Xem chi tiết-->
+                            </li>
+                            <li class="tool-bar-icon-disable">
+                                <i class="fa fa-check"></i>
+                                <!--Duyệt-->
+                            </li>
+                            <li class="tool-bar-icon-disable">
+                                <i class="fa fa-window-close"></i>
+                                <!-- Hủy -->
+                            </li>
+                            <li class="tool-bar-icon-normal" (click)="onExit()">
+                                <i class="fa fa-arrow-left"></i> 
+                                <!-- Trở lại -->
+                            </li>
+                        </ul>
+
+                        <!-- OLD -->
+                      <!-- <legend>
+                            <div class="icon-bar">
+                                <button mat-button (click)='onExit()'>
+                                    <mat-icon class="fa fa-arrow-left" >
+                                        <span style="font-family: arial;font-size: 20px;
+                                        text-align: left;
+                                        font-weight: bold;">
+                                            Trở lại
+                                        </span>
+                                    </mat-icon>
+                                </button>
+                                <button mat-button [disabled]="!canAdd"  (click)='onAdd()'>
+                                    <mat-icon class="fa fa-save" >
+                                        <span style="font-family: arial;font-size: 20px;
+                                        text-align: left;
+                                        font-weight: bold;">
+                                            Lưu
+                                        </span>
+                                    </mat-icon>
+                                </button>
+                                <button [hidden]="true" class="btn" type="button" (click)='onExit()'>
+                                    <div>
+                                        <i class="fa fa-arrow-left mr-top-10"></i>
+                                        Trở lại
+                                    </div>
+
+                                </button>
+
+                                <button class="btn" [hidden]="true" [disabled]="true" type="button" ><i class="fa fa-plus-circle mr-top-10"></i></button>
+                                <button class="btn" type="button" [hidden]="true" [disabled]="true"><i class="fa fa-pencil mr-top-10"></i></button>
+                                <button class="btn" type="button" [hidden]="true" [disabled]="true"><i class="fa fa-trash mr-top-10"></i></button>
+                                <button class="btn" type="button" [hidden]="true" [disabled]="true"><i class="fa fa-search mr-top-10"></i></button>
+                                <button class="btn" type="button" [hidden]="true" [disabled]="true"><i class="fa fa-eye mr-top-10"></i></button>
+                            </div>
+                        </legend>
+                        <br>
+                        <legend>
+                            <div class="header">
+                                <label class="title1">Thêm loại xe</label>
+
+                            </div>
+                        </legend> -->
+
+                        <!-- TITTLE -->
+                        <div
+                            style="background-color: #248dc1; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+                            <h1 style="margin-bottom: 0px"><i class="fa fa-info-circle" style="font-size: 30px; margin-right: 15px"></i>
+                                {{l("G2ThemLoaiXe")}}</h1>
+                        </div>
+
+                        <!-- TABLE -->
+                        <div style="padding: 20px;">
+                            <div style="padding: 20px; background-color: white;">
+                                <div class="row">
+                                    <div class="col-md-6" style="font-size: 15px;">
+                                        <!-- Mã loại xe -->
+                                        <div class="div-input">
+                                            <div>{{l("G2MaLoaiXe")}} <span style="color: red">(*)</span></div>
+                                            <input style="background-color: #f4f5f8" name="id" type="text" placeholder="Mã"
+                                                [(ngModel)]="inputModel.lX_CODE" (ngModelChange)="checkValidInput()" #carid="ngModel" required="required"
+                                                class="form-control" [ngClass]="{
+                                                    'enable-mode':true
+                                                }">
+                                            <span class="label error-validate" *ngIf="carid.dirty && carid.errors?.required">
+                                                {{l("G2MaLoaiXe")+" "+ l("G2KhongDuocTrong")}}
+                                            </span>
+                                            <span class="label error-validate" *ngIf="maxLengthCode">
+                                                {{l("G2MaLoaiXe")+" "+ l("G2KhongVuotQua")+" 20 "+l("G2KyTu")}}
+                                            </span>
+                                            <span class="label error-validate" *ngIf="isSpecialCode">
+                                                {{l("G2MaLoaiXe")+" "+ l("G2KhongChuaKyTuDacBiet")}}
+                                            </span>
+                                        </div>
+                                        <!-- Tên loại xe -->
+                                        <div class="div-input">
+                                            <div>{{l("G2TenLoaiXe")}} <span style="color: red">(*)</span></div>
+                                            <input style="background-color: #f4f5f8" class="form-control" name="name" type="text"
+                                                placeholder="Tên" [(ngModel)]="inputModel.lX_TEN" (ngModelChange)="checkValidInput()" #carname="ngModel"
+                                                required="required" [ngClass]="{
+                                                                                            'enable-mode':true
+                                                                                        }">
+                                            <span class="label error-validate" *ngIf="carname.dirty && carname.errors?.required">
+                                                {{l("G2TenLoaiXe")+" "+ l("G2KhongDuocTrong")}}
+                                            </span>
+                                            <span class="label error-validate" *ngIf="maxLengthName">
+                                                {{l("G2TenLoaiXe")+" "+ l("G2KhongVuotQua")+" 100 "+l("G2KyTu")}}
+                                            </span>
+                                            <span class="label error-validate" *ngIf="isSpecialName">
+                                                {{l("G2TenLoaiXe")+" "+ l("G2KhongChuaKyTuDacBiet")}}
+                                            </span>
+                                        </div>
+
+                                        <!-- Hãng xe -->
+                                        <div class="div-input">
+                                            <div>{{l("G2HangXe")}} <span style="color: red"></span></div>
+                                            <input style="background-color: #f4f5f8" class="form-control" name="hangxe" type="text"
+                                                placeholder="Hãng xe" [(ngModel)]="inputModel.lX_HANGXE" (ngModelChange)="checkValidInput()"
+                                                #carhangxe="ngModel" [ngClass]="{
+                                                                                'enable-mode':true
+                                                                            }">
+                                            <span class="label error-validate" *ngIf="maxLengthHangXe">
+                                                {{l("G2HangXe")+" "+ l("G2KhongVuotQua")+" 20 "+l("G2KyTu")}}
+                                            </span>
+                                            <span class="label error-validate" *ngIf="isSpecialHangXe">
+                                                {{l("G2HangXe")+" "+ l("G2KhongChuaKyTuDacBiet")}}
+                                            </span>
+                                        </div>
+
+                                        <!-- Mô tả -->
+                                        <div class="div-input">
+                                            <div>{{l("G2MoTa")}} <span style="color: red"></span></div>
+                                            <textarea style="background-color: #f4f5f8;height: 70px;border-width: 2px;border-color: #e6e6e6;"
+                                                class="form-control" name="description" [(ngModel)]="inputModel.lX_MO_TA"
+                                                #cardesc="ngModel" (ngModelChange)="checkValidInput()" required="required" [ngClass]="{
+                                                                                                                        'enable-mode':true
+                                                                                                                    }"></textarea>
+                                        
+                                            <span class="label error-validate" *ngIf="maxLengthDesc">
+                                                {{l("G2MoTa")+" "+ l("G2KhongVuotQua")+" 1000 "+l("G2KyTu")}}
+                                            </span>
+                                            <span class="label error-validate" *ngIf="isSpecialDesc">
+                                                {{l("G2MoTa")+" "+ l("G2KhongChuaKyTuDacBiet")}}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6" style="font-size: 15px;">
+                                        <!-- Năm sản xuất -->
+                                        <div class="div-input">
+                                            <div>{{l("G2NamSanXuat")}} <span style="color: red"></span></div>
+                                            <input style="background-color: #f4f5f8" class="form-control" name="namsanxuat" type="number"
+                                                placeholder="Năm sản xuất" [(ngModel)]="inputModel.lX_NAMSX" (ngModelChange)="checkValidInput()"
+                                                #carnamsanxuat="ngModel" [ngClass]="{
+                                                                                'disable-mode':!editable,
+                                                                                'enable-mode':editable
+                                                                            }">
+                                        </div>
+                                        <!-- Loại nguyên liệu -->
+                                        <div class="div-input">
+                                            <div>{{l("G2LoaiNguyenLieu")}} <span style="color: red"></span></div>
+                                            <input style="background-color: #f4f5f8" class="form-control" name="loainguyenlieu" 
+                                                type="text" placeholder="Loại nguyên liệu" [(ngModel)]="inputModel.lX_LOAINGUYENLIEU"
+                                                (ngModelChange)="checkValidInput()" #carloainguyenlieu="ngModel" [ngClass]="{
+                                                                                                                        'disable-mode':!editable,
+                                                                                                                        'enable-mode':editable
+                                                                                                                    }">
+                                        
+                                            <span class="label error-validate" *ngIf="maxLengthLoaiNguyenLieu">
+                                                {{l("G2LoaiNguyenLieu")+" "+ l("G2KhongVuotQua")+" 20 "+l("G2KyTu")}}
+                                            </span>
+                                            <span class="label error-validate" *ngIf="isSpecialLoaiNguyenLieu">
+                                                {{l("G2LoaiNguyenLieu")+" "+ l("G2KhongChuaKyTuDacBiet")}}
+                                            </span>
+                                        </div>
+                                        <!-- Định mức nguyên liệu (l/100km) -->
+                                        <div class="div-input">
+                                            <div>{{l("G2DinhMucNL")}} <span style="color: red"></span></div>
+                                            <input style="background-color: #f4f5f8" class="form-control" name="dinhmucnl" type="number"
+                                                placeholder="Định mức nguyên liệu" [(ngModel)]="inputModel.lX_DINHMUCNL" (ngModelChange)="checkValidInput()"
+                                                #cardinhmucnl="ngModel" [ngClass]="{
+                                                                                'disable-mode':!editable,
+                                                                                'enable-mode':editable
+                                                                            }">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

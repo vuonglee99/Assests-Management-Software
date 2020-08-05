@@ -1,0 +1,177 @@
+<div class="group14">
+    <div class="m-subheader">
+        <div class="d-flex align-items-center pb-bgblue p-2 ">
+            <button *ngIf="isGranted('Pages.Group14.PCPTBVT.Update')" class="pb-bgblue font-common-detail" (click)="updatePCP()" >
+                <i class="fa fa-pencil" aria-hidden="true" ></i>
+            </button>
+            <button  class="pb-bgblue font-common-detail" (click)="cancel()">
+                <i class="fa fa-arrow-left" aria-hidden="true" ></i>
+            </button>
+        </div>
+    </div>
+    <div class="m-subheader m-t-1">
+        <div class="bgwhite rounded-bottom">
+            <div class="row p-5 font-common-detail">
+          
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="row padding10">
+                        <b>{{l("AllocationBillID")}}</b> &nbsp;<span class="text-danger">(*)</span>
+                    </div>
+                    <div class="row padding10">
+                        <input type="text" name="" id="input" name="pb_tt" class="form-control bg-input" required="required"
+                            name="recorD_STATUS" [value]="this.currentPCP.pcptbvT_MA_PCP"  [(ngModel)]="filterInput.pcptbvT_MA_PCP" (ngModelChange)="checkValidInput()"
+                            #carname="ngModel" required="required"
+                            [ngClass]="{
+                                'enable-mode':true
+                            }"
+                        >
+                        <span class="label error-validate" *ngIf="carname.dirty && carname.errors?.required" >
+                            *{{l("AllocationBillIDNotEmpty")}}
+                        </span>
+                        <span class="label error-validate" *ngIf="maxLengthName" >
+                            *{{l("AllocationBillIDLengthLimit")}}
+                        </span>
+                        <span class="label error-validate" *ngIf="isSpecialName" >
+                            *{{l("AllocationBillIDNoSpecialCharacter")}}
+                        </span>
+                        
+                    </div>
+                    <div class="row padding10">
+                        <b>{{l("AllocationBillDepartment")}}</b> &nbsp;<span class="text-danger">(*)</span>
+                    </div>
+                    <div class="row padding10">
+                        <select name="" id="input" name="pb_tt" class="form-control bg-input" required
+                            name="recorD_STATUS" [value]="this.currentPCP.pcptbvT_DEP_ID" [(ngModel)]="filterInput.pcptbvT_DEP_ID"  (ngModelChange)="checkValidInput()">
+                            <option [ngValue]="null"selected disabled hidden>--{{l("AllocationBillDepartment")}}--</option>
+                            <option *ngFor="let opt of department" [ngValue]="opt.deP_CODE">{{opt.deP_NAME}}</option>
+                        </select>
+                    </div>
+
+
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  
+                    <div class="row padding10">
+                        <b>{{l("AllocationBillNotes")}} </b> &nbsp;<span class="text-danger">(*)</span>
+                    </div>
+                    <div class="row padding10">
+                        <textarea class="bg-input" rows="5" cols="30" [value]="this.currentPCP.pcptbvT_GHI_CHU"  pInputTextarea [(ngModel)]="filterInput.pcptbvT_GHI_CHU"  (ngModelChange)="checkValidInput()"
+                        #cardesc="ngModel" required="required"
+                        placeholder=""
+                        [ngClass]="{
+                            'enable-mode':true
+                        }"
+                        ></textarea>
+                        <span class="label error-validate" *ngIf="cardesc.dirty && cardesc.errors?.required" >
+                            *{{l("AllocationBillNotesNotEmpty")}}
+                        </span>
+                        <span class="label error-validate" *ngIf="maxLengthDesc">
+                            *{{l("AllocationBillNotesLengthLimit")}}
+                        </span>
+                        <span class="label error-validate" *ngIf="isSpecialDesc" >
+                            *{{l("AllocationBillNotesNoSpecialCharacter")}}
+                        </span>
+                    
+                    </div>
+                </div>
+     
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center">
+        <!--<Primeng-TurboTable-Start>-->
+        <div class="primeng-datatable-container"
+             [busyIf]="primengTableHelper.isLoading">
+             <div class="d-flex align-items-center pb-bgblue p-4 font-common rounded-top">
+                <div class="pb-bgblue">
+                    <i class="fa fa-list-ul ic-title-search" aria-hidden="true"></i>
+                    {{l("Equipments")}}
+                </div>
+            </div>
+            <p-table #dataTable
+                     (onLazyLoad)="getThietBiVatTu($event)"
+                     [value]="primengTableHelper.records"
+                     rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                     [paginator]="true"
+                     [lazy]="true"
+                     [totalRecords]="primengTableHelper.totalRecordsCount"
+                    [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                     [scrollable]="true"
+                     ScrollWidth="100%"
+                     [(selection)]="selectedItem"
+                    selectionMode="multiple"
+                     [responsive]="primengTableHelper.isResponsive"
+                     [resizableColumns]="primengTableHelper.resizableColumns">
+                <ng-template pTemplate="header">
+                    <tr >
+                     
+                        <th style="width: 200px" pSortableColumn="tbvT_MA_TBVT">
+                            {{l("EquipmentID")}}
+                            <p-sortIcon field="tbvT_MA_TBVT"></p-sortIcon>
+                        </th>
+                        <th style="width: 200px" pSortableColumn="tbvT_TEN" >
+                            {{l("EquipmentName")}}
+                            <p-sortIcon field="tbvT_TEN" ></p-sortIcon>
+                        </th>
+                        <th style="width: 150px" pSortableColumn="tbvT_LOAI">
+                            {{l("EquipmentType")}}
+                            <p-sortIcon field="tbvT_LOAI"></p-sortIcon>
+                        </th>
+                        <th style="width: 150px" pSortableColumn="tbvT_SERIAL">
+                            {{l("EquipmentSerial")}}
+                            <p-sortIcon field="tbvT_SERIAL"></p-sortIcon>
+                        </th>
+                        <th style="width: 150px" pSortableColumn="tbvT_NGAY_MUA">
+                            {{l("EquipmentBuyDate")}}
+                            <p-sortIcon field="tbvT_NGAY_MUA"></p-sortIcon>
+                        </th>
+                        <th style="width: 250px" pSortableColumn="tbvT_TINH_TRANG_THIET_BI">
+                            {{l("EquipmentCondition")}}
+                            <p-sortIcon field="tbvT_TINH_TRANG_THIET_BI"></p-sortIcon>
+                        </th>
+                        
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-record let-columns="columns" let-rowIndex="rowIndex">
+                    <tr  [pSelectableRow]="record" [pSelectableRowIndex]="rowIndex">
+                        <td style="width: 200px">
+                            <span class="ui-column-title"> </span>
+                            {{record.tbvT_MA_TBVT}}
+                        </td>
+                        <td style="width: 200px">
+                            <span class="ui-column-title"> </span>
+                            {{record.tbvT_TEN}}
+                        </td>
+                     
+                        <td style="width: 150px">
+                            <span class="ui-column-title"> </span>
+                            <span class="label label-success" *ngIf="record.tbvT_LOAI == 0">{{l("Equipment")}}</span>
+                            <span class="label label-default" *ngIf="record.tbvT_LOAI == 1">{{l("Supply")}}</span>
+                            <span class="label label-default" *ngIf="record.tbvT_LOAI != 1 && record.tbvT_LOAI != 0">{{l("G14Undefined")}}</span>
+                        </td>
+                        <td style="width: 150px">
+                            <span class="ui-column-title"> </span>
+                            {{record.tbvT_SERIAL}}
+                        </td>
+                        <td style="width: 150px">
+                            <span class="ui-column-title"> </span>
+                            {{record.tbvT_NGAY_MUA|date:'dd/MM/yyyy'}}
+                        </td>
+                    
+                        <td style="width: 250px">
+                            <span class="ui-column-title"> {{l("EquipmentCondition")}}</span>
+                            <span class="label label-success" *ngIf="record.tbvT_TINH_TRANG_THIET_BI == 0">{{l("DamagedCondition")}}</span>
+                            <span class="label label-default" *ngIf="record.tbvT_TINH_TRANG_THIET_BI == 1">{{l("GoodCondition")}}</span>
+                            <span class="label label-default" *ngIf="record.tbvT_TINH_TRANG_THIET_BI != 1 && record.tbvT_TINH_TRANG_THIET_BI != 0">{{l("G14Undefined")}}</span>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                {{l("NoData")}}
+            </div>
+            
+        </div>
+</div>
+
+

@@ -1,0 +1,134 @@
+<div class="group14-chi-tiet-phieu-cap-phat">
+    <div class="m-subheader">
+      <div class="d-flex align-items-center pb-bgblue p-2">
+        <button *ngIf="isGranted('Pages.Group14.PCPTBVT.Update')" class="pb-bgblue font-common-detail" (click)="updatePCP()">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+        </button>
+        <button *ngIf="isGranted('Pages.Group14.PCPTBVT.Approve')" class="pb-bgblue font-common-detail" (click)="approvePCP()">
+          <i class="fa fa-check" aria-hidden="true"></i>
+        </button>
+          <button *ngIf="isGranted('Pages.Group14.PCPTBVT.Approve')" class="pb-bgblue font-common-detail" (click)="denyPCP()" >
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+          <button  class="pb-bgblue font-common-detail" (click)="return()" >
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+          </button>
+      </div>
+    </div>
+  
+    <div class="m-subheader m-t-1">
+      <div class="bgwhite rounded-bottom">
+        <div class="row p-5 font-common-detail">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="row padding10">
+                    <b>{{l("AllocationBillID")}}</b>
+                </div>
+                <div class="row padding10">
+                    <input type="text" class="form-control bg-input" placeholder="pcptbvT_MA_PCP" [(ngModel)]="filterInput.pcptbvT_MA_PCP" disabled>
+                </div> 
+                <div class="row padding10">
+                    <b>{{l("AllocationBillDepartment")}}</b>
+                </div>
+                <div class="row padding10">
+                    <input class="form-control bg-input" placeholder="pcptbvT_DEP_ID" [(ngModel)]="filterInput.pcptbvT_DEP_ID" disabled>
+                </div>
+                <div class="row padding10">
+                    <b>{{l("AllocationBillNotes")}}</b>
+                </div>
+                <div class="row padding10">
+                    <div class="form-control bg-input" disabled>
+                        <textarea [rows]="5" [cols]="100" pInputTextarea autoResize="autoResize" class='text-box'
+                            [(ngModel)]="filterInput.pcptbvT_GHI_CHU" name="pcptbvT_GHI_CHU"
+                            [readonly]="editPageState === 'view'"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="row padding10">
+                    <b>{{l("AllocationBillCreateDate")}}</b>
+                </div>
+                <div class="row padding10">
+                    <input type="text" class="form-control bg-input" placeholder='{{l("G14Undefined")}}' [ngModel]="ngayTao | date: 'dd/MM/yyyy'" disabled>
+                </div> 
+                <div class="row padding10">
+                    <b>{{l("AllocationBillMakerID")}}</b>
+                </div>
+                <div class="row padding10">
+                    <input class="form-control bg-input" placeholder='{{l("G14Undefined")}}' [(ngModel)]="filterInput.makeR_ID" disabled>
+                </div>
+                <div class="row padding10">
+                    <b>{{l("AllocationBillApprovalStatus")}}</b>
+                </div>
+                <div class="row padding10">
+                    <input class="form-control bg-input" placeholder='{{l("G14Undefined")}}' [(ngModel)]="approve" disabled>
+                </div>
+                <div class="row padding10">
+                    <b>{{l("AllocationBillCheckerID")}}</b>
+                </div>
+                <div class="row padding10">
+                    <input class="form-control bg-input" placeholder='{{l("G14Undefined")}}' [(ngModel)]="filterInput.checkeR_ID" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="m-subheader pt-0">
+
+            <div class="d-flex align-items-center pb-bgblue p-4 font-common rounded-top">
+                <div class="pb-bgblue">
+                    <i class="fa fa-list-ul ic-title-search" aria-hidden="true"></i>
+                    {{l("Equipments")}}
+                </div>
+            </div>
+    
+            <p-table #dataTable (onLazyLoad)="getDSThietBiVatTu($event)"  
+                    [columns]="thietBiCols" 
+                    [value]="primengTableHelper.records" 
+                    [paginator]="true" 
+                    [rows]="10" 
+                    [totalRecords]="primengTableHelper.totalRecordsCount" 
+                    selectionMode="single" 
+                    [(selection)]="selectedItem" 
+                    [rowsPerPageOptions]="[10,25,50] ">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns
+                            let i = index"
+                        [style.width]="i==0?'5%':'' "
+                        [pSortableColumn]="col.field">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+    
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8" style="text-align:left">{{l("NoData")}}</td>
+                    </tr>
+                </ng-template>
+    
+                <ng-template pTemplate="body" let-record let-columns="columns" let-rowIndex="rowIndex">
+                    <tr  [pSelectableRow]="record" [pSelectableRowIndex]="rowIndex" >
+                        <td *ngFor="let col of columns">
+                            <span *ngIf="col.field==='Index'">
+                                {{rowIndex + 1}}
+                            </span>
+                            <span *ngIf="col.field==='tbvT_NGAY_MUA'">
+                                {{record[col.field]|date:'dd/MM/yyyy'}}
+                            </span>
+                            <span *ngIf="col.field==='tbvT_LOAI'">
+                                {{record[col.field] === '0' ? l("Equipment") : l("Supply")}}
+                            </span>
+                            <span *ngIf="col.field==='tbvT_TINH_TRANG_THIET_BI'">
+                                {{record[col.field] === '0' ? l("DamagedCondition") : l("GoodCondition")}}
+                            </span>
+                            <span *ngIf="col.field !=='tbvT_NGAY_MUA' && col.field !== 'Index' && col.field !== 'tbvT_LOAI' 
+                                        && col.field !== 'tbvT_TINH_TRANG_THIET_BI'">
+                                {{record[col.field]}}
+                            </span>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms" 
+             xmlns:views="clr-namespace:QRScan.Views" 
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             mc:Ignorable="d"
+             BackgroundColor="White"
+             xmlns:vm="clr-namespace:QRScan.ViewModels"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="QRScan.MainPage">
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel/>
+    </ContentPage.BindingContext>
+    <StackLayout>
+        <Label HorizontalTextAlignment="Center" FontAttributes="Bold" Margin="0,70,0,0" Text="ỨNG DỤNG KIỂM KÊ MOBILE" FontSize="20" TextColor="Black" HorizontalOptions="Center"/>
+        <pancake:PancakeView BorderColor="#0095FF" BorderThickness="1" Margin="5,40,5,0" CornerRadius="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <pancake:PancakeView BackgroundColor="#0095FF">
+                    <Label HorizontalOptions="Center" Margin="0,3" Text="Nhập thông tin để bắt đầu kiểm kê" FontSize="20" TextColor="White"/>
+                </pancake:PancakeView>
+                <Grid Grid.Row="1" Margin="20,20,20,25" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center" Text="Mã bản kiểm kê:" FontSize="17" TextColor="Black"/>
+                    <Label VerticalOptions="Center" Grid.Row="1" Text="Mã đơn vị:" FontSize="17" TextColor="Black"/>
+                    <Label VerticalOptions="Center" Grid.Row="2" Text="Ngày tạo:" FontSize="17" TextColor="Black"/>
+                    <pancake:PancakeView WidthRequest="150" Grid.Row="0" Grid.Column="1" BorderColor="Black" BorderThickness="1">
+                        <Entry Grid.Row="0" Text="{Binding MaBKK}" Grid.Column="1" HorizontalOptions="FillAndExpand" />
+                    </pancake:PancakeView>
+                    <pancake:PancakeView Grid.Row="1" Grid.Column="1" WidthRequest="150"  BorderColor="Black" BorderThickness="1">
+                        <Entry Text="{Binding MaDV}"  HorizontalOptions="FillAndExpand" />
+                    </pancake:PancakeView>
+                    <pancake:PancakeView WidthRequest="150" Grid.Row="2" Grid.Column="1" BorderColor="Black" BorderThickness="1">
+                        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Date,Converter={StaticResource DateTimeConverter}}" FontSize="17" TextColor="Black" VerticalOptions="Center" Margin="10,0,0,0"/>
+                            <pancake:PancakeView x:Name="dateCard" Grid.Column="1" Margin="0,0,0,0" Padding="10,0,10,0" BorderColor="Black" BorderThickness="1">
+                                
+                                <Image Source="calendar" WidthRequest="25" HeightRequest="25" />
+                            </pancake:PancakeView>
+                            <DatePicker x:Name="datePicker" Date="{Binding Date}" IsVisible="False"  WidthRequest="0"/>
+                        </Grid>
+                    </pancake:PancakeView>
+                </Grid>
+            </Grid>
+        </pancake:PancakeView>
+        <Button Command="{Binding ShowScanCommand}" Margin="0,20,0,0" HeightRequest="55" WidthRequest="220" HorizontalOptions="Center" Text="Bắt đầu kiểm kê" FontSize="20" BackgroundColor="#0095FF" BorderColor="Black" TextColor="White" BorderWidth="1" CornerRadius="2"/>
+    </StackLayout>
+
+</ContentPage>

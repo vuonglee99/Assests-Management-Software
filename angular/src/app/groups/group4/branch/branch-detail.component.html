@@ -1,0 +1,157 @@
+<div class="group4">
+    <!-- Toolbar + headings-->
+    <toolbar-info-page-detail [namePage]="l('g4BranchPageName')" [editPageState]="editPageState" isGrantedUpdate="Pages.Group4.Apartment.Update" isGrantedDelete="Pages.Group4.Apartment.Delete" (save)="save(formRef1)" (update)="update()" (delete)="delete()"
+        (back)="back()" (view)="view()" autH_STATUS_VALUE='0'></toolbar-info-page-detail>
+
+
+    <!-- Form -->
+    <div class="m-content">
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+
+                <form #formRef1="ngForm" (ngSubmit)="save(formRef1)">
+                    <div class="m-form m-form--label-align-right">
+                        <fieldset [disabled]="editPageState == 'view'">
+
+                            <div class="row">
+                                <!-- Mã đơn vị -->
+                                <div class="col-md-6 form-group">
+                                    <label class="lable-input">{{l('g4BranchCodeLable')}}</label>
+                                    <span class="text-danger"> (*) </span>
+                                    <p-inputMask id="br_code" name="br_code" [(ngModel)]="inputModel.brancH_CODE" mask="BR99999999" placeholder="BR________" styleClass="form-control">
+                                    </p-inputMask>
+
+                                </div>
+
+
+                                <!-- Tên đơn vị-->
+                                <div class="col-md-6 form-group">
+                                    <label class="lable-input">{{l('g4BranchNameLable')}}</label>
+                                    <span class="text-danger"> (*) </span>
+                                    <input class="form-control m-input" [(ngModel)]="inputModel.brancH_NAME" name="brancH_NAME" #brancH_NAME="ngModel" maxlength="200" required [ngClass]="{'is-invalid':brancH_NAME.touched && brancH_NAME.invalid}">
+                                    <div class="invalid-feedback">
+                                        *{{l('g4EmptyValueValidate')}}
+                                    </div>
+                                </div>
+
+                                <!-- branch type-->
+                                <div class="col-md-6 form-group ">
+                                    <label class="lable-input">{{l('g4BranchTypeLable')}}</label>
+                                    <select class="form-control custom-select" name="brancH_TYPE" (change)="change_branch_type($event)" [disabled]="editPageState != 'add'">
+                                    <option value="HS" [selected]="inputModel.brancH_TYPE == 'HS'">Hội Sở</option>
+                                    <option value="KV" [selected]="inputModel.brancH_TYPE == 'KV'">Khu Vực</option>
+                                    <option value="CN" [selected]="inputModel.brancH_TYPE == 'CN'">Chi Nhánh</option>
+                                    <option value="PGD" [selected]="inputModel.brancH_TYPE == 'PGD'">Phòng Giao Dịch</option>
+                                </select>
+                                </div>
+
+                                <!-- father id-->
+                                <div class="col-md-6 form-group">
+                                    <label class="lable-input" style="display:block">{{l('g4BranchFatherLable')}}</label>
+                                    <p-dropdown #dd name="dd_fathers" [style]="{'width':'100%'}" [readonly]="!(editPageState != 'view' && inputModel.brancH_TYPE != 'HS')" [styleClass]="!(editPageState != 'view' && inputModel.brancH_TYPE != 'HS')?'ddReadOnly':'dropdown'" [(ngModel)]="selectedFather"
+                                        [options]="listFather" optionLabel="brancH_NAME" filter="true" filterBy="brancH_NAME" [emptyFilterMessage]="l('g4NoResultFound')">
+                                    </p-dropdown>
+                                </div>
+
+                                <!-- Sđt -->
+                                <div class="col-md-6 form-group">
+                                    <label class="lable-input">{{l('g4BranchPhoneLable')}}</label>
+                                    <span class="text-danger"> (*) </span>
+                                    <input class="form-control m-input" [(ngModel)]="inputModel.tel" name="tel" #tel="ngModel" pattern="^((\\+84-?)|0)?[0-9]{10}$" maxlength="15" required [ngClass]="{'is-invalid':tel.touched && tel.invalid}">
+                                    <div *ngIf="tel.touched && tel.invalid" class="invalid-feedback">
+                                        <div *ngIf="tel.errors?.required"> *{{l('g4EmptyValueValidate')}}</div>
+                                        <div *ngIf="tel.errors?.pattern"> *{{l('g4InvalidPhoneNumber')}}</div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Fax -->
+                                <div class="col-md-6 form-group">
+                                    <label class="lable-input">{{l('g4BranchFaxLable')}}</label>
+                                    <span class="text-danger"> (*) </span>
+                                    <input class="form-control m-input" name="brancH_FAX" [(ngModel)]="inputModel.brancH_FAX" #brancH_FAX="ngModel" pattern="^((\\+84-?)|0)?[0-9]{10}$" maxlength="15" required [ngClass]="{'is-invalid':brancH_FAX.touched && brancH_FAX.invalid}">
+                                    <div *ngIf="brancH_FAX.touched && brancH_FAX.invalid" class="invalid-feedback">
+                                        <div *ngIf="brancH_FAX.errors?.required"> *{{l('g4EmptyValueValidate')}}</div>
+                                        <div *ngIf="brancH_FAX.errors?.pattern"> *{{l('g4InvalidFaxNumber')}}</div>
+                                    </div>
+                                </div>
+
+
+                                <!-- EMail -->
+                                <div class="col-md-6 form-group">
+                                    <label class="lable-input">{{l('g4BranchEmailLable')}}</label>
+                                    <span class="text-danger"> (*) </span>
+                                    <input type="email" class="form-control m-input" [(ngModel)]="inputModel.brancH_EMAIL" name="brancH_EMAIL" #brancH_EMAIL="ngModel" maxlength="50" email required [ngClass]="{'is-invalid':brancH_EMAIL.touched && brancH_EMAIL.invalid}">
+
+                                    <div *ngIf="brancH_EMAIL.touched && brancH_EMAIL.invalid" class="invalid-feedback">
+                                        <div *ngIf="brancH_EMAIL.errors?.required"> *{{l('g4EmptyValueValidate')}}</div>
+                                        <div *ngIf="brancH_EMAIL.errors?.email"> *{{l('g4InvalidEmailAddress')}}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- trạng thái hoạt động-->
+                                <div class="col-md-6 form-group">
+                                    <label class="lable-input" style="display: block;">{{l('g4BranchStatusLable')}}</label>
+                                    <div class="checkbox pt-3">
+                                        <label>
+                                        <input class="mr-2" name="status" type="checkbox"
+                                            [ngModel]="inputModel.brancH_STATUS=='1'"
+                                            (ngModelChange)="inputModel.brancH_STATUS=$event?'1':'0'">
+                                            {{l('g4BranchActiveStatus')}}
+                                    </label>
+                                    </div>
+                                </div>
+
+
+                                <!--Địa chỉ -->
+                                <div class="col-md-12 form-group">
+                                    <label class="lable-input">{{l('g4BranchAddressLable')}}</label>
+                                    <span class="text-danger"> (*) </span>
+                                    <input class="form-control m-input" [(ngModel)]="inputModel.addr" name="addr" #addr="ngModel" required [ngClass]="{'is-invalid':addr.touched && addr.invalid}">
+
+                                    <div class="invalid-feedback">
+                                        *{{l('g4EmptyValueValidate')}}
+                                    </div>
+                                </div>
+
+
+                                <!-- Mô tả -->
+                                <div class="col-md-12 form-group">
+                                    <label class="lable-input">{{l('g4BranchDescriptionLable')}}</label>
+                                    <textarea class="form-control m-input" rows='3' [(ngModel)]="inputModel.notes" name="notes"></textarea>
+                                </div>
+
+                                <!-- makerID -->
+                                <div *ngIf="editPageState!='add'" class="col-md-3 form-group">
+                                    <label class="font-weight-bold ">{{l('g4MakerID')}}</label>
+                                    <input class="form-control" [ngModel]="inputModel.makeR_ID" name="makeR_ID" disabled="true">
+                                </div>
+
+                                <!-- creatE_DT -->
+                                <div *ngIf="editPageState!='add'" class="col-md-3 form-group">
+                                    <label class="font-weight-bold ">{{l('g4CreateDT')}}</label>
+                                    <input class="form-control" [ngModel]="inputModel.creatE_DT |date :'medium'" name="creatE_DT" disabled="true">
+                                </div>
+
+                                <!-- makerID -->
+                                <div *ngIf="editPageState!='add'" class="col-md-3 form-group">
+                                    <label class="font-weight-bold ">{{l('g4CheckerID')}}</label>
+                                    <input class="form-control" [ngModel]="inputModel.checkeR_ID" name="checkeR_ID" disabled="true">
+                                </div>
+
+                                <!-- makerID -->
+                                <div *ngIf="editPageState!='add'" class="col-md-3 form-group">
+                                    <label class="font-weight-bold ">{{l('g4ApproveDT')}}</label>
+                                    <input class="form-control" [ngModel]="inputModel.approvE_DT |date :'medium' " name="approvE_DT" disabled="true">
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

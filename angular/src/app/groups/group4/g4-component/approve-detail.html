@@ -1,0 +1,33 @@
+<div class="row" *ngIf="editPageState!='add'">
+
+    <div *ngIf="autH_STATUS_VALUE != '0'" class="col-md-5 mb-4 approveFalse" [ngSwitch]="autH_STATUS_VALUE">
+        <i class="fa fa-times mr-2" aria-hidden="true"></i>
+        <label *ngSwitchCase="'1'" class="font-weight-bold"> {{l('g4WaitingAdd')}} </label>
+        <label *ngSwitchCase="'2'" class="font-weight-bold"> {{l('g4WaitingUpdate')}} </label>
+        <label *ngSwitchCase="'3'" class="font-weight-bold"> {{l('g4WaitingDelete')}} </label>
+    </div>
+
+
+    <div class="col-md-7 text-right" *ngIf="autH_STATUS_VALUE != '0' && isGranted(this.isGrantedApprove)">
+        <button *ngIf="autH_STATUS_VALUE=='2'" class="btn btn-warning" (click)="viewChange.emit()">
+            <i class="fa fa-question"></i>
+            <span>{{l('g4BtnChangeText')}} </span>
+        </button>
+        <button class="btn btn-success" (click)="approve.emit()">
+            <i class="fa fa-check"></i>
+            <span>{{l('g4BtnApproveText')}} </span>
+        </button>
+        <button class="btn btn-danger" (click)="deny.emit()">
+            <i class="fa fa-times"></i>
+            <span>{{l('g4BtnDenyText')}} </span>
+        </button>
+    </div>
+
+
+    <div class="col-md-12 mb-4 approveTrue" *ngIf="autH_STATUS_VALUE == '0'">
+        <i class="fa fa-check mr-2" aria-hidden="true"></i>
+        <label class="font-weight-bold">
+            {{l('g4ApprovedStatus')}}
+        </label>
+    </div>
+</div>

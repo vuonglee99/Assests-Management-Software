@@ -1,0 +1,388 @@
+<div [@routerTransition]>
+    <div>
+        <div class="d-flex row align-items-center">
+            <div class="col-12">
+                <div
+                    *ngIf="
+                        isGranted('Pages.Group6.DoUuTien.Create') ||
+                        isGranted('Pages.Group6.DoUuTien.Delete') ||
+                        isGranted('Pages.Group6.DoUuTien.ById')
+                    "
+                    class="card m-primary"
+                >
+                    <div>
+                        <button
+                            (click)="addNewClick()"
+                            [hidden]="!isGranted('Pages.Group6.TrangThaiYeuCauSuaChua.Create')"
+                            class="btn"
+                            style="background-color: transparent;"
+                        >
+                            <i class="fa fa-plus-circle fa-2x text-white" style="font-size: 1.5rem;"></i>
+                        </button>
+                        <button
+                            [disabled]="!selectedItem.ttycsC_ID || isRequest()"
+                            [hidden]="!isGranted('Pages.Group6.TrangThaiYeuCauSuaChua.Delete')"
+                            class="btn"
+                            data-target="#deleteModal"
+                            data-toggle="modal"
+                            style="background-color: transparent;"
+                        >
+                            <i class="fa fa-trash fa-2x text-white" style="font-size: 1.5rem;"></i>
+                        </button>
+
+                        <button
+                            (click)="viewDetail()"
+                            [disabled]="!selectedItem.ttycsC_ID"
+                            [hidden]="!isGranted('Pages.Group6.TrangThaiYeuCauSuaChua.ById')"
+                            class="btn"
+                            style="background-color: transparent;"
+                        >
+                            <i class="fa fa-info-circle fa-2x text-white" style="font-size: 1.5rem;"></i>
+                        </button>
+                        <button
+                            (click)="goToEditPage()"
+                            *ngIf="isGranted('Pages.Group6.DoUuTien.ById')"
+                            [disabled]="!selectedItem.ttycsC_ID || this.isRequest()"
+                            [hidden]="!isGranted('Pages.Group6.TrangThaiYeuCauSuaChua.Update')"
+                            class="btn"
+                            style="background-color: transparent;"
+                        >
+                            <i class="fa fa-edit fa-2x text-white" style="font-size: 1.5rem;"></i>
+                        </button>
+
+
+<!--                        <button-->
+                        <!--                            class="btn ml-4"-->
+                        <!--                            data-target="#export-modal"-->
+                        <!--                            data-toggle="modal"-->
+                        <!--                            style="background-color: transparent;"-->
+                        <!--                        >-->
+                        <!--                            <div class="row align-items-center">-->
+                        <!--                                <i class="fa fa-print fa-2x text-white" style="font-size: 1.5rem;"></i>-->
+                        <!--                            </div>-->
+                        <!--                        </button>-->
+                        <!--                        <app-export-dialog [modalId]="'export-modal'"></app-export-dialog>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center">
+        <div class="col-12">
+            <div class="m-primary p-3 my-3">
+                <span class="my-font text-white h3 mb-0">{{l('GR6_TTYCSC_LIST_TITLE')}}</span>
+            </div>
+        </div>
+        <!--<Primeng-TurboTable-Start>-->
+        <div class="col-12">
+            <div class="card mx-3 p-3 row">
+                <div class="col-12">
+                    <app-search-bar
+                        (search)="handleSearch($event)"
+                        [searchFieldOptions]="this.searchFieldOptions"
+                        [statusLabel]="l('GR6_STATUS')"
+                        [statusOptions]="this.authStatusOptions"
+                    ></app-search-bar>
+                </div>
+
+                <div class="col-12">
+                    <div class="primeng-datatable-container">
+                        <p-table
+                            #dataTable
+                            (onLazyLoad)="search($event)"
+                            ScrollWidth="100%"
+                            [(selection)]="selectedItem"
+                            [first]="0"
+                            [lazy]="true"
+                            [loading]="primengTableHelper.isLoading"
+                            [paginator]="false"
+                            [resizableColumns]="primengTableHelper.resizableColumns"
+                            [responsive]="primengTableHelper.isResponsive"
+                            [scrollable]="true"
+                            [value]="primengTableHelper.records"
+                            rows="{{
+                                                    primengTableHelper.defaultRecordsCountPerPage
+                                                }}"
+                            selectionMode="single"
+                        >
+                            <ng-template pTemplate="header">
+                                <tr class="my-text">
+                                    <th
+                                        class="my-text"
+                                        style="color: #3f4047; width: 10%;"
+                                    >
+                                                            <span class="my-text">
+                                                                {{l('GR6_STT')}}
+                                                            </span>
+                                    </th>
+                                    <th
+                                        [pSortableColumn]="'ttycsC_CODE'"
+                                        class="my-text"
+                                        style="color: #3f4047; width: 25%;"
+                                    >
+                                                            <span class="my-text">
+                                                                {{l('GR6_TTYCSC_CODE')}}
+                                                            </span>
+                                        <p-sortIcon
+                                            [field]="'ttycsC_CODE'"
+                                        ></p-sortIcon>
+                                    </th>
+                                    <th
+                                        [pSortableColumn]="'ttycsC_NAME'"
+                                        class="my-text"
+                                        style="color: #3f4047; width: 25%;"
+                                    >
+                                                            <span class="my-text">
+                                                                {{l('GR6_TTYCSC_NAME')}}
+                                                            </span>
+                                        <p-sortIcon
+                                            [field]="'ttycsC_NAME'"
+                                        ></p-sortIcon>
+                                    </th>
+                                    <th
+                                        [pSortableColumn]="'ttycsC_DESC'"
+                                        class="my-text"
+                                        style="color: #3f4047; width: 25%;"
+                                    >
+                                                            <span class="my-text">
+                                                                {{l('GR6_DESC')}}
+                                                            </span>
+                                        <p-sortIcon
+                                            [field]="'ttycsC_DESC'"
+                                        ></p-sortIcon>
+                                    </th>
+                                    <th
+                                        [pSortableColumn]="'typE_APPROVE'"
+                                        class="my-text"
+                                        style="color: #3f4047; width: 15%;"
+                                    >
+                                                            <span class="my-text">
+                                                                {{l('GR6_APPROVE_TYPE')}}
+                                                            </span>
+                                        <p-sortIcon
+                                            [field]="'ttycsC_DESC'"
+                                        ></p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template let-dv pTemplate="body">
+                                <tr [pSelectableRow]="dv">
+                                    <td class="my-text" style="width: 15%; padding-left: 1em;">
+                                        {{ this.primengTableHelper.records.indexOf(dv) + 1 }}
+                                    </td>
+                                    <td class="my-text" style="width: 25%;">
+                                        {{ dv.ttycsC_CODE}}
+                                    </td>
+                                    <td class="my-text" style="width: 25%;">
+                                        {{ dv.ttycsC_NAME}}
+                                    </td>
+                                    <td class="my-text" style="width: 35%;">
+                                        {{ dv.ttycsC_DESC}}
+                                    </td>
+                                    <td class="my-text" style="width: 15%;">
+                                        <app-ant-tag
+                                            *ngIf="dv.typE_APPROVE === 'Create'"
+                                            [label]="this.l('GR6_CREATE')"
+                                            color="green"
+                                        ></app-ant-tag>
+                                        <app-ant-tag
+                                            *ngIf="dv.typE_APPROVE === 'Update'"
+                                            [label]="this.l('GR6_EDIT')"
+                                            color="blue"
+                                        ></app-ant-tag>
+                                        <app-ant-tag
+                                            *ngIf="dv.typE_APPROVE === 'Delete'"
+                                            [label]="this.l('GR6_DELETE')"
+                                            color="red"
+                                        ></app-ant-tag>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <div
+                            *ngIf="
+                                                    primengTableHelper.totalRecordsCount == 0
+                                                "
+                            class="primeng-no-data"
+                        >
+                            {{l('GR6_NO_DATA')}}
+                        </div>
+                        <div class="primeng-paging-container">
+                            <p-paginator
+                                #paginator
+                                (onPageChange)="search($event)"
+                                [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                                [totalRecords]="primengTableHelper.totalRecordsCount"
+                                rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                            >
+                            </p-paginator>
+                            <span class="total-records-count my-text">
+                                                    {{l('GR6_TOTAL_RECORD')}}:
+                                {{ primengTableHelper.totalRecordsCount }}
+                                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<Primeng-TurboTable-End> -->
+        </div>
+    </div>
+    <div class="col-12">
+        <!-- DeleteModal -->
+        <div
+            aria-hidden="true"
+            aria-labelledby="deleteModal"
+            class="modal fade"
+            id="deleteModal"
+            role="dialog"
+            tabindex="-1"
+        >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title my-text" id="deleteModalTitle">
+                            {{l('GR6_WARNING')}}
+                        </h5>
+                        <button
+                            aria-label="Close"
+                            class="close"
+                            data-dismiss="modal"
+                            type="button"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="my-text">
+                            {{l('GR6_TTYCSC_DELETE_WARNING')}}
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                            type="button"
+                        >
+                        <span class="my-text">
+                            {{l('GR6_CANCEL')}}
+                        </span>
+                        </button>
+                        <button
+                            (click)="delete()"
+                            class="btn btn-danger"
+                            data-dismiss="modal"
+                            type="button"
+                        >
+                            <span class="my-text">{{l('GR6_DELETE')}}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--NOTE InfoModal -->
+        <div
+            aria-hidden="true"
+            aria-labelledby="modalInfo"
+            class="modal fade"
+            id="modalInfo"
+            role="dialog"
+            tabindex="-1"
+        >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form #form="ngForm" (ngSubmit)="addNew()">
+                        <div class="modal-header">
+                            <h5 class="modal-title my-text" id="modalInfoTitle">
+                                {{ l('GR6_TTYCSC_CREATE_TITLE') }}
+                            </h5>
+                            <button
+                                aria-label="Close"
+                                class="close"
+                                data-dismiss="modal"
+                                type="button"
+                            >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm form-group">
+                                    <label
+                                        class="my-text"
+                                        for="duT_code_input"
+                                    >
+                                        {{l('GR6_TTYCSC_CODE')}}
+                                    </label>
+                                    <input
+                                        [(ngModel)]="detailSchema.ttycsC_CODE"
+                                        [placeholder]="l('GR6_TTYCSC_CODE')"
+                                        class="form-control"
+                                        id="duT_code_input"
+                                        name="ttycsC_CODE"
+                                        pInputText
+                                        readonly
+                                        type="text"
+                                    />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm pt-4">
+                                    <label class="my-text" for="dut_name_input">{{l('GR6_TTYCSC_NAME')}}
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        [(ngModel)]="detailSchema.ttycsC_NAME"
+                                        [maxLength]="100"
+                                        [pattern]="viRegstr"
+                                        [placeholder]="l('GR6_TTYCSC_NAME')"
+                                        class="form-control"
+                                        id="dut_name_input"
+                                        name="ttycsC_NAME"
+                                        pInputText
+                                        required
+                                        type="text"
+                                    />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm pt-4">
+                                    <label class="my-text" for="dut_desc_input">{{l('GR6_DESC')}}
+                                    </label>
+                                    <textarea
+                                        [(ngModel)]="detailSchema.ttycsC_DESC"
+                                        [maxLength]="1000"
+                                        [placeholder]="l('GR6_DESC')"
+                                        class="form-control"
+                                        id="dut_desc_input"
+                                        name="ttycsC_DESC"
+                                        pInputTextarea
+                                        rows="3"
+                                    ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                [disabled]="isFetching"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                                type="button"
+                            >
+                        <span class="my-text">
+                           {{l('GR6_CANCEL')}}
+                        </span>
+                            </button>
+                            <button
+                                [disabled]="form.invalid ||isFetching"
+                                class="btn btn-info"
+                                type="submit"
+                            >
+                                <span class="my-text">{{l('GR6_SAVE')}}</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

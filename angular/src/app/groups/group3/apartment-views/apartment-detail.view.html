@@ -1,0 +1,155 @@
+<div [@routerTransition]>
+    <detailview-toolbar 
+      [isHidenList]="[
+        false,
+        pageState!==2 || !permission.isGranted('Pages.Group03.Apartments.Update'),
+        pageState!==1 || !permission.isGranted('Pages.Group03.Apartments.Create'),
+        pageState!==0 || !permission.isGranted('Pages.Group03.Apartments.Update'),
+        pageState!==0 || !permission.isGranted('Pages.Group03.Apartments.Delete'),
+        pageState!==2 || !permission.isGranted('Pages.Group03.Apartments.Update')
+      ]"
+      [isDisabledList]="[
+        false,
+        false,
+        !isInputValidated(),
+        false,
+        false,
+        !isInputValidated()
+      ]"
+      (navigateBack)="onNavigateBackClick()"
+      (cancelItem)="onCancelItemClick()"
+      (createItem)="onCreateItemClick()"
+      (modifyItem)="onModifyItemClick()"
+      (deleteItem)="onDeleteItemClick()"
+      (updateItem)="onUpdateItemClick()"
+    ></detailview-toolbar>
+  
+    <view-heading *ngIf="pageState===0" title="{{l('ApartmentDetailTitle_Detail')}}" 
+      subtitle="{{l('ApartmentDetailSubtitle')}}"></view-heading>
+    <view-heading *ngIf="pageState===1" title="{{l('ApartmentDetailTitle_Create')}}" 
+      subtitle="{{l('ApartmentDetailSubtitle')}}"></view-heading>
+    <view-heading *ngIf="pageState===2" title="{{l('ApartmentDetailTitle_Modify')}}" 
+      subtitle="{{l('ApartmentDetailSubtitle')}}"></view-heading>
+      
+    <div class="m-content">
+      <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body">
+            
+          <div *ngIf="inputModel.apartmenT_ID==null" class="m--font-danger">
+            {{l('Group3PageDetailNotFound')}}
+          </div>
+  
+          <div *ngIf="inputModel.apartmenT_ID!=null">
+            <approve-status 
+              [approveStatus]="inputModel.autH_STATUS" 
+              [recordStatus]="inputModel.recorD_STATUS"
+              (approve)="onApprove('1')" (disapprove)="onApprove('2')"
+            ></approve-status>  
+  
+            <fieldset [disabled]="pageState===0">
+              <div class="row">
+  
+                <div class="col-md-6 form-group">
+                  <label>{{l('ApartmentCode')}}*</label>
+                  <p-inputMask [(ngModel)]="inputModel.apartmenT_CODE" mask="AP99999999" placeholder="AP________" styleClass="form-control">
+                  </p-inputMask>
+                </div>
+  
+                <div class="col-md-6 form-group">
+                  <label>{{l('ApartmentName')}}*</label>
+                  <input type="text" [(ngModel)]="inputModel.apartmenT_NAME" class="form-control m-input">
+                </div>
+  
+                <div class="col-md-6 form-group">
+                  <label>{{l('ApartmentType')}}*</label>
+                  <searchable-select
+                    [items]="apartmentTypes"
+                    [(selectedValue)]="inputModel.apartmenttypE_ID"
+                    (createItem)="modal.show()"
+                    (deleteItem)="onApartmentTypeDelete($event)"
+                    editable="true"
+                    emptyText="{{l('Group3ClickToChoose')}}"
+                    [disabled]="pageState===0"
+                  ></searchable-select>
+                </div>
+  
+                <div class="col-md-6 form-group">
+                  <label>{{l('Group3Status')}}*</label>
+                  <searchable-select
+                    [items]="Group3Statuses"
+                    [(selectedValue)]="inputModel.apartmenT_STATUS"
+                    emptyText="{{l('Group3ClickToChoose')}}"
+                    [disabled]="pageState===0"
+                    ></searchable-select>
+                </div>
+  
+                <div class="col-md-4 form-group">
+                  <label>{{l('ApartmentPrice')}}*</label>
+                  <numeric-input
+                    [id]="ApartmentPrice"
+                    isCurrency="true"
+                    [(value)]="inputModel.apartmenT_PRICE"
+                  ></numeric-input>
+                </div>
+
+                <div class="col-md-4 form-group">
+                  <label>{{l('ApartmentRooms')}}*</label>
+                  <div class="input-group">
+                    <input type="number" max="9" [(ngModel)]="inputModel.apartmenT_ROOMS" class="form-control m-input text-right">
+                    <div class="input-group-append">
+                      <span class="input-group-text">{{l('Group3Rooms')}}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 form-group">
+                  <label>{{l('ApartmentArea')}}*</label>
+                  <div class="input-group">
+                    <input type="number" [(ngModel)]="inputModel.apartmenT_AREA" class="form-control m-input text-right">
+                    <div class="input-group-append">
+                      <span class="input-group-text">&#13217;</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 form-group">
+                  <label>{{l('ApartmentDescription')}}</label>
+                  <textarea #note="ngModel" type="text" class="form-control m-input" rows='3'
+                    [(ngModel)]="inputModel.description"></textarea>
+                </div>
+  
+                <div *ngIf="pageState!==1" class="col-md-3 form-group">
+                  <label>{{l('Group3MakerID')}}</label>
+                  <input disabled type="text" [ngModel]="inputModel.makeR_ID" class="form-control m-input">
+                </div>
+  
+                <div *ngIf="pageState!==1" class="col-md-3 form-group">
+                  <label>{{l('Group3CreateDate')}}</label>
+                  <input disabled type="text" [ngModel]="inputModel.creatE_DT | date: 'dd/MM/yyyy HH:mm:ss'" class="form-control m-input">
+                </div>
+  
+                <div *ngIf="pageState!==1" class="col-md-3 form-group">
+                  <label>{{l('Group3CheckerID')}}</label>
+                  <input disabled type="text" [ngModel]="inputModel.checkeR_ID" class="form-control m-input">
+                </div>
+  
+                <div *ngIf="pageState!==1" class="col-md-3 form-group">
+                  <label>{{l('Group3ApproveDate')}}</label>
+                  <input disabled type="text" [ngModel]="inputModel.approvE_DT | date: 'dd/MM/yyyy HH:mm:ss'" class="form-control m-input">
+                </div>
+                
+              </div>
+            </fieldset> 
+          </div>
+  
+         
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <create-enum-modal #modal
+    title="{{l('ApartmentTypeCreate')}}" fieldName="{{l('ApartmentTypeName')}}"
+    (save)="onModalSaveClick($event)"
+  ></create-enum-modal>

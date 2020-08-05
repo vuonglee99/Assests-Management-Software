@@ -1,0 +1,90 @@
+<div *ngIf="isChooseUser" [style.display]="isChooseUser==true?'block':'none'">
+    <app-page-list-user  (nameUser)="onGetChoseUser($event)"></app-page-list-user>
+</div>
+<form #formRef="ngForm" [formGroup]="formData">
+    <ul style="background-color: #248dc1;font-size: 15px;padding-left:10px;margin:0;color:white">
+      <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="save()"  [ngStyle]="isUpdate?{'pointer-events': 'none','cursor': 'not-allowed','opacity':'0.4'}:''">
+        <i class="fa fa-floppy-o"></i>
+      </li>
+      <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" onclick="window.history.back()">
+        <i class="fa fa-arrow-left"></i> </li>
+    </ul>
+    <div style="padding: 20px;">
+      <div style="padding: 20px; background-color: white;">
+        <div class="row">
+          <div class="col-md-6" style="font-size: 15px;">
+            <div class="form-group">
+              <div>Mã code &nbsp;<span class="text-danger">(*)</span></div>
+              <input [(ngModel)]="filterInput.wO_CODE" name="devicE_CODE" class="form-control"  formControlName="wO_CODE"
+                [ngClass]="{ 'is-invalid': submitted && f.wO_CODE.errors }" >
+  
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div *ngIf="f.wO_CODE.errors?.required" name="empty_field">Vui lòng nhập mã</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>Tên thiết bị &nbsp;<span class="text-danger">(*)</span></div>
+              <input [(ngModel)]="filterInput.devicE_NAME" name="devicE_NAME" class="form-control" formControlName="devicE_NAME"
+                 [ngClass]="{ 'is-invalid': submitted && f.devicE_NAME.errors }">
+  
+                <div *ngIf="submitted" class="invalid-feedback">
+                  <div *ngIf="f.devicE_NAME.errors?.required" name="empty_field">Vui lòng nhập tên thiết bị</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div>Trạng thái &nbsp;<span class="text-danger">(*)</span></div>
+                <select [(ngModel)]="filterInput.recorD_STATUS" name="recorD_STATUS" class="form-control" formControlName="recorD_STATUS"
+                [ngClass]="{ 'is-invalid': submitted && f.recorD_STATUS.errors }">
+                  <option value="1">Hoạt động</option>
+                  <option value="0">Không hoạt động</option>
+                </select>
+                <div *ngIf="submitted" class="invalid-feedback">
+                  <div *ngIf="f.recorD_STATUS.errors?.required" name="empty_field">Vui lòng chọn trạng thái</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div>Loại</div>
+                <select [(ngModel)]="filterInput.kinD_FIX" name="devicE_NAME" class="form-control" [ngModelOptions]="{standalone: true}">
+                  <option value="0">Bảo trì</option>
+                  <option value="1">Sữa chữa</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <div>Độ ưu tiên</div>
+                <select [(ngModel)]="filterInput.prioritY_ORDER" name="prioritY_ORDER" class="form-control" [ngModelOptions]="{standalone: true}">
+                  <option value="1">Mức 1</option>
+                  <option value="2">Mức 2</option>
+                  <option value="3">Mức 3</option>
+                  <option value="4">Mức 4</option>
+                  <option value="5">Mức 5</option>
+                </select>
+              </div>
+          </div>
+          <div class="col-md-6" style="font-size: 15px;">
+            <div class="form-group">
+              <div>Nhân viên đảm nhận <span style="color: red">(*)</span></div>
+              <input [(ngModel)]="filterInput.fixer" name="fixer" class="form-control" formControlName="fixer"
+                 [ngClass]="{ 'is-invalid': submitted && f.fixer.errors }">
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div *ngIf="f.fixer.errors?.required" name="empty_field">Vui lòng chọn nhân viên đảm nhận
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>Cần sửa chữa trước ngày </div>
+              <p-calendar [(ngModel)]="datE_IN" [showIcon]="true" [ngModelOptions]="{standalone: true}"></p-calendar>
+            </div>
+            <div class="form-group">
+                <div>Thời gian thực hiện </div>
+                <p-calendar [(ngModel)]="datE_OUT" [showIcon]="true" [ngModelOptions]="{standalone: true}"></p-calendar>
+              </div>
+            <div class="form-group">
+              <div>Mô tả</div>
+              <textarea rows="6" cols="66" class="form-control bg-input" pInputTextarea autoResize="autoResize"
+                [(ngModel)]="filterInput.descriptions" [ngModelOptions]="{standalone: true}"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>

@@ -1,0 +1,146 @@
+<!-- TOOLBAR -->
+<ul style="background-color: #248dc1;font-size: 15px;padding-left:10px;margin:0;color:white">
+    <li class="{{!isGranted('Pages.Group15.FLOORTYPE.Create')?'tool-bar-icon-disable':'tool-bar-icon-normal'}}"
+        (click)="isGranted('Pages.Group15.FLOORTYPE.Create')?navigate_addNewFloorType():null">
+        <i class="fa fa-plus"></i>
+        <!--Thêm-->
+    </li>
+    <li class="{{!selectedItem.floorType_CODE?'tool-bar-icon-disable':'tool-bar-icon-normal'}}" (click)="selectedItem.floorType_CODE
+        &&isGranted('Pages.Group15.FLOORTYPE.Update')?navigate_updateFloorType():null">
+        <i class="fa fa-pencil"></i>
+        <!-- Sửa -->
+    </li>
+    <li class='tool-bar-icon-disable'>
+        <i class="fa fa-floppy-o"></i>
+        <!-- Lưu -->
+    </li>
+    <li class="{{!selectedItem.floorType_CODE && isGranted('Pages.Group15.FLOORTYPE.Delete')?'tool-bar-icon-disable':'tool-bar-icon-normal'}}"
+        (click)="delete_FloorType()">
+        <!-- !selectedItem.floorType_CODE
+        &&isGranted('Pages.Group15.FLOORTYPE.Delete')?delete_FloorType():null-->
+        <i class="fa fa-trash"></i>
+        <!-- Xóa -->
+    </li>
+    <li class="tool-bar-icon-normal" (click)="searchFloorType()">
+        <i class="fa fa-search"></i>
+        <!--Tìm kiếm-->
+    </li>
+    <li class="{{!selectedItem.floorType_CODE?'tool-bar-icon-disable':'tool-bar-icon-normal'}}"
+        (click)="navigate_detailFloorType()">
+        <i class="fa fa-eye"></i>
+        <!--Xem chi tiết-->
+    </li>
+    <li class="tool-bar-icon-disable">
+        <i class="fa fa-check"></i>
+        <!--Duyệt-->
+    </li>
+    <li class="tool-bar-icon-disable">
+        <i class="fa fa-times"></i>
+        <!-- Hủy -->
+    <!-- <li class="tool-bar-icon-normal" onclick="window.history.back()">
+        <i class="fa fa-arrow-left"></i>
+    </li> -->
+</ul>
+
+<!-- TITLEBAR -->
+<div
+    style="background-color: #248dc1; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+    <h1>{{l('FloorTypeManagement')}}</h1>
+</div>
+
+
+<!-- SEARCHBAR -->
+<div class="m-content" [busyIf]="isLoading">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body">
+
+            <form class="horizontal-form" autocomplete="off" style="padding: 0 15px; margin-top: 15px;">
+                <div class="m-form m-form--label-align-right">
+                    <div class="row align-items-center m--margin-bottom-10">
+                        <div class="col-xl-12">
+                            <div class="form-group m-form__group align-items-center">
+                                <div class="input-group">
+
+                                    <b style="display: flex; align-items: center;">{{l('FloorTypeCode')}} </b>
+                                    <input id="maloaitang" class="form-control m-input" style="margin-left: 20px"
+                                        [placeholder]="l('FloorTypeEnterCode')" type="text"
+                                        [(ngModel)]="filter_DTO.floorType_CODE" name="floorType_CODE">
+                                    <span style="width: 50px"></span>
+
+                                    <b style="display: flex; align-items: center;">{{l('FloorTypeName')}} </b>
+                                    <input id="tenloaitang" class="form-control m-input" style="margin-left: 20px"
+                                        [placeholder]="l('FloorTypeEnterName')" type="text"
+                                        [(ngModel)]="filter_DTO.floorType_NAME" name="floorType_NAME">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row align-items-center">
+                <!--<Primeng-TurboTable-Start>-->
+                <div class="primeng-datatable-container">
+                    <div class="primeng-paging-container">
+                        <p-table #dataTable rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                            [value]="primengTableHelper.records" [loading]="isLoading"
+                            [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                            selectionMode="single" [(selection)]="selectedItem" [paginator]="true" [scrollable]="true"
+                            ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+                            [resizableColumns]="primengTableHelper.resizableColumns">
+                            <ng-template pTemplate="header" let-columns>
+                                <tr>
+                                    <th style="width: 100px !important;">{{l('Group15_Order')}}</th>
+
+                                    <th pSortableColumn="floorType_CODE">
+                                        {{l('FloorTypeCode')}}
+                                        <p-sortIcon field="floorType_CODE">
+                                        </p-sortIcon>
+                                    </th>
+
+                                    <th pSortableColumn="floorType_NAME">
+                                        {{l('FloorTypeName')}}
+                                        <p-sortIcon field="floorType_NAME">
+                                        </p-sortIcon>
+                                    </th>
+
+                                    <th pSortableColumn="floorType_DESC">
+                                        {{l('Group15_Description')}}
+                                        <p-sortIcon field="floorType_DESC">
+                                        </p-sortIcon>
+                                    </th>
+
+                                    <th
+                                        *ngIf="isGrantedAny('Pages.Group15.FLOORTYPE.ApproveAdd','Pages.Group15.FLOORTYPE.ApproveUpdate','Pages.Group15.FLOORTYPE.ApproveDelete','Pages.Group15.FLOORTYPE.CancelApproveAdd','Pages.Group15.FLOORTYPE.CancelApproveUpdate','Pages.Group15.FLOORTYPE.CancelApproveDelete')">
+                                        {{l('Group15_ApproveStatus')}}
+                                    </th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowData let-loaiTang let-i="rowIndex">
+                                <tr [pSelectableRow]="rowData"  style = "height: 50px;">
+                                    <td style="width: 100px !important;">{{i+1}}</td>
+                                    <td>{{loaiTang.floorType_CODE}}</td>
+                                    <td>{{loaiTang.floorType_NAME}}</td>
+                                    <td>{{loaiTang.floorType_DESC}}</td>
+                                    <td>{{ (loaiTang.deletE_REQUESTED === "1") ?  l('WaitingForApproveDelete') :
+                                        (loaiTang.autH_STATUS === "A")? l('Group15_Approved') :
+                                        (loaiTang.autH_STATUS === "PU") ? l('WaitingForApproveUpdate') 
+                                        : l('Group15_NotApproved') }}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                            {{l('NoData')}}
+                        </div>
+                        <span class="total-records-count">
+                            {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                        </span>
+                    </div>
+                </div>
+                <!--<Primeng-TurboTable-End>-->
+            </div>
+        </div>
+    </div>
+</div>

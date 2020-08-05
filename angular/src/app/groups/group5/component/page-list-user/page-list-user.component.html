@@ -1,0 +1,54 @@
+<div class="group5-page-user">
+  <!-- them,xoa phong ban -->
+  <!-- end search -->
+
+  <div class="m-subheader">
+    <div class="d-flex align-items-center pb-bgblue p-2" style="margin-bottom: 5px;">
+        <button class="pb-bgblue font-common" (click)="selectedUser()">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            Lưu
+        </button>
+
+    </div>
+</div>
+
+  <!-- table phong ban -->
+  <div class="m-subheader pt-0">
+
+      <div class="d-flex align-items-center pb-bgblue p-4 font-common rounded-top">
+          <div class="pb-bgblue">
+              <i class="fa fa-list-ul ic-title-search" aria-hidden="true"></i>
+              Danh Sách nhân viên
+          </div>
+      </div>
+
+      <p-table [columns]="cols" [value]="records" [paginator]="true" [rows]="10" selectionMode="single" [(selection)]="listSelectRow" [rowsPerPageOptions]="[10,25,50]">
+          <ng-template pTemplate="header" let-columns>
+              <tr>
+                  <th *ngFor="let col of columns
+                      let i = index"
+                  [style.width]="i==0?'5%':'' "
+                  [pSortableColumn]="col.field">
+                      {{col.header}}
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+              </tr>
+          </ng-template>
+
+          <ng-template pTemplate="emptymessage">
+              <tr>
+                  <td colspan="8" style="text-align:left">Không có dữ liệu</td>
+              </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-record let-columns="columns" let-rowIndex="rowIndex">
+              <tr  [pSelectableRow]="record" [pSelectableRowIndex]="rowIndex">
+                  <td *ngFor="let col of columns">
+                      {{record[col.field]}}
+                  </td>
+              </tr>
+          </ng-template>
+      </p-table>
+  </div>
+  <!-- end table phong ban -->
+</div>

@@ -1,0 +1,232 @@
+<div [@routerTransition]>
+    <div>
+        <div class="d-flex row align-items-center">
+            <div class="col-12">
+                <div class="m-primary">
+                    <button
+                        (click)="addNewClick()"
+                        class="btn"
+                        style="background-color: transparent;"
+                    >
+                        <i
+                            class="fa fa-plus-circle fa-2x text-white"
+                            style="font-size: 1.5rem;"
+                        ></i>
+                    </button>
+
+                    <button
+                        [disabled]="!selectedItem.dvT_ID"
+                        [hidden]="!isGranted('Pages.Group6.TrangThaiYeuCauSuaChua.Delete')"
+                        class="btn"
+                        data-target="#deleteModal"
+                        data-toggle="modal"
+                        style="background-color: transparent;"
+                    >
+                        <i
+                            class="fa fa-trash fa-2x text-white"
+                            style="font-size: 1.5rem;"
+                        ></i>
+                    </button>
+
+                    <button
+                        (click)="viewDetail()"
+                        [disabled]="!selectedItem.dvT_ID"
+                        class="btn"
+                        style="background-color: transparent;"
+                    >
+                        <i
+                            class="fa fa-info-circle fa-2x text-white"
+                            style="font-size: 1.5rem;"
+                        ></i>
+                    </button>
+                    <button
+                        (click)="goToEditPage()"
+                        [disabled]="!selectedItem.dvT_ID"
+                        class="btn"
+                        style="background-color: transparent;"
+                    >
+                        <i
+                            class="fa fa-edit fa-2x text-white"
+                            style="font-size: 1.5rem;"
+                        ></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3 m-header-container">
+        <span class="m-font text-white m-3 h3">{{l('GR6_DVT_LIST_TITLE')}}</span>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card m-3 p-3">
+                <div class="row">
+                    <div class="col-12">
+                        <app-search-bar
+                            (search)="handleSearch($event)"
+                            [searchFieldOptions]="this.searchFieldOptions"
+                            [statusLabel]="this.l('GR6_STATUS')"
+                            [statusOptions]="this.statusOptions"
+                        ></app-search-bar>
+                    </div>
+                    <div class="col-12">
+                        <div class="m-portlet__body">
+                            <div class="primeng-datatable-container">
+                                <p-table
+                                    #dataTable
+                                    (onLazyLoad)="search($event)"
+                                    ScrollWidth="100%"
+                                    [(selection)]="selectedItem"
+                                    [first]="0"
+                                    [lazy]="true"
+                                    [loading]="primengTableHelper.isLoading"
+                                    [paginator]="false"
+                                    [resizableColumns]="primengTableHelper.resizableColumns"
+                                    [responsive]="primengTableHelper.isResponsive"
+                                    [scrollable]="true"
+                                    [value]="primengTableHelper.records"
+                                    rows="{{
+                                    primengTableHelper.defaultRecordsCountPerPage
+                                }}"
+                                    selectionMode="single"
+                                >
+                                    <ng-template pTemplate="header">
+                                        <tr class="my-text">
+                                            <th
+                                                class="my-text"
+                                                style="color: #3f4047; width: 15%;"
+                                            >
+                                                {{l('GR6_STT')}}
+                                            </th>
+                                            <th
+                                                [pSortableColumn]="'dvT_CODE'"
+                                                class="my-text"
+                                                style="color: #3f4047; width: 25%;"
+                                            >
+                                                {{l('GR6_DVT_CODE')}}
+                                                <p-sortIcon [field]="'dvT_CODE'"></p-sortIcon>
+                                            </th>
+                                            <th
+                                                [pSortableColumn]="'dvT_NAME'"
+                                                class="my-text"
+                                                style="color: #3f4047; width: 25%;"
+                                            >
+                                                {{l('GR6_DVT_NAME')}}
+                                                <p-sortIcon [field]="'dvT_NAME'"></p-sortIcon>
+                                            </th>
+                                            <th
+                                                [pSortableColumn]="'dvT_DESC'"
+                                                class="my-text"
+                                                style="color: #3f4047; width: 35%;"
+                                            >
+                                                {{l('GR6_DESC')}}
+                                                <p-sortIcon [field]="'dvT_DESC'"></p-sortIcon>
+                                            </th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template let-dv pTemplate="body">
+                                        <tr [pSelectableRow]="dv">
+                                            <td class="my-text" style="width: 15%; padding-left: 1em;">
+                                                {{ this.primengTableHelper.records.indexOf(dv) + 1 }}
+                                            </td>
+                                            <td class="my-text" style="width: 25%;">
+                                                {{ dv.dvT_CODE}}
+                                            </td>
+                                            <td class="my-text" style="width: 25%;">
+                                                {{ dv.dvT_NAME}}
+                                            </td>
+                                            <td class="my-text" style="width: 35%;">
+                                                {{ dv.dvT_DESC}}
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                                <div
+                                    *ngIf="
+                                    primengTableHelper.totalRecordsCount == 0
+                                "
+                                    class="primeng-no-data"
+                                >
+                                    {{l('GR6_NO_DATA')}}
+                                </div>
+                                <div class="primeng-paging-container">
+                                    <p-paginator
+                                        #paginator
+                                        (onPageChange)="search($event)"
+                                        [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                                        [totalRecords]="primengTableHelper.totalRecordsCount"
+                                        rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                                    >
+                                    </p-paginator>
+                                    <span class="total-records-count my-text">
+                                    {{l('GR6_TOTAL_RECORD')}}:
+                                        {{ primengTableHelper.totalRecordsCount }}
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--<Primeng-TurboTable-End> -->
+    </div>
+</div>
+<div class="col-12">
+    <!-- DeleteModal -->
+    <div
+        aria-hidden="true"
+        aria-labelledby="deleteModal"
+        class="modal fade"
+        id="deleteModal"
+        role="dialog"
+        tabindex="-1"
+    >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title my-text" id="deleteModalTitle">
+                        {{l('GR6_WARNING')}}
+                    </h5>
+                    <button
+                        aria-label="Close"
+                        class="close"
+                        data-dismiss="modal"
+                        type="button"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="my-text">
+                        {{l('GR6_DVT_DELETE_WARNING')}}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                        type="button"
+                    >
+                        <span class="my-text">
+                           {{l('GR6_CANCEL')}}
+                        </span>
+                    </button>
+                    <button
+                        (click)="delete()"
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                        type="button"
+                    >
+                        <span class="my-text">
+                            {{l('GR6_YES')}}
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

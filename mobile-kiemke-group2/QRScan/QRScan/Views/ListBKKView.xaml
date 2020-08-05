@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:vm="clr-namespace:QRScan.ViewModels"
+             NavigationPage.HasNavigationBar="False"
+             x:Name="listpage"
+             x:Class="QRScan.Views.ListBKKView">
+    <!--<ContentPage.BindingContext>
+        <vm:ListBKKViewModel/>
+    </ContentPage.BindingContext>-->
+    <ContentPage.Content>
+        <pancake:PancakeView Margin="10,10,10,10" BorderColor="Black" BorderThickness="2" CornerRadius="10" Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <pancake:PancakeView HorizontalOptions="FillAndExpand" CornerRadius="10,10,0,0" BorderThickness="2" BorderColor="Black" BackgroundColor="#0095FF" Margin="0" Padding="0">
+                    <Label Margin="0,3" TextColor="White" Text="Danh sách bản kiểm kê offline" HorizontalTextAlignment="Center" FontSize="20" HorizontalOptions="FillAndExpand"/>
+                </pancake:PancakeView>
+                <ListView Grid.Row="1" ItemsSource="{Binding BanKiemKes}" SelectionMode="None" HasUnevenRows="True" SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <pancake:PancakeView  BorderThickness="2" BackgroundColor="White"  CornerRadius="3" HasShadow="True" BorderColor="Black" Margin="10" Padding="0">
+                                    <pancake:PancakeView.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                              Command="{Binding BindingContext.ShowListCommand,Source={x:Reference Name=listpage}}"/>
+                                    </pancake:PancakeView.GestureRecognizers>
+                                    <Grid HorizontalOptions="FillAndExpand" Margin="5,5,0,10" ColumnSpacing="5" RowSpacing="5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Margin="3,-15,0,0" Grid.Row="1" Grid.Column="0" Text="Mã đơn vị:" FontSize="18" TextColor="Black" />
+                                        <Label Grid.Row="2" Grid.Column="0" Text="Mã bản kiểm kê:" FontSize="18" TextColor="Black" Margin="3"/>
+                                        <Label Grid.Row="3" Grid.Column="0" Text="Ngày tạo:" FontSize="18" TextColor="Black" Margin="3"/>
+
+                                        <Frame Margin="0,-15,0,0" Grid.Row="1" Grid.Column="1" BorderColor="Black" HorizontalOptions="FillAndExpand" Padding="0" >
+                                            <Label Text="{Binding KK_MADONVI}" FontSize="18" TextColor="Black" Margin="3"/>
+                                        </Frame>
+                                        <Frame Grid.Row="2" Grid.Column="1" BorderColor="Black" HorizontalOptions="FillAndExpand" Padding="0" Margin="0,0,0,0">
+                                            <Label Text="{Binding KK_CODE}" FontSize="18" TextColor="Black" Margin="3"/>
+                                        </Frame>
+                                        <Frame Grid.Row="3" Grid.Column="1" BorderColor="Black" HorizontalOptions="FillAndExpand" Padding="0" Margin="0,0,0,0">
+                                            <Label Text="{Binding KK_NGAYTAO,Converter={StaticResource DateTimeConverter}}" FontSize="18" TextColor="Black" Margin="3"/>
+                                        </Frame>
+
+                                        <pancake:PancakeView Grid.Row="0" Grid.Column="2" WidthRequest="27" HeightRequest="27" BackgroundColor="Red" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="45" Margin="0,0,5,0">
+                                            <pancake:PancakeView.GestureRecognizers>
+                                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                              Command="{Binding BindingContext.DeleteCommand,Source={x:Reference Name=listpage}}"/>
+                                            </pancake:PancakeView.GestureRecognizers>
+                                            <Image Source="x" Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        </pancake:PancakeView>
+                                    </Grid>
+                                </pancake:PancakeView>
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </pancake:PancakeView>
+
+    </ContentPage.Content>
+</ContentPage>

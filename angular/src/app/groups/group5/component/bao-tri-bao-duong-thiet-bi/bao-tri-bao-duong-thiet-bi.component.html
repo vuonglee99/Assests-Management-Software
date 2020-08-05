@@ -1,0 +1,181 @@
+<div>
+  <ul style="background-color: #248dc1;font-size: 15px;padding-left:10px;margin:0;color:white">
+    <li *ngIf="isGranted('Pages.Group5.Equipment.Add')"
+      style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="addNew()"><i
+        class="fa fa-plus-circle" aria-hidden="true"></i>
+    <li *ngIf="isGranted('Pages.Group5.Equipment.Update')"
+      style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="update()">
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+    </li>
+    <li *ngIf="isGranted('Pages.Group5.Equipment.Delete')"
+      style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="delete()"><i
+        class="fa fa-trash"></i>
+    </li>
+    <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;"  (click)="search()">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    </li>
+    <li *ngIf="isGranted('Pages.Group5.Equipment.View')"
+      style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="viewDetail()">
+      <i class="fa fa-eye" aria-hidden="true"></i>
+    </li>
+    <li 
+      style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="export()">
+      <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+   </li>
+  </ul> 
+</div>
+<div
+  style="background-color: #248dc1; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+  <h1>Danh sách bảo dưỡng</h1>
+</div>
+
+
+
+
+<!-- end them,xóa phong ban -->
+
+
+<!-- search -->
+
+  <!-- end search -->
+
+
+  <!-- table phong ban -->
+
+
+
+  <div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+      <div class="m-portlet__body">
+
+        <div>
+          <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-4 pr-0">
+              <div class="col line-height-search font-common font-weigth-search pr-0 pl-0">
+                Mã yêu cầu</div>
+              <div class="colpl-0">
+                <input type="text" name="wO_CODE" class="form-control" placeholder="Mã yêu cầu" name=""
+                  [(ngModel)]="filterInput.wO_CODE" (keyup.enter)="search()">
+              </div>
+      
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-4 pr-0">
+              <div class="col line-height-search font-common font-weigth-search pr-0  pl-0">
+                Thiết bị</div>
+              <div class="col pl-0">
+      
+                <input list="name-dev" class="form-control " placeholder="Tên Thiết Bị" [(ngModel)]="filterInput.devicE_NAME"
+                  (keyup.enter)="search()" required>
+                <datalist id="name-dev">
+                  <option *ngFor="let item of listNameDevice">{{item}}</option>
+                </datalist>
+      
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-4 pr-0">
+              <div class="col line-height-search font-common font-weigth-search pr-0  pl-0">
+                Độ ưu tiên
+              </div>
+              <div class="col pl-0">
+                <select id="" name="prioritY_ORDER" class="form-control" required="required"
+                  [(ngModel)]="filterInput.prioritY_ORDER" (change)="search()">
+                  <option value="">-----Tất cả-----</option>
+                  <option value="1">Mức 1</option>
+                  <option value="2">Mức 2</option>
+                  <option value="3">Mức 3</option>
+                </select>
+              </div>
+            </div>
+      
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-4 pr-0">
+              <div class="col line-height-search font-common font-weigth-search pr-0  pl-0">
+                Trạng Thái
+              </div>
+              <div class="col pl-0">
+                <select id="" name="recorD_STATUS" class="form-control" required="required"
+                  [(ngModel)]="filterInput.recorD_STATUS" (change)="search()">
+                  <option value="">-----Tất cả-----</option>
+                  <option value="1">Hoạt động</option>
+                  <option value="0">Không hoạt động</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 col-xl-4 pr-0">
+              <div class="col line-height-search font-common font-weigth-search pr-0  pl-0">Loại
+              </div>
+              <div class="col pl-0">
+                <select id="" name="kinD_FIX" class="form-control" required="required" [(ngModel)]="filterInput.kinD_FIX"
+                  (change)="search()">
+                  <option value="" selected>-----Tất cả-----</option>
+                  <option value="1">Bảo trì</option>
+                  <option value="2">Sữa chữa</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <!--<Primeng-TurboTable-Start>-->
+          <div class="primeng-datatable-container">
+            <div class="primeng-paging-container">
+              <p-table #dataTable rows="{{primengTableHelper.defaultRecordsCountPerPage}}" [value]="records"
+                [loading]="isLoading" [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                selectionMode="single" [(selection)]="listSelectRow" [paginator]="true" [scrollable]="true"
+                ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+                [resizableColumns]="primengTableHelper.resizableColumns" [columns]="cols" selectionMode="multiple" [scrollable]="true" [style]="{width:'100%'}">
+                <ng-template pTemplate="colgroup" let-columns>
+                  <colgroup>
+                      <col *ngFor="let col of columns"  [style.width]="col.field == 'No' ?'50px':''">
+                  </colgroup>
+              </ng-template>
+                <ng-template pTemplate="header" let-columns >
+                  <tr>
+                    <th *ngFor="let col of columns
+                                              let i = index" [pSortableColumn]="col.field">
+                      {{col.header}}
+
+                      <p-sortIcon *ngIf="col.field!='No'"></p-sortIcon>
+
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-record let-columns="columns" let-rowIndex="rowIndex">
+                  <tr [pSelectableRow]="record" [pSelectableRowIndex]="rowIndex">
+                    <td *ngFor="let col of columns">
+                      <div *ngIf="col.field == 'recorD_STATUS'">
+                        {{record[col.field] == 0?'Không hoạt động':'Hoạt động'}}
+                      </div>
+                      <div *ngIf="col.field == 'kinD_FIX'">
+                        {{record[col.field] == 1 ?'Bảo trì':'Sữa chữa'}}
+                      </div>
+                      <div *ngIf="col.field == 'prioritY_ORDER'">
+                        Mức &nbsp;{{record[col.field]}}
+                      </div>
+
+                      <div *ngIf="col.field == 'autH_STATUS' && (record[col.field]==null && record['approvE_DT']!=null) ">Chờ duyệt xóa</div>
+                      <div *ngIf="col.field == 'autH_STATUS' && (record[col.field]==null && record['approvE_DT']==null) ">Chờ duyệt thêm</div>
+                      <div *ngIf="col.field == 'autH_STATUS' && record[col.field]=='A' ">Đã duyệt</div> 
+                      <div *ngIf="col.field == 'autH_STATUS' && record[col.field]=='U' ">Từ chối</div>
+                      <div
+                        *ngIf="col.field != 'recorD_STATUS' && col.field != 'kinD_FIX' && col.field !='prioritY_ORDER' && col.field !='autH_STATUS'">
+                        {{record[col.field]}}
+                      </div>
+
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+              <div class="primeng-no-data" *ngIf="records.length == 0">
+                {{l('Không có dữ liệu')}}
+              </div>
+              <span class="total-records-count">
+                {{l('TotalRecordsCount', records.length)}}
+              </span>
+            </div>
+          </div>
+          <!--<Primeng-TurboTable-End>-->
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- end table phong ban -->

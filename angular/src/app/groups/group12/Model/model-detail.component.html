@@ -1,0 +1,103 @@
+<ul style="background-color: #248dc1;font-size: 15px;padding-left:10px;margin:0;color:white">
+    <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" onclick="window.history.back()"
+    pTooltip="{{l('Group12_Back')}}" tooltipPosition="bottom">
+        <i class="fa fa-arrow-left" style="font-size: large;vertical-align: middle;"></i></li>
+    <li *ngIf="isGranted('Pages.Group12.Model.Delete') && !isEdit"
+        style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="isEdit=true"
+        pTooltip="{{l('Group12_Edit')}}" tooltipPosition="bottom"><i
+            class="fa fa-pencil" style="font-size: large;vertical-align: middle;"></i></li>
+    <li *ngIf="isGranted('Pages.Group12.Model.Approve') && !isEdit && isUnApproved"
+        style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="approve(true)"
+        pTooltip="{{l('Group12_ApproveAction')}}" tooltipPosition="bottom"><i
+            class="fa fa-check" style="font-size: large;vertical-align: middle;"></i></li>
+    <li *ngIf="isGranted('Pages.Group12.Model.Approve') && !isEdit && isUnApproved"
+        style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="approve(false)"
+        pTooltip="{{l('Group12_DenyApprove')}}" tooltipPosition="bottom"><i
+            class="fa fa-times" style="font-size: large;vertical-align: middle;"></i></li>
+    <li *ngIf="isGranted('Pages.Group12.Model.Delete') && isEdit"
+        style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="save()"
+        name="btnDelete"  pTooltip="{{l('Group12_Save')}}" tooltipPosition="bottom"><i class="fa fa-floppy-o" style="font-size: large;vertical-align: middle;"></i></li>
+    <li *ngIf="isGranted('Pages.Group12.Model.Delete') && isEdit"
+        style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="isEdit=false"
+        name="btnDelete"  pTooltip="{{l('Group12_Cancel')}}" tooltipPosition="bottom"><i class="fa fa-times" style="font-size: large;vertical-align: middle;"></i></li>
+</ul>
+
+<form #formRef="ngForm" [formGroup]="modelForm">
+    <div
+        style="background-color: #248dc1; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+        <h4 style="margin-bottom: 0px"><i class="fa fa-info-circle"
+                style="font-size: 30px; margin-right: 15px"></i>{{l('Group12_ModelDetailTitle')}}</h4>
+    </div>
+
+    <div style="padding: 20px;">
+        <div style="padding: 20px; background-color: white;">
+            <div class="row">
+                <div class="col-md-6" style="font-size: 15px;">
+                    <div>
+                        <div>{{l('Group12_ModelCode')}}<span style="color: red">(*)</span></div>
+                        <input formControlName="modeL_CODE"
+                            [ngClass]="{ 'is-invalid': submitted && modelForm }"
+                            [(ngModel)]="inputModel.modeL_CODE" name="modeL_CODE" class="form-control"
+                            [readonly]="!isEdit">
+                        <div *ngIf="submitted" class="invalid-feedback">
+                            <div *ngIf="modelForm.modeL_CODE.errors?.required" name="empty_field">Vui lòng nhập mã bảo dưỡng
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <div>{{l('Group12_ModelName')}}<span style="color: red">(*)</span></div>
+                        <input formControlName="modeL_NAME"
+                            [ngClass]="{ 'is-invalid': submitted && modelForm }"
+                            [(ngModel)]="inputModel.modeL_NAME" name="modeL_NAME" class="form-control"
+                            [readonly]="!isEdit">
+                        <div *ngIf="submitted" class="invalid-feedback">
+                            <div *ngIf="modelForm.modeL_NAME.errors?.required" name="empty_field">Vui lòng nhập đơn vị thực hiện
+                                bảo dưỡng xe </div>
+                        </div>
+
+                    </div>
+                    <div class="mt-3">
+                        <div>{{l('Group12_ModelHSX')}}<span style="color: red">(*)</span></div>
+                        <select class="form-control" id="HSX" [(ngModel)]="inputModel.modeL_HSX" name="modeL_HSX"
+                            [ngModelOptions]="{standalone: true}" [disabled]="!isEdit">
+                            <option value="VietNam">VietNam</option>
+                            <option value="Japan">Japan</option>
+                            <option value="China">China</option>
+                            <option value="Korean">Korean</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="font-size: 15px;">
+                    <div>
+                        <div>{{l('Group12_ModelType')}}<span style="color: red">(*)</span></div>
+                        <select class="form-control" id="loaiXe" [(ngModel)]="inputModel.modeL_TYPE" name="modeL_TYPE"
+                            [ngModelOptions]="{standalone: true}" [disabled]="!isEdit">
+                            <option value="motorbike">motorbike</option>
+                            <option value="car">car</option>
+                            <option value="container">container</option>
+                            <option value="truck">truck</option>
+                            <option value="bus">bus</option>
+                        </select>
+                    </div>
+
+                    <div class="mt-3">
+                        <div>{{l('Group12_ModelDMNL')}}<span style="color: red">(*)</span></div>
+                        <input class="form-control input" id="DMNL" [(ngModel)]="inputModel.modeL_DMNL"
+                            name="modeL_DMNL" formControlName="modeL_DMNL" required [readonly]="!isEdit" type="number">
+                        <div *ngIf="submitted" class="invalid-feedback">
+                            <div *ngIf="modelForm.modeL_DMNL.errors?.required" name="empty_field">Vui lòng nhập mã xe </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <div>{{l('Group12_ModelNote')}}</div>
+                        <textarea class="form-control input" id="ghiChu" [(ngModel)]="inputModel.notes" name="notes"
+                            rows="2" [ngModelOptions]="{standalone: true}" [readonly]="!isEdit"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

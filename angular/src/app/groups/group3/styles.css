@@ -1,0 +1,26 @@
+.g3-toolbar {
+    position: relative;
+    width: 100%;
+    background: #58a3dc;
+    display: flex;
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
+
+.g3-toolbar>button {
+    border-width: 0px;
+    border-radius: 0px;
+}
+
+p-inputmask>input {
+    padding: .85rem 1.15rem !important;
+    border-color: #ebedf2 !important; 
+}
+
+p-inputmask>input:disabled {
+    opacity: 1.0 !important;
+}
+
+input.form-control:disabled {
+    background-color: #e9ecef !important;
+}

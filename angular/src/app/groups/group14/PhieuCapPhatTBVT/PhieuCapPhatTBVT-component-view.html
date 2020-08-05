@@ -1,0 +1,170 @@
+<div [@routerTransition]>
+<div class="group14">
+    <!-- them,xoa phong ban -->
+
+    <div class="m-subheader">
+        <div class="d-flex align-items-center pb-bgblue p-2 ">
+            <button *ngIf="isGranted('Pages.Group14.PCPTBVT.Insert')" class="pb-bgblue font-common" (click)="createPCP()">
+                <i class="fa fa-plus"></i>
+            </button>
+        
+            <button *ngIf="isGranted('Pages.Group14.PCPTBVT.Update')" class="pb-bgblue font-common" (click)="updatePCP()">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button *ngIf="isGranted('Pages.Group14.PCPTBVT.Delete')" class="pb-bgblue font-common" (click)="deletePCP()">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+            <button *ngIf="isGranted('Pages.Group14.PCPTBVT.ById')" class="pb-bgblue font-common" (click)="detailPCP()">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </button>
+            <button class="pb-bgblue font-common" (click)="searchPCP()">
+                <i class="fa fa-search " aria-hidden="true"></i>
+            </button>
+            <button (click)="exportToExcel()"class="pb-bgblue font-common">
+                <i class="fa fa-file-excel-o"></i>
+            </button>
+        </div>
+    </div>
+
+
+
+
+    <!-- end them,xóa phong ban -->
+
+
+    <!-- search -->
+    <div class="m-subheader m-t-1">
+        <div class="bgwhite rounded-bottom">
+            <div class="row  p-4">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 pr-0">
+                    <div class="row">
+                        <div
+                            class="col-xs-5 col-sm-5 col-md-5 col-lg-5 line-height-search font-common font-weigth-search pr-0">
+                            {{l("AllocationBillIDSearch")}}</div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 pl-0">
+                            <input type="text" name="pb_ma" class="form-control"   placeholder='{{l("AllocationBillIDSearch")}}...' [(ngModel)]="maPCP" name="dEP_CODE" >
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 pr-0">
+                    <div class="row">
+                        <div
+                            class="col-xs-5 col-sm-5 col-md-5 col-lg-5 line-height-search font-common font-weigth-search pr-0">
+                            {{l("AllocationBillDepartmentSearch")}}</div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 pl-0">
+                            <select name="" id="input" name="pb_tt" class="form-control bg-input" required
+                            name="recorD_STATUS" [(ngModel)]="this.pbNhan">
+                            <option [ngValue]="null">--{{l("All")}}--</option>
+                            <option *ngFor="let opt of department" [ngValue]="opt.deP_CODE">{{opt.deP_NAME}}</option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
+           
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 pr-0">
+                    <div class="row">
+                        <div
+                            class="col-xs-5 col-sm-5 col-md-5 col-lg-5 line-height-search font-common font-weigth-search pr-0">
+                            {{l("AllocationBillApprovalStatusSearch")}}</div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 pl-0">
+                            <select name="" id="input" name="pb_tt" class="form-control" required="required" [(ngModel)]="approve" name="autH_STATUS" >
+                                <option value="">--{{l("All")}}--</option>
+                                <option value="0">{{l("AllocationBillNotApproved")}}</option>
+                                <option value="1">{{l("AllocationBillApproved")}}</option>
+                                <option value="U">{{l("AllocationBillDenied")}}</option>            
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 pr-0">
+                    <div class="row">
+                        <div
+                            class="col-xs-5 col-sm-5 col-md-5 col-lg-5 line-height-search font-common font-weigth-search pr-0">
+                            {{l("AllocationBillStartDateSearch")}}</div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 pl-0">
+                            <p-calendar  [(ngModel)]="date1"   dateFormat="dd.mm.yy" [showIcon]="true" ></p-calendar>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 pr-0">
+                    <div class="row">
+                        <div
+                            class="col-xs-5 col-sm-5 col-md-5 col-lg-5 line-height-search font-common font-weigth-search pr-0">
+                            {{l("AllocationBillEndDateSearch")}}</div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 pl-0">
+                            <p-calendar  [(ngModel)]="date2"   dateFormat="dd.mm.yy" [showIcon]="true" ></p-calendar>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end search -->
+
+
+    <!-- table phong ban -->
+    <div class="row align-items-center">
+        <!--<Primeng-TurboTable-Start>-->
+        <div class="primeng-datatable-container"
+             [busyIf]="primengTableHelper.isLoading">
+             <div class="d-flex align-items-center pb-bgblue p-4 font-common rounded-top">
+                <div class="pb-bgblue">
+                    <i class="fa fa-list-ul ic-title-search" aria-hidden="true"></i>
+                {{l("AllocationBillsDatatable")}}
+            </div>
+        </div>
+
+        <p-table #dataTable (onLazyLoad)="getPCP($event)"  [columns]="cols" [value]="primengTableHelper.records" [paginator]="true" [rows]="5" [totalRecords]="primengTableHelper.totalRecordsCount" selectionMode="single" [(selection)]="selectedItem" [rowsPerPageOptions]="[5,10,25,50] ">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns
+                        let i = index"
+                    [style.width]="i==0?'5%':'' "
+                    [pSortableColumn]="col.field">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="8" style="text-align:center">{{l("NoData")}}</td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-record let-columns="columns" let-rowIndex="rowIndex">
+                <tr  [pSelectableRow]="record" [pSelectableRowIndex]="rowIndex" >
+                    <td *ngFor="let col of columns">
+                        <span *ngIf="col.field===''">
+                            {{rowIndex+1}}
+                        </span>
+                        <span *ngIf="col.field==='creatE_DT'">
+                            {{record[col.field]|date:'dd/MM/yyyy'}}
+                        </span>
+                        <span *ngIf="col.field!=='creatE_DT'&&col.field!=='autH_STATUS'">
+                            {{record[col.field]}}
+                        </span>
+                        <span *ngIf="col.field==='autH_STATUS'">
+                            <span *ngIf="record[col.field]==='1'">
+                                {{l("AllocationBillApproved")}}
+                            </span>
+                            <span *ngIf="record[col.field]==='0'">
+                                {{l("AllocationBillNotApproved")}}
+                            </span>
+                            <span *ngIf="record[col.field]==='U'">
+                                {{l("AllocationBillDenied")}}
+                            </span>
+                        </span>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <!-- end table phong ban -->
+</div>
+</div>
+</div>
+

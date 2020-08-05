@@ -1,0 +1,121 @@
+<ul style="background-color: #248dc1;font-size: 15px;padding-left:10px;margin:0;color:white">
+    <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" onclick="window.history.back()"
+        pTooltip="{{l('Group12_Back')}}" tooltipPosition="bottom">
+        <i class="fa fa-arrow-left" style="font-size: large;vertical-align: middle;"></i></li>
+    <li *ngIf="isGranted('Pages.Group12.KiemKe.Create')"
+        style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="save()" name="btnDelete"
+        pTooltip="{{l('Group12_Save')}}" tooltipPosition="bottom"><i class="fa fa-floppy-o"
+            style="font-size: large;vertical-align: middle;"></i></li>
+</ul>
+
+
+<form #formRef="ngForm" [formGroup]="kiemKeForm">
+    <div
+        style="background-color: #248dc1; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+        <h4 style="margin-bottom: 0px"><i class="fa fa-info-circle"
+                style="font-size: 30px; margin-right: 15px"></i>{{l('Group12_AddNewInventoryTitle')}}</h4>
+    </div>
+
+    <div style="padding: 20px;">
+        <div style="padding: 20px; background-color: white;">
+            <div class="row">
+                <div class="col-md-6" style="font-size: 15px;">
+                    <div>
+                        <div>{{l('Group12_kK_CODE')}}<span style="color: red">(*)</span></div>
+                        <input formControlName="kK_CODE"
+                            [ngClass]="{ 'is-invalid': submitted && kiemKeForm }"
+                            [(ngModel)]="kiemKeInput.kK_CODE" name="kK_CODE" class="form-control">
+                        <div *ngIf="submitted" class="invalid-feedback">
+                            <div *ngIf="kiemKeForm.kK_CODE.errors?.required" name="empty_field">Vui lòng nhập mã bảo
+                                dưỡng
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div>{{l('Group12_kK_MADONVI')}}<span style="color: red">(*)</span></div>
+                        <input formControlName="kK_MADONVI"
+                            [ngClass]="{ 'is-invalid': submitted && kiemKeForm    }"
+                            [(ngModel)]="kiemKeInput.kK_MADONVI" name="kK_MADONVI" class="form-control">
+                        <div *ngIf="submitted" class="invalid-feedback">
+                            <div *ngIf="kiemKeForm.kK_MADONVI.errors?.required" name="empty_field">Vui lòng nhập mã bảo
+                                dưỡng
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <div>{{l('Group12_kK_TENDONVI')}}<span style="color: red">(*)</span></div>
+                        <input formControlName="kK_TENDONVI"
+                            [ngClass]="{ 'is-invalid': submitted && kiemKeForm}"
+                            [(ngModel)]="kiemKeInput.kK_TENDONVI" name="kK_TENDONVI" class="form-control">
+                        <div *ngIf="submitted" class="invalid-feedback">
+                            <div *ngIf="kiemKeForm.kK_TENDONVI.errors?.required" name="empty_field">Vui lòng nhập mã bảo
+                                dưỡng
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div>{{l('Group12_kK_NGUOITAO')}}<span style="color: red">(*)</span></div>
+                        <select class="form-control" id="kK_NGUOITAO" [(ngModel)]="kiemKeInput.kK_NGUOITAO"
+                            name="kK_NGUOITAO" [ngModelOptions]="{standalone: true}">
+                            <option value="" class="mt-1 mb-1">---{{l('Group12_All')}}---</option>
+                            <option *ngFor="let nv of nhanvienList " value="{{nv}}">
+                                {{nv}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mt-3">
+                        <div>{{l('Group12_kK_TONGTB_DUOCKIEMKE')}}<span style="color: red">(*)</span></div>
+                        <input formControlName="kK_TONGTB_DUOCKIEMKE"
+                            [ngClass]="{ 'is-invalid': submitted && kiemKeForm}"
+                            [(ngModel)]="kiemKeInput.kK_TONGTB_DUOCKIEMKE" name="kK_TONGTB_DUOCKIEMKE"
+                            class="form-control" type="number">
+                        <div *ngIf="submitted" class="invalid-feedback">
+                            <div *ngIf="kiemKeForm.kK_TONGTB_DUOCKIEMKE.errors?.required" name="empty_field">Vui lòng
+                                nhập mã bảo dưỡng
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="font-size: 15px;">
+                    <div>
+                        <div>{{l('Group12_kK_TONGTB_DUSOVOISAOKE')}}<span style="color: red">(*)</span></div>
+                        <input [(ngModel)]="kiemKeInput.kK_TONGTB_DUSOVOISAOKE" name="kK_TONGTB_DUSOVOISAOKE"
+                            class="form-control" type="number" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="mt-3">
+                        <div>{{l('Group12_kK_TONGTB_THIEUSOVOISAOKE')}}<span style="color: red">(*)</span></div>
+                        <input [(ngModel)]="kiemKeInput.kK_TONGTB_THIEUSOVOISAOKE" name="kK_TONGTB_THIEUSOVOISAOKE"
+                            class="form-control" type="number" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="mt-3">
+                        <div>{{l('Group12_kK_TONGTB_THUASOVOISAOKE')}}<span style="color: red">(*)</span></div>
+                        <input [(ngModel)]="kiemKeInput.kK_TONGTB_THUASOVOISAOKE" name="kK_TONGTB_THUASOVOISAOKE"
+                            class="form-control" type="number" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="mt-3">
+                        <div>{{l('Group12_kK_NGAYCHOT')}}<span style="color: red">(*)</span></div>
+                        <input name="filterText" autoFocus class="form-control m-input"
+                            [placeholder]="l('Group12_kK_NGAYCHOT')" type="date" [(ngModel)]="kiemKeInput.kK_NGAYCHOT"
+                            name="kK_NGAYCHOT" formControlName="kK_NGAYCHOT">
+                        <div *ngIf="submitted" class="invalid-feedback">
+                            <div *ngIf="kiemKe.kK_NGAYCHOT.errors?.required" name="empty_field">Vui lòng
+                                nhập mã bảo dưỡng
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div>{{l('Group12_autH_STATUS')}}<span style="color: red">(*)</span></div>
+                        <select class="form-control" id="kK_TRANGTHAI" [(ngModel)]="kiemKeInput.kK_TRANGTHAI"
+                            name="kK_TRANGTHAI" [ngModelOptions]="{standalone: true}">
+                            <option value="đóng">Đóng</option>
+                            <option value="mở">Mở</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

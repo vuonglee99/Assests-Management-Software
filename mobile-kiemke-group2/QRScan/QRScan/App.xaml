@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:converter="clr-namespace:QRScan.Views.Converters"
+             x:Class="QRScan.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <converter:DateTimeConverter x:Key="DateTimeConverter"/>
+            <converter:RadioButtonConverter x:Key="RadioButtonConverter"/>
+            <converter:ChoosedLabelColorConverter x:Key="ChoosedLabelColorConverter"/>
+            <converter:NullValueConverter x:Key="NullValueConverter"/>
+            <converter:ShowPasswordConverter x:Key="ShowPasswordConverter"/>
+            <converter:ErrorStringConverter x:Key="ErrorStringConverter"/>
+        </ResourceDictionary>
+        <OnPlatform x:Key="Cata"
+                        x:TypeArguments="x:String"
+                        Android="Catamaran-Regular.ttf#Catamaran"/>
+        <OnPlatform x:Key="CataMedium"
+                        x:TypeArguments="x:String"
+                        Android="Catamaran-Medium.ttf#Catamaran"/>
+        <OnPlatform x:Key="CataBold"
+                        x:TypeArguments="x:String"
+                        Android="Catamaran-Bold.ttf#Catamaran"/>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,166 @@
+<div [@routerTransition]>
+    <div class="m-subheader">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto col-xs-6">
+                <h3 class="m-subheader__title m-subheader__title--separator">
+                    <span>{{l("Chi Tiết Nhân Viên")}}</span>
+                </h3>
+            </div>
+            <div class="col-xs-6 text-right">
+                <button (click)="createNhanVien()" *ngIf="isGranted('Pages.Administration.Users.Create')"
+                    class="btn btn-primary">
+                    <i class="fa fa-plus"></i> {{l("Tạo mới Nhân Viên")}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body">
+            <!-- <div
+                style="background-color: #248dc1;font-family: auto;font-size: 20px;padding-left:10px;margin:0;color:white;line-height: 55px;">
+                {{l("Tìm kiếm thông tin")}}
+            </div>
+
+            <div style="padding:10px">
+                <form class="horizontal-form" autocomplete="off">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <group8-input label="Mã Nhân Viên" [(ngModel)]="maNhanVientext" name="ctnV_MA_NHAN_VIEN"
+                                    class="input">
+                                </group8-input>
+                            </div>
+                            <div class="col-md-4">
+                                <group8-input label="Tên Nhân Viên" [(ngModel)]="tenNhanVientext"
+                                    name="ctnV_TEN_NHAN_VIEN" class="input">
+                                </group8-input>
+                            </div>
+                            <div class="col-md-4">
+                                <group8-select label="Phòng Ban" [(ngModel)]="phongBan" name="ctnV_PHONG_BAN"
+                                    class="input" [dataSources]="phongBan_List" dataDisplay="TEN" dataValue="MA_PB">
+                                </group8-select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <group8-select label="Trạng Thái Hoạt Động" [(ngModel)]="trangThaiHoatDong"
+                                    name="ctnV_TRANG_THAI_HOAT_DONG" class="input"
+                                    [dataSources]="trangThaiHoatDong_List" dataDisplay="TEN" dataValue="MA_TT">
+                                </group8-select>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-10">
+                            <div class="col-sm-12 text-right">
+                                <button class="btn btn-primary" (click)="refreshFilter()"><i class="fa fa-refresh"></i>
+                                    {{l("Refresh")}}</button>
+                                <button class="btn btn-primary" (click)="searchNhanVien()"><i class="fa fa-search"></i>
+                                    {{l("Tìm Kiếm")}}</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div> -->
+
+            <div class="primeng-datatable-container">
+                <p-table [columns]="cols" [value]="records" [paginator]="isPaging" [rows]="5"
+                    [responsive]="primengTableHelper.isResponsive" [scrollable]="true"
+                    [rowsPerPageOptions]="[5,10,25,50]">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                                {{col.header}}
+                                <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+                                    ariaLabelDesc="Activate to sort in descending order"
+                                    ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                            </th>
+                            <th style="width: 150px">
+                                {{l(' ')}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td *ngFor="let col of columns">
+                                {{rowData[col.field]}}
+                            </td>
+                            <td style="width: 150px" *ngIf="records.length != 0"><a
+                                    routerLink="/app/admin/chitietnhanvien-view/{{rowData[columns[0].field]}}">Xem Chi
+                                    tiết</a>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <!-- <p-table #dataTable (onLazyLoad)="getAllNhanVien($event)" [value]="primengTableHelper.records"
+                    dataKey="records.ctnV_MANV" [lazy]="true" [paginator]="true" [scrollable]="true"
+                    [responsive]="primengTableHelper.isResponsive" [rows]="5" [rowsPerPageOptions]="[5,10,25,50]">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th ngFor style="width: 150px" pSortableColumn="ctnV_MANV">
+                                {{l('Mã Nhân Viên')}}
+                                <p-sortIcon field="ctnV_MANV"></p-sortIcon>
+                            </th>
+                            <th style="width: 150px" pSortableColumn="ctnV_TEN_NV">
+                                {{l('Tên Nhân Viên')}}
+                                <p-sortIcon field="ctnV_TEN_NV"></p-sortIcon>
+                            </th>
+                            <th style="width: 150px" pSortableColumn="chucVu">
+                                {{l('Chức Vụ')}}
+                                <p-sortIcon field="chucVu"></p-sortIcon>
+                            </th>
+                            <th style="width: 150px" pSortableColumn="phongBan">
+                                {{l('Phòng Ban')}}
+                                <p-sortIcon field="phongBan"></p-sortIcon>
+                            </th>
+                            <th style="width: 150px" pSortableColumn="soDienThoai">
+                                {{l('Số Điện Thoại')}}
+                                <p-sortIcon field="soDienThoai"></p-sortIcon>
+                            </th>
+                            <th style="width: 200px" pSortableColumn="trangThaiHoatDong">
+                                {{l('Trạng Thái Hoạt Động')}}
+                                <p-sortIcon field="trangThaiHoatDong"></p-sortIcon>
+                            </th>
+                            <th style="width: 200px" pSortableColumn="trangThaiHoatDong">
+                                {{l(' ')}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-ctnv>
+                        <tr>
+                            <td style="width: 150px">{{ctnv.ctnV_MANV}}</td>
+                            <td style="width: 150px">{{ctnv.ctnV_TEN_NV}}</td>
+                            <td style="width: 150px">{{ctnv.ctnV_CHUC_VU}}</td>
+                            <td style="width: 150px">{{ctnv.ctnV_PHONG_BAN}}</td>
+                            <td style="width: 150px">{{ctnv.ctnV_SDT}}</td>
+                            <td style="width: 200px">{{ctnv.ctnV_TRANG_THAI_HOAT_DONG}}</td>
+
+                            <td style="width: 200px"><a
+                                    routerLink="/app/admin/chitietnhanvien-view/{{ctnv.ctnV_MANV}}">Xem Chi tiết</a>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table> -->
+                <div class="primeng-no-data" *ngIf="records.length == 0">
+                    {{l('NoData')}}
+                </div>
+                <!-- <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8" style="text-align:left">No records found.</td>
+                    </tr>
+                </ng-template> -->
+                <!-- <div class="primeng-paging-container">
+                    <p-paginator rows="{{primengTableHelper.defaultRecordsCountPerPage}}" #paginator
+                        (onPageChange)="getAllNhanVien($event)" [totalRecords]="primengTableHelper.totalRecordsCount"
+                        [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage">
+                    </p-paginator>
+                    <span class="total-records-count">
+                        {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                    </span>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

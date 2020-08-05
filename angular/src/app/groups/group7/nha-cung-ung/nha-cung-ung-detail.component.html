@@ -1,0 +1,174 @@
+<div *ngIf="!hasData">
+    <h3 class="alert" role="alert" style="background:  #248dc1; color: white;">
+        {{l('G7SupplierDetailScreen')}}
+    </h3>
+    <button type="button" style="color:  #248dc1;" class="btn btn-link"
+            (click)="backToListPage()">{{l('G7NotFoundSuppliers')}} <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </button>
+</div>
+
+<!-- Toolbar -->
+<ul *ngIf="hasData" class="toolbar-ul shadow">
+
+    <li class="toolbar-li" *ngIf="editPageState=='view'" (click)="onAdd()">
+        <i class="fa fa-plus"></i>
+    </li>
+
+    <li class="toolbar-li" *ngIf="editPageState=='view'" (click)="onEdit()">
+        <i class="fa fa-pencil"></i>
+    </li>
+
+    <li class="toolbar-li" *ngIf="editPageState=='add'|| editPageState=='edit'"
+        (click)="onSave()">
+        <i class="fa fa-floppy-o"></i>
+    </li>
+
+    <!--    <li class="toolbar-li" *ngIf="editPageState=='add'|| editPageState=='edit'" (click)="onEdit()">-->
+    <!--        <i class="fa fa-pencil"></i>-->
+    <!--    </li>-->
+
+    <!--    <div *ngIf="" class="col-md-12 form-group">-->
+    <!--        <button type="submit" class="btn"-->
+    <!--                style="color: white; font-weight: bold; font-family: Roboto;"><i-->
+    <!--            class="fa fa-floppy-o"></i> Lưu-->
+    <!--        </button>-->
+    <!--    </div>-->
+
+    <li class="toolbar-li" *ngIf="editPageState=='view'" (click)="onDelete()">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+    </li>
+
+    <li class="toolbar-li" (click)="onBack()">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </li>
+
+</ul>
+
+
+<!-- Thông tin chi tiết/Thêm mới -->
+<ul *ngIf="hasData" class="home-ul shadow">
+
+    <li class="home-li" *ngIf="editPageState=='add'">
+        {{l('G7AddSupplier')}}
+    </li>
+
+    <li class="home-li" *ngIf="editPageState=='view'">
+        {{l('G7ViewDetail')}}
+    </li>
+
+</ul>
+
+
+<!-- Form -->
+<div *ngIf="hasData" class="shadow bg-white mx-4"
+     style="font-size: 15px; font-family: Roboto, Arial, Helvetica, sans-serif;">
+
+    <form #formRef1="ngForm" (ngSubmit)="onSave()" class="m-4">
+        <fieldset [disabled]="editPageState == 'view'">
+            <br>
+            <div class="row">
+                <!-- Mã NCU -->
+                <div class="col-md-6 form-group">
+                    <label class="font-weight-bold">{{l('G7SupplierCode')}} </label>
+                    <span class="text-danger"> (*) </span>
+                    <input class="form-control" [(ngModel)]="inputModel.ncU_MA_NCU" name="ncU_MA_NCU"
+                           #ncU_MA_NCU="ngModel" maxlength="20" required
+                           [ngClass]="{'is-invalid': !newAdding && (submitted || ncU_MA_NCU.touched) && ncU_MA_NCU.invalid}">
+
+                    <div class="invalid-feedback">
+                        * {{l('G7SupplierCode')}} {{l('G7CantBeEmpty')}}
+                    </div>
+                </div>
+
+
+                <!-- Tên NCU-->
+                <div class="col-md-6 form-group">
+                    <label class="font-weight-bold">{{l('G7SupplierName')}}</label>
+                    <span class="text-danger"> (*) </span>
+                    <input class="form-control" [(ngModel)]="inputModel.ncU_TEN" name="ncU_TEN" #ncU_TEN="ngModel"
+                           maxlength="200" required
+                           [ngClass]="{'is-invalid': !newAdding && (submitted || ncU_TEN.touched) && ncU_TEN.invalid}">
+
+                    <div class="invalid-feedback">
+                        *{{l('G7SupplierName')}} {{l('G7CantBeEmpty')}}
+                    </div>
+                </div>
+
+                <!-- Địa chỉ -->
+                <div class="col-md-6 form-group ">
+                    <label class="font-weight-bold">{{l('G7Address')}}</label>
+                    <input class="form-control" [(ngModel)]="inputModel.ncU_DIA_CHI" name="ncU_DIA_CHI"
+                           #ncU_DIA_CHI="ngModel" maxlength="200">
+
+                </div>
+
+                <!-- Sđt -->
+                <div class="col-md-6 form-group">
+                    <label class="font-weight-bold">{{l('G7Phone')}}</label>
+                    <input class="form-control" [(ngModel)]="inputModel.ncU_SDT" name="ncU_SDT" #ncU_SDT="ngModel"
+                           pattern="^((\\+84-?)|0)?[0-9]{10}$" maxlength="15"
+                           [ngClass]="{'is-invalid': !newAdding && (submitted || ncU_SDT.touched) && ncU_SDT.invalid}">
+
+                    <div class="invalid-feedback">
+                        <div *ngIf="ncU_SDT.errors?.pattern"> * {{l('G7Phone')}} {{l('G7MustBe10Characters')}}</div>
+                    </div>
+                </div>
+
+                <!-- -->
+                <div class="col-md-6 form-group">
+                    <label class="font-weight-bold">{{l('G7TaxNumber')}}</label>
+                    <input class="form-control" [(ngModel)]="inputModel.ncU_MA_SO_THUE" name="ncU_MA_SO_THUE"
+                           #ncU_MA_SO_THUE="ngModel" maxlength="200"
+                           [ngClass]="{'is-invalid': !newAdding && (submitted || ncU_MA_SO_THUE.touched) && ncU_MA_SO_THUE.invalid}">
+                </div>
+
+
+                <!-- Fax -->
+                <div class="col-md-6 form-group">
+                    <label class="font-weight-bold">{{l('Fax')}}</label>
+                    <input class="form-control" [(ngModel)]="inputModel.ncU_FAX" name="ncU_FAX" #ncU_FAX="ngModel"
+                           pattern="^((\\+84-?)|0)?[0-9]{10}$" maxlength="15"
+                           [ngClass]="{'is-invalid': !newAdding && (submitted || ncU_FAX.touched) && ncU_FAX.invalid}">
+                    <div class="invalid-feedback">
+                        <div *ngIf="ncU_FAX.errors?.pattern"> * {{l('Fax')}} {{l('G7MustBe10Characters')}}</div>
+                    </div>
+                </div>
+
+                <!--Tên người liên hệ -->
+                <div class="col-md-6 form-group ">
+                    <label class="font-weight-bold">{{l('G7ContactPersonName')}}</label>
+                    <input class="form-control" [(ngModel)]="inputModel.ncU_TEN_NGUOI_LIEN_HE"
+                           name="ncU_TEN_NGUOI_LIEN_HE" #ncU_TEN_NGUOI_LIEN_HE="ngModel" maxlength="200"
+                           [ngClass]="{'is-invalid': !newAdding && (submitted || ncU_TEN_NGUOI_LIEN_HE.touched) && ncU_TEN_NGUOI_LIEN_HE.invalid}">
+                </div>
+
+                <!-- Email người liên hệ -->
+                <div class="col-md-6 form-group">
+                    <label class="font-weight-bold">{{l('G7ContactPersonEmail')}}</label>
+                    <input type="email" class="form-control" [(ngModel)]="inputModel.ncU_EMAIL_NGUOI_LIEN_HE"
+                           name="ncU_EMAIL_NGUOI_LIEN_HE" #ncU_EMAIL_NGUOI_LIEN_HE="ngModel" maxlength="50" email
+                           [ngClass]="{'is-invalid': !newAdding && (submitted || ncU_EMAIL_NGUOI_LIEN_HE.touched) && ncU_EMAIL_NGUOI_LIEN_HE.invalid}">
+
+                    <div class="invalid-feedback">
+                        <div *ngIf="ncU_EMAIL_NGUOI_LIEN_HE.errors?.email"> * {{l('G7CorrectEmail')}}
+                        </div>
+                    </div>
+                </div>
+
+                <!--  -->
+                <div class="col-md-6 form-group">
+                    <label class="font-weight-bold">{{l('G7ContactPersonPhone')}}</label>
+                    <input class="form-control" [(ngModel)]="inputModel.ncU_SDT_NGUOI_LIEN_HE"
+                           name="ncU_SDT_NGUOI_LIEN_HE" #ncU_SDT_NGUOI_LIEN_HE="ngModel"
+                           pattern="^((\\+84-?)|0)?[0-9]{10}$" maxlength="15"
+                           [ngClass]="{'is-invalid': !newAdding && (submitted || ncU_SDT_NGUOI_LIEN_HE.touched) && ncU_SDT_NGUOI_LIEN_HE.invalid}">
+
+                    <div class="invalid-feedback">
+                        <div *ngIf="ncU_SDT_NGUOI_LIEN_HE.errors?.pattern"> * {{l('G7Phone')}} {{l('G7MustBe10Characters')}}</div>
+                    </div>
+                </div>
+
+            </div>
+        </fieldset>
+    </form>
+</div>

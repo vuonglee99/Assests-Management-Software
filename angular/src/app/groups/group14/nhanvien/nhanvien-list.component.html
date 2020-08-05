@@ -1,0 +1,256 @@
+<div [@routerTransition]>
+    <div class="group14">
+    
+    
+    <div class="m-subheader">
+        <div class="d-flex align-items-center pb-bgblue p-2 ">
+            <button *ngIf="isGranted('Pages.Group8.ChiTietNhanVien.Insert')" class="pb-bgblue font-common" (click)="createNhanVien()">
+                <i class="fa fa-plus"></i>
+            </button>
+            <button *ngIf="isGranted('Pages.Group8.ChiTietNhanVien.Update')" class="pb-bgblue font-common" (click)="updateNhanVien()">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button *ngIf="isGranted('Pages.Group14.NhanVien.Delete')" class="pb-bgblue font-common" (click)="deleteNhanVien()">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+            <button *ngIf="isGranted('Pages.Group8.ChiTietNhanVien')" class="pb-bgblue font-common" (click)="detailsNhanVien()">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </button>
+             
+            <button class="pb-bgblue font-common" (click)="getNhanVien()">
+                <i class="fa fa-search " aria-hidden="true"></i>
+            </button>
+            <button (click)="exportToExcel()" class="pb-bgblue font-common">
+                <i class="fa fa-file-excel-o"></i>
+            </button>
+        </div>
+    </div>
+    <!-- <div class="m-content">
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+                <form class="horizontal-form" autocomplete="off">
+                    <div class="m-form m-form--label-align-right">
+                        <div class="row align-items-center m--margin-bottom-10">
+                            <div class="col-xl-12">
+                                <div class="form-group m-form__group align-items-center">
+                                    <div class="input-group">
+                                        <input [(ngModel)]="maNhanVien" name="maNhanVien" autoFocus class="form-control m-input" placeholder='{{l("EmployeeIDSearch")}}...' type="text">
+                                        <span class="input-group-btn">
+                                            <button (click)="getNhanVien()" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                        </span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row m--margin-bottom-10" [hidden]="!advancedFiltersAreShown">
+                            <div class="col-md-12">
+                                <div class="form-group m-form__group align-items-center">
+                                    <div class="input-group">
+                                        <input [(ngModel)]="tenNhanVien" name="tenNhanVien" autoFocus class="form-control m-input" placeholder='{{l("EmployeeNameSearch")}}...' type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row m--margin-bottom-10" [hidden]="!advancedFiltersAreShown">
+                            <div class="col-md-6">
+                                <div class="form-group m-form__group align-items-center">
+                                    <select class='form-control' emptytext="Department" [(ngModel)]="phongBan" name="phongBan" (focus)="getAllDepartments()">
+                                        <option [ngValue]="null">-- {{l("Department")}} --</option>
+                                        <option *ngFor="let opt of phongBanList" [ngValue]="opt">{{opt}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group m-form__group align-items-center">
+                                    <select class='form-control' emptytext="Status" [(ngModel)]="trangThai" name="trangThai">
+                                        <option [ngValue]="null">-- {{l("Status")}} --</option>
+                                        <option *ngFor="let opt of trangThaiList" [ngValue]="opt">{{opt == 1 ? l("Working") : l("OffWork")}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row margin-bottom-10">
+                            <div class="col-sm-12">
+                                <span class="clickable-item text-muted" *ngIf="!advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-down"></i> {{l("ShowAdvancedFilters")}}</span>
+                                <span class="clickable-item text-muted" *ngIf="advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-up"></i> {{l("HideAdvancedFilters")}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </form> -->
+                <div class="m-subheader m-t-1">
+                    
+                    <div class="bgwhite rounded-bottom">
+                        <div class="row  p-4">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 pr-0">
+                                <div class="row">
+                                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 line-height-search font-common font-weigth-search pr-0">
+                                        {{l("EmployeeID")}}
+                                    </div>
+                                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 pl-0">
+                                        <input type="text" name="pb_ma" class="form-control"  placeholder='{{l("EmployeeIDSearch")}}' [(ngModel)]="maNhanVien" name="dEP_CODE" >
+                                    </div>
+                                </div>
+            
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 pr-0">
+                                <div class="row">
+                                    <div
+                                        class="col-xs-5 col-sm-5 col-md-5 col-lg-5 line-height-search font-common font-weigth-search pr-0">
+                                        {{l("EmployeeName")}} </div>
+                                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 pl-0">
+                                        <input type="text" name="pb_name" class="form-control" placeholder='{{l("EmployeeNameSearch")}}' [(ngModel)]="tenNhanVien" name="dEP_NAME">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 pr-0">
+                                <div class="row">
+                                    <div
+                                        class="col-xs-5 col-sm-5 col-md-5 col-lg-5 line-height-search font-common font-weigth-search pr-0">
+                                        {{l("Department")}}</div>
+                                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 pl-0">
+                                        <select name="" id="input" name="pb_tt" class="form-control" required="required" [(ngModel)]="phongBan" name="autH_STATUS" (focus)="getAllDepartments()" >
+                                            <option [ngValue]="null" >--{{l("Department")}}--</option>
+                                        <option *ngFor="let opt of phongBanList" [ngValue]="opt.deP_CODE">{{opt.deP_NAME}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 pr-0">
+                                <div class="row">
+                                    <div
+                                        class="col-xs-5 col-sm-5 col-md-5 col-lg-5 line-height-search font-common font-weigth-search pr-0">
+                                        {{l("WorkStatus")}}</div>
+                                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 pl-0">
+                                        <select name="" id="input" name="pb_tt" class="form-control" required="required" [(ngModel)]="this.trangThai" name="autH_STATUS" >
+                                            <option value="" selected disabled hidden>--Tất-cả--</option>
+                                            <option value="1">{{l("Working")}}</option>
+                                            <option value="0">{{l("OffWork")}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                         
+                <div class="row align-items-center">
+                    
+                    <!--<Primeng-TurboTable-Start>-->
+                    <div class="primeng-datatable-container"
+                         [busyIf]="primengTableHelper.isLoading">
+                         <div class="d-flex align-items-center pb-bgblue p-4 font-common rounded-top">
+                            <div class="pb-bgblue">
+                                <i class="fa fa-list-ul ic-title-search" aria-hidden="true"></i>
+                                {{l("EmployeesDatatable")}}
+                            </div>
+                        </div>
+                        <p-table #dataTable
+                                 (onLazyLoad)="getNhanVien($event)"
+                                 [value]="primengTableHelper.records"
+                                 [rows]="5"
+                                 [paginator]="true"
+                                 [(selection)]="selectedItem"
+                                 [totalRecords]="primengTableHelper.totalRecordsCount"
+                                 [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage" 
+                                 selectionMode="single"
+                                 [responsive]="primengTableHelper.isResponsive"
+                                 [resizableColumns]="primengTableHelper.resizableColumns">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                   
+                                    <th style="width: 150px" pSortableColumn="nV_MA_NV">
+                                        {{l("EmployeeID")}}
+                                        <p-sortIcon field="nV_MA_NV"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="nV_TEN" >
+                                        {{l("EmployeeName")}}
+                                        <p-sortIcon field="nV_TEN" ></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="nV_PHONG_BAN">
+                                        {{l("Department")}}
+                                        <p-sortIcon field="nV_PHONG_BAN"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="nV_CHUC_VU">
+                                        {{l("EmployeePosition")}}
+                                        <p-sortIcon field="nV_CHUC_VU"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 250px" pSortableColumn="nV_SDT">
+                                        {{l("EmployeePhone")}}
+                                        <p-sortIcon field="nV_SDT"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 200px" pSortableColumn="nV_TRANG_THAI">
+                                        {{l("WorkStatus")}}
+                                        <p-sortIcon field="nV_TRANG_THAI"></p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-record let-columns="columns" let-rowIndex="rowIndex">
+                                <tr  [pSelectableRow]="record" [pSelectableRowIndex]="rowIndex">
+                                    <!-- <td style="width: 130px"
+                                    [hidden]="!isGrantedAny('Pages.Group14.NhanVien')">
+                                        <div class="btn-group dropdown" normalizePosition>
+                                            <button class="dropdown-toggle btn btn-sm btn-primary"
+                                                    data-toggle="dropdown"
+                                                    aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                <i class="fa fa-cog"></i><span class="caret"></span> {{l("Actions")}}
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a *ngIf="permission.isGranted('Pages.Group14.NhanVien.Delete')"
+                                                        (click)="deleteNhanVien(record)">{{l("Delete")}}</a>
+                                                </li>
+                                                <li>
+                                                    <a *ngIf="permission.isGranted('Pages.Group8.ChiTietNhanVien')"
+                                                        routerLink="/app/admin/chitietnhanvien-view/{{record.nV_MA_NV}}">{{l("Details")}}</a>
+                                                </li>
+                                                <li>
+                                                    <a *ngIf="permission.isGranted('Pages.Group8.ChiTietNhanVien.Update')"
+                                                        routerLink="/app/admin/chitietnhanvien-edit/{{record.nV_MA_NV}}">{{l("Edit")}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td> -->
+                                    <td style="width: 150px">
+                                        <span class="ui-column-title"> </span>
+                                        {{record.nV_MA_NV}}
+                                    </td>
+                                    <td style="width: 150px">
+                                        <span class="ui-column-title"> </span>
+                                        {{record.nV_TEN}}
+                                    </td>
+                                    <td style="width: 150px">
+                                        <span class="ui-column-title"> </span>
+                                        {{record.nV_TEN_PHONG_BAN}}
+                                    </td>
+                                    <td style="width: 150px">
+                                        <span class="ui-column-title"> </span>
+                                        {{record.nV_CHUC_VU}}
+                                    </td>
+                                    <td style="width: 250px">
+                                        <span class="ui-column-title"></span>
+                                        {{record.nV_SDT}}
+                                    </td>
+                                    <td style="width: 200px">
+                                        <span class="ui-column-title"></span>
+                                        <span class="label label-success" *ngIf="record.nV_TRANG_THAI == 0">{{l("OffWork")}}</span>
+                                        <span class="label label-default" *ngIf="record.nV_TRANG_THAI == 1">{{l("Working")}}</span>
+                                        <span class="label label-default" *ngIf="record.nV_TRANG_THAI != 1 && record.nV_TRANG_THAI != 0">{{l("G14Undefined")}}</span>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                            {{l("NoData")}}
+                        </div>
+                        
+                    <!--<Primeng-TurboTable-End>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

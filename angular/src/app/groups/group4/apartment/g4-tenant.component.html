@@ -1,0 +1,102 @@
+<div bsModal #createModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg group4">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title font-weight-bold">
+                    <span>{{l('ResidentsListTitle')}}</span>
+                </h4>
+                <button id="btn_close" type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pt-0 pr-0">
+
+                <div class="row pr-4" style="padding: 10px;">
+
+                    <div class="col-md-5 input-group">
+                        <input id="input_filter" name="filter" class="form-control" [(ngModel)]="filter" (keyup.enter)="search()">
+                        <span class="input-group-btn">
+                            <button id="btn_search" (click)="search()" class="btn btn-primary" type="submit"><i
+                                    class="flaticon-search-1" [attr.aria-label]="l('Search')"></i></button>
+                        </span>
+
+                    </div>
+
+
+                    <div class="col-md-7 text-right">
+                        <button *ngIf="isGranted('Pages.Group4.ApartmentResident.Add')" id="btn_add_tenant" class="btn btn-primary" (click)="addTenant()"><i class="fa fa-plus"></i>
+                            <span>{{l('g4AddToApartment')}}
+                            </span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- start table -->
+                <div class="m-portlet__body mx-0" style="padding-right: 25px;">
+                    <div class="row align-items-center">
+                        <div class="primeng-datatable-container">
+                            <div class="primeng-paging-container">
+
+                                <p-table #dt class="tableG4" [value]="listFreeTenant" [rows]="10" [rowsPerPageOptions]="[5,10,25,50]" [paginator]="true" [filterDelay]="0" selectionMode="single" [(selection)]="selectedTenant" [scrollable]="true" ScrollWidth="100%">
+
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th style="width: 70px">
+                                                {{l('g4SerialColTitle')}}
+                                            </th>
+
+                                            <th style="width: 150px" pSortableColumn="residenT_CODE">
+                                                {{l('g4ResidentCode')}}
+                                                <p-sortIcon field="residenT_CODE"></p-sortIcon>
+                                            </th>
+                                            <th style="width: 150px" pSortableColumn="residenT_NAME">
+                                                {{l('g4ResidentName')}}
+                                                <p-sortIcon field="residenT_NAME"></p-sortIcon>
+                                            </th>
+
+                                            <th style="width: 170px" pSortableColumn="residenT_IDCARD">
+                                                {{l('g4ResidentIDCard')}}
+                                                <p-sortIcon field="residenT_IDCARD"></p-sortIcon>
+                                            </th>
+                                            <th style="width: 150px" pSortableColumn="residenT_BIRTH">
+                                                {{l('g4ResidentBirth')}}
+                                                <p-sortIcon field="residenT_BIRTH"></p-sortIcon>
+                                            </th>
+                                            <th style="width: 150px">
+                                                {{l('g4ResidentPhone')}}
+                                            </th>
+
+                                        </tr>
+                                    </ng-template>
+
+                                    <ng-template pTemplate="body" class="body-table" let-record="$implicit" let-i="rowIndex">
+                                        <tr [pSelectableRow]="record">
+                                            <td style="width: 70px"> {{i+1}} </td>
+                                            <td style="width: 150px"> {{record.residenT_CODE}} </td>
+                                            <td style="width: 150px"> {{record.residenT_NAME}} </td>
+                                            <td style="width: 170px"> {{record.residenT_IDCARD}} </td>
+                                            <td style="width: 150px"> {{record.residenT_BIRTH|date:"dd/MM/yyyy"}} </td>
+                                            <td style="width: 150px"> 0378963405 </td>
+
+                                        </tr>
+                                    </ng-template>
+
+                                    <ng-template pTemplate="emptymessage">
+                                        <tr>
+                                            <td colspan="6" style="text-align:center">{{l('g4EmptyValueValidate')}}</td>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="paginatorleft" class="ui-paginator-current">
+                                        <span>{{l('g4SummaryRecords')}}: {{dt.totalRecords}}</span>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

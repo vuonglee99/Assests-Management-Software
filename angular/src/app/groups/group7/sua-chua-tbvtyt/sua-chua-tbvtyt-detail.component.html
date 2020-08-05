@@ -1,0 +1,182 @@
+<ul class="toolbar-ul shadow">
+
+    <li class="toolbar-li" title="Thêm mới" (click)="add()">
+        <i class="fa fa-plus-circle"></i>
+    </li>
+
+    <li class="toolbar-li" title="Sửa" *ngIf="editPageState == 'view'" (click)="edit()">
+        <i class="fa fa-edit"></i>
+    </li>
+
+    <li class="toolbar-li" *ngIf="editPageState == 'add'|| editPageState=='edit'"
+        (click)="onSave(f)">
+        <i class="fa fa-floppy-o"></i>
+    </li>
+
+    <li class="toolbar-li" title="Xóa" (click)="delete()">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+    </li>
+
+    <li class="toolbar-li" title="Trở lại" (click)="this.navigate(['/app/admin/yeu-cau-sua-chua-tbvtyt'])">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </li>
+
+    <li *ngIf="this.editPageState != 'add' && inputModel.YCSC_TINHTRANG_DUYET == 0" class="toolbar-li" title="Duyệt" (click)="onSave(f, 1)">
+        <i class="fa fa-check" aria-hidden="true"></i> DUYỆT
+    </li>
+
+    <li *ngIf="this.editPageState != 'add' && inputModel.YCSC_TINHTRANG_DUYET == 0" class="toolbar-li" title="Duyệt" (click)="onSave(f, -1)">
+        <i class="fa fa-times" aria-hidden="true"></i> KHÔNG DUYỆT
+    </li>
+</ul>
+
+<div
+    style="background-color: #248dc1; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+    <h3>{{l('Chi tiết yêu cầu sửa chữa')}}</h3>
+</div>
+
+<div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body">
+            <form #f="ngForm" class="horizontal-form" autocomplete="off">
+                <div class="m-form m-form--label-align-right">
+                    <div class="row align-items-center m--margin-bottom-10">
+                        <div class="col-xl-12">
+                            <div class="form-group">
+                                <label>Mã yêu cầu duy nhất (*)</label>
+                                <input [disabled]="editPageState === 'view'" class="form-control" required name="YCSC_MA_YCSC" [(ngModel)]="inputModel.YCSC_MA_YCSC">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center m--margin-bottom-10">
+                        <div class="col-xl-4">
+                            <div class="form-group">
+                                <label>Ngày lập (*)</label>
+                                <input [disabled]="editPageState === 'view'" type="datetime-local" required class="form-control" name="CREATE_DT" [(ngModel)]="inputModel.CREATE_DT">
+                            </div>
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="form-group">
+                                <label>Ngày yêu cầu</label>
+                                <input [disabled]="editPageState === 'view'" type="datetime-local" class="form-control" name="YCSC_NGAYYC" [(ngModel)]="inputModel.YCSC_NGAYYC">
+                            </div>
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="form-group">
+                                <label>Ngày kiểm tra</label>
+                                <input [disabled]="editPageState === 'view'" type="datetime-local" class="form-control" name="YCSC_NGAYKT" [(ngModel)]="inputModel.YCSC_NGAYKT">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center m--margin-bottom-10">
+                        <div class="col-xl-12">
+                            <div class="form-group">
+                                <label>Thiết bị (*)</label>
+                                <select [disabled]="editPageState === 'view'" class="form-control" name="YCSC_TBVT_ID" [(ngModel)]="inputModel.YCSC_TBVT_ID">
+                                    <option *ngFor="let thietBi of thietBiList" [value]="thietBi.tbvT_ID">{{thietBi.tbvT_MA_TBVT}} - {{thietBi.tbvT_TEN}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center m--margin-bottom-10">
+                        <div class="col-xl-12">
+                            <div class="form-group">
+                                <label>Nhân viên sửa chữa</label>
+                                <select [disabled]="editPageState === 'view'" class="form-control" name="YCSC_NHANVIEN_SUACHUA" [(ngModel)]="inputModel.YCSC_NHANVIEN_SUACHUA">
+                                    <option *ngFor="let nhanVien of nhanVienList" [value]="nhanVien.nV_ID">{{nhanVien.nV_MA_NV}} - {{nhanVien.nV_TEN}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="editPageState == 'view'" class="row align-items-center m--margin-bottom-10">
+                        <div class="col-xl-12">
+                            <div class="form-group">
+                                <label>Người lập</label>
+                                <input class="form-control" disabled [value]="inputModel.NGUOILAP">
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="editPageState == 'view'" class="row align-items-center m--margin-bottom-10">
+                        <div class="col-xl-12">
+                            <div class="form-group">
+                                <label>Người duyệt</label>
+                                <input class="form-control" disabled [value]="inputModel.NGUOIDUYET">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center m--margin-bottom-10">
+                        <div class="col-xl-12">
+                            <div class="form-group">
+                                <label>Mô tả nguyên nhân (*)</label>
+                                <input [disabled]="editPageState === 'view'" class="form-control" required name="YCSC_MOTA_NGUYENNHAN" [(ngModel)]="inputModel.YCSC_MOTA_NGUYENNHAN">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center m--margin-bottom-10">
+                        <div class="col-xl-12">
+                            <div class="form-group">
+                                <label>Ý kiến lãnh đạo</label>
+                                <input [disabled]="editPageState === 'view'" class="form-control" name="YCSC_YKIEN_LANHDAO" [(ngModel)]="inputModel.YCSC_YKIEN_LANHDAO">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center m--margin-bottom-10">
+                        <div class="col-xl-12">
+                            <div class="form-group">
+                                <label>Tình trạng sau xử lý</label>
+                                <input [disabled]="editPageState === 'view'" class="form-control" name="YCSC_KQTINHTRANG" [(ngModel)]="inputModel.YCSC_KQTINHTRANG">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center m--margin-bottom-10">
+                        <div class="col-xl-12">
+                            <div class="form-group">
+                                <label>Ngày kết thúc</label>
+                                <input [disabled]="editPageState === 'view'" type="datetime-local" class="form-control" name="YCSC_NGAYHT" [(ngModel)]="inputModel.YCSC_NGAYHT">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--<form #formRef="ngForm">-->
+<!--    <ul style="background-color: #248dc1;font-family: auto;font-size: 15px;padding-left:10px;margin:0;color:white">-->
+<!--        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="save()">Lưu</li>-->
+<!--        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;">Duyệt</li>-->
+<!--        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;"-->
+<!--            onclick="window.history.back()"><i class="fa fa-arrow-left"></i> Trở lại</li>-->
+<!--    </ul>-->
+<!--    <div style="height: 50px;"></div>-->
+<!--    <div style="padding-left: 20px;">-->
+<!--        <div style="margin-bottom: 5px; display: flex; padding: 5px;">-->
+<!--            <div>-->
+<!--                <label>Ngày lập: * </label>-->
+<!--                <input name="code" class="input">-->
+<!--            </div>-->
+<!--            <div style="margin-left: 50px;">-->
+<!--                <label>Ngày lập: * </label>-->
+<!--                <input name="code" class="input">-->
+<!--            </div>-->
+<!--            <div style="margin-left: 50px;">-->
+<!--                <label>Ngày lập: * </label>-->
+<!--                <input name="code" class="input">-->
+<!--            </div>-->
+<!--           -->
+<!--        </div>-->
+<!--        <div style="margin-bottom: 5px; display: flex; ">-->
+<!--            <label>Mã yêu cầu sửa chửa TBVTYT </label>-->
+<!--            <input name="code" class="input">-->
+<!--        </div>-->
+<!--        <div style="margin-bottom: 5px">-->
+<!--            <div>Tên thiết bị </div>-->
+<!--            <input name="name_TB" class="input">-->
+<!--        </div>-->
+<!--        <div>Tình trạng duyệt</div>-->
+<!--        <input name="status" class="input">-->
+<!--        <div>Ngày tạo</div>-->
+<!--        <input name="status" class="input" type="datetime-local">-->
+<!--    </div>-->
+<!--</form>-->

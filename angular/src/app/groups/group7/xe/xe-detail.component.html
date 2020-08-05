@@ -1,0 +1,19 @@
+<form #formRef="ngForm">
+    <ul style="background-color: #248dc1;font-family: auto;font-size: 15px;padding-left:10px;margin:0;color:white">
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="save()">Lưu</li>
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;">Duyệt</li>
+    </ul>
+    <div style="height: 50px;"></div>
+    <div style="padding-left: 20px;">
+        <div style="margin-bottom: 5px">
+            <div>Mã xe *</div>
+            <input [(ngModel)]="inputModel.xE_CODE" name="xE_CODE" class="input">
+        </div>
+        <div style="margin-bottom: 5px">
+            <div>Tên xe *</div>
+            <input [(ngModel)]="inputModel.xE_NAME" name="xE_NAME" class="input">
+        </div>
+        <div>Màu sắc</div>
+        <input [(ngModel)]="inputModel.xE_COLOR" name="xE_COLOR" class="input">
+    </div>
+</form>

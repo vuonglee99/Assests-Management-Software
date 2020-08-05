@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White"
+             x:Class="QRScan.Views.StockTakingView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid HeightRequest="50" Margin="20,0,20,0" HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1" FontSize="25" TextColor="Black" Margin="0,3,0,0"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Text="Kiểm kê thiết bị"/>
+                <Image  x:Name="backLabel" Source="backarrow" WidthRequest="30" HeightRequest="30" Margin="0,0,0,-5"/>
+                <Image  Grid.Column="2" Source="backarrow0" WidthRequest="30" HeightRequest="30" Margin="0,0,0,-5"/>
+
+            </Grid>
+            <ScrollView>
+                <StackLayout>
+                    <Frame Margin="20,20" CornerRadius="3" BorderColor="Black"   Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                        <Grid HeightRequest="400">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <!--Header-->
+                            <pancake:PancakeView HorizontalOptions="FillAndExpand"  BorderThickness="2" BorderColor="Black" BackgroundColor="#0095FF" Margin="0" Padding="0">
+                                <Label Margin="5,3" Text="Thông tin thiết bị" TextColor="White" HorizontalTextAlignment="Start" FontSize="20" HorizontalOptions="FillAndExpand"/>
+                            </pancake:PancakeView>
+                            <!--Thông tin chi tiết-->
+                            <ScrollView Grid.Row="1" Orientation="Vertical">
+                                
+                                <StackLayout Orientation="Vertical">
+                                    <Grid Grid.Row="1" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <!--Mã-->
+                                        <Label Text="Mã:" TextColor="Black" Grid.Row="0" Grid.Column="0" FontSize="20" VerticalOptions="Center"/>
+                                        <pancake:PancakeView Grid.Row="0" Grid.Column="1" BorderThickness="2" BorderColor="Black">
+                                            <Label x:Name="Ma" Margin="5,5" Grid.Row="0" Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        </pancake:PancakeView>
+                                        <!--Tên-->
+                                        <Label VerticalOptions="Center" Text="Tên thiết bị:" Grid.Row="1" Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        <pancake:PancakeView Grid.Row="1" Grid.Column="1" BorderThickness="2" BorderColor="Black">
+                                            <Label x:Name="Ten" Margin="5,5" Grid.Row="0" Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        </pancake:PancakeView>
+                                        <!--Tình trạng-->
+                                        <Label x:Name="TinhTrangTitle" VerticalOptions="Center" Grid.Row="2" Text="Tình trạng:"  Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        <pancake:PancakeView x:Name="TinhTrangContainer" Grid.Row="2" Grid.Column="1" BorderThickness="2" BorderColor="Black">
+                                            <Label x:Name="TinhTrang" Margin="5,5" Grid.Row="0" Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        </pancake:PancakeView>
+
+                                        <!--Đơn vị quản lý-->
+                                        <Label VerticalOptions="Center" Grid.Row="3" Text="Đơn vị quản lý:"  Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        <pancake:PancakeView Grid.Row="3" Grid.Column="1" BorderThickness="2" BorderColor="Black">
+                                            <Label x:Name="DonViQL" Margin="5,5" Grid.Row="0" Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        </pancake:PancakeView>
+                                        <!--Chu kỳ bảo dưỡng-->
+                                        <Label x:Name="CKBDTitle" VerticalOptions="Center" Grid.Row="4" Text="Chu kỳ &#10;bảo dưỡng:"  Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        <pancake:PancakeView x:Name="CKBDContainer" Grid.Row="4" Grid.Column="1" BorderThickness="2" BorderColor="Black">
+                                            <Label x:Name="CKBD" Margin="5,5" Grid.Row="0" Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        </pancake:PancakeView>
+                                        <!--Ngày mua-->
+                                        <Label x:Name="NgayMuaTitle" VerticalOptions="Center" Grid.Row="5" Text="Ngày mua:"  Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        <pancake:PancakeView x:Name="NgayMuaContainer" Grid.Row="5" Grid.Column="1" BorderThickness="2" BorderColor="Black">
+                                            <Label x:Name="NgayMua" Margin="5,5" Grid.Row="0" Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        </pancake:PancakeView>
+                                        <!--Ngày bảo hành-->
+                                        <Label x:Name="NgayBHTitle" VerticalOptions="Center" Grid.Row="6" Text="Ngày bảo hành:"  Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        <pancake:PancakeView x:Name="NgayBHContainer" Grid.Row="6" Grid.Column="1" BorderThickness="2" BorderColor="Black">
+                                            <Label x:Name="NgayBH" VerticalOptions="Center" Margin="5,5" Grid.Row="0" Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        </pancake:PancakeView>
+                                        <!--Ngày hết bảo hành-->
+                                        <Label x:Name="NgayHetBHTitle" VerticalOptions="Center" Grid.Row="7" Text="Ngày hết &#10;bảo hành:"  Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        <pancake:PancakeView x:Name="NgayHetBHContainer" Grid.Row="7" Grid.Column="1" BorderThickness="2" BorderColor="Black">
+                                            <Label x:Name="NgayHetBH" VerticalOptions="Center" Margin="5,5" Grid.Row="0" Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        </pancake:PancakeView>
+                                        <!--Năm sản xuất-->
+                                        <Label x:Name="NamSXTitle" VerticalOptions="Center" Grid.Row="8" Text="Năm sản xuất:"  Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        <pancake:PancakeView x:Name="NamSXContainer" Grid.Row="8" Grid.Column="1" BorderThickness="2" BorderColor="Black">
+                                            <Label x:Name="NamSX" Margin="5,5" Grid.Row="0" Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        </pancake:PancakeView>
+                                        <!--NSX-->
+                                        <Label x:Name="NSXTitle" VerticalOptions="Center" Grid.Row="9" Text="Nhà sản xuất:"  Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        <pancake:PancakeView x:Name="NSXContainer" Grid.Row="9" Grid.Column="1" BorderThickness="2" BorderColor="Black">
+                                            <Label x:Name="NSX" Margin="5,5" Grid.Row="0" Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        </pancake:PancakeView>
+                                        <!--Serial-->
+                                        <Label x:Name="SerialTitle" VerticalOptions="Center" Grid.Row="10" Text="Serial:"  Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        <pancake:PancakeView x:Name="SerialContainer" Grid.Row="10" Grid.Column="1" BorderThickness="2" BorderColor="Black">
+                                            <Label x:Name="Serial" Margin="5,5" Grid.Row="0" Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        </pancake:PancakeView>
+                                        <!--Mô tả-->
+                                        <Label x:Name="MoTaTitle" VerticalOptions="Center" Grid.Row="11" Text="Mô tả:"  Grid.Column="0" FontSize="20"  TextColor="Black"/>
+                                        <pancake:PancakeView x:Name="MoTaContainer" Grid.Row="11" Grid.Column="1" BorderThickness="2" BorderColor="Black">
+                                            <Editor x:Name="MoTa" IsReadOnly="True" AutoSize="TextChanges" PlaceholderColor="Black"  TextColor="Black"/>
+                                        </pancake:PancakeView>
+                                    </Grid>
+
+                                </StackLayout>
+                            
+                            
+                            </ScrollView>
+                        </Grid>
+                    </Frame>
+                    
+                    <!--Thông tin kiểm kê-->
+                    <Grid Margin="20,0" RowSpacing="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--Tình trạng sau khi kiểm kê-->
+                        <Label Text="Tình trạng&#10;sau khi kiểm kê:" TextColor="Black" Grid.Row="0" Grid.Column="0" FontSize="20" VerticalOptions="Center"/>
+                        <pancake:PancakeView Grid.Row="0" Grid.Column="1" BorderThickness="2" BorderColor="Black">
+                            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Picker Margin="7,0,0,-8" x:Name="State_Picker" TitleColor="Transparent" IsEnabled="{Binding RadioDefault}"  FontSize="20"  TextColor="Black">
+
+                                </Picker>
+                                <Image Grid.Column="1" Source="downarrow" HeightRequest="20" WidthRequest="20" Margin="0,0,5,-13"/>
+                            </Grid>
+                            
+                            
+                        </pancake:PancakeView>
+
+                    </Grid>
+
+                    <Button Clicked="Confirm_Clicked" Padding="0" Margin="0,0,0,10"  BackgroundColor="#0095FF" BorderColor="Black" BorderWidth="1" CornerRadius="5" TextColor="White" WidthRequest="280" HeightRequest="50" HorizontalOptions="Center" Text="Xác nhận" FontSize="25"/>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label x:Name="close1" Margin="0,0,-5,0" Text="(" FontSize="20"/>
+                        <Image x:Name="image"  HeightRequest="25" WidthRequest="25"/>
+                        <Label x:Name="text"  FontSize="20"/>
+                        <Label x:Name="close2" Margin="-5,0,0,0" Text=")" FontSize="20"/>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            
+        </StackLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,269 @@
+<form #formRef="ngForm" [formGroup]="baoDuongForm">
+    <ul style="background-color: #58a3dc;font-size: 15px;padding-left:10px;margin:0;color:white">
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;"
+            onclick="window.history.back()"><i class="fa fa-arrow-left"></i></li>
+        <li *ngIf="isGranted('Pages.Group11.BD.Update') && (editPageState !== 'view')"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="save()"><i
+                class="fa fa-floppy-o"></i></li>
+        <li *ngIf="isGranted('Pages.Group11.BD.Delete') && editPageState === 'update'"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="delete()"><i
+                class="fa fa-trash"></i></li>
+        <li *ngIf="isGranted('Pages.Group11.BD.Update') && editPageState === 'view'"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="goToDetailPage()"><i
+                class="fa fa-pencil"></i></li>
+        <li *ngIf="isGranted('Pages.Group11.BD.Approve') && inputModel.autH_STATUS === null"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="approve()"><i
+                class="fa fa-check"></i> {{l('Group11ApproveButton')}}</li>
+        <li *ngIf="isGranted('Pages.Group11.BD.Approve') && inputModel.autH_STATUS === null"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="disapprove()"><i
+                class="fa fa-times"></i> {{l('Group11DisApproveButton')}}</li>
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="export()"><i
+                    class="fa fa-file-excel-o"></i></li>
+    </ul>
+    <div *ngIf="!show" class="blockUI blockOverlay"
+        style="z-index: 1000; border: none; margin: 0px; padding: 0px; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgb(170, 170, 170); opacity: 0.3; cursor: wait; position: fixed;">
+    </div>
+    <div *ngIf="show">
+        <div
+            style="background-color: #58a3dc; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+            <h1 style="margin-bottom: 0px"><i class="fa fa-info-circle"
+                    style="font-size: 30px; margin-right: 15px"></i>{{l('MaintenanceInfo')}}</h1>
+        </div>
+        <div style="padding: 20px;">
+            <div style="padding: 20px; background-color: white;">
+                <!-- START Approve Status  -->
+                <div class="row" *ngIf="isGranted('Pages.Group11.BD.Approve') && inputModel.autH_STATUS === null"
+                    style="color: orange">
+                    <div class="col-md-6" style="font-size: 15px; display: inline-block"><i
+                            class="fa fa-question-circle"></i> {{l('TypeApproveStatus')}}:
+                        <span
+                            *ngIf="inputModel.approvE_DT.toISOString().substring(0, 10) !== '0000-12-31'; else UpdateApproval">
+                            ({{l('Group11Delete')}})</span>
+                        <ng-template #UpdateApproval>
+                            <span *ngIf="isUpdating; else InsertApproval"> ({{l('Group11Update')}})</span>
+                            <ng-template #InsertApproval>
+                                <span> ({{l('Group11Insert')}})</span>
+                            </ng-template>
+                        </ng-template>
+
+                    </div>
+                </div>
+                <!-- END Approve Status -->
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-md-6" style="font-size: 15px;">
+                        <div>
+                            <div>{{l('MaintenanceCode')}} <span style="color: red">(*)</span></div>
+
+                            <input formControlName="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }"
+                                maxlength="20" [(ngModel)]="inputModel.bD_CODE" name="bD_CODE" class="form-control"
+                                style="background-color: #f4f5f8" [disabled]="this.editPageState === 'view'">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.code.errors?.required" name="empty_field">
+                                    {{l('Group11MaintenanceCodeValidate')}}
+                                </div>
+                                <div
+                                    *ngIf="!f.code.errors?.required && baoDuongForm.get('code').hasError('whitespace')">
+                                    {{l('Group11MaintenanceWhiteSpaceValidate')}}</div>
+                                <div *ngIf="f.code.errors?.pattern">{{l('Group11MaintenanceCodePatternValidate')}}</div>
+                            </div>
+
+
+                        </div>
+                        <div>
+                            <div>{{l('MaintenanceGarage')}} <span style="color: red">(*)</span></div>
+
+                            <input formControlName="garage" [ngClass]="{ 'is-invalid': submitted && f.garage.errors }"
+                                maxlength="20" [(ngModel)]="inputModel.bD_GARAGE" name="bD_GARAGE" class="form-control"
+                                style="background-color: #f4f5f8">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.garage.errors?.required" name="empty_field">
+                                    {{l('Group11MaintenanceGarageValidate')}}</div>
+                                <div
+                                    *ngIf="!f.garage.errors?.required && baoDuongForm.get('garage').hasError('whitespace')">
+                                    {{l('Group11MaintenanceWhiteSpaceValidate')}}</div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>{{l('MaintenanceFrom')}} <span style="color: red">(*)</span></div>
+
+                            <input formControlName="fromDT" [ngClass]="{ 'is-invalid': submitted && f.fromDT.errors }"
+                                type="date" [(ngModel)]="bd_FROM_DT" name="bD_FROM_DT" class="form-control"
+                                style="background-color: #f4f5f8">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.fromDT.errors?.required" name="empty_field">
+                                    {{l('Group11MaintenanceFromValidate')}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="font-size: 15px;">
+                        <div>
+                            <div>{{l('MaintenanceCar')}} <span style="color: red">(*)</span></div>
+
+                            <!-- <input formControlName="xe" [ngClass]="{ 'is-invalid': submitted && f.xe.errors }"
+                                [(ngModel)]="inputModel.xE_ID" name="xE_ID" class="form-control"
+                                style="background-color: #f4f5f8" [disabled]="this.editPageState === 'view'"> -->
+                            <select formControlName="xe" [ngClass]="{ 'is-invalid': submitted && f.xe.errors }"
+                                [(ngModel)]="inputModel.xE_ID" name="xE_ID" class="form-control"
+                                style="background-color: #f4f5f8" [disabled]="this.editPageState === 'view'">
+                                <option *ngIf="editPageState === 'add'" [value]="undefined" disabled>--- Chọn xe cần bảo
+                                    dưỡng ---</option>
+                                <!-- <option *ngIf="editPageState !== 'add'" [value]="curXe?.xE_ID" disabled>{{curXe?.xE_CODE}} - {{curXe?.xE_NAME}}</option> -->
+                                <option *ngFor="let xe of xeList" [value]="xe.xE_ID">{{xe.xE_CODE}} - {{xe.xE_NAME}}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.xe.errors?.required" name="empty_field">
+                                    {{l('Group11MaintenanceCarValidate')}}</div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div>{{l('MaintenanceAddress')}} <span style="color: red">(*)</span></div>
+
+                            <input type="text" formControlName="address" maxlength="20"
+                                [ngClass]="{ 'is-invalid': submitted && f.address.errors }"
+                                [(ngModel)]="inputModel.bD_ADDRESS" name="bD_ADDRESS" class="form-control" style="background-color: #f4f5f8
+                            ">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.address.errors?.required" name="empty_field">
+                                    {{l('Group11MaintenanceAddressValidate')}}</div>
+                                <div
+                                    *ngIf="!f.address.errors?.required && baoDuongForm.get('address').hasError('whitespace')">
+                                    {{l('Group11MaintenanceWhiteSpaceValidate')}}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div>{{l('MaintenanceTo')}} <span style="color: red">(*)</span></div>
+
+                            <input formControlName="toDT" [ngClass]="{ 'is-invalid': submitted && f.toDT.errors }"
+                                type="date" [(ngModel)]="bd_TO_DT" name="bD_TO_DT" class="form-control"
+                                style="background-color: #f4f5f8">
+                            <div *ngIf="submitted" class="invalid-feedback">
+                                <div *ngIf="f.toDT.errors?.required" name="empty_field">
+                                    {{l('Group11MaintenanceToValidate')}}</div>
+                                <div *ngIf="f.toDT.errors?.beforeFromDT">{{l('Group11MaintenanceBeforeDateValidate')}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phần group 10 -->
+        <div *ngIf="editPageState !== 'add'">
+            <div
+                style="background-color: #58a3dc; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+                <h1 style="margin-bottom: 0px"><i class="fa fa-info-circle"
+                        style="font-size: 30px; margin-right: 15px"></i>{{l('MaintenanceDetail')}}</h1>
+            </div>
+
+            <ul style="background-color: #58a3dc;font-size: 15px;padding-left:10px;margin-top:15px;color:white">
+                <li *ngIf="isGranted('Pages.Group10.CTBD.Add')" (click)="addCTBD()"
+                    style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;"><i
+                        class="fa fa-plus"></i></li>
+                <li *ngIf="isGranted('Pages.Group10.CTBD.Update')" (click)="updateCTBD()"
+                    style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;"><i
+                        class="fa fa-pencil"></i></li>
+                <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;"
+                    (click)="detailCTBD()"><i class="fa fa-eye"></i></li>
+                <li *ngIf="isGranted('Pages.Group10.CTBD.Delete')" (click)="deleteCTBD()"
+                    style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;"><i
+                        class="fa fa-trash"></i></li>
+                <li *ngIf="isGranted('Pages.Group10.CTBD.Search')" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="searchCTBD()"><i
+                        class="fa fa-search"></i></li>
+                <li *ngIf="isGranted('Pages.Group10.CTBD.Approve')"
+                    style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="goToCTBDApprovePage()">
+                    <i class="fa fa-list-alt"></i></li>
+
+            </ul>
+
+            <div class="m-content">
+                <div class="m-portlet m-portlet--mobile">
+                    <div class="m-portlet__body">
+                        <form class="horizontal-form" autocomplete="off" style="padding: 0 15px; margin-top: 15px;">
+                            <div class="m-form m-form--label-align-right">
+                                <div class="row align-items-center m--margin-bottom-10">
+                                    <div class="col-xl-12">
+                                        <div class="form-group m-form__group align-items-center">
+                                            <div class="input-group">
+                                                <b style="display: flex;align-items: center;">{{l('Group10_CTBD_NAME')}}
+                                                </b>
+                                                <input name="filterText" autoFocus class="form-control m-input" style="margin-left: 15px"
+                                                    [placeholder]="l('Group10_SEARCH')+l('Group10_CTBD_NAME')"
+                                                    type="text" [(ngModel)]="filterInput.ctbD_NAME" name="ctbD_NAME">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!--<Primeng-TurboTable-Start>-->
+                        <div class="row align-items-center">
+                            <!--<Primeng-TurboTable-Start>-->
+                            <div class="primeng-datatable-container">
+                                <div class="primeng-paging-container">
+                                    <p-table class="" #dataTable
+                                        rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                                        [value]="primengTableHelper.records"
+                                        [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                                        selectionMode="single" [paginator]="true" [scrollable]="true"
+                                        [(selection)]="selectedCTBD" ScrollWidth="100%"
+                                        [responsive]="primengTableHelper.isResponsive"
+                                        [resizableColumns]="primengTableHelper.resizableColumns">
+                                        <ng-template pTemplate="header" let-columns>
+                                            <tr>
+                                                <th>{{l('GROUP10_NUMBER_ORDER')}}</th>
+                                                <th pSortableColumn="ctbD_NAME">{{l('Group10_CTBD_NAME')}}<p-sortIcon
+                                                        field="ctbD_NAME">
+                                                    </p-sortIcon>
+                                                </th>
+                                                <th pSortableColumn="ctbD_QUANTITY">{{l('Group10_CTBD_QUANTITY')}}
+                                                    <p-sortIcon field="ctbD_QUANTITY">
+                                                    </p-sortIcon>
+                                                </th>
+                                                <th class="text-right" pSortableColumn="ctbD_UNIT_PRICE">
+                                                    {{l('Group10_CTBD_UNIT_PRICE')}}<p-sortIcon field="ctbD_UNIT_PRICE">
+                                                    </p-sortIcon>
+                                                </th>
+                                                <th class="text-right" pSortableColumn="ctbD_TOTAL_PRICE">
+                                                    {{l('Group10_CTBD_TOTAL_PRICE')}}<p-sortIcon
+                                                        field="ctbD_TOTAL_PRICE">
+                                                    </p-sortIcon>
+                                                </th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-rowData let-ctbd let-i="rowIndex">
+                                            <tr [pSelectableRow]="rowData">
+                                                <td>{{i+1}}</td>
+                                                <td>{{ctbd.ctbD_NAME}}</td>
+                                                <td>{{ctbd.ctbD_QUANTITY}}</td>
+                                                <td class="text-right">
+                                                    {{ctbd.ctbD_UNIT_PRICE| currency:'code':'':'1.0-0'}} VND
+                                                </td>
+                                                <td class="text-right">
+                                                    {{ctbd.ctbD_TOTAL_PRICE| currency:'code':'':'1.0-0'}} VND
+                                                </td>
+
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                    <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                                        {{l('NoData')}}
+                                    </div>
+                                    <span class="total-records-count">
+                                        {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<Primeng-TurboTable-End>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

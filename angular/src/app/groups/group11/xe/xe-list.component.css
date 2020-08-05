@@ -1,0 +1,4 @@
+.primeng-datatable-container .ui-table-loading-content {
+    color: white !important;
+    display: flex;
+}

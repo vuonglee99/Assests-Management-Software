@@ -1,0 +1,118 @@
+<style>
+    td{
+        text-align: center !important;
+    }
+    th{
+        text-align: center !important;
+    }
+</style>
+
+<div>
+    <ul style="background-color: #58a3dc;font-size: 15px;padding-left:10px;margin:0;color:white">
+        <li
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="goToListPage()">
+            <i class="fa fa-arrow-left"></i> </li>
+        <li *ngIf="isGranted('Pages.Group10.CTBD.Approve')"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="detailCTBD()"><i
+                class="fa fa-eye"></i></li>
+        <li *ngIf="isGranted('Pages.Group10.CTBD.Approve')"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="approve()"><i
+                class="fa fa-check"></i> {{l('Group11ApproveButton')}}</li>
+        <li *ngIf="isGranted('Pages.Group10.CTBD.Approve')"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="disapprove()"><i
+                class="fa fa-times"></i> {{l('Group11DisApproveButton')}}</li>
+
+    </ul>
+</div>
+
+
+<div class="group10">
+    <div class="m-content">
+        <div
+                style="background-color: #58a3dc; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+                <h1 style="margin-bottom: 0px"><i class="fa fa-info-circle"
+                        style="font-size: 30px; margin-right: 15px"></i>{{l('MaintenanceInfo')}}</h1>
+            </div>
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+                    <!--<Primeng-TurboTable-Start>-->
+                    <div class="row align-items-center">
+                        <!--<Primeng-TurboTable-Start>-->
+                        <div class="primeng-datatable-container">
+                            <div class="primeng-paging-container">
+                                <p-table class="" #dataTable
+                                    rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                                    [value]="primengTableHelper.records"
+                                    [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                                    selectionMode="single" [paginator]="true" [scrollable]="true"
+                                    [(selection)]="selectedCTBD" ScrollWidth="100%"
+                                    [responsive]="primengTableHelper.isResponsive"
+                                    [resizableColumns]="primengTableHelper.resizableColumns">
+                                    <ng-template pTemplate="header" let-columns>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th pSortableColumn="ctbD_NAME">{{l('Group10_CTBD_NAME')}}<p-sortIcon
+                                                    field="ctbD_NAME">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th pSortableColumn="ctbD_QUANTITY">{{l('Group10_CTBD_QUANTITY')}} <p-sortIcon
+                                                    field="ctbD_QUANTITY">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th class="text-right" pSortableColumn="ctbD_UNIT_PRICE">{{l('Group10_CTBD_UNIT_PRICE')}}<p-sortIcon
+                                                    field="ctbD_UNIT_PRICE">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th class="text-right" pSortableColumn="ctbD_TOTAL_PRICE">{{l('Group10_CTBD_TOTAL_PRICE')}}<p-sortIcon
+                                                    field="ctbD_TOTAL_PRICE">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th pSortableColumn="autH_STATUS">{{l('Group10_AUTH_STATUS')}}<p-sortIcon
+                                                    field="autH_STATUS">
+                                                </p-sortIcon>
+                                            </th>
+                                            <th> Loại </th>
+
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-rowData let-ctbd let-i="rowIndex">
+                                        <tr [pSelectableRow]="rowData">
+                                            <td>{{i+1}}</td>
+                                            <td>{{ctbd.ctbD_NAME}}</td>
+                                            <td>{{ctbd.ctbD_QUANTITY}}</td>
+                                            <td class="text-right">
+                                                {{ctbd.ctbD_UNIT_PRICE| currency:'code':'':'1.0-0'}} VND
+                                            </td>
+                                            <td class="text-right">
+                                                {{ctbd.ctbD_TOTAL_PRICE| currency:'code':'':'1.0-0'}} VND
+                                            </td>
+                                            <td *ngIf="ctbd.autH_STATUS === null; else Approved"><i style="color: orange"
+                                                class="fa fa-question-circle"></i>
+                                            </td>
+                                            <ng-template #Approved>
+                                                <td *ngIf="ctbd.autH_STATUS === 'A'; else DisApproved"> <i style="color: green"
+                                                        class="fa fa-check"></i></td>
+                                                <ng-template #DisApproved>
+                                                    <td> <i style="color: red" class="fa fa-times"></i></td>
+                                                </ng-template>
+                                            </ng-template>
+                                            <td>
+                                                {{this.l(ctbd.approvE_STATUS)}}
+                                            </td>    
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                                <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                                    {{l('NoData')}}
+                                </div>
+                                <span class="total-records-count">
+                                    {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<Primeng-TurboTable-End>-->
+                </div>
+            </div>
+        </div>
+    </div>

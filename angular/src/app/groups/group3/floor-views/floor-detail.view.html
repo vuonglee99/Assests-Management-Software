@@ -1,0 +1,261 @@
+<div [@routerTransition]>
+  <detailview-toolbar 
+    [isHidenList]="[
+      false,
+      pageState!==2 || !permission.isGranted('Pages.Group03.Floors.Update'),
+      pageState!==1 || !permission.isGranted('Pages.Group03.Floors.Create'),
+      pageState!==0 || !permission.isGranted('Pages.Group03.Floors.Update'),
+      pageState!==0 || !permission.isGranted('Pages.Group03.Floors.Delete'),
+      pageState!==2 || !permission.isGranted('Pages.Group03.Floors.Update')
+    ]"
+    [isDisabledList]="[
+      false,
+      false,
+      !isInputValidated(),
+      false,
+      false,
+      !isInputValidated()
+    ]"
+    (navigateBack)="onNavigateBackClick()"
+    (cancelItem)="onCancelItemClick()"
+    (createItem)="onCreateItemClick()"
+    (modifyItem)="onModifyItemClick()"
+    (deleteItem)="onDeleteItemClick()"
+    (updateItem)="onUpdateItemClick()"
+  ></detailview-toolbar>
+
+  <view-heading *ngIf="pageState===0" title="{{l('FloorDetailTitle_Detail')}}" 
+    subtitle="{{l('FloorDetailSubtitle')}}"></view-heading>
+  <view-heading *ngIf="pageState===1" title="{{l('FloorDetailTitle_Create')}}" 
+    subtitle="{{l('FloorDetailSubtitle')}}"></view-heading>
+  <view-heading *ngIf="pageState===2" title="{{l('FloorDetailTitle_Modify')}}" 
+    subtitle="{{l('FloorDetailSubtitle')}}"></view-heading>
+    
+  <div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+      <div class="m-portlet__body">
+          
+        <div *ngIf="inputModel.flooR_ID==null" class="m--font-danger">
+          {{l('Group3PageDetailNotFound')}}
+        </div>
+
+        <div *ngIf="inputModel.flooR_ID!=null">
+          <approve-status 
+            [approveStatus]="inputModel.autH_STATUS" 
+            [recordStatus]="inputModel.recorD_STATUS"
+            (approve)="onApprove('1')" (disapprove)="onApprove('2')"
+          ></approve-status>  
+
+          <fieldset [disabled]="pageState===0">
+            <div class="row">
+
+              <div class="col-md-6 form-group">
+                <label>{{l('FloorCode')}}*</label>
+                <p-inputMask [(ngModel)]="inputModel.flooR_CODE" mask="FL99999999" placeholder="FL________" styleClass="form-control">
+                </p-inputMask>
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label>{{l('FloorName')}}*</label>
+                <input type="text" [(ngModel)]="inputModel.flooR_NAME" class="form-control m-input">
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label>{{l('FloorType')}}*</label>
+                <searchable-select
+                  [items]="floorTypes"
+                  [(selectedValue)]="inputModel.floortypE_ID"
+                  (createItem)="modal.show()"
+                  (deleteItem)="onFloorTypeDelete($event)"
+                  editable="true"
+                  emptyText="{{l('Group3ClickToChoose')}}"
+                  [disabled]="pageState===0"
+                ></searchable-select>
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label>{{l('Group3Status')}}*</label>
+                <searchable-select
+                  [items]="Group3Statuses"
+                  [(selectedValue)]="inputModel.flooR_STATUS"
+                  emptyText="{{l('Group3ClickToChoose')}}"
+                  [disabled]="pageState===0"
+                ></searchable-select>
+              </div>
+
+              <div class="col-md-12 form-group">
+                <label>{{l('FloorDescription')}}</label>
+                <textarea #note="ngModel" type="text" class="form-control m-input" rows='3'
+                  [(ngModel)]="inputModel.description"></textarea>
+              </div>
+
+              <div *ngIf="pageState!==1" class="col-md-3 form-group">
+                <label>{{l('Group3MakerID')}}</label>
+                <input disabled type="text" [ngModel]="inputModel.makeR_ID" class="form-control m-input">
+              </div>
+
+              <div *ngIf="pageState!==1" class="col-md-3 form-group">
+                <label>{{l('Group3CreateDate')}}</label>
+                <input disabled type="text" [ngModel]="inputModel.creatE_DT | date: 'dd/MM/yyyy HH:mm:ss'" class="form-control m-input">
+              </div>
+
+              <div *ngIf="pageState!==1" class="col-md-3 form-group">
+                <label>{{l('Group3CheckerID')}}</label>
+                <input disabled type="text" [ngModel]="inputModel.checkeR_ID" class="form-control m-input">
+              </div>
+
+              <div *ngIf="pageState!==1" class="col-md-3 form-group">
+                <label>{{l('Group3ApproveDate')}}</label>
+                <input disabled type="text" [ngModel]="inputModel.approvE_DT | date: 'dd/MM/yyyy HH:mm:ss'" class="form-control m-input">
+              </div>
+              
+            </div>
+          </fieldset> 
+        </div>
+
+        <h4 class="m-portlet__head-text mt-3" *ngIf="pageState!==1">
+            <i class="icon-graduation font-red-pink"></i>
+            <span class="caption-subject font-red-pink bold uppercase">{{l("ApartmentsListTitle")}}</span>
+        </h4>
+
+        <datatable-toolbar *ngIf="pageState!==1"
+          [isHidenList]="[
+            !permission.isGranted('Pages.Group03.Apartments.Create'),
+            !permission.isGranted('Pages.Group03.Apartments'),
+            !permission.isGranted('Pages.Group03.Apartments.Update'),
+            !permission.isGranted('Pages.Group03.Apartments.Delete'),
+            false
+          ]"
+          [isDisabledList]="[
+            pageState!==2,
+            !selection,
+            !selection||pageState!==2,
+            !selection||pageState!==2,
+            false
+          ]"
+          (createItem)="createItem()"
+          (detailItem)="detailItem(selection)"
+          (modifyItem)="modifyItem(selection)"
+          (deleteItem)="deleteItem(selection)"
+          (exportItems)="exportItems()"
+        ></datatable-toolbar>
+          
+        <div class="row align-items-center mx-0" *ngIf="pageState!==1">
+          <div class="primeng-datatable-container">
+            <p-table #dataTable (onLazyLoad)="getItems($event)" [value]="primengTableHelper.records"
+              rows="{{primengTableHelper.defaultRecordsCountPerPage}}" [paginator]="false" [lazy]="true"
+              [scrollable]="true" ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+              [resizableColumns]="primengTableHelper.resizableColumns" selectionMode='single' [(selection)]="selection">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="width: 140px;"
+                    [hidden]="!isGrantedAny('Pages.Group03.Apartments', 'Pages.Group03.Apartments.Update', 'Pages.Group03.Apartments.Delete', 'Pages.Group03.Apartments.Approve')">
+                    {{l('Actions')}}
+                  </th>
+                  <th style="width: 150px" pSortableColumn="apartmenT_CODE">
+                    {{l('ApartmentCode')}}
+                    <p-sortIcon field="apartmenT_CODE"></p-sortIcon>
+                  </th>
+                  <th style="width: 250px" pSortableColumn="apartmenT_NAME">
+                    {{l('ApartmentName')}}
+                    <p-sortIcon field="apartmenT_NAME"></p-sortIcon>
+                  </th>
+                  <th style="width: 100px" pSortableColumn="apartmenttypE_NAME">
+                    {{l('ApartmentTypeName')}}
+                    <p-sortIcon field="apartmenttypE_NAME"></p-sortIcon>
+                  </th>
+                  <th style="width: 150px; text-align: right;" pSortableColumn="apartmenT_PRICE">
+                    {{l('ApartmentPrice')}}
+                    <p-sortIcon field="apartmenT_PRICE"></p-sortIcon>
+                  </th>
+                  <th style="width: 100px; text-align: center;" pSortableColumn="apartmenT_STATUS">
+                    {{l('Group3Status')}}
+                    <p-sortIcon field="apartmenT_STATUS"></p-sortIcon>
+                  </th>
+                  <th style="width: 100px; text-align: center;" pSortableColumn="autH_STATUS">
+                    {{l('Group3AuthStatus')}}
+                    <p-sortIcon field="autH_STATUS"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-record="$implicit" let-rowData let-bd let-i="rowIndex">
+                <tr [pSelectableRow]="rowData">
+                  <td style="width: 140px;"
+                    [hidden]="!isGrantedAny('Pages.Group03.Apartments', 'Pages.Group03.Apartments.Update', 'Pages.Group03.Apartments.Delete', 'Pages.Group03.Apartments.Approve')">
+                    <div class="btn-group dropdown" normalizePosition>
+                      <button class="dropdown-toggle btn btn-sm btn-primary" data-toggle="dropdown">
+                        <i class="fa fa-cog"></i><span class="caret"></span> {{l("Actions")}}
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a *ngIf="permission.isGranted('Pages.Group03.Apartments')"
+                            (click)="detailItem(record)"
+                          >{{l('Group3Detail')}}</a>
+                        </li>
+                        <li>
+                          <a *ngIf="permission.isGranted('Pages.Group03.Apartments.Update')&&pageState===2"
+                            (click)="modifyItem(record)"
+                          >{{l('Group3Modify')}}</a>
+                        </li>
+                        <li>
+                          <a *ngIf="permission.isGranted('Pages.Group03.Apartments.Delete')&&pageState===2"
+                            (click)="deleteItem(record)"
+                          >{{l('Group3Delete')}}</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td style="width: 150px">
+                    <span class="ui-column-title"> {{l('ApartmentCode')}}</span>
+                    {{record.apartmenT_CODE}}
+                  </td>
+                  <td style="width: 250px">
+                    <span class="ui-column-title"> {{l('ApartmentName')}}</span>
+                    {{record.apartmenT_NAME}}
+                  </td>
+                  <td style="width: 100px">
+                    <span class="ui-column-title"> {{l('ApartmentTypeName')}}</span>
+                    {{record.apartmenttypE_NAME}}
+                  </td>
+                  <td style="width: 100px; text-align: right">
+                    <span class="ui-column-title"> {{l('ApartmentPrice')}}</span>
+                    {{record.apartmenT_PRICE | currency }}
+                  </td>
+                  <td style="width: 150px; text-align: center;">
+                    <span class="ui-column-title"> {{l('Group3Status')}}</span>
+                    <i class="fa fa-check-circle m--font-success" *ngIf="record.apartmenT_STATUS==='1'"></i>
+                    <i class="fa fa-times-circle m--font-danger" *ngIf="record.apartmenT_STATUS==='0'"></i>
+                  </td>
+                  <td style="width: 100px; text-align: center;">
+                    <span class="ui-column-title"> {{l('Group3AuthStatus')}}</span>
+                    <i class="fa fa-check-circle m--font-success" *ngIf="record.autH_STATUS==='1'"></i>
+                    <i class="fa fa-times-circle m--font-danger" *ngIf="record.autH_STATUS==='2'"></i>
+                    <i class="fa fa-question-circle m--font-warning" *ngIf="record.autH_STATUS==='0'"></i>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+              {{l('NoData')}}
+            </div>
+            <div class="primeng-paging-container">
+              <p-paginator rows="{{primengTableHelper.defaultRecordsCountPerPage}}" #paginator
+                (onPageChange)="getItems($event)" [totalRecords]="primengTableHelper.totalRecordsCount"
+                [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage">
+              </p-paginator>
+              <span class="total-records-count">
+                {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<create-enum-modal #modal
+  title="{{l('FloorTypeCreate')}}" fieldName="{{l('FloorTypeName')}}"
+  (save)="onModalSaveClick($event)"
+></create-enum-modal>

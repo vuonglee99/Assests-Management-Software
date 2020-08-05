@@ -1,0 +1,603 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<localizationDictionary culture="vi">
+  <texts>
+    <text name="UitDemoUI">UIT giao diện demo</text>
+    <text name="Group12_ModelTitle" >Danh sách các mẫu xe</text>
+    <text name="Group12_ModelDetailTitle">Thông tin mẫu xe</text>
+    <text name="Group12_ModelCode" >Mã mẫu</text>
+    <text name="Group12_ModelName" >Tên mẫu</text>
+    <text name="Group12_ModelType" >Loại</text>
+    <text name="Group12_ModelHSX" >Hãng sản xuất</text>
+    <text name="Group12_ModelDMNL" >DMNL</text>
+    <text name="Group12_ModelNote" >Ghi chú</text>
+     <text name="Group12_AddNewModel">Thêm mới mẫu xe</text>
+    <text name="Group12_SearchModels">Tìm kiếm mẫu xe</text>
+    <text name="Group12_DeleteModels">Xóa mẫu xe </text>
+    <text name="Group12_ViewDetailModel">Xem chi tiết mẫu xe</text>
+    <text name="Group12_ExportModelTable">Xuất file excel</text>
+
+    <text name="Group12_KiemKeTitle" >Danh sách các bản kiểm kê</text>
+    <text name="Group12_KiemKeDetailTitle">Thông tin bản kiểm kê</text>
+    <text name="Group12_AddNewInventoryTitle">Thêm mới bản kiểm kê</text>
+    <text name="Group12_kK_CODE">Mã kiểm kê</text>
+    <text name="Group12_kK_NGUOITAO">Người tạo</text>
+    <text name="Group12_kK_MADONVI">Mã đơn vị</text>
+    <text name="Group12_kK_TENDONVI">Tên đơn vị</text>
+    <text name="Group12_kK_NGAYTAO">Ngày tạo</text>
+    <text name="Group12_kK_NGAYCHOT">Ngày chốt</text>
+    <text name="Group12_kK_TONGTB_DUOCKIEMKE">Tổng TB được kiểm kê</text>
+    <text name="Group12_kK_TONGTB_DUSOVOISAOKE">Đủ so với sao kê</text>
+    <text name="Group12_kK_TONGTB_THIEUSOVOISAOKE">Thiếu so với sao kê</text>
+    <text name="Group12_kK_TONGTB_THUASOVOISAOKE">Thừa so với sao kê</text>
+    <text name="Group12_AddNewInventory">Thêm mới bản kiểm kê</text>
+    <text name="Group12_SearchInventories">Tìm kiếm bản kiểm kê</text>
+    <text name="Group12_DeleteInventories">Xóa bản kiểm kê </text>
+    <text name="Group12_ViewDetailInventory">Xem chi tiết bản kiểm kê</text>
+    <text name="Group12_ExportInventoryTable">Xuất file excel</text>
+
+    <text name="Group12_autH_STATUS" >Trạng thái</text>
+    <text name="Group12_NoData" >Không có dữ liệu</text>
+    <text name="Group12_All" >Tất cả</text>
+    <text name="Group12_DeleteModelWaringMessage" >Bạn có chắc không?</text>
+    <text name="Group12_DeleteSuccess" >Xóa thành công!</text>
+    <text name="Group12_Notification" >Thông báo</text>
+    <text name="Group12_ChooseAModel" >Vui lòng chọn một mẫu xe!</text>
+    <text name="Group12_ChooseMaxModel" >Chỉ được chọn 1 mẫu xe!</text>
+    <text name="Group12_ApproveAction" >Duyệt</text>
+    <text name="Group12_DenyApproveAction" >Từ chối</text>
+    <text name="Group12_Approved" >Đã duyệt</text>
+    <text name="Group12_WatingForCheckingDeletion" >Chờ duyệt xóa</text>
+    <text name="Group12_WatingForCheckingUpdate" >Chờ duyệt chỉnh sửa/cập nhật</text>
+     <text name="Group12_WatingForCheckingAdd" >Chờ duyệt thêm mới</text>
+    <text name="Group12_CheckSuccess" >Duyệt thành công!</text>
+    <text name="Group12_DenyApproveSuccessfully" >Từ chối duyệt thành công!</text>
+    <text name="Group12_DenyApprove" >Từ chối duyệt</text>
+     <text name="Group12_Back" >Quay lại</text>
+     <text name="Group12_Edit" >Chỉnh sửa</text>
+     <text name="Group12_Save" >Lưu</text>
+     <text name="Group12_Cancel" >Hủy</text>
+     <text name="Group12_EditSuccessfully" >Chỉnh sửa thành công!</text>
+
+    <text name="GR6_STT">Số thứ tự</text>
+    <text name="GR6_DESC">Mô tả chi tiết</text>
+    <text name="GR6_WARNING">Cảnh báo</text>
+    <text name="GR6_TOTAL_RECORD">Tổng số dòng</text>
+    <text name="GR6_NO_DATA">Không có dữ liệu</text>
+    <text name="GR6_YES">Đồng ý</text>
+    <text name="GR6_SAVE">Lưu lại</text>
+    <text name="GR6_CANCEL">Hủy</text>
+    <text name="GR6_GOBACK">Trở về</text>
+    <text name="GR6_CREATE">Tạo</text>
+    <text name="GR6_EDIT">Chỉnh sửa</text>
+    <text name="GR6_UPDATE">Chỉnh sửa</text>
+    <text name="GR6_DELETE">Xóa</text>
+    <text name="GR6_APPROVE">Phê duyệt</text>
+    <text name="GR6_DENY">Không duyệt</text>
+    <text name="GR6_STATUS">Trạng thái</text>
+    <text name="GR6_SEARCHBY">Tìm theo</text>
+    <text name="GR6_CONFIRM">Xác nhận</text>
+    <text name="GR6_DOWNLOAD">Tải về máy</text>
+    <text name="GR6_CREATE_EXCEL_SUCESSFULL">Tạo excel thành công</text>
+    <text name="GR6_DTH">Đang thực hiện</text>
+    <text name="GR6_DC">Đang chờ</text>
+    <text name="GR6_DHT">Đã hoàn thành</text>
+    
+    <text name="GR6_REQUEST_TYPE">Loại yêu cầu</text>
+    <text name="GR6_APPROVED">Đã duyệt</text>
+    <text name="GR6_APPROVE_TYPE">Loại yêu cầu</text>
+    <text name="GR6_PENDING">Chờ duyệt</text>
+    <text name="GR6_DENIED">Bị từ chối</text>
+    <text name="GR6_ALL">Tất cả</text>
+    <text name="GR6_ACTIVE">Đang trong hệ thống</text>
+    <text name="GR6_INACTIVE">Đã xóa khỏi hệ thống</text>
+    
+    
+    <!-- Message -->
+    <text name="GR6_DELETED_MESSAGE">Đã xóa</text>
+    <text name="GR6_MESSAGE">Thông báo</text>
+    <text name="GR6_DELETED_SENT">Đã gửi yêu cầu</text>
+    <text name="GR6_REQUEST_SENT">Đã gửi yêu cầu</text>
+    <text name="GR6_REQUEST_APPROVED">Đã duyệt yêu cầu</text>
+    <text name="GR6_REQUEST_DENIED">Đã từ chối yêu cầu</text>
+
+    <!-- BEGIN-GROUP-6 -->
+    <!-- DVT -->
+    <text name="GR6_DVT_LIST_TITLE">Danh sách đơn vị tính</text>
+    <text name="GR6_DVT_TITLE">Đơn vị tính</text>
+    <text name="GR6_DVT_DETAIL_TITLE">Thông tin đơn vị tính</text>
+    <text name="GR6_DVT_CODE">Mã đơn vị tính</text>
+    <text name="GR6_DVT_NAME">Tên đơn vị tính</text>
+    <text name="GR6_DVT_DELETE_WARNING">Bạn có chắc chắn muốn xóa đơn vị tính đã chọn?</text>
+    <text name="GR6_DVT_APPROVE_CONFIRM">Bạn có chắc chắn muốn duyệt đơn vị tính đã chọn?</text>
+    <text name="GR6_DVT_DENY_CONFIRM">Bạn có chắc chắn không duyệt đơn vị tính đã chọn?</text>
+
+    <!-- DUT -->
+    <text name="GR6_DUT_LIST_TITLE">Danh sách độ ưu tiên</text>
+    <text name="GR6_DUT_TITLE">Độ ưu tiên</text>
+    <text name="GR6_DUT_DETAIL_TITLE">Thông tin độ ưu tiên</text>
+    <text name="GR6_DUT_CREATE_TITLE">Tạo mới độ ưu tiên</text>
+    <text name="GR6_DUT_CODE">Mã độ ưu tiên</text>
+    <text name="GR6_DUT_NAME">Tên độ ưu tiên</text>
+    <text name="GR6_DUT_LEVEL">Mức độ ưu tiên</text>
+    <text name="GR6_DUT_DELETE_WARNING">Bạn có chắc chắn muốn xóa độ ưu tiên đã chọn?</text>
+    <text name="GR6_DUT_APPROVE_CONFIRM">Bạn có chắc chắn muốn duyệt độ ưu tiên đã chọn?</text>
+    <text name="GR6_DUT_DENY_CONFIRM">Bạn có chắc chắn không duyệt độ ưu tiên đã chọn?</text>
+
+    <!-- TTYCSC -->
+    <text name="GR6_TTYCSC_LIST_TITLE">Danh sách trạng thái yêu cầu sửa chữa</text>
+    <text name="GR6_TTYCSC_TITLE">Trạng thái yêu cầu sửa chữa</text>
+    <text name="GR6_TTYCSC_DETAIL_TITLE">Thông tin trạng thái</text>
+    <text name="GR6_TTYCSC_CREATE_TITLE">Tạo mới trạng thái</text>
+    <text name="GR6_TTYCSC_CODE">Mã trạng thái</text>
+    <text name="GR6_TTYCSC_NAME">Tên trạng thái</text>
+    <text name="GR6_TTYCSC_DELETE_WARNING">Bạn có chắc chắn muốn xóa trạng thái đã chọn?</text>
+    <text name="GR6_TTYCSC_APPROVE_CONFIRM">Bạn có chắc chắn muốn duyệt trạng thái đã chọn?</text>
+    <text name="GR6_TTYCSC_DENY_CONFIRM">Bạn có chắc chắn không duyệt trạng thái đã chọn?</text>
+
+    <!-- Thong-Ke -->
+    <text name="GR6_STATISTIC">Thống kê</text>
+    <text name="GR6_STATISTIC_DESC">Thống kê số yêu cầu sửa chữa</text>
+    <text name="GR6_STATISTIC_COUNT">Tổng số Yêu cầu sửa chữa</text>
+    <text name="GR6_STATISTIC_RATIO">Tỉ lệ</text>
+    <text name="GR6_STATISTIC_REQUEST">Thống kê yêu cầu</text>
+    <text name="GR6_STATISTIC_COMPLETED_REQUEST">Tổng Yêu cầu sửa chữa đã hoàn thành</text>
+    <text name="GR6_STATISTIC_PROCESSING_REQUEST">Tổng Yêu cầu sửa chữa đang thực hiện</text>
+    <text name="GR6_STATISTIC_PENDING_REQUEST">Tổng Yêu cầu sửa chữa chưa thực hiện</text>
+    
+    <!-- END-GROUP-6 -->
+
+    <!--Buldings-->
+    <text name="BuildingsManagement">Quản lý tòa nhà</text>
+    <text name="BuildingsListTitle">Danh mục tòa nhà</text>
+    <text name="BuildingsListSubitle">Quản lý danh sách các tòa nhà</text>
+    <text name="BuildingCode">Mã số Tòa nhà</text>
+    <text name="BuildingName">Tên của Tòa nhà</text>
+    <text name="BuildingAddress">Địa chỉ Tòa nhà</text>
+    <text name="BuildingFloorNo">Số tầng</text>
+    <text name="BuildingDescription">Miêu tả Tòa nhà</text>
+    <text name="BuildingDeleteWarningMessage">Tòa nhà {0} sẽ bị xóa</text>
+    <text name="BuildingDetailTitle_Create">Thêm tòa nhà mới</text>
+    <text name="BuildingDetailTitle_Detail">Chi tiết tòa nhà</text>
+    <text name="BuildingDetailTitle_Modify">Chỉnh sửa tòa nhà</text>
+    <text name="BuildingDetailSubtitle">Thông tin chi tiết của toà nhà</text>
+    <text name="FloorsListTitle">Danh mục tầng nhà</text>
+    <text name="FloorCode">Mã tầng</text>
+    <text name="FloorName">Tên tầng</text>
+    <text name="FloorType">Loại tầng</text>
+    <text name="FloorTypeCreate">Tạo loại tầng nhà mới</text>
+    <text name="FloorTypeName">Tên loại tầng</text>
+    <text name="FloorDescription">Miêu tả Tầng nhà</text>
+    <text name="FloorDeleteWarningMessage">Tầng nhà {0} sẽ bị xóa</text>
+    <text name="FloorDetailTitle_Create">Thêm tầng nhà mới</text>
+    <text name="FloorDetailTitle_Detail">Chi tiết tầng nhà</text>
+    <text name="FloorDetailTitle_Modify">Chỉnh sửa tầng nhà</text>
+    <text name="FloorDetailSubtitle">Thông tin chi tiết của tầng nhà</text>
+
+    <text name="ApartmentsListTitle">Danh mục căn hộ</text>
+    <text name="ApartmentCode">Mã căn hộ</text>
+    <text name="ApartmentName">Tên căn hộ</text>
+    <text name="ApartmentType">Loại căn hộ</text>
+    <text name="ApartmentTypeCreate">Tạo loại căn hộ mới</text>
+    <text name="ApartmentTypeName">Tên loại căn hộ</text>
+    <text name="ApartmentDescription">Miêu tả Căn hộ nhà</text>
+    <text name="ApartmentPrice">Giá căn hộ</text>
+    <text name="ApartmentRooms">Số lượng phòng</text>
+    <text name="ApartmentArea">Diện tích</text>
+    <text name="ApartmentDeleteWarningMessage">Căn hộ nhà {0} sẽ bị xóa</text>
+    <text name="ApartmentDetailTitle_Create">Thêm căn hộ nhà mới</text>
+    <text name="ApartmentDetailTitle_Detail">Chi tiết căn hộ nhà</text>
+    <text name="ApartmentDetailTitle_Modify">Chỉnh sửa căn hộ nhà</text>
+    <text name="ApartmentDetailSubtitle">Thông tin chi tiết của căn hộ nhà</text>
+
+    <text name="ResidentsManagement">Quản lý dân cư</text>
+    <text name="ResidentsListTitle">Danh mục dân cư</text>
+    <text name="ResidentsListSubitle">Quản lý danh sách các dân cư</text>
+    <text name="ResidentCode">Mã số của dân cư</text>
+    <text name="ResidentName">Họ tên của dân cư</text>
+    <text name="ResidentPhone">SĐT của dân cư</text>
+    <text name="ResidentBirth">Ngày sinh của dân cư</text>
+    <text name="ResidentIDCard">CMND của dân cư</text>
+    <text name="ResidentCurApart">Căn hộ đang sống</text>
+    <text name="ResidentDeleteWarningMessage">Dân cư {0} sẽ bị xóa</text>
+    <text name="ResidentDetailTitle_Create">Thêm dân cư nhà mới</text>
+    <text name="ResidentDetailTitle_Detail">Chi tiết dân cư nhà</text>
+    <text name="ResidentDetailTitle_Modify">Chỉnh sửa dân cư nhà</text>
+    <text name="ResidentDetailSubtitle">Thông tin chi tiết của dân cư nhà</text>
+
+    <text name="Group3AuthStatus">Duyệt</text>
+    <text name="Group3Rooms">Phòng</text>
+    <text name="Group3CurrencyUnit">VNĐ</text>
+    <text name="Group3Status">Trạng thái</text>
+    <text name="Group3Create">Thêm mới</text>
+    <text name="Group3Detail">Chi tiết</text>
+    <text name="Group3Delete">Xóa bỏ</text>
+    <text name="Group3Modify">Chỉnh sửa</text>
+    <text name="Group3Update">Cập nhật</text>
+    <text name="Group3Approve">Kiểm duyệt</text>
+    <text name="Group3Export">Xuất Excel</text>
+    <text name="Group3Back">Trở về</text>
+    <text name="Group3Cancel">Hủy bỏ</text>
+    <text name="Group3Approved">Đã duyệt</text>
+    <text name="Group3Denied">Từ chối</text>
+    <text name="Group3Waiting">Chờ duyệt</text>
+    <text name="Group3UpdateSuccess">Cập nhật thành công</text>
+    <text name="Group3MakerID">Mã số người tạo</text>
+    <text name="Group3CreateDate">Ngày giờ tạo</text>
+    <text name="Group3CheckerID">Mã số người duyệt</text>
+    <text name="Group3ApproveDate">Ngày giờ duyệt</text>
+    <text name="Group3PageDetailNotFound">
+      Trang này đã không còn tồn tại trong hệ thống. 
+      Tuy nhiên nó có thể còn tồn tại dữ liệu trong database.
+      Hãy liên hệ với người quản trị database để được tìm lại nội dung
+    </text>
+    <text name="Group3ClickToChoose">Nhấp để chọn</text>
+	
+	
+	<!--Group 7-->
+	<text name="G7ListOfVehicleTypes">Danh sách loại xe</text>
+	<text name="G7VehicleTypeCode">Mã loại xe</text>
+	<text name="G7EnterVehicleTypeCode">Nhập mã loại xe</text>
+	<text name="G7VehicleTypeName">Tên loại xe</text>
+	<text name="G7EnterVehicleTypeName">Nhập tên loại xe</text>
+	<text name="G7No">STT</text>
+	<text name="G7Description">Mô tả</text>
+	<text name="G7DateCreated">Ngày tạo</text>
+	<text name="G7NoData">Không có dữ liệu</text>
+	<text name="G7TotalRecordsCount">Số bản ghi</text>
+	
+	<text name="G7SupplierDetailScreen">Màn hình chi tiết nhà cung ứng</text>
+	<text name="G7NotFoundSuppliers">Không tìm thấy nhà cung ứng phù hợp. Quay lại</text>
+	<text name="G7AddSupplier">Thêm mới nhà cung ứng</text>
+	<text name="G7ViewDetail">Thông tin chi tiết</text>
+	<text name="G7SupplierCode">Mã nhà cung ứng</text>
+	<text name="G7SupplierName">Tên nhà cung ứng</text>
+	<text name="G7CantBeEmpty">không được trống</text>
+	<text name="G7Address">Địa chỉ</text>
+	<text name="G7Phone">Số điện thoại</text>
+	<text name="G7MustBe10Characters">phải gồm 10 kí tự</text>
+	<text name="G7TaxNumber">Mã số thuế</text>
+	<text name="G7ContactPersonName">Tên người liên hệ</text>
+	<text name="G7ContactPersonEmail">Email người liên hệ</text>
+	<text name="G7ContactPersonPhone">Số điện thoại người liên hệ</text>
+	<text name="G7CorrectEmail">Nhập đúng định dạng email vd: "abc@xyz.com"</text>
+	
+	
+	
+
+    <!--GROUP11 START -->
+    <!--Maintenance START-->
+    <text name="Group11Maintenance">Bảo dưỡng xe</text>
+    <text name="MaintenanceManagement">Quản lý bảo dưỡng xe</text>
+    <text name="MaintenanceInfo">Thông tin bảo dưỡng</text>
+    <text name="MaintenanceCar">Mã xe</text>
+    <text name="MaintenanceCode">Mã bảo dưỡng</text>
+    <text name="MaintenanceTitle">Chi tiết bảo dưỡng</text>
+    <text name="MaintenanceGarage">Đơn vị thực hiện</text>
+    <text name="MaintenanceAddress">Địa điểm</text>
+    <text name="MaintenanceFrom">Từ ngày</text>
+    <text name="MaintenanceTo">Đến ngày</text>
+    <text name="MaintenancePrice">Tổng chi phí</text>
+    <text name="MaintenanceNo">STT</text>
+
+    <text name="Group11SearchByCarId">Tìm theo mã xe...</text>
+    
+    <text name="Group11MaintenanceCodeValidate">Vui lòng nhập mã bảo dưỡng</text>
+    <text name="Group11MaintenanceCarValidate">Vui lòng nhập mã xe</text>
+    <text name="Group11MaintenanceGarageValidate">Vui lòng nhập đơn vị thực hiện bảo dưỡng xe</text>
+    <text name="Group11MaintenanceAddressValidate">Vui lòng nhập địa điểm</text>
+    <text name="Group11MaintenanceFromValidate">Vui lòng chọn thời gian bắt đầu</text>
+    <text name="Group11MaintenanceToValidate">Vui lòng chọn thời gian kết thúc bảo dưỡng</text>
+    <text name="Group11MaintenanceWhiteSpaceValidate">Vui lòng nhập vào dữ liệu hợp lệ</text>
+    <text name="Group11MaintenanceBeforeDateValidate">Vui lòng chọn lại thời gian kết thúc bảo dưỡng</text>
+
+    <text name="TypeApproveStatus">Chờ duyệt</text>
+    <text name="Group11Delete">Xóa</text>
+    <text name="Group11Update">Cập nhật</text>
+    <text name="Group11Insert">Thêm mới</text>
+    <text name="Group11FormInvalid">Bạn vui lòng nhập lại đầy đủ các thông tin!</text>
+    <text name="Group11DisApproveButton">KHÔNG DUYỆT</text>
+    <text name="Group11ApproveButton">DUYỆT</text>
+    <text name="SuccessfullyDeleteApproved">Yêu cầu xóa đã được duyệt thành công</text>
+    <text name="SuccessfullyUpdateApproved">Yêu cầu cập nhật đã được duyệt thành công</text>
+    <text name="SuccessfullyApproved">Yêu cầu thêm mới đã được duyệt thành công</text>
+    <text name="SuccessfullyDeleteDisApproved">Yêu cầu xóa đã bị hủy bỏ</text>
+    <text name="SuccessfullyUpdateDisApproved">Yêu cầu cập nhật đã bị hủy bỏ</text>
+    <text name="SuccessfullyDisApproved">Yêu cầu thêm mới đã bị hủy bỏ</text>
+    <text name="MaintenanceAuthStatus">Trạng thái duyệt</text>
+    <text name="ExistedMaintenanceCodeError">Mã bảo dưỡng đã tồn tại hoặc đang chờ duyệt</text>
+    <text name="InQueueDeleteMessage">Yêu cầu xóa đã được thêm vào danh sách duyệt</text>
+    <text name="InQueueUpdateMessage">Yêu cầu sửa đã được thêm vào danh sách duyệt</text>
+    <text name="WaitingForApproveMessage">Phiếu đang chờ duyệt</text>
+    <text name="InvalidFinishDateError">Ngày kết thúc không được nhỏ hơn ngày bắt đầu bảo dưỡng</text>
+    <text name="AddNewSuccessMessage">Yêu cầu thêm mới đã được đưa vào danh sách duyệt</text>
+    <text name="ChooseMaintenanceToViewDetailMessage">Vui lòng chọn phiếu bảo dưỡng cần xem thông tin</text>
+    <text name="ExportExcelSuccess">Đã xuất file excel thành công</text>
+    <text name="ExportExcelError">Xuất file excel thất bại, vui lòng kiểm tra lại</text>
+    <text name="ChooseMaintenanceToDeleteMessage">Vui lòng chọn phiếu bảo dưỡng cần xóa</text>
+    <text name="ChooseMaintenanceToApproveMessage">Vui lòng chọn phiếu bảo dưỡng cần duyệt</text>
+    <text name="ChooseAlreadyApprovedMessage">Phiếu bảo dưỡng đã được duyệt</text>
+    <text name="MaintenanceDeleteWarningMessage">Xóa lịch sử bảo dưỡng {0}?</text>
+    <text name="MaintenanceApproveDeleteWarningMessage">Duyệt yêu cầu xóa {0}?</text>
+    <text name="MaintenanceApproveUpdateWarningMessage">Duyệt yêu cầu sửa {0}?</text>
+    <text name="MaintenanceApproveInsertWarningMessage">Duyệt yêu cầu thêm mới {0}?</text>
+    <text name="MaintenanceDenyDeleteWarningMessage">Từ chối yêu cầu xóa {0}?</text>
+    <text name="MaintenanceDenyUpdateWarningMessage">Từ chối yêu cầu sửa {0}? </text>
+    <text name="MaintenanceDenyInsertWarningMessage">Từ chối yêu cầu thêm mới {0}?</text>
+    <text name="MaintenanceDetail">Chi tiết bảo dưỡng</text>
+    <text name="Group11MaintenanceCodePatternValidate"> Mã bảo dưỡng không được chứa khoảng trống và các kí tự đặc biệt ngoài _</text>
+    
+    <!--Maintenance END-->
+    <!--Car Rental START -->
+    <text name="Group11CarRental">Phiếu thuê xe</text>
+    <text name="CarRentalManagement">Quản lí phiếu thuê xe</text>
+    <text name="CarRentalDetail">Chi tiết thuê xe</text>
+    <text name="CarRentalCode">Mã phiếu thuê xe</text>
+    <text name="CarRentalRenter">Người thuê xe</text>
+    <text name="CarRentalCar">Xe</text>
+    <text name="CarRentalPrice">Giá thuê</text>
+    <text name="CarRentalFrom">Ngày thuê</text>
+    <text name="CarRentalReturn">Ngày trả</text>
+    <text name="CarRentalExpect">Hạn trả</text>
+    <text name="CarRentalNotes">Ghi chú</text>
+
+    <text name="Group11CarRentalCodeValidate">Vui lòng nhập mã phiếu thuê xe</text>
+    <text name="Group11CarRentalRenterValidate">Vui lòng chọn người thuê xe</text>
+    <text name="Group11CarRentalCarValidate">Vui lòng chọn xe cho thuê</text>
+    <text name="Group11CarRentalPriceValidate">Vui lòng nhập giá thuê</text>
+    <text name="Group11CarRentalFromValidate">Vui lòng chọn ngày thuê</text>
+    <text name="Group11CarRentalExpectValidate">Vui lòng chọn hạn trả</text>
+    <text name="Group11CarRentalReturnValidate">Vui lòng chọn ngày trả</text>
+    <text name="Group11CarRentalWhiteSpaceValidate">Vui lòng nhập vào dữ liệu hợp lệ</text>
+    <text name="Group11CarRentalPriceWithWordsValidate">Giá tiền chỉ chứa số</text>
+    <text name="Group11CarRentalBeforeDateValidate">Ngày thuê xe phải nhỏ hơn hoặc bằng ngày trả và hạn trả</text>
+    <text name="InvalidRentDateError">Ngày thuê không hợp lệ</text>
+
+    <text name="CarRentalDeleteWarningMessage">Bạn có chắc muốn xóa phiếu thuê xe {0}?</text>
+    
+    <text name="Group11CarRentalCodePatternValidate">Mã phiếu thuê xe không được chứa khoảng trống và các kí tự đặc biệt ngoài _</text>
+    <!--Car Rental END-->
+    
+    <!-- Car START-->
+    <text name="Group11Car">Xe-Group11</text>
+    <text name="CarManagement">Quản lí danh sách xe</text>
+    <text name="CarCode">Mã xe</text>
+    <text name="SearchByCarCode">Tìm theo mã xe...</text>
+    <text name="CarName">Tên xe</text>
+    <text name="SearchByCarName">Tìm theo tên xe...</text>
+    <text name="CarLicensePlate">Biển số xe</text>
+    <text name="SearchByCarLicensePlate">Tìm theo biển số xe...</text>
+    <text name="CarNo">STT</text>
+    <text name="CarColor">Màu xe</text>
+    <text name="CarManufacturer">Hãng sản xuất</text>
+    <text name="CarStatus">Trạng thái</text>
+
+    <text name="CarDeleteWarningMessage">Bạn có chắc chắn muốn xóa xe {0}?</text>
+    <text name="Group11CarCodePatternValidate">Mã xe không được chứa khoảng trống và các kí tự đặc biệt ngoài _</text>
+    <!-- Car END-->
+    <!--GROUP11 END-->
+    <!--LOAI XE-->
+    <text name="G2LoaiXe">Loại xe</text>
+    <text name="G2QuanLyCacLoaiXe">Quản lý các loại xe</text>
+    <text name="G2ThemLoaiXe">Thêm loại xe</text>
+    <text name="G2TimKiem">Tìm kiếm</text>
+    <text name="G2MaLoaiXe">Mã loại xe</text>
+    <text name="G2TenLoaiXe">Tên loại xe</text>
+    <text name="G2NhapTuKhoaDeTim">Nhập từ khóa để tìm</text>
+    <text name="G2MoTa">Mô tả</text>
+    <text name="G2TongCong">Tổng cộng</text>
+    <text name="G2KhongCoDuLieu">Không có dữ liệu</text>
+    <text name="G2XoaMucDaChon">Xóa mục đã chọn</text>
+    <text name="G2KhongTimThayLoaiXe">Không tìm thấy loại xe này</text>
+    <text name="G2Chon">Chọn</text>
+    <text name="G2Daxoa">Đã xóa</text>
+    <text name="G2Muc">Mục</text>
+    <text name="G2TroLai">Trở lại</text>
+    <text name="G2NhapGiaTri">Nhập giá trị</text>
+    <text name="G2Them">Thêm</text>
+    <text name="G2ThongTinLoaiXe">Thông tin loại xe</text>
+    <text name="G2HangXe">Hãng xe</text>
+    <text name="G2NamSanXuat">Năm sản xuất</text>
+    <text name="G2LoaiNguyenLieu">Loại nguyên liệu</text>
+    <text name="G2DinhMucNL">Định mức nguyên liệu (l/100km)</text>
+    
+    <text name="G2KhongDuocTrong">không được trống</text>
+    <text name="G2KhongVuotQua">không vượt quá</text>
+    <text name="G2KyTu">ký tự</text>
+    <text name="G2KhongChuaKyTuDacBiet">không được chứa ký tự đặc biệt</text>
+    <text name="G2KhongTimThayLoaiXeNay">Không tìm thấy loại xe này</text>
+    <text name="G2LoaiXeBiXoaHoacKhongTonTai">Loại xe này có thể đã bị xóa hoặc không tồn tại. Vui lòng kiểm tra lại!</text>
+    <text name="G2SuaThanhCong">Sửa thành công</text>
+    <text name="G2KhongHopLe">không hợp lệ</text>
+    <text name="G2XoaThanhCong">Xóa thành công!</text>
+    <text name="G2XacNhan">Xác nhận</text>
+    <text name="G2BanChacChanMuonXoaLoaiXe">Bạn chắc chắn muốn xóa loại xe</text>
+    <text name="G2DuyetThanhCong">Duyệt thành công!</text>
+    <text name="G2KhongDuyetThanhCong">Không duyệt thành công!</text>
+    <text name="G2DuFilter">Đủ</text>
+    <text name="G2ThieuFilter">Thiếu</text>
+    <text name="G2ThuaFilter">Thừa</text>
+    
+    <!-- Group4-text -->
+    <text name="g4SuccessfullyAdded">Thêm mới thành công</text>
+    <text name="g4SuccessfullyUpdated">Chỉnh sửa thành công</text>
+    <text name="g4SuccessfullyDeleted">Xóa thành công</text>
+    <text name="g4WarningSelectedTenant">Vui lòng chọn 1 người thuê</text>
+    <text name="g4ConfirmDelete">Xác nhận xóa</text>
+    <text name="g4DeleteWarningMessage" value="Bạn muốn xóa '{0}'?" />
+    <text name="g4SaveErrorMessage">Vui lòng nhập lại thông tin</text>
+    <text name="g4MaxTenantMessage">Đã đạt số người tối đa!</text>
+    <text name="g4BtnAddText">Thêm</text>
+    <text name="g4BtnDeleteText">Xóa</text>
+    <text name="g4BtnViewText">Xem chi tiết</text>
+    <text name="g4BtnSearchText">Tìm kiếm</text>
+    <text name="g4BtnEditText">Chỉnh sửa</text>
+    <text name="g4BtnSaveText">Lưu</text>
+    <text name="g4BtnBackText">Trở lại</text>
+    <text name="g4BtnCancelText">Hủy bỏ</text>
+    <text name="g4BtnApproveText">Duyệt</text>
+    <text name="g4BtnDenyText">Từ chối</text>
+    <text name="g4ApprovedStatus">Đã duyệt</text>
+    <text name="g4DenyStatus">Từ chối</text>
+    <text name="g4WaitingStatus">Chờ duyệt</text>
+    <text name="g4AddPageName">Thêm mới</text>
+    <text name="g4EditPageName">Chỉnh sửa</text>
+    <text name="g4ViewPageName">Xem chi tiết</text>
+    <text name="g4CodeTxtPlaceholder">Tìm kiếm với mã</text>
+    <text name="g4NameTxtPlaceholder">Tìm kiếm với tên</text>
+    <text name="g4SearchByCode">Tìm kiếm theo mã</text>
+    <text name="g4SearchByName">Tìm kiếm theo tên</text>
+    <text name="g4SeleteAll">--- Chọn tất cả ---</text>
+    <text name="g4SummaryRecords">Tổng số</text>
+    <text name="g4EmptyValueValidate">Không được để trống trường này</text>
+    <text name="g4SerialColTitle">STT</text>
+    <text name="g4NoResultFound">Không tìm thấy kết quả</text>
+    <text name="g4List">Danh sách</text>
+    <text name="g4Manage">Quản lý</text>
+    <text name="g4EmptyData">Không có dữ liệu</text>
+    <text name="g4BranchPageName">Đơn vị</text>
+    <text name="g4BranchCodeLable">Mã đơn vị</text>
+    <text name="g4BranchNameLable">Tên đơn vị</text>
+    <text name="g4BranchTypeLable">Loại đơn vị</text>
+    <text name="g4BranchFatherLable">Đơn vị cha</text>
+    <text name="g4BranchPhoneLable">Số điện thoại</text>
+    <text name="g4BranchFaxLable">Số Fax</text>
+    <text name="g4BranchEmailLable">Email</text>
+    <text name="g4BranchAddressLable">Địa chỉ</text>
+    <text name="g4BranchDescriptionLable">Mô tả</text>
+    <text name="g4BranchStatusLable">Trạng thái hoạt động</text>
+    <text name="g4BranchActiveStatus">Đang hoạt động</text>
+    <text name="g4InvalidPhoneNumber">Số điện thoại bao gồm 10 chữ số</text>
+    <text name="g4InvalidFaxNumber">Số Fax bao gồm 10 chữ số</text>
+    <text name="g4InvalidEmailAddress">Địa chỉ email không hợp lệ (vd: "abc@xyz.com")</text>
+    <text name="g4ApartmentPageName">Căn hộ</text>
+    <text name="g4ApartmentCodeLable">Mã căn hộ</text>
+    <text name="g4ApartmentNameLable">Tên căn hộ</text>
+    <text name="g4BuildingLable">Tòa nhà</text>
+    <text name="g4FloorLable">Tầng</text>
+    <text name="g4ApartmentTypeLable">Loại căn hộ</text>
+    <text name="g4StatusLable">Tình trạng</text>
+    <text name="g4PriceLable">Giá</text>
+    <text name="g4NumberOfRoomLable">Số phòng</text>
+    <text name="g4SuperficiesLable">Diện tích</text>
+    <text name="g4MaximumPeopleLable">Số người tối đa</text>
+    <text name="g4ApartmentDescription">Mô tả</text>
+    <text name="g4ChooseApType">--- Chọn loại căn hộ ---</text>
+    <text name="g4ResidentsList">Danh sách người thuê</text>
+    <text name="g4BtnAddResidentLable">Thêm người thuê</text>
+    <text name="g4ApartmentAuthStatus">Trạng thái duyệt</text>
+    <text name="g4NumbersOfPeople">Số lượng người</text>
+    <text name="g4ApartmentList">Danh sách căn hộ</text>
+    <text name="g4ManageApartment">Quản lý căn hộ</text>
+    <text name="g4Enable">Được phép sử dụng</text>
+    <text name="g4Disable">Chưa được phép sử dụng</text>
+    <text name="g4UnseletedApartmentWarning">Vui lòng chọn một căn hộ</text>
+    <text name="g4ApTypePageName">Loại căn hộ</text>
+    <text name="g4AddApTypePageLable">Thêm mới loại căn hộ</text>
+    <text name="g4EditApTypePageLable">Chỉnh sửa loại căn hộ</text>
+    <text name="g4ApTypeCodeLable">Mã loại căn hộ</text>
+    <text name="g4ApTypeNameLable">Tên loại căn hộ</text>
+    <text name="g4ApTypeDescriptionLable">Mô tả</text>
+    <text name="g4ListApTypeTitle">Danh sách Loại căn hộ</text>
+    <text name="g4UnseletedApTypeWarning">Vui lòng chọn một loại căn hộ</text>
+    <text name="g4ApartmentManagement">Căn hộ</text>
+    <text name="g4ApartmentTypeManagement">Loại căn hộ</text>
+    <text name="g4ExportSuccess">Xuất excel thành công</text>
+    <text name="g4ExportFalled">Xuất excel thất bại</text>
+    <text name="g4AddToApartment">Thêm vào căn hộ</text>
+    <text name="g4ChooseBuilding">--- Chọn Tòa ---</text>
+    <text name="g4ChooseFloor">--- Chọn Tầng ---</text>
+    <text name="g4MakerID">ID Người tạo</text>
+    <text name="g4CreateDT">Ngày giờ tạo</text>
+    <text name="g4CheckerID">ID Người duyệt</text>
+    <text name="g4ApproveDT">Ngày giờ duyệt</text>
+    <text name="g4ResidentCode">Mã số </text>
+    <text name="g4ResidentName">Họ tên </text>
+    <text name="g4ResidentPhone">SĐT </text>
+    <text name="g4ResidentBirth">Ngày sinh </text>
+    <text name="g4ResidentIDCard">CMND </text>
+    <text name="g4WaitingAdd">Chờ duyệt Thêm </text>
+    <text name="g4WaitingUpdate">Chờ duyệt Sửa </text>
+    <text name="g4WaitingDelete">Chờ duyệt Xóa </text>
+    <text name="g4BtnChangeText">Xem thay đổi </text>
+    <text name="g4Compare">Bảng so sánh</text>
+    <text name="g4ApartmentOld">Thông tin Cũ</text>
+    <text name="g4ApartmentNew">Thông tin Mới</text> 
+    <text name="g4SuccessfullyApproved">Duyệt thành công</text>
+    <text name="g4SuccessfullyDenied">Từ chối thành công</text>
+    <text name="g4WaitingApprove">Vui lòng chờ duyệt</text>
+    <text name="g4Approved">Đã duyệt</text>
+    <!-- Group 4 -->
+    
+        <!--GROUP10-->
+         <text name="Group10_REASON">Lí do</text>
+    <text name="Group10_REQUEST_REASON">Vui lòng nhập lí do không duyệt</text>
+	<text name="Group10_EXCEL_FAIL">Xuất file excel thất bại</text>
+	<text name="Group10_EXCEL_COMPLETE">Xuất file excel thành công</text>
+	<text name="Group10_EXCEL_REQUEST">Bạn có muốn tải tập tin này về?</text>
+      <text name="Group10_AUTH_STATUS">Trạng thái</text>
+       <text name="Group10_APPROVE_DT">Ngày duyệt</text>
+      <text name="GROUP10_NUMBER_ORDER">STT</text>
+      <text name="Group10_MALE">Nam</text>
+      <text name="Group10_FEMALE">Nữ</text>
+      <text name="Group10_SEARCH">Tìm theo: </text>
+      <text name="Group10_DELETE_WARNING">Bạn có chắc muốn xóa dữ liệu này không?</text>
+      <text name="Group10_DELETE_CHOSE">Không có dữ liệu được chọn để xóa!</text>
+      <text name="Group10_UPDATE_CHOSE">Không có dữ liệu được chọn để chỉnh sửa!</text>
+      <text name="Group10_DETAIL_CHOSE">Không có dữ liệu được chọn để xem chi tiết!</text>
+      <text name="Group10_DELETE_COMPLETE">Xóa thành công</text>
+      <text name="Group10_UPDATE_COMPLETE">Chỉnh sửa thành công</text>
+      <text name="Group10_ADD_COMPLETE">Thêm thành công</text>
+      <text name="Group10_ID_NOT_FOUND">Không tồn tại dữ liệu</text>
+      <text name="Group10_ERROR_INPUT">Có lỗi xuất hiện, vui lòng kiểm tra các trường nhập vào</text>
+      <text name="Group10_DELETE_APPROVE">Yêu cầu xóa đã được thêm vào danh sách duyệt</text>
+      <text name="Group10_ADD_APPROVE">Yêu cầu thêm đã được thêm vào danh sách duyệt</text>
+      <text name="Group10_UPDATE_APPROVE">Yêu cầu sửa đã được thêm vào danh sách duyệt</text>
+
+<!--Approve status-->
+<text name="DEN_UPDATE">Từ chối sửa</text>
+<text name="DEN_DELETE">Từ chối xóa</text>
+<text name="DEN_INSERT">Từ chối thêm</text>
+<text name="APP_INSERT">Đã thêm</text>
+<text name="APP_DELETE">Đã xóa</text>
+<text name="APP_UPDATE">Đã sửa</text>
+<text name="PEN_INSERT">Chờ thêm</text>
+<text name="PEN_DELETE">Chờ xóa</text>
+<text name="PEN_UPDATE">Chờ sửa</text>
+<!--Validate-->
+    <text name="Group10_ONLY_NUMBER">Chỉ được nhập số.</text>
+    <text name="Group10_MAX">Chỉ được nhập tối đa {0} kí tự.</text>
+     <text name="Group10_MIN">Chỉ được nhập tối thiểu {0} kí tự.</text>
+    <text name="Group10_REQUIRED">Không được để trống.</text>
+    <text name="Group10_SELECT_DATE">Vui lòng chọn ngày ở quá khứ </text>
+     <!-- NTX -->
+    <text name="Group10_NTX_SEARCH_ID_CARD">Tìm theo CMND</text>
+    <text name="Group10_NTX_SEARCH_NAME">Tìm theo tên</text>
+    <text name="Group10_NTX_LIST_TITLE">Quản lí người thuê xe</text>
+    <text name="Group10_NTX_DETAIL_TITLE">Chi tiết người thuê xe</text>
+    <text name="Group10_NTX_CODE">Mã người thuê</text>
+    <text name="Group10_NTX_NAME">Tên người thuê</text>
+    <text name="Group10_NTX_ADDRESS">Địa chỉ</text>
+    <text name="Group10_NTX_GENDER">Giới tính</text>
+    <text name="Group10_NTX_BIRTHDAY">Ngày sinh</text>
+    <text name="Group10_NTX_ID_CARD">CMND</text>
+    <text name="Group10_NTX_LICENSE">GPLX</text>
+     
+    <!--NSX-->
+ 
+    <text name="Group10_NSX_LIST_TITLE">Quản lí nhà sản xuất</text>
+    <text name="Group10_NSX_DETAIL_TITLE">Chi tiết nhà sản xuất</text>
+    <text name="Group10_NSX_CODE">Mã NSX</text>
+    <text name="Group10_NSX_NAME">Tên NSX</text>
+    <text name="Group10_NSX_FROM">Xuất xứ</text> 
+    <!--CTBD-->
+    <text name="Group10_CTBD_LIST_TITLE">Quản lí chi tiết bảo dưỡng</text>
+    <text name="Group10_CTBD_DETAIL_TITLE">Chi tiết của chi tiết bảo dưỡng</text>
+    <text name="Group10_CTBD_CODE">Mã chi tiết </text>
+    <text name="Group10_CTBD_NAME">Tên chi tiết</text>
+    <text name="Group10_CTBD_QUANTITY">Số lượng</text>
+    <text name="Group10_CTBD_UNIT_PRICE">Đơn giá</text>
+    <text name="Group10_CTBD_TOTAL_PRICE">Thành tiền</text>
+    
+    <!--GROUP10-->
+  </texts>
+</localizationDictionary>

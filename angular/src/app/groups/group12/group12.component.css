@@ -1,0 +1,5 @@
+.primeng-paging-container .ui-paginator span a.ui-state-active {
+    background: #6AA0CA;
+    color: #fff !important;
+    margin-top: 5px;
+}

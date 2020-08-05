@@ -1,0 +1,280 @@
+<div style="background: white; padding: 20px; height: 100%; margin: 20px;">
+
+    <div style=" position: relative; width: 100%; height: 40px; background: #0095FF; display: flex; justify-content:
+    flex-start; padding: 5px; box-sizing: border-box;">
+        <div class="bar_btn"
+            style="width: 30px; height:30px;  justify-content: flex-start;display: flex; cursor: pointer; border-radius: 4px;"
+            *ngIf="isGranted('Pages.Group15.FLOORTYPE.Create')" (click)="navigate_addNewFloor()">
+            <i class="fa fa-plus"
+                style="width: 20px; height:20px; margin-top: 5px; margin-left: 5px;"></i>
+
+        </div>
+        <div class="bar_btn"
+            style="width: 30px; height:30px; display: flex; margin-left: 8px; cursor: pointer; border-radius: 4px;"
+            *ngIf="selectedItem && selectedItem.floor_ID"
+            (click)="navigate_detailFloor()">
+            <i class="fa fa-eye"
+                style="width: 20px; height:20px; margin-top: 5px; margin-left: 5px;" ></i>
+
+        </div>
+        <div class="bar_btn"
+            style="width: 30px; height:30px; display: flex; margin-left: 8px; cursor: pointer; border-radius: 4px;"
+            *ngIf="selectedItem && selectedItem.floor_ID"
+            (click)="navigate_updateFloor()">
+            <i class="fa fa-pencil"
+                style="width: 20px; height:20px; margin-top: 5px; margin-left: 5px;" ></i>
+
+        </div>
+        <div class="bar_btn" *ngIf="selectedItem && selectedItem.floor_ID"
+            style="width: 30px; height:30px; display: flex; margin-left: 8px; cursor: pointer; border-radius: 4px;"
+            data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-trash"
+                style="width: 20px; height:20px; margin-top: 5px; margin-left: 5px;" ></i>
+
+        </div>
+        <div class="bar_btn"
+            style="width: 30px; height:30px; display: flex; margin-left: 8px; cursor: pointer; border-radius: 4px;"
+            *ngIf="this.allItem.length > 0"
+            (click)="exportFloor()">
+            <i class="fa fa-bars"
+                style="width: 20px; height:20px; margin-top: 5px; margin-left: 5px;" ></i>
+
+        </div>
+    </div>
+
+    <div style="position: relative;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+    box-sizing: border-box;
+    ">
+        <img src="https://img.icons8.com/android/26/000000/home.png"
+            style="width: 30px; height: 30px; background-color:aliceblue;"
+        />
+        <a class="path" href="/"><div class="path">Dashboard</div></a>
+        <a class="path" ><div class="path">{{l('BuildingStatistic')}}</div></a>
+    </div>
+
+
+
+    <div style="position: relative;
+    width: 60%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+    box-sizing: border-box;
+    ">
+            <td style="position: relative;
+            width: 27%;
+            margin-right: 20px;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: solid gray 1px;
+            background-color: aliceblue;
+            ">
+               <tr>
+                   <td>
+                    {{l('TheTotalNumberOfBuildings')}}
+                   </td>
+                   <td style="font-weight: bold;margin-left: 5px;">
+                    {{this.allBuilding.length}}
+                   </td>
+               </tr> 
+            </td>
+            <td style="position: relative;
+            width: 27%;
+            margin-right: 20px;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: solid gray 1px;
+            background-color: cornflowerblue;
+            ">
+                 <tr>
+                    <td>
+                     {{l('TheTotalNumberOfBuildingsHasBeenApproved')}}
+                    </td>
+                    <td style="font-weight: bold; margin-left: 5px;">
+                     {{this.countApprovedBuilding}}
+                    </td>
+                </tr> 
+            </td>
+            <td style="position: relative;
+            width: 27%;
+            margin-right: 20px;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: solid gray 1px;
+            background-color: orange;
+            ">
+                 <tr>
+                    <td>
+                     {{l('TheTotalNumberOfBuildingsHasNotBeenApproved')}}
+                    </td>
+                    <td style="font-weight: bold; margin-left: 5px;">
+                     {{this.countUApprovedBuilding}}
+                    </td>
+                </tr> 
+            </td>
+    </div>
+
+    <div>
+        <div class="simple_gray_label">
+            {{l('ChooseABuilding')}}
+        </div>
+        <p-dropdown id="tang" class="dropdown" [options]="this.allBuilding" [(ngModel)]="this.selectedBuilding" placeholder="{{l('ChooseABuilding')}}" [filter]="true"
+            name="selectedBuilding" optionLabel="buildinG_NAME" (ngModelChange)="countFloor() ">
+        </p-dropdown>
+    </div>
+
+    <div style="position: relative;
+    width: 60%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+    box-sizing: border-box;
+    ">
+            <td style="position: relative;
+            width: 27%;
+            margin-right: 20px;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: solid gray 1px;
+            background-color: aliceblue;
+            ">
+               <tr>
+                   <td>
+                    {{l('TheTotalNumberOfFloors')}}
+                   </td>
+                   <td style="font-weight: bold;margin-left: 5px;">
+                    {{this.allFloors.length}}
+                   </td>
+               </tr> 
+            </td>
+            <td style="position: relative;
+            width: 27%;
+            margin-right: 20px;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: solid gray 1px;
+            background-color: cornflowerblue;
+            ">
+                 <tr>
+                    <td>
+                     {{l('TheTotalNumberOfFloorsHasBeenApproved')}}
+                    </td>
+                    <td style="font-weight: bold; margin-left: 5px;">
+                     {{this.countApprovedFloor}}
+                    </td>
+                </tr> 
+            </td>
+            <td style="position: relative;
+            width: 27%;
+            margin-right: 20px;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: solid gray 1px;
+            background-color: orange;
+            ">
+                 <tr>
+                    <td>
+                     {{l('TheTotalNumberOfFloorsHasNotBeenApproved')}}
+                    </td>
+                    <td style="font-weight: bold; margin-left: 5px;">
+                     {{this.countUApprovedFloor}}
+                    </td>
+                </tr> 
+            </td>
+    </div>
+
+    <!-- <div>
+        <div class="simple_gray_label">
+            {{l('ChooseAFloor')}}
+        </div>
+        <p-dropdown id="ch" class="dropdown" [options]="this.allFloors" [(ngModel)]="this.selectedFloor" placeholder="{{l('ChooseAFloor')}}" [filter]="true"
+            name="selectedFloor" optionLabel="floor_NAME" (ngModelChange)="countApartment() ">
+        </p-dropdown>
+    </div> -->
+
+    <div>
+        <div class="simple_gray_label">
+            {{l('ChooseAFloor')}}
+        </div>
+        <p-dropdown id="tang" class="dropdown" [options]="this.allFloors" [(ngModel)]="this.selectedFloor" placeholder="{{l('ChooseAFloor')}}" [filter]="true"
+            name="selectedFloor" optionLabel="floor_NAME" (ngModelChange)="countApartment() ">
+        </p-dropdown>
+    </div>
+
+    <div style="position: relative;
+    width: 60%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+    box-sizing: border-box;
+    ">
+            <td style="position: relative;
+            width: 27%;
+            margin-right: 20px;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: solid gray 1px;
+            background-color: aliceblue;
+            ">
+               <tr>
+                   <td>
+                    {{l('TheTotalNumberOfApartmentsInThisFloor')}}
+                   </td>
+                   <td style="font-weight: bold;margin-left: 5px;">
+                    {{this.allApartment.length}}
+                   </td>
+               </tr> 
+            </td>
+            <td style="position: relative;
+            width: 27%;
+            margin-right: 20px;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: solid gray 1px;
+            background-color: cornflowerblue;
+            ">
+                 <tr>
+                    <td>
+                     {{l('TheTotalNumberOfApartmentsHasBeenApproved')}}
+                    </td>
+                    <td style="font-weight: bold; margin-left: 5px;">
+                     {{this.countApprovedApartment}}
+                    </td>
+                </tr> 
+            </td>
+            <td style="position: relative;
+            width: 27%;
+            margin-right: 20px;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: solid gray 1px;
+            background-color: orange;
+            ">
+                 <tr>
+                    <td>
+                     {{l('TheTotalNumberOfApartmentsHasNotBeenApproved')}}
+                    </td>
+                    <td style="font-weight: bold; margin-left: 5px;">
+                     {{this.countUApprovedApartment}}
+                    </td>
+                </tr> 
+            </td>
+    </div>
+</div>

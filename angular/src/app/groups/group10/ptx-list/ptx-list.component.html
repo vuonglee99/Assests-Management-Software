@@ -1,0 +1,167 @@
+<div class="group10" style="font-family: roboto;" >
+    <div>
+        <ul  style="background-color: #58a3dc;font-size: 15px;padding-left:10px;margin:0;color:white">
+            <li *ngIf=" isGranted('Pages.Group11.PTX.Insert')" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="add()" ><i
+                class="fa fa-plus" id="btnAdd"></i></li>
+            <!-- <li *ngIf=" isGranted('Pages.Group10.PTX.Update')" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="update()" ><i
+                class="fa fa-pencil" id="btnEdit"></i></li> -->
+            <li *ngIf="isGranted('Pages.Group10.PTX.Delete')"
+                style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="delete()"><i
+                class="fa fa-trash" id="btnDel"></i></li>
+            <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;"
+            (click)="detail()"><i class="fa fa-eye"></i></li>
+            <li *ngIf="isGranted('Pages.Group10.PTX.Search')" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="search()"><i
+                class="fa fa-search"></i></li>
+
+
+                <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="this.export()" ><i
+                    class="fa fa-file-excel-o"></i></li>
+        </ul>
+    </div>
+    <div
+    style="background-color: #58a3dc; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+    <h1 style="margin-bottom: 0px"><i class="fa fa-info-circle"
+            style="font-size: 30px; margin-right: 15px"></i>{{l('CarRentalManagement')}}</h1>
+    </div>
+    <div class="m-content">
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+
+                <form class="horizontal-form" autocomplete="off">
+                    <div class="m-form m-form--label-align-right">
+                        <div class="row align-items-center m--margin-bottom-10">
+                            <div class="col-xl-12">
+                                <div class="form-group m-form__group align-items-center">
+                                    <div class="input-group">
+                                        <b style="display: flex; width: 100px;align-items: center;">{{l('Group10_NTX_CODE')}} </b>
+                                        <input name="filterText" autoFocus class="form-control m-input "
+                                            [placeholder]="l('Group10_SEARCH')+l('Group10_NTX_CODE')" type="text"
+                                            [(ngModel)]="this.ntxCode" name="ntxCode">
+
+                                        <span style="width: 10px"></span>
+
+                                        <b style="display: flex; width: 100px;align-items: center;">{{l('Group10_NTX_NAME')}} </b>
+                                        <input name="filterText" autoFocus class="form-control m-input"
+                                            [placeholder]="l('Group10_SEARCH')+l('Group10_NTX_NAME')" type="text"
+                                            [(ngModel)]="this.ntxName" name="ntxName">
+                                        <span style="width: 5px"></span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="m-form m-form--label-align-right">
+                        <div class="row align-items-center m--margin-bottom-10">
+                            <div class="col-xl-12">
+                                <div class="form-group m-form__group align-items-center">
+                                    <div class="input-group">
+                                        <b style="display: flex;width: 100px;align-items: center;">{{l('CarCode')}} </b>
+                                        <input name="filterText" autoFocus class="form-control m-input "
+                                            [placeholder]="l('Group10_SEARCH')+l('CarCode')" type="text"
+                                            [(ngModel)]="this.xeCode" name="xeCode">
+
+                                        <span style="width: 10px"></span>
+
+                                        <b style="display: flex; width: 100px;align-items: center;">{{l('CarName')}} </b>
+                                        <input name="filterText" autoFocus class="form-control m-input"
+                                            [placeholder]="l('Group10_SEARCH')+l('CarName')" type="text"
+                                            [(ngModel)]="this.xeName" name="xeName">
+                                        <span style="width: 5px"></span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="m-form m-form--label-align-right">
+                        <div class="row align-items-center m--margin-bottom-10">
+                            <div class="col-xl-12">
+                                <div class="form-group m-form__group align-items-center">
+                                    <div class="input-group">
+                                        <b style="display: flex; width: 100px;align-items: center;">{{l('CarLicensePlate')}} </b>
+                                        <input name="filterText" autoFocus class="form-control  m-input "
+                                            [placeholder]="l('Group10_SEARCH')+l('CarLicensePlate')" type="text"
+                                            [(ngModel)]="this.license" name="license">
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+                <div class="row align-items-center">
+                    <!--<Primeng-TurboTable-Start>-->
+                    <div class="primeng-datatable-container">
+                        <div class="primeng-paging-container">
+                            <p-table #dataTable rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                                [value]="primengTableHelper.records"
+                                [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                                selectionMode="single" [(selection)]="selectedPTX" [paginator]="true" [scrollable]="true"
+                                ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+                                [resizableColumns]="primengTableHelper.resizableColumns">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th style="width: 50px !important;">{{l('GROUP10_NUMBER_ORDER')}}</th>
+                                        <th class="text-left" pSortableColumn="ntX_ID">{{l('Group10_NTX_NAME')}} <p-sortIcon field="ntX_ID">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th  class="text-left" pSortableColumn="xE_ID">{{l('CarLicensePlate')}} <p-sortIcon field="xE_ID">
+                                            </p-sortIcon>
+                                        </th>
+
+                                        <th pSortableColumn="ptX_RENT_DT">{{l('CarRentalFrom')}} <p-sortIcon
+                                                field="ptX_RENT_DT">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th pSortableColumn="ptX_EXP_DT">{{l('CarRentalExpect')}} <p-sortIcon
+                                                field="ptX_EXP_DT">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th pSortableColumn="ptX_RETURN_DT">{{l('CarRentalReturn')}} <p-sortIcon field="ptX_RETURN_DT">
+                                            </p-sortIcon>
+                                        </th>
+                                        <th class="text-right" pSortableColumn="ptX_PRICE">{{l('CarRentalPrice')}} <p-sortIcon
+                                                field="ptX_PRICE">
+                                            </p-sortIcon>
+                                        </th>
+
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-ptx let-i="rowIndex">
+                                    <tr [pSelectableRow]="rowData">
+                                        <td style="width: 50px !important;">{{i+1}}</td>
+                                        <td class="text-left">{{ptx.ntX_ID}}</td>
+                                        <td  class="text-left">{{ptx.xE_ID}}</td>
+                                        <td>{{ptx.ptX_RENT_DT | date: 'MM/dd/yyyy'}}</td>
+                                        <td>{{ptx.ptX_EXP_DT | date: 'MM/dd/yyyy'}}</td>
+                                        <td>{{ptx.ptX_RETURN_DT | date: 'MM/dd/yyyy'}}</td>
+                                        <td  class="text-right">{{ptx.ptX_PRICE| currency:'code':'':'1.0-0'}} VND</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                            <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                                {{l('NoData')}}
+                            </div>
+                            <span class="total-records-count">
+                                {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!--<Primeng-TurboTable-End>-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

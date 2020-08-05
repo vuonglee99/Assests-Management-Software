@@ -1,0 +1,122 @@
+<div class="group5-chi-tiet-bao-tri">
+    <div class="m-subheader">
+        <div class="d-flex align-items-center pb-bgblue p-2 ">
+            <button class="pb-bgblue font-common-detail">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                Lưu
+            </button>
+            <button class="pb-bgblue font-common-detail">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Duyệt
+            </button>
+        </div>
+    </div>
+    <div class="m-subheader m-t-1">
+        <div class="d-flex align-items-center pb-bgblue p-4 font-common-detail rounded-top">
+            <div class="pb-bgblue title-search" (click)="disabledInput()">
+                <i class="fa fa-plus ic-title-search" aria-hidden="true"></i>
+                Chỉnh Sửa Phòng Ban
+            </div>
+        </div>
+        <div class="bgwhite rounded-bottom">
+            <div class="row p-5 font-common-detail">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="row padding10">
+                        <b>Mã yêu cầu</b> &nbsp;<span class="text-danger">(*)</span>
+                    </div>
+                    <div class="row padding10">
+                        <input type="text" class="form-control" id="" placeholder="BR02" readonly>
+                    </div>
+                    <div class="row padding10">
+                        <b>Tên thiết bị</b> &nbsp;<span class="text-danger">(*)</span>
+                    </div>
+                    <div class="row padding10">
+                        <select name="" id="input" name="pb_tt" class="form-control" required="required" name="recorD_STATUS"
+                        disabled>
+                        <option value="">~~Danh Sách thiết bị~~</option>
+                        <option value="">Máy in</option>
+                        <option value="">Máy Chiếu</option>
+                      </select>
+                    </div>
+                    <div class="row padding10">
+                        <b>Loại</b> &nbsp;<span class="text-danger">(*)</span>
+                    </div>
+                    <div class="row padding10">
+                        <input type="text" class="form-control" id="" placeholder="Điền mã phòng ban" disabled>
+                    </div>
+                    <div class="row padding10">
+                        <b>Độ ưu tiên</b> &nbsp;<span class="text-danger">(*)</span>
+                    </div>
+                    <div class="row padding10">
+                        <select name="" id="input" name="pb_tt" class="form-control" required="required" name="recorD_STATUS"
+                        disabled>
+                        <option value="">~~Độ ưu tiên~~</option>
+                        <option value="">Yếu</option>
+                        <option value="">Trung bình</option>
+                        <option value="">Mạnh</option>
+                        <option value="">Rất mạnh</option>
+                      </select>
+                    </div>
+                    <div class="row padding10">
+                        <b>Cần sữa chữa trước ngày</b>
+                    </div>
+                    <div class="row padding10" disabled>
+                        <p-calendar [(ngModel)]="date3" [showIcon]="true"></p-calendar>
+                    </div>
+                    <div class="row padding10">
+                        <b>Thời gian thực hiện</b> &nbsp;<span class="text-danger">(*)</span>
+                    </div>
+                    <div class="row padding10" disabled>
+                        <p-calendar [(ngModel)]="date7" [showTime]="true"></p-calendar>
+                    </div>
+
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="row padding10">
+                        <b>Nhân viên đảm nhận</b> &nbsp;<span class="text-danger">(*)</span>
+                    </div>
+                    <div class="row padding10">
+                        <select name="" id="input" name="pb_tt" class="form-control" required="required"
+                            name="recorD_STATUS" disabled>
+                            <option value="">~~Danh Sách nhân viên~~</option>
+                            <option value="">Lê Văn Hoàng</option>
+                            <option value="">Trần Văn Hùng</option>
+                            <option value="">Trần Minh LOL</option>
+                            <option value="">Nguyễn Văn Âu</option>
+                            <option value="">Nguyễn Đức An</option>
+                            <option value="">Vũ Ngọc Tuấn</option>
+                        </select>
+                    </div>
+                    <div class="row padding10">
+                        <b>Mô tả vấn đề</b>
+                    </div>
+                    <div class="row padding10">
+                        <input type="text" class="form-control" id="" placeholder="Điền mã phòng ban" disabled>
+                    </div>
+                    <div class="row padding10">
+                        <b>Mô tả công việc thực hiện</b> &nbsp;<span class="text-danger">(*)</span>
+                    </div>
+                    <div class="row padding10">
+                        <input type="text" class="form-control" id="" placeholder="Điền mã phòng ban" disabled>
+                    </div>
+                    <div class="row padding10">
+                        <b>Danh sách sữa chữa và chi phí</b> &nbsp;<span class="text-danger">(*)</span>
+                    </div>
+                    <div class="row padding10">
+                        <input type="text" class="form-control" id="" placeholder="Điền mã phòng ban" disabled>
+                    </div>
+
+                    <div class="row padding10">
+                        <b>Nguyên nhân vấn đề và giải pháp</b> &nbsp;<span class="text-danger">(*)</span>
+                    </div>
+                    <div class="row padding10">
+                        <input type="text" class="form-control" id="" placeholder="Điền mã phòng ban" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>    
+</div>
+
+

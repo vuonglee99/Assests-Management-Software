@@ -1,0 +1,72 @@
+
+
+.my-text {
+    font-family: "Roboto";
+    font-size: 15px;
+}
+
+.m-font {
+    font-family: "Roboto";
+}
+
+body .ui-widget-overlay {
+    background-color: #f4f3fb;
+    border-radius: 0.5em;
+}
+
+.mt-4,
+.my-4 {
+    margin-top: 0px !important;
+}
+
+.m-primary {
+    background-color: #58a3dc;
+}
+
+a.ui-table-sort-icon {
+    color: #58a3dc
+}
+
+.m-header-container {
+    background-color: #58a3dc;
+    padding: 1em;
+}
+
+/*prime-table*/
+body .ui-widget-header {
+    border-style: hidden;
+}
+
+.primeng-datatable-container table thead tr th.ui-state-highlight {
+    color: #58a3dc !important
+}
+
+.primeng-datatable-container table tbody tr:nth-child(even) {
+    background-color: #ecf4fe !important;
+}
+
+.primeng-datatable-container table tbody tr.ui-state-highlight {
+    background-color: #58a3dc !important;
+    color: #fff !important;
+}
+
+.primeng-paging-container .ui-paginator a {
+    background-color: #ecf4fe;
+    color: #fff !important;
+}
+
+.primeng-paging-container .ui-paginator span a.ui-state-active {
+    background: #58a3dc;
+    color: #fff !important;
+}
+
+.primeng-paging-container .ui-paginator a span {
+    color: #0095ff !important;
+}
+
+body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight {
+    background-color: #58a3dc;
+    color: #ffffff;
+}
+
+

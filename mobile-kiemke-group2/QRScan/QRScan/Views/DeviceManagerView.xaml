@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White"
+             x:Name="DeviceManagerPage"
+             xmlns:vm="clr-namespace:QRScan.ViewModels" xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="QRScan.Views.DeviceManagerView">
+    <ContentPage.BindingContext>
+        <vm:DeviceManagerViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <StackLayout Spacing="0">
+                    <Label FontAttributes="Bold" Text="Quản lý thiết bị kiểm kê offline" HorizontalTextAlignment="Center" Margin="0,20,0,0" FontSize="22" TextColor="Black"
+                HorizontalOptions="CenterAndExpand" />
+                    <Frame BorderColor="Black" Margin="10,20,10,0" Padding="10">
+                        <Grid HorizontalOptions="FillAndExpand" Padding="0" ColumnSpacing="5" RowSpacing="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Text="Mã đơn vị:" FontSize="18" TextColor="Black" Margin="3"/>
+                            <Label Grid.Row="1" Grid.Column="0" Text="Mã bản kiểm kê:" FontSize="18" TextColor="Black" Margin="3"/>
+                            <Label Grid.Row="2" Grid.Column="0" Text="Ngày tạo:" FontSize="18" TextColor="Black" Margin="3"/>
+
+                            <Frame Grid.Row="0" Grid.Column="1" BorderColor="Black" HorizontalOptions="FillAndExpand" Padding="0" Margin="0,0,0,0">
+                                <Label Text="{Binding kiemke.BKK.KK_MADONVI}" FontSize="18" TextColor="Black" Margin="3"/>
+                            </Frame>
+                            <Frame Grid.Row="1" Grid.Column="1" BorderColor="Black" HorizontalOptions="FillAndExpand" Padding="0" Margin="0,0,0,0">
+                                <Label Text="{Binding kiemke.BKK.KK_CODE}" FontSize="18" TextColor="Black" Margin="3"/>
+                            </Frame>
+                            <Frame Grid.Row="2" Grid.Column="1" BorderColor="Black" HorizontalOptions="FillAndExpand" Padding="0" Margin="0,0,0,0">
+                                <Label Text="{Binding kiemke.BKK.KK_NGAYTAO,Converter={StaticResource DateTimeConverter}}" FontSize="18" TextColor="Black" Margin="3"/>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+                    <pancake:PancakeView Grid.Row="1" Margin="5,20,5,0" BorderThickness="2" BackgroundColor="#0095FF"  HasShadow="False" BorderColor="Black"  Padding="0">
+                        <Grid HorizontalOptions="FillAndExpand" Padding="0"  ColumnSpacing="0" RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <pancake:PancakeView BorderColor="Black" BorderThickness="1" HorizontalOptions="FillAndExpand" Padding="0">
+                                <Label HorizontalOptions="Center" VerticalTextAlignment="Center" Text="STT" TextColor="White" FontSize="15" Margin="5"/>
+                            </pancake:PancakeView>
+                            <pancake:PancakeView BorderColor="Black" Grid.Column="1" BorderThickness="1" HorizontalOptions="FillAndExpand">
+                                <Label HorizontalOptions="Center" VerticalTextAlignment="Center" Text="Mã thiết bị" TextColor="White" FontSize="15" Margin="5"/>
+                            </pancake:PancakeView>
+                            <pancake:PancakeView BorderColor="Black" Grid.Column="2" BorderThickness="1" HorizontalOptions="FillAndExpand">
+                                <Label HorizontalOptions="Center" VerticalTextAlignment="Center" Text="Tên thiết bị" TextColor="White" FontSize="15" Margin="5"/>
+                            </pancake:PancakeView>
+                            <pancake:PancakeView BorderColor="Black" Grid.Column="3" BorderThickness="1" HorizontalOptions="FillAndExpand">
+                                <Label HorizontalOptions="Center" VerticalTextAlignment="Center" Text="Trạng thái" TextColor="White" FontSize="15" Margin="5"/>
+                            </pancake:PancakeView>
+                            <pancake:PancakeView BorderColor="Black" Grid.Column="4" BorderThickness="1" HorizontalOptions="FillAndExpand">
+                                <Label HorizontalOptions="Center" VerticalTextAlignment="Center" Text="Ngày" TextColor="White" FontSize="15" Margin="5"/>
+                            </pancake:PancakeView>
+
+                        </Grid>
+                    </pancake:PancakeView>
+
+                    <pancake:PancakeView Grid.Row="2" Margin="5,0,5,20" HeightRequest="300" BorderColor="Black" BorderThickness="2">
+                        <ListView  Grid.Row="1"  ItemsSource="{Binding Records}" SelectionMode="None" HasUnevenRows="True" SeparatorVisibility="None" VerticalScrollBarVisibility="Never">
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <pancake:PancakeView BorderThickness="1" BackgroundColor="{Binding STT,Converter={StaticResource ChoosedLabelColorConverter}}"  HasShadow="False" BorderColor="Black" Margin="0"  Padding="0">
+                                            <Grid HorizontalOptions="FillAndExpand" Padding="0"  ColumnSpacing="0" RowSpacing="0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="40"/>
+                                                    <ColumnDefinition Width="4*"/>
+                                                    <ColumnDefinition Width="3*"/>
+                                                    <ColumnDefinition Width="4*"/>
+                                                    <ColumnDefinition Width="4*"/>
+                                                    <ColumnDefinition Width="2*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <pancake:PancakeView BorderColor="Black" BorderThickness="1" HorizontalOptions="FillAndExpand">
+                                                    <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{Binding STT}" TextColor="Black" FontSize="15" Margin="5"/>
+                                                </pancake:PancakeView>
+                                                <pancake:PancakeView BorderColor="Black" Grid.Column="1" BorderThickness="1" HorizontalOptions="FillAndExpand">
+                                                    <Label VerticalTextAlignment="Center" Text="{Binding CTBKK.CTBKK_MA_TB,Converter={StaticResource NullValueConverter}}" TextColor="Black" FontSize="15" Margin="5"/>
+                                                </pancake:PancakeView>
+                                                <pancake:PancakeView BorderColor="Black" Grid.Column="2" BorderThickness="1" HorizontalOptions="FillAndExpand">
+                                                    <Label VerticalTextAlignment="Center" Text="{Binding CTBKK.CTBKK_TEN_TB,Converter={StaticResource NullValueConverter}}" TextColor="Black" FontSize="15" Margin="5"/>
+                                                </pancake:PancakeView>
+                                                <pancake:PancakeView BorderColor="Black" Grid.Column="3" BorderThickness="1" HorizontalOptions="FillAndExpand">
+                                                    <Label VerticalTextAlignment="Center" Text="{Binding CTBKK.CTBKK_TT_SAU}" TextColor="Black" FontSize="15" Margin="5"/>
+                                                </pancake:PancakeView>
+                                                <pancake:PancakeView BorderColor="Black" Grid.Column="4" BorderThickness="1" HorizontalOptions="FillAndExpand">
+                                                    <Label VerticalTextAlignment="Center" Text="{Binding CTBKK.CTBKK_THOI_GIAN,Converter={StaticResource DateTimeConverter}}" TextColor="Black" FontSize="15" Margin="5"/>
+                                                </pancake:PancakeView>
+                                                <pancake:PancakeView BorderColor="Red" BackgroundColor="Red" Grid.Column="5" Margin="6" BorderThickness="1" CornerRadius="2" HasShadow="True" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                                    <pancake:PancakeView.GestureRecognizers>
+                                                        <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                              Command="{Binding BindingContext.DeleteCommand,Source={x:Reference Name=DeviceManagerPage}}"/>
+                                                    </pancake:PancakeView.GestureRecognizers>
+                                                    <Image Source="delete" Margin="2" HeightRequest="35"/>
+                                                </pancake:PancakeView>
+                                            </Grid>
+                                        </pancake:PancakeView>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+
+                    </pancake:PancakeView>
+
+
+                    <pancake:PancakeView CornerRadius="10" Margin="0,20,0,30" BorderColor="Black" Padding="0" BorderThickness="1" BackgroundColor="#0095FF" HeightRequest="50"  HorizontalOptions="Center">
+                        <pancake:PancakeView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding XacNhanKKCommand}"/>
+                        </pancake:PancakeView.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal" Margin="10,0">
+                            <Image Source="upload" WidthRequest="30" HeightRequest="30"/>
+                            <Label Text="Đồng bộ với server" VerticalTextAlignment="Center" FontSize="20" TextColor="White"/>
+                        </StackLayout>
+
+                    </pancake:PancakeView>
+                </StackLayout>
+            </ScrollView>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

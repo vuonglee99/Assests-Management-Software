@@ -1,0 +1,162 @@
+<form #formRef="ngForm" [formGroup]="formData">
+  <ul style="background-color: #248dc1;font-size: 15px;padding-left:10px;margin:0;color:white">
+   
+
+    <li *ngIf="editPageState === 'edit' "
+    style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="save()" [ngStyle]="isUPdate?{'pointer-events': 'none','cursor': 'not-allowed','opacity':'0.4'}:''"><i
+    class="fa fa-floppy-o"></i>
+    </li>
+    <li *ngIf="isGranted('Pages.Group5.Device.Delete') && editPageState != 'view' && editPageState != 'edit'"
+      style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="delete()"><i
+        class="fa fa-trash"></i>
+    </li>
+    <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" onclick="window.history.back()">
+      <i class="fa fa-arrow-left"></i>
+    </li>
+    <li *ngIf="isGranted('Pages.Group5.Approve') && editPageState === 'view' " style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" [ngStyle]=" ( currentID==filterInput.makeR_ID || filterInput.autH_STATUS == 'A' || filterInput.autH_STATUS == 'U' || isGranted('Pages.Group5.Approve')==false )?{'pointer-events': 'none','cursor': 'not-allowed','opacity':'0.4'}:{'cursor': 'pointer'}"
+      (click)="approve(1)">
+      <i class="fa fa-check" aria-hidden="true">&nbsp; DUYỆT</i>
+    </li>
+
+    <li *ngIf="isGranted('Pages.Group5.Approve') && editPageState === 'view'" style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" [ngStyle]=" (  currentID==filterInput.makeR_ID ||  filterInput.autH_STATUS == 'A' || filterInput.autH_STATUS == 'U' || isGranted('Pages.Group5.Approve')==false )?{'pointer-events': 'none','cursor': 'not-allowed','opacity':'0.4'}:{'cursor': 'pointer'}"
+    (click)="approve(0)">
+    <i class="fa fa-times" aria-hidden="true">&nbsp;KHÔNG DUYỆT</i>
+  </li>
+   
+  </ul>
+
+
+  <div
+    style="background-color: #248dc1; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+    <h1 style="margin-bottom: 0px"><i class="fa fa-info-circle" style="font-size: 30px; margin-right: 15px"></i>Thông
+      tin thiết bị bảo dưỡng</h1>
+  </div>
+  
+  <div style="padding: 20px;">
+    <div style="padding: 20px; background-color: white;">
+      <h5 *ngIf="filterInput.autH_STATUS == 'A'" class="text-success"><i class="fa fa-check" aria-hidden="true"></i><span>Đã duyệt</span></h5>
+      
+      <div class="row">
+        <div class="col-md-6" style="font-size: 15px;">
+          <div>
+            <div>Mã code &nbsp;<span class="text-danger">(*)</span></div>
+            <input [(ngModel)]="filterInput.devicE_CODE" name="devicE_CODE" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.devicE_CODE.errors }" formControlName="devicE_CODE"
+              style="background-color: #f4f5f8"  [disabled]="isUPdate">
+
+            <div *ngIf="submitted" class="invalid-feedback">
+              <div *ngIf="f.devicE_CODE.errors?.required" name="empty_field">Requied
+              </div>
+            </div>
+
+          </div>
+          <div>
+            <div>Tên thiết bị &nbsp;<span class="text-danger">(*)</span></div>
+            <input [(ngModel)]="filterInput.devicE_NAME" name="devicE_NAME" class="form-control"
+              formControlName="devicE_NAME" style="background-color: #f4f5f8"
+              [ngClass]="{ 'is-invalid': submitted && f.devicE_NAME.errors }"  [disabled]="isUPdate">
+
+            <div *ngIf="submitted" class="invalid-feedback">
+              <div *ngIf="f.devicE_NAME.errors?.required" name="empty_field">Requied
+              </div>
+            </div>
+
+          </div>
+          <div>
+            <div>Đơn vị quản lý &nbsp;<span class="text-danger">(*)</span></div>
+
+            <input [(ngModel)]="filterInput.brancH_ID" name="brancH_ID" class="form-control" formControlName="brancH_ID"
+              style="background-color: #f4f5f8" [ngClass]="{ 'is-invalid': submitted && f.brancH_ID.errors }"  [disabled]="isUPdate">
+            <div *ngIf="submitted" class="invalid-feedback" >
+              <div *ngIf="f.brancH_ID.errors?.required" name="empty_field">Requied
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>Chu Kì Bảo Dưỡng</div>
+            <select name="maintenancE_CYCLE" class="form-control bg-input" required="required" name="recorD_STATUS"
+              [(ngModel)]="filterInput.maintenancE_CYCLE" [ngModelOptions]="{standalone: true}" [disabled]="isUPdate">
+              <option value="">--Chọn Chu Kì--</option>
+              <option value="3">3 Tháng</option>
+              <option value="6">6 Tháng</option>
+              <option value="12">12 Tháng</option>
+            </select>
+          </div>
+          <div>
+            <div>Tình trạng</div>
+            <select name="activE_STATUS" class="form-control bg-input" required="required" name="recorD_STATUS"
+              [(ngModel)]="filterInput.activE_STATUS" [ngModelOptions]="{standalone: true}" [disabled]="isUPdate">
+              <option value="">--Chọn tình trạng--</option>
+              <option value="1">Hoạt động</option>
+              <option value="0">Không hoạt động</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6" style="font-size: 15px;">
+          <div>
+            <div>Serial <span style="color: red">(*)</span></div>
+            <input [(ngModel)]="filterInput.serial" name="serial" class="form-control" formControlName="serial"
+              style="background-color: #f4f5f8" [ngClass]="{ 'is-invalid': submitted && f.serial.errors }"  [disabled]="isUPdate">
+            <div *ngIf="submitted" class="invalid-feedback">
+              <div *ngIf="f.serial.errors?.required" name="empty_field">Requied
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>Nhà sản xuất </div>
+            <select [(ngModel)]="filterInput.produceR_ID" name="produceR_ID" class="form-control"
+              style="background-color: #f4f5f8" [ngModelOptions]="{standalone: true}" [disabled]="isUPdate">
+              <option data-value="1" value="Sam Sung">Sam Sung</option>
+              <option data-value="2" value="LG">LG</option>
+              <option data-value="3" value="Nagakawa">Nagakawa</option>
+              <option data-value="4" value="Toshiba">Toshiba</option>
+              <option data-value="5" value="Panasonic">Panasonic</option>
+            </select>
+          </div>
+          <div>
+            <div>Mô tả</div>
+            <textarea rows="5" cols="66" class="form-control bg-input" pInputTextarea autoResize="autoResize"
+              [(ngModel)]="filterInput.descriptions" [ngModelOptions]="{standalone: true}"
+              [disabled]="isUPdate"></textarea>
+          </div>
+          <div>
+            <div>Năm sản xuất</div>
+            <select class="form-control bg-input" required="required" name="yeaR_PRODUCTION"
+              [(ngModel)]="filterInput.yeaR_PRODUCTION" [ngModelOptions]="{standalone: true}" [disabled]="isUPdate">
+              <option value="{{year-3}}">{{year-3}}</option>
+              <option value="{{year-2}}">{{year-2}}</option>
+              <option value="{{year-1}}">{{year-1}}</option>
+              <option value="{{year}}">{{year}}</option>
+              <option value="{{year+1}}">{{year+1}}</option>
+              <option value="{{year+2}}">{{year+2}}</option>
+              <option value="{{year+3}}">{{year+3}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pt-2">
+          <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <div>Ngày Mua</div>
+              <p-calendar [(ngModel)]="datE_BUY" [showIcon]="true" [ngModelOptions]="{standalone: true}"
+                [disabled]="isUPdate"></p-calendar>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <div>Ngày Bảo Hành</div>
+
+
+              <p-calendar [(ngModel)]="datE_WARRANTY_BEGIN" [showIcon]="true" [ngModelOptions]="{standalone: true}"
+                [disabled]="isUPdate">
+              </p-calendar>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+              <div>Ngày Hết Bảo Hành</div>
+              <p-calendar [(ngModel)]="datE_WARRANTY_END" [showIcon]="true" [ngModelOptions]="{standalone: true}"
+                [disabled]="isUPdate">
+              </p-calendar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,143 @@
+<div>
+    <ul style="background-color: #58a3dc;font-size: 15px;padding-left:10px;margin:0;color:white">
+        <li *ngIf="isGranted('Pages.Group11.BD')"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="goToListPage()">
+            <i class="fa fa-arrow-left"></i> </li>
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="viewDetail()"><i
+                class="fa fa-eye"></i></li>
+        <li *ngIf="isGranted('Pages.Group11.BD.Approve')"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="approve()"><i
+                class="fa fa-check"></i> {{l('Group11ApproveButton')}}</li>
+        <li *ngIf="isGranted('Pages.Group11.BD.Approve')"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="disapprove()"><i
+                class="fa fa-times"></i> {{l('Group11DisApproveButton')}}</li>
+
+    </ul>
+</div>
+<div
+    style="background-color: #58a3dc; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+    <h1>{{l('MaintenanceManagement')}}</h1>
+</div>
+
+<div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body">
+
+            <!-- <form class="horizontal-form" autocomplete="off" style="padding: 0 15px; margin-top: 15px;">
+                <div class="m-form m-form--label-align-right">
+                    <div class="row align-items-center m--margin-bottom-10">
+                        <div class="col-xl-12">
+                            <div class="form-group m-form__group align-items-center">
+                                <div class="input-group">
+                                    <b style="display: flex; align-items: center;">{{l('MaintenanceCar')}} </b>
+                                    <input name="filterText" autoFocus class="form-control m-input"
+                                        style="margin-left: 20px" [placeholder]="l('Group11SearchByCarId')" type="text"
+                                        [(ngModel)]="filterInput.xE_ID" name="xE_ID">
+                                    <span style="width: 50px"></span>
+                                    <b style="display: flex; align-items: center;">{{l('MaintenanceFrom')}} </b>
+                                    <input name="filterText" autoFocus class="form-control m-input"
+                                        style="margin-left: 20px" [placeholder]="l('MaintenanceFrom')" type="date"
+                                        [(ngModel)]="bD_FROM_DT" name="bD_FROM_DT">
+                                    <span style="width: 50px"></span>
+                                    <b style="display: flex; align-items: center;">{{l('MaintenanceTo')}} </b>
+                                    <input name="filterText" autoFocus class="form-control m-input"
+                                        style="margin-left: 20px" [placeholder]="l('MaintenanceTo')" type="date"
+                                        [(ngModel)]="bD_TO_DT" name="bD_TO_DT">
+                                    <span class="input-group-btn">
+                                        <button (click)="search()" class="btn btn-primary" type="submit"><i
+                                                class="flaticon-search-1" [attr.aria-label]="l('Search')"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div style="margin-left: 50%">
+                            <button hidden (click)="search()" class="btn btn-primary" style="align-items: center"
+                                type="submit"><i class="flaticon-search-1"></i>Tìm kiếm</button>
+                        </div>
+                    </div>
+                </div>
+            </form> -->
+
+            <div class="row align-items-center">
+                <!--<Primeng-TurboTable-Start>-->
+                <div class="primeng-datatable-container">
+                    <div class="primeng-paging-container">
+                        <p-table #dataTable rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                            [value]="primengTableHelper.records" [loading]="loading"
+                            [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                            selectionMode="single" [(selection)]="selectedBD" [paginator]="true" [scrollable]="true"
+                            ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+                            [resizableColumns]="primengTableHelper.resizableColumns">
+                            <ng-template pTemplate="header" let-columns>
+                                <tr>
+                                    <th style="width: 50px !important;">{{l('MaintenanceNo')}}</th>
+                                    <th pSortableColumn="bD_CODE">{{l('MaintenanceCode')}} <p-sortIcon field="bD_CODE">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="xE_ID">{{l('MaintenanceCar')}} <p-sortIcon field="xE_ID">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="bD_GARAGE">{{l('MaintenanceGarage')}} <p-sortIcon
+                                            field="bD_GARAGE">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="bD_ADDRESS">{{l('MaintenanceAddress')}} <p-sortIcon
+                                            field="bD_ADDRESS">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="bD_FROM_DT">{{l('MaintenanceFrom')}} <p-sortIcon
+                                            field="bD_FROM_DT">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="bD_TO_DT">{{l('MaintenanceTo')}} <p-sortIcon field="bD_TO_DT">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="bD_PRICE">{{l('MaintenancePrice')}} (VND) <p-sortIcon
+                                            field="bD_PRICE">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="bD_autH_STATUS">{{l('MaintenanceAuthStatus')}} <p-sortIcon
+                                            field="bD_autH_STATUS">
+                                        </p-sortIcon>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowData let-bd let-i="rowIndex">
+                                <tr [pSelectableRow]="rowData">
+                                    <td style="width: 50px !important;">{{i+1}}</td>
+                                    <td>{{bd.bD_CODE}}</td>
+                                    <td>{{bd.xE_ID}}</td>
+                                    <td>{{bd.bD_GARAGE}}</td>
+                                    <td>{{bd.bD_ADDRESS}}</td>
+                                    <td>{{bd.bD_FROM_DT | date: 'MM/dd/yyyy'}}</td>
+                                    <td>{{bd.bD_TO_DT | date: 'MM/dd/yyyy' }}</td>
+                                    <!-- <td>{{bd.bD_PRICE | currency:'VND':'code'}}</td> -->
+                                    <td>{{bd.bD_PRICE.toLocaleString()}}</td>
+                                    <td *ngIf="bd.autH_STATUS === null; else Approved"><i style="color: orange"
+                                            class="fa fa-question-circle"></i>
+                                    </td>
+                                    <ng-template #Approved>
+                                        <td *ngIf="bd.autH_STATUS === 'A'; else DisApproved"> <i style="color: green"
+                                                class="fa fa-check"></i></td>
+                                        <ng-template #DisApproved>
+                                            <td> <i style="color: red" class="fa fa-times"></i></td>
+                                        </ng-template>
+                                    </ng-template>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                            {{l('NoData')}}
+                        </div>
+                        <span class="total-records-count">
+                            {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                        </span>
+                    </div>
+                </div>
+                <!--<Primeng-TurboTable-End>-->
+            </div>
+        </div>
+    </div>
+</div>

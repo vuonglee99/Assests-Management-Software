@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:vm="clr-namespace:QRScan.ViewModels"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="QRScan.Views.LoginView">
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="Normal">
+            <Setter Property="FontFamily" Value="{StaticResource Cata}"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
+        <Style TargetType="Label" x:Key="Medium">
+            <Setter Property="FontFamily" Value="{StaticResource CataMedium}"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
+        <Style TargetType="Label" x:Key="Bold">
+            <Setter Property="FontFamily" Value="{StaticResource CataBold}"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
+        <Style TargetType="Label" x:Key="ItalicMedium">
+
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontAttributes" Value="Italic"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical">
+            <StackLayout Margin="20,20,20,0">
+                <Label Margin="10,0,0,0" Text="Kiểm kê mobile" FontSize="30" Style="{StaticResource Bold}"/>
+                <Label Margin="10,0,0,0" TextColor="Gray" Text="Quản lý và kiểm kê tình trạng của thiết bị" FontSize="18" Style="{StaticResource Normal}"/>
+                <StackLayout  Margin="10,90,10,0" Spacing="0" >
+                    <Label FontSize="19" Style="{StaticResource Medium}" Margin="5,0,0,-5" TextColor="Gray" FontAttributes="Bold" Text="Tài khoản"/>
+                    <Entry x:Name="username" Text="{Binding Username}" HeightRequest="50" HorizontalOptions="FillAndExpand" FontSize="20" FontFamily="{StaticResource CataMedium}"/>
+                </StackLayout>
+                <StackLayout  Margin="10,5,10,0" Spacing="0">
+                    <Label FontSize="19" Style="{StaticResource Medium}" Margin="5,0,0,-5" TextColor="Gray" FontAttributes="Bold" Text="Mật khẩu"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Entry x:Name="password" IsPassword="{Binding Hide}" Text="{Binding Password}"  HeightRequest="50" HorizontalOptions="FillAndExpand" FontSize="20" FontFamily="{StaticResource CataMedium}"/>
+                        <Image Source="{Binding Hide,Converter={StaticResource ShowPasswordConverter}}" WidthRequest="30" HeightRequest="30">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HideCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                </StackLayout>
+                <Label Margin="15,0,0,0" IsVisible="{Binding Error,Converter={StaticResource ErrorStringConverter}}" Text="{Binding Error}" TextColor="Red" FontSize="16"  FontAttributes="Bold, Italic" />
+                <StackLayout Orientation="Horizontal" Margin="10,10,0,0">
+                    <CheckBox Color="#0095FF" IsChecked="{Binding Remember}"/>
+                    <Label Text="Ghi nhớ tài khoản" TextColor="Gray" FontSize="18" Style="{StaticResource Medium}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RememberCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </StackLayout>
+                
+                <Button x:Name="LoginBtn" Command="{Binding LoginCommand}"  Margin="10,20,10,0" WidthRequest="300" HeightRequest="55" CornerRadius="5" FontSize="20" Text="Đăng nhập" TextColor="White" BackgroundColor="#0095FF"/>
+                
+
+            </StackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+</ContentPage>

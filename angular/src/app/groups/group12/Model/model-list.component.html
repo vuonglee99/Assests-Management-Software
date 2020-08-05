@@ -1,0 +1,165 @@
+<div>
+    <ul
+        style="background-color: #248dc1;font-family: Roboto !important;font-size: 15px;padding-left:10px;margin:0;color:white">
+        <li *ngIf="isGranted('Pages.Group12.Model.Add')"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="addNew()"
+            name="btnAdd"  pTooltip="{{l('Group12_AddNewModel')}}" tooltipPosition="bottom"><i class="fa fa-plus" style="font-size: large;vertical-align: middle;"></i></li>
+        <li
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="search()"
+            name="btnAdd"  pTooltip="{{l('Group12_SearchModels')}}" tooltipPosition="bottom"><i class="fa fa-search" style="font-size: large;vertical-align: middle;"></i></li>
+        <li *ngIf="isGranted('Pages.Group12.Model.Delete')"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="delete()"
+            name="btnDelete"  pTooltip="{{l('Group12_DeleteModels')}}" tooltipPosition="bottom"><i class="fa fa-trash" style="font-size: large;vertical-align: middle;"></i></li>
+        <li *ngIf="isGrantedAny('Pages.Group12.Model')"
+            style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="viewDetail()"
+            name="btnView"  pTooltip="{{l('Group12_ViewDetailModel')}}" tooltipPosition="bottom">
+            <i class="fa fa-eye" style="font-size: large;vertical-align: middle;"></i></li>
+            <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="exportExcel()"
+            name="btnExport" pTooltip="{{l('Group12_ExportModelTable')}}" tooltipPosition="bottom">
+            <i class="fa fa-file-text-o" style="font-size: large;vertical-align: middle;"></i></li>
+    </ul>
+</div>
+
+<div
+    style="background-color: #248dc1; font-family: Roboto !important;padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+    <h4>{{l('Group12_ModelTitle')}}</h4>
+</div>
+
+
+
+
+<div class="m-content" style="font-family: Roboto !important;">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__body">
+
+            <form class="horizontal-form" autocomplete="off" style="padding: 0 15px; margin-top: 15px;">
+                <div class="m-form m-form--label-align-right">
+                    <div class="row align-items-center m--margin-bottom-10">
+                        <div class="col-xl-12">
+                            <div class="form-group m-form__group align-items-center">
+                                <div class="input-group">
+                                    <b style="display: flex; align-items: center;font-family: Roboto !important;">{{l('Group12_ModelCode')}}
+                                    </b>
+                                    <input name="filterText" autoFocus class="form-control m-input"
+                                        style="margin-left: 20px" type="text" [(ngModel)]="filterInput.modeL_CODE"
+                                        name="modeL_CODE">
+                                    <span style="width: 50px"></span>
+                                    <b
+                                        style="display: flex; align-items: center;font-family: Roboto !important;">{{l('Group12_ModelType')}}</b>
+                                    <select name="filterText" autoFocus class="form-control m-input"
+                                        style="margin-left: 20px" [(ngModel)]="filterInput.modeL_TYPE"
+                                        name="modeL_TYPE">
+                                        <option value="" class="mt-1 mb-1">---{{l('Group12_All')}}---</option>
+                                        <option value="motorbike">motorbike</option>
+                                        <option value="car">car</option>
+                                        <option value="container">container</option>
+                                        <option value="truck">truck</option>
+                                        <option value="bus">bus</option>
+                                    </select>
+                                    <span style="width: 50px"></span>
+                                    <b
+                                        style="display: flex; align-items: center;font-family: Roboto !important;">{{l('Group12_ModelHSX')}}</b>
+                                    <select name="filterText" autoFocus class="form-control m-input"
+                                        style="margin-left: 20px" [(ngModel)]="filterInput.modeL_HSX" name="modeL_HSX">
+                                        <option value="">---{{l('Group12_All')}}---</option>
+                                        <option value="VietNam">VietNam</option>
+                                        <option value="Japan">Japan</option>
+                                        <option value="China">China</option>
+                                        <option value="Korean">Korean</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row align-items-center">
+                <!--<Primeng-TurboTable-Start>-->
+                <div class="primeng-datatable-container">
+                    <div class="primeng-paging-container">
+                        <p-table #dataTable rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                            [value]="primengTableHelper.records" [loading]="loading"
+                            [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage"
+                            selectionMode="multiple" [(selection)]="listSelectedRow" [paginator]="true"
+                            [scrollable]="true" ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+                            [resizableColumns]="primengTableHelper.resizableColumns" dataKey="modeL_NAME"
+                            editMode="row">
+                            <ng-template pTemplate="header" let-columns>
+                                <tr style="font-family: Roboto !important;">
+                                    <th style="width: 50px !important;">#</th>
+                                    <th pSortableColumn="modeL_CODE" style="width: 150px"> {{l('Group12_ModelCode')}}
+                                        <p-sortIcon field="modeL_CODE">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="modeL_NAME" style="width: 150px">{{l('Group12_ModelName')}}
+                                        <p-sortIcon field="modeL_NAME">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="modeL_TYPE" style="width: 150px">{{l('Group12_ModelType')}}
+                                        <p-sortIcon field="modeL_TYPE">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="modeL_HSX" style="width: 150px">{{l('Group12_ModelHSX')}}
+                                        <p-sortIcon field="modeL_HSX">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="modeL_DMNL" style="width: 100px">{{l('Group12_ModelDMNL')}}
+                                        <p-sortIcon field="modeL_DMNL">
+                                        </p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="notes" style="width: 150px">{{l('Group12_ModelNote')}}
+                                    </th>
+                                    <th style="width: 100px"
+                                        [hidden]="!isGrantedAny('Pages.Group12.Model.Approve','Pages.Group12.Model.Create','Pages.Group12.Model.Delete')">
+                                        {{l('Group12_autH_STATUS')}}
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowData let-model let-i="rowIndex" let-editing="editing">
+                                <tr   [pSelectableRow]="rowData" (dblclick)="onRowDblClick($event, model)"
+                                    style="font-family: Roboto !important;" >
+                                    <td style="width: 50px !important;">{{i+1}}</td>
+                                    <td style="width: 150px">{{model.modeL_CODE}}</td>
+                                    <td style="width: 150px">
+                                        {{model.modeL_NAME}}
+                                    </td>
+                                    <td style="width: 150px">{{model.modeL_TYPE}}</td>
+                                    <td style="width: 150px">{{model.modeL_HSX }}</td>
+                                    <td style="width: 100px">{{model.modeL_DMNL }}</td>
+                                    <td style="width: 150px">{{model.notes }}</td>
+                                    <td style="width: 100px; text-align: center;"
+                                        [hidden]="!isGrantedAny('Pages.Group12.Model.Approve','Pages.Group12.Model.Create','Pages.Group12.Model.Delete')">
+                                        <span class="ui-column-title"> {{l('Group12_autH_STATUS')}}</span>
+                                        <i class="fa fa-check-circle m--font-success"
+                                            *ngIf="model.autH_STATUS==='1'"></i>
+                                        <!--đã duyệt-->
+                                        <i class="fa fa-times-circle m--font-danger"
+                                            *ngIf="model.autH_STATUS==='-1'"></i>
+                                        <!--từ chối duyệt-->
+                                        <i class="fa fa-plus-circle m--font-warning"
+                                            *ngIf="model.autH_STATUS==='0' && !model.approvE_DT && model.recorD_STATUS==='1'"></i>
+                                        <!--chờ duyệt thêm-->
+                                        <i class="fa fa-pencil-square-o m--font-warning"
+                                            *ngIf="model.autH_STATUS==='0' && model.approvE_DT"></i>
+                                        <!--chờ duyệt chỉnh sửa-->
+                                        <i class="fa fa-trash m--font-warning"
+                                            *ngIf="model.autH_STATUS==='0' && model.recorD_STATUS==='0'"></i>
+                                        <!--chờ duyệt chỉnh xóa-->
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                            {{l('Group12_NoData')}}
+                        </div>
+                        <span class="total-records-count">
+                            {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                        </span>
+                    </div>
+                </div>
+                <!--<Primeng-TurboTable-End>-->
+            </div>
+        </div>
+    </div>
+</div>

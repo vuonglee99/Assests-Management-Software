@@ -1,0 +1,130 @@
+<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" >
+    <div class="panel panel-default main-panel ">
+        <div class="panel-body">
+            <form>
+                <!-- NEW -->
+                <ul style="background-color: #248dc1;font-size: 15px;padding-left:10px;margin:0;color:white">
+                    <li class="tool-bar-icon-disable">
+                        <i class="fa fa-plus"></i>
+                        <!--Thêm-->
+                    </li>
+                    <li class='tool-bar-icon-disable'>
+                        <i class="fa fa-pencil"></i>
+                        <!-- Sửa -->
+                    </li>
+                    <li class="{{canAdd?'tool-bar-icon-normal':'tool-bar-icon-disable'}}"
+                        (click)="canAdd?saveFloorType():null">
+                        <i class="fa fa-floppy-o"></i>
+                        <!-- Lưu -->
+                    </li>
+                    <li class="tool-bar-icon-disable">
+                        <i class="fa fa-trash"></i>
+                        <!-- Xóa -->
+                    </li>
+                    <li class="tool-bar-icon-disable">
+                        <i class="fa fa-search"></i>
+                        <!--Tìm kiếm-->
+                    </li>
+                    <li class="tool-bar-icon-disable">
+                        <i class="fa fa-eye"></i>
+                        <!--Xem chi tiết-->
+                    </li>
+                    <li class="tool-bar-icon-disable">
+                        <i class="fa fa-check"></i>
+                        <!--Duyệt-->
+                    </li>
+
+                    <li class="{{editable?'tool-bar-icon-normal':'tool-bar-icon-disable'}}"
+                        (click)="editable?onCancelEdit():null">
+                        <i class="fa fa-window-close"></i>
+                        <!-- Hủy chỉnh sửa-->
+                    </li>
+
+                    <!-- <li class="tool-bar-icon-normal" (click)="onExit()">
+                            <i class="fa fa-arrow-left"></i> -->
+                    <!-- Trở lại -->
+                    <!-- </li> -->
+                </ul>
+
+                <!-- TITLE -->
+                <div
+                    style="background-color: #248dc1; padding: 10px 30px; margin-top: 15px; color:white; display: flex; align-items: center;">
+                    <h1 style="margin-bottom: 0px"><i class="fa fa-info-circle"
+                            style="font-size: 30px; margin-right: 15px"></i>
+                        {{l('FloorTypeAdd')}}</h1>
+                </div>
+
+                <div style="padding: 20px;" [busyIf]="isLoading">
+                    <div style="padding: 20px; background-color: white;">
+                        <div class="row">
+                            <div class="col-md-6" style="font-size: 15px;">
+                                <!-- Mã loại tầng -->
+                                <div class="div-input">
+                                    <div>{{l('FloorTypeCode')}} <span style="color: red">(*)</span></div>
+                                    <input style="background-color: #f4f5f8" name="id" type="text"
+                                        placeholder="{{l('FloorTypeEnterCode')}}"
+                                        [(ngModel)]="inputModel.floorType_CODE" (ngModelChange)="checkValidInput()"
+                                        #floortypecode="ngModel" required="required" class="form-control" [ngClass]="{
+                                                'disable-mode':true,
+                                                'enable-mode':editable
+                                            }">
+                                    <span class="label error-validate"
+                                        *ngIf="floortypecode.dirty && floortypecode.errors?.required">
+                                        {{l('FloorTypeCodeCannotBeEmpty')}}
+                                    </span>
+
+                                    <span class="label error-validate" *ngIf="maxLengthCode">
+                                        {{l('FloorTypeCodeCannotBeLongerThan20Character')}}
+                                    </span>
+
+                                    <span class="label error-validate" *ngIf="isSpecialCode">
+                                        {{l('FloorTypeCodeCannotContainSpecialCharacter')}}
+                                    </span>
+                                </div>
+
+                                <!-- Tên loại tầng -->
+                                <div class="div-input">
+                                    <div>{{l("FloorTypeName")}}<span style="color: red">(*)</span></div>
+                                    <input style="background-color: #f4f5f8" class="form-control" name="name"
+                                        type="text" placeholder="{{l('FloorTypeEnterName')}}"
+                                        [(ngModel)]="inputModel.floorType_NAME" (ngModelChange)="checkValidInput()"
+                                        #floortypename="ngModel" required="required" [ngClass]="{
+                                                'disable-mode':!editable,
+                                                'enable-mode':editable
+                                            }">
+                                    <span class="label error-validate"
+                                        *ngIf="floortypename.dirty && floortypename.errors?.required">
+                                        {{l('FloorTypeNameCannotBeEmpty')}}
+                                    </span>
+                                    <span class="label error-validate" *ngIf="maxLengthName">
+                                        {{l('FloorTypeNameCannotBeLongerThan100Character')}}
+                                    </span>
+                                    <span class="label error-validate" *ngIf="isSpecialName">           
+                                        {{l('FloorTypeNameCannotContainSpecialCharacter')}}
+                                    </span>
+                                </div>
+
+                                <!-- Mô tả loại tầng -->
+                                <div class="div-input">
+                                    <div>{{l("Group15_Description")}} <span style="color: red"></span></div>
+                                    <textarea placeholder="{{l('Group15_EnterDescription')}}"
+                                        style="background-color: #f4f5f8;height: 70px;border-width: 2px;border-color: #e6e6e6;"
+                                        class="form-control" name="description" [(ngModel)]="inputModel.floorType_DESC"
+                                        #cardesc="ngModel" (ngModelChange)="checkValidInput()" required="required"
+                                        [ngClass]="{'disable-mode':!editable,'enable-mode':editable}"></textarea>
+
+                                    <span class="label error-validate " *ngIf="maxLengthDesc">
+                                        {{l('Group15_DescriptionCannotBeLongerThan1000Character')}}
+                                    </span>
+                                    <span class="label error-validate " *ngIf="isSpecialDesc">
+                                        {{l('Group15_DescriptionCannotContainSpecialCharacter')}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

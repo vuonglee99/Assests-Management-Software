@@ -1,0 +1,303 @@
+/* You can add global styles to this file, and also import other style files */
+.bar_btn {
+    /* background: #006fd6; */
+}
+
+.bg-secondary {
+    background: #0095FF !important;
+}
+
+.bar_btn:hover {
+    background: #006fd6;
+}
+
+.search_btn {
+    background: #65b3fc;
+}
+
+.search_btn:hover {
+    background: #006fd6;
+}
+
+.search_btn:active {
+    background   : #006fd6;
+    border-radius: 10px;
+}
+
+.searchbar_input {
+    background: #65b3fc;
+    border    : none;
+    color     : white;
+}
+
+.searchbar_input::placeholder {
+    color: white;
+}
+
+.searchbar_input:focus {
+    background: #006fd6;
+    border    : none;
+}
+
+.simple_input {
+    margin-right: 20px;
+    border      : 1px solid #c4c4c4;
+    background  : white;
+    height      : 100%;
+}
+
+.simple_readonly_input {
+    border    : 1px solid #c4c4c4;
+    height    : 100%;
+    background: #cccccc;
+}
+
+.simple_textArea {
+    border    : 1px solid #c4c4c4;
+    min-height: 300px;
+}
+
+.simple_input,
+.simple_textArea:hover {
+    border: 1px solid #c4c4c4;
+    cursor: text;
+}
+
+
+.simple_input:focus,
+.simple_textArea:focus {
+    border: 1px solid #3366ff;
+}
+
+.simple_combobox {
+    border: 1px solid #c4c4c4;
+    cursor: pointer;
+}
+
+.simple_label {
+    display    : flex;
+    align-self : center;
+    color      : white;
+    font-family: Roboto;
+    font-size  : 15px;
+    font-weight: 400;
+}
+
+.simple_gray_label {
+
+    display    : flex;
+    align-self : center;
+    color      : #363636;
+    font-family: Roboto;
+    font-size  : 16px;
+    font-weight: 400;
+}
+
+.label_error {
+    height     : 12px;
+    display    : flex;
+    align-self : center;
+    color      : #fe3a3a;
+    font-family: Roboto;
+    font-size  : 12px;
+    font-weight: 500;
+}
+
+.table:hover {
+    cursor: pointer;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin     : 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+button {
+    display      : flex;
+    margin       : auto;
+    cursor       : pointer;
+    border-radius: 4px;
+    background   : #0095ff;
+    box-shadow   : none;
+    border       : 1px solid #0095ff;
+    color        : #fff;
+    font-weight  : bold;
+    font-family  : Roboto;
+    font-size    : medium;
+}
+
+button:hover {
+    background : #006fd6;
+    border     : white 1px solid;
+    align-self : center;
+    color      : white;
+    font-family: Roboto;
+    font-size  : 16px;
+    font-weight: 500;
+}
+
+.bar_button_label {
+    color      : white;
+    font-family: Roboto;
+    font-size  : 16px;
+    font-weight: 600;
+    line-height: 30px;
+}
+
+body .ui-paginator * {
+    vertical-align: middle !important;
+}
+
+body .ui-widget-header {
+    border: none;
+}
+
+.path {
+    color      : inherit;
+    line-height: 24px;
+    font-weight: 700;
+    font-family: Roboto;
+    font-size  : 16px;
+    margin     : 5px;
+    height     : 24px;
+    cursor     : pointer;
+}
+
+.path:hover {
+    text-decoration      : underline;
+    text-decoration-color: black;
+}
+
+.dropdown {
+    padding-left : 5px;
+    padding-right: 5px;
+    margin-right : 1em;
+    width        : 50%;
+    align-self   : center;
+    display      : flex;
+    border-radius: 4px;
+    min-width    : 200px;
+}
+
+/* sprint 4 */
+.main-panel {
+    display       : flex;
+    flex-direction: column;
+    max-width     : 1800px;
+    /* margin-top : 20px;*/
+    margin-top    : 20px;
+
+
+    width    : 240%;
+    /* height: 550px; */
+    height   : 700px;
+}
+
+.mar-left-100 {
+    margin-left: 100px;
+}
+
+.mar-top-5 {
+    margin-top: 5px;
+}
+
+.error-validate {
+    font-family     : Arial;
+    font-size       : 12px;
+    padding         : 2px;
+    border-radius   : 3px;
+    background-color: red;
+    margin-top      : 15px;
+    /* margin-left  : 130px; */
+    color           : white;
+}
+
+.icon-bar {
+    position        : relative;
+    left            : 0px;
+    top             : 0px;
+    width           : 100%;
+    background-color: #0095FF;
+    overflow        : auto;
+    height          : 44px;
+
+    padding-left: 5px;
+
+}
+
+.mr-top-10 {
+    margin-top: 10px;
+}
+
+.icon-bar button {
+    float       : left;
+    /*width     : 5%;*/
+    margin-top  : -3px;
+    width       : auto;
+    height      : 43px;
+    text-align  : center;
+    padding-left: 9px;
+    padding-top : 10px;
+    transition  : all 0.3s ease;
+    color       : white;
+    font-size   : 25px;
+    overflow    : all;
+}
+
+.icon-bar button:hover {
+    background-color: #42A9FE;
+}
+
+.icon-bar button:disabled:hover {
+    background-color: transparent;
+}
+
+.icon-bar button .fa {
+
+    width    : 100%;
+    height   : 100%;
+    font-size: 25px;
+}
+
+/* list */
+.taoqrcode h1 {
+    background-color: #0095ff;
+    color           : white;
+    padding-left    : 10px;
+}
+
+.qrcode {
+    margin-top      : 20px;
+    margin-left     : 200px;
+    margin-right    : 400px;
+    background-color: #E4E9F2;
+}
+
+.taoqrcode {
+    margin-top: 10px;
+}
+
+.print {
+    margin-left: 700px;
+
+}
+
+.tool-bar-icon-normal {
+    display     : inline-block;
+    padding     : 10px;
+    padding-left: 20px;
+    cursor      : pointer;
+}
+
+.tool-bar-icon-disable {
+    display     : inline-block;
+    padding     : 10px;
+    padding-left: 20px;
+    cursor      : pointer;
+    color       : #B4B4B4;
+}

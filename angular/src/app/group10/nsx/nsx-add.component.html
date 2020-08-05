@@ -1,0 +1,20 @@
+<form #formRef="ngForm">
+    <ul style="background-color: #248dc1;font-family: auto;font-size: 15px;padding-left:10px;margin:0;color:white">
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="save()">Thêm</li>
+        <li style="display: inline-block;padding:10px;padding-left: 20px;cursor: pointer;" (click)="back()">Quay lại
+        </li>
+    </ul>
+    <div style="height: 50px;"></div>
+    <div style="padding-left: 20px; width: 400px;">
+        <div style="margin-bottom: 5px">
+            <div>Code NSX *</div>
+            <input [(ngModel)]="inputModel.nsX_CODE" name="nsX_CODE" class="input form-control">
+        </div>
+        <div style="margin-bottom: 5px">
+            <div>Tên NSX *</div>
+            <input [(ngModel)]="inputModel.nsX_NAME" name="nsX_NAME" class="input form-control">
+        </div>
+        <div>Xuất xứ </div>
+        <input [(ngModel)]="inputModel.nsX_FROM" name="nsX_FROM" class="input form-control">
+    </div>
+</form>

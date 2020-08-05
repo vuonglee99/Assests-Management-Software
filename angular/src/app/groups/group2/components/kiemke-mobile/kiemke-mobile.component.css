@@ -1,0 +1,13 @@
+.tool-bar-icon-normal{
+    display: inline-block;
+    padding:10px;
+    padding-left: 20px;
+    cursor: pointer;
+}
+.tool-bar-icon-disable{
+    display: inline-block;
+    padding:10px;
+    padding-left: 20px;
+    cursor: pointer;
+    color: #B4B4B4;
+}

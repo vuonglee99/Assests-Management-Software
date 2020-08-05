@@ -1,0 +1,214 @@
+<div style="background: white; padding: 20px; height: 100%; margin: 20px;">
+
+    <div style=" position: relative; width: 100%; height: 40px; background: #0095FF; display: flex; justify-content:
+    flex-start; padding: 5px; box-sizing: border-box;">
+        <div class="bar_btn"
+            style="width: 30px; height:30px;  justify-content: flex-start;display: flex; cursor: pointer; border-radius: 4px;"
+            *ngIf="isGranted('Pages.Group15.FLOORTYPE.Create')" (click)="navigate_addNewFloor()">
+            <i class="fa fa-plus"
+                style="width: 20px; height:20px; margin-top: 5px; margin-left: 5px;"></i>
+
+        </div>
+        <div class="bar_btn"
+            style="width: 30px; height:30px; display: flex; margin-left: 8px; cursor: pointer; border-radius: 4px;"
+            *ngIf="selectedItem && selectedItem.floor_ID"
+            (click)="navigate_detailFloor()">
+            <i class="fa fa-eye"
+                style="width: 20px; height:20px; margin-top: 5px; margin-left: 5px;" ></i>
+
+        </div>
+        <div class="bar_btn"
+            style="width: 30px; height:30px; display: flex; margin-left: 8px; cursor: pointer; border-radius: 4px;"
+            *ngIf="selectedItem && selectedItem.floor_ID && isGranted('Pages.Group15.FLOOR.Update')"
+            (click)="navigate_updateFloor()">
+            <i class="fa fa-pencil"
+                style="width: 20px; height:20px; margin-top: 5px; margin-left: 5px;" ></i>
+
+        </div>
+        <div class="bar_btn" *ngIf="selectedItem && selectedItem.floor_ID && isGranted('Pages.Group15.FLOOR.Delete')"
+            style="width: 30px; height:30px; display: flex; margin-left: 8px; cursor: pointer; border-radius: 4px;"
+            data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-trash"
+                style="width: 20px; height:20px; margin-top: 5px; margin-left: 5px;" ></i>
+
+        </div>
+        <div class="bar_btn"
+            style="width: 30px; height:30px; display: flex; margin-left: 8px; cursor: pointer; border-radius: 4px;"
+            *ngIf="this.allItem.length > 0"
+            (click)="exportFloor()">
+            <i class="fa fa-bars"
+                style="width: 20px; height:20px; margin-top: 5px; margin-left: 5px;" ></i>
+
+        </div>
+    </div>
+
+    <div style="position: relative;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+    box-sizing: border-box;
+    ">
+        <img src="https://img.icons8.com/android/26/000000/home.png"
+            style="width: 30px; height: 30px; background-color:aliceblue;"
+        />
+        <a class="path" href="/"><div class="path">Dashboard</div></a>
+        <a class="path" ><div class="path">{{l('FloorManagement')}}</div></a>
+    </div>
+
+    <div style="position: relative;
+     width: 100%;
+     height: fit-content;
+     margin-top: 5px;
+     margin-bottom: 5px;
+    
+     display: flex;
+     justify-content:space-between;
+     flex-direction: row;
+     box-sizing: border-box;
+     padding: 5px;
+     ">
+        <div style=" display: flex;">
+            <div>
+                <div class="simple_gray_label">
+                    {{l('floor_CODE')}}
+                </div>
+                <div>
+                    <input id="matang" class=" simple_input" type="text" style=" position: relative; padding-left:5px;padding-right:  5px; align-self:center; width: 30%; height:30px;   border-radius: 4px; 
+                 min-width: 200px; color: #363636 ; font-family: Roboto; font-size: 14px; margin-right: 1em;"
+                        placeholder="{{l('FloorEnterCode')}}" [(ngModel)]="this.selectedItem.floor_CODE"
+                    (ngModelChange)="searchFloor()" />
+                </div>
+            </div>
+            <div>
+                <div class="simple_gray_label">
+                    {{l('floor_NAME')}}
+                </div>
+                <input id="tentang" class="simple_input" type="text" style=" position: relative;padding-left: 5px; padding-right:  5px; align-self:center; width: 30%; height:30px; display: flex;    border-radius: 4px; 
+                min-width: 200px; color: #363636 ; font-family: Roboto; font-size: 14px; margin-right: 1em; "
+                    placeholder="{{l('FloorEnterName')}}" [(ngModel)]="this.selectedItem.floor_NAME"
+                    (ngModelChange)="searchFloor() " />
+            </div>
+            <div>
+                <div class="simple_gray_label">
+                    {{l('FloorType')}}
+                </div>
+                <p-dropdown id="maloaitang" class="dropdown" [options]="this.allFloorType" [(ngModel)]="this.selectedFloorType" placeholder="{{l('ChooseAFloorType')}}" [filter]="true"
+                    name="selectedFloorType" optionLabel="floorType_NAME" (ngModelChange)="searchFloor() ">
+                </p-dropdown>
+            </div>
+            <div>
+                <div class="simple_gray_label">
+                    {{l('Group15_ApproveStatus')}}
+                </div>
+                <p-dropdown id="maloaitang" class="dropdown" [options]="this.allStatus" [(ngModel)]="this.selectedStatus" placeholder="{{l('Group15_ChooseAStatus')}}" [filter]="true"
+                    name="selectedStatus" optionLabel="status_NAME" (ngModelChange)="searchFloor()">
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+
+    <div  [busyIf]="isLoading">
+        <p-table 
+            class="table"
+            [value]="this.currentInteractList"
+            selectionMode="single"
+            [(selection)]="selectedItem"
+            >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th
+                        style="width: 10%; border: solid 1px gray;">
+                        {{l('Group15_Order')}}
+                    </th>
+                    <th [pSortableColumn]="'floor_CODE'"
+                        style="width: 10%; border: solid 1px gray;">
+                        {{l('floor_CODE')}}
+                        <p-sortIcon [field]="'floor_CODE'"></p-sortIcon>
+                    </th>
+                    <th [pSortableColumn]="'floor_NAME'"                        
+                        style="width: 20%; border: solid 1px gray;">
+                        {{l('floor_NAME')}}
+                        <p-sortIcon [field]="'floor_NAME'"></p-sortIcon>
+                    </th>
+                    <th [pSortableColumn]="'floorType_ID'"
+                        style="width: 15%; border: solid 1px gray;">
+                        {{l('FloorType')}}
+                        <p-sortIcon [field]="'floorType_ID'"></p-sortIcon>
+                    </th>
+                    <th [pSortableColumn]="'floor_STATUS'"
+                        style="width: 15%; border: solid 1px gray;">
+                        {{l('Group15_ApproveStatus')}}
+                        <p-sortIcon [field]="'floor_STATUS'"></p-sortIcon>
+                    </th>
+                    <th [pSortableColumn]="'floor_NOTE'"
+                        style="width: 30%; border: solid 1px gray;">
+                        {{l('Group15_Description')}}
+                        <p-sortIcon [field]="'floor_NOTE'"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-record let-rowIndex="rowIndex">
+                <tr [pSelectableRow]="record">
+                    <td style="border: solid 1px gray;">{{ rowIndex + 1 + this.pageNumber * this.pageSize }}</td>
+                    <td style="border: solid 1px gray;">{{ record.floor_CODE }}</td>
+                    <td style="border: solid 1px gray;">{{ record.floor_NAME }}</td>
+                    <td style="border: solid 1px gray;">{{ record.floorType_NAME }}</td>
+                    <td style="border: solid 1px gray;">{{ (record.deletE_REQUESTED === "1") ?  l('WaitingForApproveDelete')
+                        : (record.autH_STATUS === "A")? l('Group15_Approved')
+                        : (record.autH_STATUS === "PU") ? l('WaitingForApproveUpdate')
+                        : l('Group15_NotApproved') }}</td>
+                    <td style="border: solid 1px gray;">{{ record.floor_NOTE }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <div class="primeng-datatable-container" style="display: flex; margin-top: 10px;">
+            <div style="
+                    display: flex;
+                    align-self: end;
+                    margin-right: auto;">
+                <span>{{l('TotalRecordsCount', isSearching ? this.currentInteractList.length : this.allItem.length)}}</span>
+                <!-- <span>{{ isSearching ? this.currentInteractList.length : this.allItem.length}}</span> -->
+            </div>
+            <p-paginator
+                (onPageChange)="loadWithPage($event)"
+                [(first)]="first"
+                [rows]="pageSize"
+                [(totalRecords)]="isSearching ? this.currentInteractList.length : this.allItem.length"
+                [rowsPerPageOptions]="[5, 10]"
+            ></p-paginator>
+        </div>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        {{l('Group15_Warming')}}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        {{l('Group15_YouWantDelete')}}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color: #363636;">
+                        {{l('Group15_Cancle')}}
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="delete_Floor()" data-dismiss="modal">
+                        {{l('Group15_Delete')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
